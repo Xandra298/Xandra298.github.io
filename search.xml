@@ -4,31 +4,6 @@
   
     
     <entry>
-      <title>setup</title>
-      <link href="/2022/11/17/setup/"/>
-      <url>/2022/11/17/setup/</url>
-      
-        <content type="html"><![CDATA[<h2 id="hexo-deploy-到github失败"><a href="#hexo-deploy-到github失败" class="headerlink" title="hexo deploy 到github失败"></a>hexo deploy 到github失败</h2><p>使用deploy之后要求输入账户和密码，密码正确但是显示验证失败。</p><ul><li><p>失败原因：</p><p>github 21年取消了密码验证</p><p><img src="/.com//image-20221117162546351.png" alt="image-20221117162546351"></p></li><li><p>解决方式</p><p>在_config.yml的deploy中，repo对应的填写为github仓库的ssh地址，可以避免进行密码验证（前提：git配置完成，github上有设置公钥）</p></li></ul><h2 id="完成的配置"><a href="#完成的配置" class="headerlink" title="完成的配置"></a>完成的配置</h2><ul><li><p>目前使用hexo主题</p><p><a href="https://github.com/probberechts/hexo-theme-cactus">hexo-theme-cactus</a></p></li><li><p>主题配置 tags 和 categories</p></li><li><p>配置baidu_analytics</p></li><li><p>使用utterances设置comment</p></li><li><p>使用主题的search未成功</p></li><li><p>解决图片路径问题</p></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 随笔 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 记录 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>第一篇博客文章</title>
       <link href="/2022/11/16/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/"/>
       <url>/2022/11/16/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</url>
