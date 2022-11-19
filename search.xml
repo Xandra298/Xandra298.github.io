@@ -61,7 +61,7 @@
 <p>s是 sigmoid, 函数ρ用于加强（和削弱）得分接近度大于（和小于）0.5的配对关系，softmax也用于归一化。</p>
 <p>$$<br>\rho (x) &#x3D; \frac{1}{1+exp(-\frac{x-0.5}{0.1})}<br>$$</p>
 <h2 id="training-based-on-MIL"><a href="#training-based-on-MIL" class="headerlink" title="training based on MIL"></a>training based on MIL</h2><p>$$<br>C^P &#x3D; (X^H||X^L||X^S)W<br>$$</p>
-<p>所有输出($C^P 和 C^S$)在时间维度上的K-max取平均作为输出，以得到$y^P 和y^S$。K定义为T‘ 除以q加一后向下取整。</p>
+<p>所有输出($C^P 和 C^S$)在时间维度上的K-max取平均作为输出，以得到$y^P$ 和$y^S$。K定义为T‘ 除以q加一后向下取整。</p>
 <p>补充： top-k策略（Weakly-supervised video anomaly detection with robust temporal feature magnitude learning）</p>
 <ul>
 <li>loss结合三个branch</li>
@@ -77,13 +77,13 @@
 <ul>
 <li>Precision and Recall (PR曲线)：用于稀有事件检测，如目标检测、信息检索、推荐系统。负样本很多的时候，??? &#x3D; FP⁄(FP+TN）很小，比较TPR和FPR没有太大意义（ROC）</li>
 </ul>
-<h3 id="性能表现"><a href="#性能表现" class="headerlink" title="性能表现"></a>性能表现</h3><p>![Untitled](Learning-Multimodal-Violence-Detection-under-Weak-Supervision\Untitled 1.png)</p>
+<h3 id="性能表现"><a href="#性能表现" class="headerlink" title="性能表现"></a>性能表现</h3><p>![Untitled](Untitled 1.png)</p>
 <p>优于当前最先进的方法（20年的文章）</p>
 <p>我们观察到，在我们的暴力检测任务中，C3D比I3D差了很大一截。</p>
 <h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><ul>
 <li>五种模态AP对比</li>
 </ul>
-<p>![Untitled](Learning-Multimodal-Violence-Detection-under-Weak-Supervision\Untitled 2.png)</p>
+<p>![Untitled](Untitled 2.png)</p>
 <p>（该文证明声音和视觉的融合检测效果更好，且视觉模态的作用优于声音）</p>
 <ul>
 <li><p>三个分支的对比（holistic, localized and score branches）</p>
