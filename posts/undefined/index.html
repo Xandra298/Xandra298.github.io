@@ -28,14 +28,18 @@
 <meta property="og:site_name" content="Tiny Blog">
 <meta property="og:description" content="Not only look, but also listen: Learning multimodal violence detection under weak supervisionpaper ， https:&#x2F;&#x2F;roc-ng.github.io&#x2F;XD-Violence&#x2F; 暴力视频检测方向论文  💡 We introduce a HL-Net to simultaneously captur">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://xandra298.github.io/posts/undefined/Learning-Multimodal-Violence-Detection-under-Weak-Supervision%5CUntitled.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/undefined/Untitled.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/undefined/Untitled%201.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/undefined/Untitled%202.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/undefined/Untitled%203.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/undefined/Untitled%204.png">
 <meta property="article:published_time" content="2022-11-19T11:02:42.000Z">
 <meta property="article:modified_time" content="2022-11-19T11:12:37.939Z">
 <meta property="article:author" content="Xandra">
 <meta property="article:tag" content="深度视频检测">
 <meta property="article:tag" content="暴力视频检测">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://xandra298.github.io/posts/undefined/Learning-Multimodal-Violence-Detection-under-Weak-Supervision%5CUntitled.png">
+<meta name="twitter:image" content="https://xandra298.github.io/posts/undefined/Untitled.png">
 
 <link rel="canonical" href="https://xandra298.github.io/posts/undefined/">
 
@@ -262,7 +266,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>4.7k</span>
+              <span>4.3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -288,17 +292,18 @@
 **local distance relations**, of which these two relations are based on similarity prior and proximity prior, respectively
 
 
-<p>三个并行的branch捕捉视频片段和集成的特征之间的不同联系:</p>
-<ul>
-<li>holistic branch captures long-range dependencies using similarity prior,</li>
-<li>localized branch captures local positional relation using proximity prior,</li>
-<li>score branch dynamically captures the closeness of predicted score.</li></ul></aside>
+三个并行的branch捕捉视频片段和集成的特征之间的不同联系:
+
+- holistic branch captures long-range dependencies using similarity prior,
+- localized branch captures local positional relation using proximity prior,
+- score branch dynamically captures the closeness of predicted score.
+  </aside>
 
 <p>相关工作，其中attention部分可以后面看下；</p>
 <p>一些工作将图神经网络(GCNs)[20,39]在图上建立不同节点之间的关系模型，并学习计算机视觉的强大表示。例如，GCN被用于时间性动作定位[50]、视频分类[37,41]、异常检测[51]。基于骨架的动作识别[33,45]，点云语义分割[21]，图像说明[46]等等。除了GCN，时间关系网络[52]，旨在学习和推理视频帧之间的时间依赖关系，被提出来用于解决视频分类。最近，自我注意网络[40,47,5,18]已被成功应用于视觉问题。注意力操作可以通过聚合一组元素的信息来影响单个元素，其中聚合的权重是自动学习的。</p>
 <h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><hr>
 <p>总体框架图</p>
-<p><img src="/posts/undefined/Learning-Multimodal-Violence-Detection-under-Weak-Supervision%5CUntitled.png" alt="Untitled"></p>
+<p><img src="/posts/undefined/Untitled.png" alt="Untitled"></p>
 <ul>
 <li><p>特征提取：using the sliding window mechanism 提取 视频特征和声音特征，合并成融合特征（融合部分不予关注。滑动窗口机制待看）</p>
 <blockquote>
@@ -308,38 +313,39 @@
 </ul>
 <h2 id="Holistic-and-Localized-Networks"><a href="#Holistic-and-Localized-Networks" class="headerlink" title="Holistic and Localized Networks"></a>Holistic and Localized Networks</h2><h3 id="Holistic-特征相似性"><a href="#Holistic-特征相似性" class="headerlink" title="Holistic - 特征相似性"></a><strong>Holistic - 特征相似性</strong></h3><hr>
 <p>通用的图卷积表示可以看为：</p>
-<p>$$<br>X_l+1 &#x3D; Update(Aggregate(X_l,W_l^{agg},W_l^{update}))<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+X_l+1 = Update(Aggregate(X_l,W_l^{agg},W_l^{update}))</script><ul>
 <li><p><strong>GCN范式：</strong></p>
-<p>$$<br>X^H_{l+1} &#x3D; Dropout(ReLU(A^HX^H_lW^H_l))<br>$$</p>
-<p>注：$X^H_0 &#x3D; X^S_0 &#x3D; X^L_0 &#x3D; X^F$</p>
+<script type="math/tex; mode=display">
+X^H_{l+1} = Dropout(ReLU(A^HX^H_lW^H_l))</script><p>注：$X^H_0 = X^S_0 = X^L_0 = X^F$</p>
 </li>
 </ul>
-<p><strong>特征相似性的邻接矩阵表示:</strong><br>$$<br>A^H_{ij} &#x3D; g(f(x_i,x_j))<br>$$</p>
-<p>$A^H_{ij}$衡量第i个和第j个特征的特征相似性；g是归一化函数，f函数计算一对特征的相似性；附录部分还讨论了一下其他版本的。本文定义如下</p>
+<p><strong>特征相似性的邻接矩阵表示:</strong></p>
+<script type="math/tex; mode=display">
+A^H_{ij} = g(f(x_i,x_j))</script><p>$A^H_{ij}$衡量第i个和第j个特征的特征相似性；g是归一化函数，f函数计算一对特征的相似性；附录部分还讨论了一下其他版本的。本文定义如下</p>
 <ul>
 <li>f 定义为：</li>
 </ul>
-<p>$$<br>f(x_i,x_j) &#x3D; \frac{x_i^Tx_j}{||x_i||_{2} \ . \ ||x_j||_2}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+f(x_i,x_j) = \frac{x_i^Tx_j}{||x_i||_{2} \\ . \\ ||x_j||_2}</script><ul>
 <li>thresholding操作（$\tau$是threshod，f将相似性限制在（0,1]之间）：</li>
 </ul>
-<p>$$<br>f(x_i,x_j) &#x3D; \begin{cases} f(x_i,x_j)  &amp; f(x_i,x_j) &gt; \tau \ 0 &amp; f(x_i,x_j)\leq \tau\end{cases}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+f(x_i,x_j) = \begin{cases} f(x_i,x_j)  & f(x_i,x_j) > \tau \\ 0 & f(x_i,x_j)\leq \tau\end{cases}</script><ul>
 <li><p>使用softmax作为归一化函数g，使得A的每一行的和都为1。</p>
-<p>$$<br>A^H_{ij} &#x3D; \frac{exp(A^H_{ij})}{\sum ^{T’}<em>{k&#x3D;1} exp(A^H</em>{ij})}<br>$$</p>
-</li>
+<script type="math/tex; mode=display">
+A^H_{ij} = \frac{exp(A^H_{ij})}{\sum ^{T'}_{k=1} exp(A^H_{ij})}</script></li>
 </ul>
 <h3 id="localized-branch-proximity-prior-和时间一致性类似）"><a href="#localized-branch-proximity-prior-和时间一致性类似）" class="headerlink" title="localized branch -proximity prior (和时间一致性类似）"></a><strong>localized branch -proximity prior (和时间一致性类似）</strong></h3><hr>
-<p>$$<br>A^L_{ij} &#x3D; exp(\frac{-|i-j|^r}{\sigma })<br>$$</p>
-<h2 id="Online-detection-amp-score-branch"><a href="#Online-detection-amp-score-branch" class="headerlink" title="Online detection &amp; score branch"></a>Online detection &amp; score branch</h2><p>正如我们提到的，暴力检测系统不仅适用于离线检测（互联网录像机），也适用于在线检测（监控系统）。然而，<strong>上述HL-Net</strong>的在线检测受到了一个主要障碍的阻碍：<strong>HL-Net需要整个视频来获得长距离的依赖关系</strong>。为了跳出这个困境，我们提出了一个HLC近似器，只把以前的视频片段作为输入，在HL-Net的指导下产生精确的预测。两个堆叠的FC层和ReLU以及一个一维因果卷积层构成了HLC近似器。一维因果卷积层的核大小为5，跨度为1，在时间上滑动卷积滤波器。一维因果卷积层也充当分类器，其输出是形状为 T’ 的暴力激活表示为$C^S$。更妙的是，这个操作引入了一个额外的分支，名为**动态得分分支(dynamic score branch)**，以扩展HL-Net，它取决于$C^S$。</p>
+<script type="math/tex; mode=display">
+A^L_{ij} = exp(\frac{-|i-j|^r}{\sigma })</script><h2 id="Online-detection-amp-score-branch"><a href="#Online-detection-amp-score-branch" class="headerlink" title="Online detection &amp; score branch"></a>Online detection &amp; score branch</h2><p>正如我们提到的，暴力检测系统不仅适用于离线检测（互联网录像机），也适用于在线检测（监控系统）。然而，<strong>上述HL-Net</strong>的在线检测受到了一个主要障碍的阻碍：<strong>HL-Net需要整个视频来获得长距离的依赖关系</strong>。为了跳出这个困境，我们提出了一个HLC近似器，只把以前的视频片段作为输入，在HL-Net的指导下产生精确的预测。两个堆叠的FC层和ReLU以及一个一维因果卷积层构成了HLC近似器。一维因果卷积层的核大小为5，跨度为1，在时间上滑动卷积滤波器。一维因果卷积层也充当分类器，其输出是形状为 T’ 的暴力激活表示为$C^S$。更妙的是，这个操作引入了一个额外的分支，名为<strong>动态得分分支(dynamic score branch)</strong>，以扩展HL-Net，它取决于$C^S$。</p>
 <h3 id="score-branch"><a href="#score-branch" class="headerlink" title="score branch"></a>score branch</h3><p>用于online detection, 解决需要将整个视频作为输入（以获得长距离依赖）的问题。</p>
 <p>该分支的主要作用是将一个位置的响应计算为所有位置特征的加权和，其中权重取决于分数的接近程度。与整体和局部分支的关系矩阵不同，分数分支的关系矩阵在每次迭代中都会更新，并且取决于预测的分数而不是先验。从形式上看，分数分支的关系矩阵设计如下：</p>
-<p>$$<br>A^S_{ij} &#x3D; \rho(1 - |s(C^S_i) - s(C^S_j)|)<br>$$</p>
-<p>s是 sigmoid, 函数ρ用于加强（和削弱）得分接近度大于（和小于）0.5的配对关系，softmax也用于归一化。</p>
-<p>$$<br>\rho (x) &#x3D; \frac{1}{1+exp(-\frac{x-0.5}{0.1})}<br>$$</p>
-<h2 id="training-based-on-MIL"><a href="#training-based-on-MIL" class="headerlink" title="training based on MIL"></a>training based on MIL</h2><p>$$<br>C^P &#x3D; (X^H||X^L||X^S)W<br>$$</p>
-<p>所有输出($C^P 和 C^S$)在时间维度上的K-max取平均作为输出，以得到$y^P$ 和$y^S$。K定义为T‘ 除以q加一后向下取整。</p>
+<script type="math/tex; mode=display">
+A^S_{ij} = \rho(1 - |s(C^S_i) - s(C^S_j)|)</script><p>s是 sigmoid, 函数ρ用于加强（和削弱）得分接近度大于（和小于）0.5的配对关系，softmax也用于归一化。</p>
+<script type="math/tex; mode=display">
+\rho (x) = \frac{1}{1+exp(-\frac{x-0.5}{0.1})}</script><h2 id="training-based-on-MIL"><a href="#training-based-on-MIL" class="headerlink" title="training based on MIL"></a>training based on MIL</h2><script type="math/tex; mode=display">
+C^P = (X^H||X^L||X^S)W</script><p>所有输出($C^P 和 C^S$)在时间维度上的K-max取平均作为输出，以得到$y^P$ 和$y^S$。K定义为T‘ 除以q加一后向下取整。</p>
 <p>补充： top-k策略（Weakly-supervised video anomaly detection with robust temporal feature magnitude learning）</p>
 <ul>
 <li>loss结合三个branch</li>
@@ -348,20 +354,20 @@
 <p>The instances corresponding to the K-max activation in the positive bag is most likely to be true positive instances (violence). The instances corresponding to the K-max activation in the negative bag is hard instances. We expect these two types of instances to be as far as possible.</p>
 </blockquote>
 <p>L_BCE（binary crossentropy) 和L_BCE2分别对应为$y^p 和 y^s$ 与 ground truth y之间的loss。L_DISTILL为知识蒸馏损失。</p>
-<p>$$<br>L_{TOTAL}  &#x3D; L_{BCE} + L_{BCE2} +\lambda L_{DISTILL}<br>$$</p>
-<p>$$<br>L_{DISTILL} &#x3D; \sum \limits^N_{j&#x3D;1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))<br>$$</p>
-<h2 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h2><p>方法支持线上和离线的检测。sigmoid函数作为$C^P$和$C^S$的激活函数，并最后生成在[0,1]之间的暴力置信得分。注：在线上预测中，只有HLC近似器工作，HL-NET可以移除。</p>
+<script type="math/tex; mode=display">
+L_{TOTAL}  = L_{BCE} + L_{BCE2} +\lambda L_{DISTILL}</script><script type="math/tex; mode=display">
+L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</script><h2 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h2><p>方法支持线上和离线的检测。sigmoid函数作为$C^P$和$C^S$的激活函数，并最后生成在[0,1]之间的暴力置信得分。注：在线上预测中，只有HLC近似器工作，HL-NET可以移除。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="评估标准"><a href="#评估标准" class="headerlink" title="评估标准"></a>评估标准</h3><p>we utilize the frame-level <strong>precision-recall curve</strong> (PRC) and corresponding area under the curve <strong>(average precision, AP)</strong> [30] rather than receiver operating characteristic curve (ROC) and corresponding area under the curve (AUC) [44,43]<br><strong>since AUC usually shows an optimistic result when dealing with class-imbalanced data, and PRC and AP focus on positive samples (violence)</strong></p>
 <ul>
-<li>Precision and Recall (PR曲线)：用于稀有事件检测，如目标检测、信息检索、推荐系统。负样本很多的时候，??? &#x3D; FP⁄(FP+TN）很小，比较TPR和FPR没有太大意义（ROC）</li>
+<li>Precision and Recall (PR曲线)：用于稀有事件检测，如目标检测、信息检索、推荐系统。负样本很多的时候，??? = FP⁄(FP+TN）很小，比较TPR和FPR没有太大意义（ROC）</li>
 </ul>
-<h3 id="性能表现"><a href="#性能表现" class="headerlink" title="性能表现"></a>性能表现</h3><p>![Untitled](Untitled 1.png)</p>
+<h3 id="性能表现"><a href="#性能表现" class="headerlink" title="性能表现"></a>性能表现</h3><p><img src="/posts/undefined/Untitled 1.png" alt="Untitled"></p>
 <p>优于当前最先进的方法（20年的文章）</p>
 <p>我们观察到，在我们的暴力检测任务中，C3D比I3D差了很大一截。</p>
 <h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><ul>
 <li>五种模态AP对比</li>
 </ul>
-<p>![Untitled](Untitled 2.png)</p>
+<p><img src="/posts/undefined/Untitled 2.png" alt="Untitled"></p>
 <p>（该文证明声音和视觉的融合检测效果更好，且视觉模态的作用优于声音）</p>
 <ul>
 <li><p>三个分支的对比（holistic, localized and score branches）</p>
@@ -370,16 +376,16 @@
 <li>移除任何一个分支都会使得表现变差</li>
 <li>HL-NET在这三个分支一起作用的时候表现最好，因此证明三个分支都不可替代。</li>
 </ul>
-<p>![Untitled](Learning-Multimodal-Violence-Detection-under-Weak-Supervision\Untitled 3.png)</p>
+<p><img src="/posts/undefined/Untitled 3.png" alt="Untitled"></p>
 </li>
 <li><p>online vs offline</p>
-<p>![Untitled](Learning-Multimodal-Violence-Detection-under-Weak-Supervision\Untitled 4.png)</p>
+<p><img src="/posts/undefined/Untitled 4.png" alt="Untitled"></p>
 </li>
 </ul>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="光流"><a href="#光流" class="headerlink" title="光流"></a>光流</h3><blockquote>
 <p>光流（optical flow）是空间运动物体在观察成像平面上的像素运动的瞬时速度。<br>光流法是利用图像序列中像素在时间域上的变化以及相邻帧之间的相关性来找到上一帧跟当前帧之间存在的对应关系，从而计算出相邻帧之间物体的运动信息的一种方法。<br>通常将二维图像平面特定坐标点上的灰度瞬时变化率定义为光流矢量。</p>
 </blockquote>
-<p>作者在《On the Integration of Optical Flow and Action Recognition》这篇文章[1]中深入讨论了光流与行为识别的结合，并通过实验观察到如下结论：<br>（1）光流对于行为识别是有用的，因为它的外观不变性；<br>（2）光流法采用最小化端点误差（EPE，end-point-error）来优化，但是当前EPE方法与动作识别性能没有很好的相关性；<br>（3）对于测试过的光流方法，在边界上和小位移上的精度与动作识别性能最相关；<br>（4）采用最小化分类误差（而非EPE）来训练光流可以提高识别性能；<br>（5）用于行为识别任务的光流不同于传统的光流，特别是在人体内部和身体边界处。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhang_can/article/details/80259946">https://blog.csdn.net/zhang_can&#x2F;article&#x2F;details&#x2F;80259946</a></p>
+<p>作者在《On the Integration of Optical Flow and Action Recognition》这篇文章[1]中深入讨论了光流与行为识别的结合，并通过实验观察到如下结论：<br>（1）光流对于行为识别是有用的，因为它的外观不变性；<br>（2）光流法采用最小化端点误差（EPE，end-point-error）来优化，但是当前EPE方法与动作识别性能没有很好的相关性；<br>（3）对于测试过的光流方法，在边界上和小位移上的精度与动作识别性能最相关；<br>（4）采用最小化分类误差（而非EPE）来训练光流可以提高识别性能；<br>（5）用于行为识别任务的光流不同于传统的光流，特别是在人体内部和身体边界处。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhang_can/article/details/80259946">https://blog.csdn.net/zhang_can/article/details/80259946</a></p>
 
     </div>
 
@@ -562,7 +568,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">6k</span>
+    <span title="Symbols count total">5k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
@@ -648,6 +654,8 @@
 
 
 
+
+  
 
   
 
