@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://xandra298.github.io/posts/undefined/Untitled%203.png">
 <meta property="og:image" content="https://xandra298.github.io/posts/undefined/Untitled%204.png">
 <meta property="article:published_time" content="2022-11-19T11:02:42.000Z">
-<meta property="article:modified_time" content="2022-11-19T11:38:44.424Z">
+<meta property="article:modified_time" content="2022-11-20T08:25:53.305Z">
 <meta property="article:author" content="Xandra">
 <meta property="article:tag" content="深度视频检测">
 <meta property="article:tag" content="暴力视频检测">
@@ -239,10 +239,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-11-19 19:02:42 / Modified: 19:38:44" itemprop="dateCreated datePublished" datetime="2022-11-19T19:02:42+08:00">2022-11-19</time>
+              <time title="Created: 2022-11-19 19:02:42" itemprop="dateCreated datePublished" datetime="2022-11-19T19:02:42+08:00">2022-11-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-20 16:25:53" itemprop="dateModified" datetime="2022-11-20T16:25:53+08:00">2022-11-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -288,7 +294,7 @@
         <h1 id="Not-only-look-but-also-listen-Learning-multimodal-violence-detection-under-weak-supervision"><a href="#Not-only-look-but-also-listen-Learning-multimodal-violence-detection-under-weak-supervision" class="headerlink" title="Not only look, but also listen: Learning multimodal violence detection under weak supervision"></a>Not only look, but also listen: Learning multimodal violence detection under weak supervision</h1><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2007.04687.pdf">paper</a> ，<a target="_blank" rel="noopener" href="https://roc-ng.github.io/XD-Violence/">code and dataset</a></p>
 <p>暴力视频检测方向论文</p>
 <blockquote>
-<p> 💡 We introduce a HL-Net to simultaneously capture <strong>long-range relations</strong> and<br><strong>local distance relations</strong>, of which these two relations are based on similarity prior and proximity prior, respectively三</p>
+<p> 💡 We introduce a HL-Net to simultaneously capture <strong>long-range relations</strong> and<br><strong>local distance relations</strong>, of which these two relations are based on similarity prior and proximity prior, respectively</p>
 <p>三个并行的branch捕捉视频片段和集成的特征之间的不同联系:</p>
 <ul>
 <li>holistic branch captures long-range dependencies using similarity prior,</li>
@@ -299,8 +305,7 @@
 <span id="more"></span>
 <p>相关工作，其中attention部分可以后面看下；</p>
 <p>一些工作将图神经网络(GCNs)[20,39]在图上建立不同节点之间的关系模型，并学习计算机视觉的强大表示。例如，GCN被用于时间性动作定位[50]、视频分类[37,41]、异常检测[51]。基于骨架的动作识别[33,45]，点云语义分割[21]，图像说明[46]等等。除了GCN，时间关系网络[52]，旨在学习和推理视频帧之间的时间依赖关系，被提出来用于解决视频分类。最近，自我注意网络[40,47,5,18]已被成功应用于视觉问题。注意力操作可以通过聚合一组元素的信息来影响单个元素，其中聚合的权重是自动学习的。</p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>总体框架图</p>
-<p><img src="/posts/undefined/Untitled.png" alt></p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="总体框架图"><a href="#总体框架图" class="headerlink" title="总体框架图"></a>总体框架图</h2><p><img src="/posts/undefined/Untitled.png" alt></p>
 <ul>
 <li><p>特征提取：using the sliding window mechanism 提取 视频特征和声音特征，合并成融合特征（融合部分不予关注。滑动窗口机制待看）</p>
 <blockquote>
@@ -353,14 +358,14 @@ C^P = (X^H||X^L||X^S)W</script><p>所有输出($C^P 和 C^S$)在时间维度上�
 <script type="math/tex; mode=display">
 L_{TOTAL}  = L_{BCE} + L_{BCE2} +\lambda L_{DISTILL}</script><script type="math/tex; mode=display">
 L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</script><h2 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h2><p>方法支持线上和离线的检测。sigmoid函数作为$C^P$和$C^S$的激活函数，并最后生成在[0,1]之间的暴力置信得分。注：在线上预测中，只有HLC近似器工作，HL-NET可以移除。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="评估标准"><a href="#评估标准" class="headerlink" title="评估标准"></a>评估标准</h3><p>we utilize the frame-level <strong>precision-recall curve</strong> (PRC) and corresponding area under the curve <strong>(average precision, AP)</strong> [30] rather than receiver operating characteristic curve (ROC) and corresponding area under the curve (AUC) [44,43]<br><strong>since AUC usually shows an optimistic result when dealing with class-imbalanced data, and PRC and AP focus on positive samples (violence)</strong></p>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><h2 id="评估标准"><a href="#评估标准" class="headerlink" title="评估标准"></a>评估标准</h2><p>we utilize the frame-level <strong>precision-recall curve</strong> (PRC) and corresponding area under the curve <strong>(average precision, AP)</strong> [30] rather than receiver operating characteristic curve (ROC) and corresponding area under the curve (AUC) [44,43]<br><strong>since AUC usually shows an optimistic result when dealing with class-imbalanced data, and PRC and AP focus on positive samples (violence)</strong></p>
 <ul>
 <li>Precision and Recall (PR曲线)：用于稀有事件检测，如目标检测、信息检索、推荐系统。负样本很多的时候，??? = FP⁄(FP+TN）很小，比较TPR和FPR没有太大意义（ROC）</li>
 </ul>
-<h3 id="性能表现"><a href="#性能表现" class="headerlink" title="性能表现"></a>性能表现</h3><p><img src="/posts/undefined/Untitled 1.png" alt></p>
+<h2 id="性能表现"><a href="#性能表现" class="headerlink" title="性能表现"></a>性能表现</h2><p><img src="/posts/undefined/Untitled 1.png" alt></p>
 <p>优于当前最先进的方法（20年的文章）</p>
 <p>我们观察到，在我们的暴力检测任务中，C3D比I3D差了很大一截。</p>
-<h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><ul>
+<h2 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h2><ul>
 <li>五种模态AP对比</li>
 </ul>
 <p><img src="/posts/undefined/Untitled 2.png" alt="Untitled"></p>
@@ -378,7 +383,7 @@ L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</s
 <p><img src="/posts/undefined/Untitled 4.png" alt></p>
 </li>
 </ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="光流"><a href="#光流" class="headerlink" title="光流"></a>光流</h3><blockquote>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h3 id="光流"><a href="#光流" class="headerlink" title="光流"></a>光流</h3><blockquote>
 <p>光流（optical flow）是空间运动物体在观察成像平面上的像素运动的瞬时速度。<br>光流法是利用图像序列中像素在时间域上的变化以及相邻帧之间的相关性来找到上一帧跟当前帧之间存在的对应关系，从而计算出相邻帧之间物体的运动信息的一种方法。<br>通常将二维图像平面特定坐标点上的灰度瞬时变化率定义为光流矢量。</p>
 </blockquote>
 <p>作者在《On the Integration of Optical Flow and Action Recognition》这篇文章[1]中深入讨论了光流与行为识别的结合，并通过实验观察到如下结论：<br>（1）光流对于行为识别是有用的，因为它的外观不变性；<br>（2）光流法采用最小化端点误差（EPE，end-point-error）来优化，但是当前EPE方法与动作识别性能没有很好的相关性；<br>（3）对于测试过的光流方法，在边界上和小位移上的精度与动作识别性能最相关；<br>（4）采用最小化分类误差（而非EPE）来训练光流可以提高识别性能；<br>（5）用于行为识别任务的光流不同于传统的光流，特别是在人体内部和身体边界处。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhang_can/article/details/80259946">https://blog.csdn.net/zhang_can/article/details/80259946</a></p>
@@ -486,7 +491,7 @@ L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</s
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Not-only-look-but-also-listen-Learning-multimodal-violence-detection-under-weak-supervision"><span class="nav-number">1.</span> <span class="nav-text">Not only look, but also listen: Learning multimodal violence detection under weak supervision</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Holistic-and-Localized-Networks"><span class="nav-number">2.1.</span> <span class="nav-text">Holistic and Localized Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Holistic-%E7%89%B9%E5%BE%81%E7%9B%B8%E4%BC%BC%E6%80%A7"><span class="nav-number">2.1.1.</span> <span class="nav-text">Holistic - 特征相似性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#localized-branch-proximity-prior-%E5%92%8C%E6%97%B6%E9%97%B4%E4%B8%80%E8%87%B4%E6%80%A7%E7%B1%BB%E4%BC%BC%EF%BC%89"><span class="nav-number">2.1.2.</span> <span class="nav-text">localized branch -proximity prior (和时间一致性类似）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Online-detection-amp-score-branch"><span class="nav-number">2.2.</span> <span class="nav-text">Online detection &amp; score branch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#score-branch"><span class="nav-number">2.2.1.</span> <span class="nav-text">score branch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#training-based-on-MIL"><span class="nav-number">2.3.</span> <span class="nav-text">training based on MIL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inference"><span class="nav-number">2.4.</span> <span class="nav-text">Inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">2.5.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E6%A0%87%E5%87%86"><span class="nav-number">2.5.1.</span> <span class="nav-text">评估标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E8%A1%A8%E7%8E%B0"><span class="nav-number">2.5.2.</span> <span class="nav-text">性能表现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="nav-number">2.5.3.</span> <span class="nav-text">消融实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">2.6.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%89%E6%B5%81"><span class="nav-number">2.6.1.</span> <span class="nav-text">光流</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Not-only-look-but-also-listen-Learning-multimodal-violence-detection-under-weak-supervision"><span class="nav-number">1.</span> <span class="nav-text">Not only look, but also listen: Learning multimodal violence detection under weak supervision</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E6%A1%86%E6%9E%B6%E5%9B%BE"><span class="nav-number">2.1.</span> <span class="nav-text">总体框架图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Holistic-and-Localized-Networks"><span class="nav-number">2.2.</span> <span class="nav-text">Holistic and Localized Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Holistic-%E7%89%B9%E5%BE%81%E7%9B%B8%E4%BC%BC%E6%80%A7"><span class="nav-number">2.2.1.</span> <span class="nav-text">Holistic - 特征相似性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#localized-branch-proximity-prior-%E5%92%8C%E6%97%B6%E9%97%B4%E4%B8%80%E8%87%B4%E6%80%A7%E7%B1%BB%E4%BC%BC%EF%BC%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">localized branch -proximity prior (和时间一致性类似）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Online-detection-amp-score-branch"><span class="nav-number">2.3.</span> <span class="nav-text">Online detection &amp; score branch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#score-branch"><span class="nav-number">2.3.1.</span> <span class="nav-text">score branch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#training-based-on-MIL"><span class="nav-number">2.4.</span> <span class="nav-text">training based on MIL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inference"><span class="nav-number">2.5.</span> <span class="nav-text">Inference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">3.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E6%A0%87%E5%87%86"><span class="nav-number">3.1.</span> <span class="nav-text">评估标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E8%A1%A8%E7%8E%B0"><span class="nav-number">3.2.</span> <span class="nav-text">性能表现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="nav-number">3.3.</span> <span class="nav-text">消融实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%89%E6%B5%81"><span class="nav-number">4.0.1.</span> <span class="nav-text">光流</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
