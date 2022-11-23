@@ -29,7 +29,7 @@
 <meta property="og:description" content="邻接矩阵 to pyg需要的edge_index格式">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-22T09:37:59.000Z">
-<meta property="article:modified_time" content="2022-11-22T15:13:15.760Z">
+<meta property="article:modified_time" content="2022-11-23T08:08:09.788Z">
 <meta property="article:author" content="Xandra">
 <meta property="article:tag" content="PyG">
 <meta property="article:tag" content="GNN">
@@ -233,10 +233,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-11-22 17:37:59 / Modified: 23:13:15" itemprop="dateCreated datePublished" datetime="2022-11-22T17:37:59+08:00">2022-11-22</time>
+              <time title="Created: 2022-11-22 17:37:59" itemprop="dateCreated datePublished" datetime="2022-11-22T17:37:59+08:00">2022-11-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-23 16:08:09" itemprop="dateModified" datetime="2022-11-23T16:08:09+08:00">2022-11-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -260,14 +266,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>21k</span>
+              <span>20k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>19 mins.</span>
+              <span>18 mins.</span>
             </span>
 
         </div>
@@ -280,7 +286,7 @@
 
       
         <h1 id="邻接矩阵-to-pyg需要的edge-index格式"><a href="#邻接矩阵-to-pyg需要的edge-index格式" class="headerlink" title="邻接矩阵 to pyg需要的edge_index格式"></a>邻接矩阵 to pyg需要的edge_index格式</h1><span id="more"></span>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">A = torch.rand([<span class="number">10</span>,<span class="number">10</span>]) <span class="comment"># 10*10的邻接矩阵A，带有权值，而非0/1</span></span><br><span class="line">A</span><br></pre></td></tr></table></figure>
+<h2 id="scipy"><a href="#scipy" class="headerlink" title="scipy"></a>scipy</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">A = torch.rand([<span class="number">10</span>,<span class="number">10</span>]) <span class="comment"># 10*10的邻接矩阵A，带有权值，而非0/1</span></span><br><span class="line">A</span><br></pre></td></tr></table></figure>
 <pre><code>tensor([[0.8253, 0.2458, 0.9340, 0.4631, 0.5114, 0.3248, 0.8528, 0.6354, 0.2988,
          0.1087],
         [0.0190, 0.5693, 0.4843, 0.9588, 0.6011, 0.5755, 0.4621, 0.7694, 0.0637,
@@ -359,6 +365,106 @@
          0.9301, 0.1725, 0.4012, 0.3893, 0.8366, 0.1587, 0.3342, 0.7945, 0.8123,
          0.8724]),
  torch.Size([100]))
+</code></pre><h2 id="torch"><a href="#torch" class="headerlink" title="torch**"></a>torch<em>**</em></h2><p>使用前面的方法，当传入cuda的输入然后进行转换时，前面的方法只能在cpu上执行，因为cuda不支持numpy(),需要进行cpu和cuda的转换。（一直以为是因为数据传输等方面可能的影响导致我的速度变慢，但是似乎影响更大的是因为后续模型加载非成batch)）</p>
+<p>torch的方法不需要</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">A = torch.rand([<span class="number">10</span>,<span class="number">10</span>]) <span class="comment"># 10*10的邻接矩阵A，带有权值，而非0/1</span></span><br><span class="line">A</span><br></pre></td></tr></table></figure>
+<pre><code>tensor([[0.8176, 0.2545, 0.6473, 0.2937, 0.9869, 0.0929, 0.6526, 0.6831, 0.0242,
+         0.3227],
+        [0.8430, 0.0125, 0.0166, 0.2306, 0.6767, 0.7800, 0.3947, 0.5706, 0.1307,
+         0.3265],
+        [0.8983, 0.5701, 0.0590, 0.0370, 0.1142, 0.9176, 0.0413, 0.7737, 0.8839,
+         0.9673],
+        [0.2120, 0.0877, 0.8496, 0.2748, 0.2316, 0.1640, 0.2160, 0.1306, 0.4602,
+         0.9815],
+        [0.8076, 0.4725, 0.8042, 0.3854, 0.4384, 0.9577, 0.5992, 0.5335, 0.9595,
+         0.1808],
+        [0.3166, 0.5219, 0.1348, 0.2726, 0.6527, 0.7875, 0.2952, 0.6067, 0.5722,
+         0.0738],
+        [0.2799, 0.3344, 0.2588, 0.3888, 0.6586, 0.3389, 0.3849, 0.0184, 0.8913,
+         0.5702],
+        [0.5489, 0.5952, 0.3463, 0.6634, 0.1480, 0.4949, 0.3449, 0.6737, 0.5059,
+         0.1255],
+        [0.3011, 0.6796, 0.9407, 0.1118, 0.2194, 0.9374, 0.2392, 0.1681, 0.4226,
+         0.9818],
+        [0.7948, 0.4114, 0.2621, 0.5588, 0.2609, 0.7126, 0.6315, 0.7893, 0.2553,
+         0.4072]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adj = A.to_sparse()</span><br><span class="line">adj, adj.indices(),adj.values()</span><br></pre></td></tr></table></figure>
+<pre><code>(tensor(indices=tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                         1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3,
+                         3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5,
+                         5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7,
+                         7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9,
+                         9, 9, 9, 9, 9],
+                        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8,
+                         9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7,
+                         8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6,
+                         7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5,
+                         6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4,
+                         5, 6, 7, 8, 9]]),
+        values=tensor([0.8176, 0.2545, 0.6473, 0.2937, 0.9869, 0.0929, 0.6526,
+                       0.6831, 0.0242, 0.3227, 0.8430, 0.0125, 0.0166, 0.2306,
+                       0.6767, 0.7800, 0.3947, 0.5706, 0.1307, 0.3265, 0.8983,
+                       0.5701, 0.0590, 0.0370, 0.1142, 0.9176, 0.0413, 0.7737,
+                       0.8839, 0.9673, 0.2120, 0.0877, 0.8496, 0.2748, 0.2316,
+                       0.1640, 0.2160, 0.1306, 0.4602, 0.9815, 0.8076, 0.4725,
+                       0.8042, 0.3854, 0.4384, 0.9577, 0.5992, 0.5335, 0.9595,
+                       0.1808, 0.3166, 0.5219, 0.1348, 0.2726, 0.6527, 0.7875,
+                       0.2952, 0.6067, 0.5722, 0.0738, 0.2799, 0.3344, 0.2588,
+                       0.3888, 0.6586, 0.3389, 0.3849, 0.0184, 0.8913, 0.5702,
+                       0.5489, 0.5952, 0.3463, 0.6634, 0.1480, 0.4949, 0.3449,
+                       0.6737, 0.5059, 0.1255, 0.3011, 0.6796, 0.9407, 0.1118,
+                       0.2194, 0.9374, 0.2392, 0.1681, 0.4226, 0.9818, 0.7948,
+                       0.4114, 0.2621, 0.5588, 0.2609, 0.7126, 0.6315, 0.7893,
+                       0.2553, 0.4072]),
+        size=(10, 10), nnz=100, layout=torch.sparse_coo),
+ tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2,
+          2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4,
+          4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7,
+          7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9,
+          9, 9, 9, 9],
+         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3,
+          4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7,
+          8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1,
+          2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5,
+          6, 7, 8, 9]]),
+ tensor([0.8176, 0.2545, 0.6473, 0.2937, 0.9869, 0.0929, 0.6526, 0.6831, 0.0242,
+         0.3227, 0.8430, 0.0125, 0.0166, 0.2306, 0.6767, 0.7800, 0.3947, 0.5706,
+         0.1307, 0.3265, 0.8983, 0.5701, 0.0590, 0.0370, 0.1142, 0.9176, 0.0413,
+         0.7737, 0.8839, 0.9673, 0.2120, 0.0877, 0.8496, 0.2748, 0.2316, 0.1640,
+         0.2160, 0.1306, 0.4602, 0.9815, 0.8076, 0.4725, 0.8042, 0.3854, 0.4384,
+         0.9577, 0.5992, 0.5335, 0.9595, 0.1808, 0.3166, 0.5219, 0.1348, 0.2726,
+         0.6527, 0.7875, 0.2952, 0.6067, 0.5722, 0.0738, 0.2799, 0.3344, 0.2588,
+         0.3888, 0.6586, 0.3389, 0.3849, 0.0184, 0.8913, 0.5702, 0.5489, 0.5952,
+         0.3463, 0.6634, 0.1480, 0.4949, 0.3449, 0.6737, 0.5059, 0.1255, 0.3011,
+         0.6796, 0.9407, 0.1118, 0.2194, 0.9374, 0.2392, 0.1681, 0.4226, 0.9818,
+         0.7948, 0.4114, 0.2621, 0.5588, 0.2609, 0.7126, 0.6315, 0.7893, 0.2553,
+         0.4072]))
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">indices = adj.indices() <span class="comment"># 我们需要的coo形式的edge_index</span></span><br><span class="line">edge_index = indices<span class="comment">#PyG需要的edge_index</span></span><br><span class="line">edge_index,edge_index.shape</span><br></pre></td></tr></table></figure>
+<pre><code>(tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2,
+          2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4,
+          4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7,
+          7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9,
+          9, 9, 9, 9],
+         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3,
+          4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7,
+          8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1,
+          2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5,
+          6, 7, 8, 9]]),
+ torch.Size([2, 100]))
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">edge_attr = adj.values()</span><br><span class="line">edge_attr,edge_attr.shape</span><br></pre></td></tr></table></figure>
+<pre><code>(tensor([0.8176, 0.2545, 0.6473, 0.2937, 0.9869, 0.0929, 0.6526, 0.6831, 0.0242,
+         0.3227, 0.8430, 0.0125, 0.0166, 0.2306, 0.6767, 0.7800, 0.3947, 0.5706,
+         0.1307, 0.3265, 0.8983, 0.5701, 0.0590, 0.0370, 0.1142, 0.9176, 0.0413,
+         0.7737, 0.8839, 0.9673, 0.2120, 0.0877, 0.8496, 0.2748, 0.2316, 0.1640,
+         0.2160, 0.1306, 0.4602, 0.9815, 0.8076, 0.4725, 0.8042, 0.3854, 0.4384,
+         0.9577, 0.5992, 0.5335, 0.9595, 0.1808, 0.3166, 0.5219, 0.1348, 0.2726,
+         0.6527, 0.7875, 0.2952, 0.6067, 0.5722, 0.0738, 0.2799, 0.3344, 0.2588,
+         0.3888, 0.6586, 0.3389, 0.3849, 0.0184, 0.8913, 0.5702, 0.5489, 0.5952,
+         0.3463, 0.6634, 0.1480, 0.4949, 0.3449, 0.6737, 0.5059, 0.1255, 0.3011,
+         0.6796, 0.9407, 0.1118, 0.2194, 0.9374, 0.2392, 0.1681, 0.4226, 0.9818,
+         0.7948, 0.4114, 0.2621, 0.5588, 0.2609, 0.7126, 0.6315, 0.7893, 0.2553,
+         0.4072]),
+ torch.Size([100]))
 </code></pre><h1 id="edge-index-to-邻接矩阵"><a href="#edge-index-to-邻接矩阵" class="headerlink" title="edge_index to 邻接矩阵"></a>edge_index to 邻接矩阵</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scipy.sparse <span class="keyword">as</span> sp</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> sparse_coo_tensor</span><br><span class="line">adj = sparse_coo_tensor(edge_index,edge_attr,[<span class="number">10</span>,<span class="number">10</span>])</span><br><span class="line">adj.to_dense()</span><br></pre></td></tr></table></figure>
 <pre><code>tensor([[4.5977e-01, 6.6455e-01, 4.3946e-01, 3.8642e-01, 1.2331e-01, 2.9945e-01,
          2.5433e-01, 9.7476e-01, 4.5961e-04, 5.9594e-02],
@@ -413,228 +519,51 @@
         2.7897447e-01, 5.5806071e-01]], dtype=float32)
 </code></pre><h1 id="构建自定义边权重的GNN"><a href="#构建自定义边权重的GNN" class="headerlink" title="构建自定义边权重的GNN"></a>构建自定义边权重的GNN</h1><p>胡乱定值的<br>代码修改自：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/426907570">https://zhuanlan.zhihu.com/p/426907570</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch_geometric.nn <span class="keyword">import</span> GATConv</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Net</span>(torch.nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(Net, self).__init__()</span><br><span class="line">        self.conv1 = GCNConv(data.num_features, <span class="number">16</span>, cached=<span class="literal">True</span>,</span><br><span class="line">                             normalize=<span class="literal">True</span>)</span><br><span class="line"><span class="comment">#         self.conv1 = GATConv(data.num_features, 16)</span></span><br><span class="line">        <span class="comment">#self.conv2 = GCNConv(16, data.num_classes, cached=True,</span></span><br><span class="line">        self.conv2 = GCNConv(<span class="number">16</span>, <span class="number">2</span>, cached=<span class="literal">True</span>,</span><br><span class="line">                            normalize=<span class="literal">True</span>)</span><br><span class="line"><span class="comment">#         self.conv2 = GATConv(16, 2)</span></span><br><span class="line">        <span class="comment"># self.conv1 = ChebConv(data.num_features, 16, K=2)</span></span><br><span class="line">        <span class="comment"># self.conv2 = ChebConv(16, data.num_features, K=2)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self</span>):</span><br><span class="line">        x, edge_index, edge_weight = data.x, data.edge_index, data.edge_attr</span><br><span class="line">        x = F.relu(self.conv1(x, edge_index, edge_weight))</span><br><span class="line">        x = F.dropout(x, training=self.training)</span><br><span class="line">        x = self.conv2(x, edge_index, edge_weight)</span><br><span class="line">        <span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch_geometric.nn <span class="keyword">import</span> GCNConv, ChebConv  <span class="comment"># noqa</span></span><br><span class="line"><span class="keyword">from</span> torch_geometric.data <span class="keyword">import</span> data <span class="keyword">as</span> D</span><br><span class="line"></span><br><span class="line">x = torch.tensor([[<span class="number">1</span>],[<span class="number">2</span>],[<span class="number">3</span>],[<span class="number">4</span>],[<span class="number">5</span>],[<span class="number">6</span>],[<span class="number">7</span>],[<span class="number">8</span>],[<span class="number">9</span>],[<span class="number">10</span>]], dtype=torch.<span class="built_in">float</span>)   <span class="comment"># N x emb(in)</span></span><br><span class="line"><span class="built_in">print</span>(x.shape)</span><br><span class="line">x = torch.ones(<span class="number">10</span>,dtype=torch.<span class="built_in">float</span>).unsqueeze(-<span class="number">1</span>)</span><br><span class="line"><span class="comment">#print(x.shape)</span></span><br><span class="line">y = torch.randint(<span class="number">0</span>,<span class="number">2</span>,[<span class="number">10</span>])</span><br><span class="line">train_mask = torch.tensor([<span class="literal">True</span>, <span class="literal">True</span>, <span class="literal">True</span>,<span class="literal">True</span>,<span class="literal">True</span>,<span class="literal">True</span>,<span class="literal">True</span>,<span class="literal">True</span>,<span class="literal">True</span>,<span class="literal">True</span>], dtype=torch.<span class="built_in">bool</span>)</span><br><span class="line">val_mask=train_mask</span><br><span class="line">test_mask=train_mask</span><br><span class="line">data=D.Data()</span><br><span class="line">data.x,data.y,data.edge_index,data.edge_attr,data.train_mask,data.val_mask,data.test_mask \</span><br><span class="line">    = x,y,edge_index,edge_attr,train_mask,val_mask,test_mask</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch_geometric.nn <span class="keyword">import</span> GCNConv, ChebConv  <span class="comment"># noqa</span></span><br><span class="line"><span class="keyword">from</span> torch_geometric.data <span class="keyword">import</span> data <span class="keyword">as</span> D</span><br><span class="line"><span class="keyword">from</span> torch_geometric.data <span class="keyword">import</span> dataset</span><br><span class="line"></span><br><span class="line">x = torch.tensor([[<span class="number">1</span>],[<span class="number">2</span>],[<span class="number">3</span>],[<span class="number">4</span>],[<span class="number">5</span>],[<span class="number">6</span>],[<span class="number">7</span>],[<span class="number">8</span>],[<span class="number">9</span>],[<span class="number">10</span>]], dtype=torch.<span class="built_in">float</span>)   <span class="comment"># N x emb(in)</span></span><br><span class="line"><span class="built_in">print</span>(x.shape)</span><br><span class="line">x = torch.ones(<span class="number">10</span>,dtype=torch.<span class="built_in">float</span>).unsqueeze(-<span class="number">1</span>)</span><br><span class="line"><span class="comment">#print(x.shape)</span></span><br><span class="line">y = torch.randint(<span class="number">0</span>,<span class="number">2</span>,[<span class="number">10</span>])</span><br><span class="line">train_mask = torch.tensor([<span class="literal">True</span>, <span class="literal">True</span>, <span class="literal">True</span>,<span class="literal">True</span>,<span class="literal">True</span>,<span class="literal">True</span>,<span class="literal">True</span>,<span class="literal">True</span>,<span class="literal">True</span>,<span class="literal">True</span>], dtype=torch.<span class="built_in">bool</span>)</span><br><span class="line">val_mask=train_mask</span><br><span class="line">test_mask=train_mask</span><br><span class="line">data=D.Data()</span><br><span class="line">data.x,data.y,data.edge_index,data.edge_attr,data.train_mask,data.val_mask,data.test_mask \</span><br><span class="line">    = x,y,edge_index,edge_attr,train_mask,val_mask,test_mask</span><br></pre></td></tr></table></figure>
 <pre><code>torch.Size([10, 1])
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">device = torch.device(<span class="string">&#x27;cuda&#x27;</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line">model, data = Net().to(device), data.to(device)</span><br><span class="line">optimizer = torch.optim.Adam([</span><br><span class="line">    <span class="built_in">dict</span>(params=model.conv1.parameters(), weight_decay=<span class="number">5e-4</span>),</span><br><span class="line">    <span class="built_in">dict</span>(params=model.conv2.parameters(), weight_decay=<span class="number">0</span>)</span><br><span class="line">], lr=<span class="number">0.01</span>)  <span class="comment"># Only perform weight-decay on first convolution.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">train</span>():</span><br><span class="line">    model.train()</span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    F.nll_loss(model()[data.train_mask], data.y[data.train_mask]).backward()</span><br><span class="line">    <span class="comment">#F.nll_loss(model()[data], data.y).backward() #不行！</span></span><br><span class="line">    optimizer.step()</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@torch.no_grad()</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>():</span><br><span class="line">    model.<span class="built_in">eval</span>()</span><br><span class="line">    logits, accs = model(), []</span><br><span class="line">    <span class="keyword">for</span> _, mask <span class="keyword">in</span> data(<span class="string">&#x27;train_mask&#x27;</span>, <span class="string">&#x27;val_mask&#x27;</span>, <span class="string">&#x27;test_mask&#x27;</span>):</span><br><span class="line">        pred = logits[mask].<span class="built_in">max</span>(<span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">        acc = pred.eq(data.y[mask]).<span class="built_in">sum</span>().item() / mask.<span class="built_in">sum</span>().item()</span><br><span class="line">        accs.append(acc)</span><br><span class="line">    <span class="keyword">return</span> accs</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">best_val_acc = test_acc = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">201</span>):</span><br><span class="line">    train()</span><br><span class="line">    train_acc, val_acc, tmp_test_acc = test()</span><br><span class="line">    <span class="keyword">if</span> val_acc &gt; best_val_acc:</span><br><span class="line">        best_val_acc = val_acc</span><br><span class="line">        test_acc = tmp_test_acc</span><br><span class="line">    log = <span class="string">&#x27;Epoch: &#123;:03d&#125;, Train: &#123;:.4f&#125;, Val: &#123;:.4f&#125;, Test: &#123;:.4f&#125;&#x27;</span></span><br><span class="line">    <span class="built_in">print</span>(log.<span class="built_in">format</span>(epoch, train_acc, best_val_acc, test_acc))</span><br></pre></td></tr></table></figure>
-<pre><code>Epoch: 001, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 002, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 003, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 004, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 005, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 006, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 007, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 008, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 009, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 010, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 011, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 012, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 013, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 014, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 015, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 016, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 017, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 018, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 019, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 020, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 021, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 022, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 023, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 024, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 025, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 026, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 027, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 028, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 029, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 030, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 031, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 032, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 033, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 034, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 035, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 036, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 037, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 038, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 039, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 040, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 041, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 042, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 043, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 044, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 045, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 046, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 047, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 048, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 049, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 050, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 051, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 052, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 053, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 054, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 055, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 056, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 057, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 058, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 059, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 060, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 061, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 062, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 063, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 064, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 065, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 066, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 067, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 068, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 069, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 070, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 071, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 072, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 073, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 074, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 075, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 076, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 077, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 078, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 079, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 080, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 081, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 082, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 083, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 084, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 085, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 086, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 087, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 088, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 089, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 090, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 091, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 092, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 093, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 094, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 095, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 096, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 097, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 098, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 099, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 100, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 101, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 102, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 103, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 104, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 105, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 106, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 107, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 108, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 109, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 110, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 111, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 112, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 113, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 114, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 115, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 116, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 117, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 118, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 119, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 120, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 121, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 122, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 123, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 124, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 125, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 126, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 127, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 128, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 129, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 130, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 131, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 132, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 133, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 134, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 135, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 136, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 137, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 138, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 139, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 140, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 141, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 142, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 143, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 144, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 145, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 146, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 147, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 148, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 149, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 150, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 151, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 152, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 153, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 154, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 155, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 156, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 157, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 158, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 159, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 160, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 161, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 162, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 163, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 164, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 165, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 166, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 167, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 168, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 169, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 170, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 171, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 172, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 173, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 174, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 175, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 176, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 177, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 178, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 179, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 180, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 181, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 182, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 183, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 184, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 185, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 186, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 187, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 188, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 189, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 190, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 191, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 192, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 193, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 194, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 195, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 196, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 197, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 198, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 199, Train: 0.6000, Val: 0.6000, Test: 0.6000
-Epoch: 200, Train: 0.6000, Val: 0.6000, Test: 0.6000
-</code></pre><h1 id="批量"><a href="#批量" class="headerlink" title="批量"></a>批量</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Net</span>(torch.nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(Net, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.layer = GATConv(in_channels=<span class="number">16</span>, out_channels=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self,x,edg_index</span>):</span><br><span class="line">        output = torch.stack([self.layer(graph, edge_index=edge_indexi) <span class="keyword">for</span> graph,edge_indexi <span class="keyword">in</span> <span class="built_in">zip</span>(x,edg_index)], dim=<span class="number">0</span>)</span><br><span class="line">        output = torch.sigmoid(output)</span><br><span class="line">        <span class="built_in">print</span>(output.shape)</span><br><span class="line">        <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch_geometric.nn <span class="keyword">import</span> GATConv</span><br><span class="line">x = torch.randn((<span class="number">8</span>, <span class="number">207</span>, <span class="number">16</span>))</span><br><span class="line">y = torch.rand([<span class="number">8</span>,<span class="number">207</span>,<span class="number">1</span>]).<span class="built_in">float</span>()</span><br><span class="line">edge_index = torch.randint(high=<span class="number">206</span>, size=(<span class="number">2</span>, <span class="number">1200</span>))</span><br><span class="line"><span class="built_in">print</span>(edge_index.shape)</span><br><span class="line"></span><br><span class="line">edge_index = edge_index.repeat(<span class="number">8</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(edge_index.shape)</span><br><span class="line">model = Net()</span><br><span class="line">optimizer = torch.optim.Adam(params=model.parameters(),lr=<span class="number">0.01</span>)  <span class="comment"># Only perform weight-decay on first convolution.</span></span><br><span class="line"></span><br><span class="line">out = model(x,edge_index)</span><br><span class="line"><span class="built_in">print</span>(out.shape)</span><br><span class="line"><span class="built_in">print</span>(y.shape)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">model.train()</span><br><span class="line">optimizer.zero_grad()</span><br><span class="line">loss = F.mse_loss(out, y)</span><br><span class="line">loss.backward()</span><br><span class="line">optimizer.step()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(loss.item())</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">best_val_acc = test_acc = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">    train()</span><br><span class="line">    train_acc, val_acc, tmp_test_acc = test()</span><br><span class="line">    <span class="keyword">if</span> val_acc &gt; best_val_acc:</span><br><span class="line">        best_val_acc = val_acc</span><br><span class="line">        test_acc = tmp_test_acc</span><br><span class="line">    log = <span class="string">&#x27;Epoch: &#123;:03d&#125;, Train: &#123;:.4f&#125;, Val: &#123;:.4f&#125;, Test: &#123;:.4f&#125;&#x27;</span></span><br><span class="line">    <span class="built_in">print</span>(log.<span class="built_in">format</span>(epoch, train_acc, best_val_acc, test_acc))</span><br></pre></td></tr></table></figure>
+<pre><code>Epoch: 001, Train: 0.5000, Val: 0.5000, Test: 0.5000
+Epoch: 002, Train: 0.5000, Val: 0.5000, Test: 0.5000
+Epoch: 003, Train: 0.5000, Val: 0.5000, Test: 0.5000
+Epoch: 004, Train: 0.5000, Val: 0.5000, Test: 0.5000
+Epoch: 005, Train: 0.5000, Val: 0.5000, Test: 0.5000
+Epoch: 006, Train: 0.5000, Val: 0.5000, Test: 0.5000
+Epoch: 007, Train: 0.5000, Val: 0.5000, Test: 0.5000
+Epoch: 008, Train: 0.5000, Val: 0.5000, Test: 0.5000
+Epoch: 009, Train: 0.5000, Val: 0.5000, Test: 0.5000
+</code></pre><h1 id="批量"><a href="#批量" class="headerlink" title="批量"></a>批量</h1><h2 id="单独传入，stack结果"><a href="#单独传入，stack结果" class="headerlink" title="单独传入，stack结果"></a>单独传入，stack结果</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Net</span>(torch.nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(Net, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.layer = GATConv(in_channels=<span class="number">16</span>, out_channels=<span class="number">16</span>)</span><br><span class="line">        self.layer2 = GATConv(in_channels=<span class="number">16</span>, out_channels=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self,x,edg_index</span>):</span><br><span class="line">        output = torch.stack([self.layer(graph, edge_index=edge_indexi) <span class="keyword">for</span> graph,edge_indexi <span class="keyword">in</span> <span class="built_in">zip</span>(x,edg_index)], dim=<span class="number">0</span>)</span><br><span class="line">        output = torch.stack([self.layer2(graph, edge_index=edge_indexi) <span class="keyword">for</span> graph,edge_indexi <span class="keyword">in</span> <span class="built_in">zip</span>(output,edg_index)], dim=<span class="number">0</span>)</span><br><span class="line">        <span class="comment">#output = torch.sigmoid(output)</span></span><br><span class="line">        <span class="comment">#print(output.shape)</span></span><br><span class="line">        <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch_geometric.nn <span class="keyword">import</span> GATConv</span><br><span class="line">x = torch.randn((<span class="number">8</span>, <span class="number">207</span>, <span class="number">16</span>))</span><br><span class="line">y = torch.rand([<span class="number">8</span>,<span class="number">207</span>,<span class="number">1</span>]).<span class="built_in">float</span>()</span><br><span class="line">edge_index = torch.randint(high=<span class="number">206</span>, size=(<span class="number">2</span>, <span class="number">1200</span>))</span><br><span class="line"><span class="comment">#print(edge_index.shape)</span></span><br><span class="line"></span><br><span class="line">edge_index = edge_index.repeat(<span class="number">8</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"><span class="comment">#print(edge_index.shape)</span></span><br><span class="line">model = Net()</span><br><span class="line">optimizer = torch.optim.Adam(params=model.parameters(),lr=<span class="number">0.01</span>)  <span class="comment"># Only perform weight-decay on first convolution.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">model.train()</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">s = time.time()</span><br><span class="line"><span class="keyword">for</span> e <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    out = model(x,edge_index)</span><br><span class="line">    <span class="comment">#print(out.shape)</span></span><br><span class="line">    <span class="comment">#print(y.shape)</span></span><br><span class="line">    loss = F.mse_loss(out, y)</span><br><span class="line">    loss.backward()</span><br><span class="line">    optimizer.step()</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(loss.item())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;time:&quot;</span>,time.time()-s)</span><br></pre></td></tr></table></figure>
+<pre><code>0.7729121446609497
+0.41821303963661194
+0.384408563375473
+time: 0.09303927421569824
+</code></pre><h2 id="Batch-Data"><a href="#Batch-Data" class="headerlink" title="Batch+Data"></a>Batch+Data</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch_geometric.nn <span class="keyword">import</span> GATConv</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Net</span>(torch.nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(Net, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.layer = GATConv(in_channels=<span class="number">16</span>, out_channels=<span class="number">16</span>)</span><br><span class="line">        self.layer2 = GATConv(in_channels=<span class="number">16</span>,out_channels=<span class="number">1</span>)</span><br><span class="line">        self.dropout = nn.Dropout(<span class="number">0.2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self,x,edge_index</span>):</span><br><span class="line"><span class="comment">#         print(&quot;input:&quot;,x.shape)</span></span><br><span class="line">        data_list = [Data(x=x_, edge_index=edge_indexi) <span class="keyword">for</span> x_ , edge_indexi <span class="keyword">in</span> <span class="built_in">zip</span>(x,edge_index)] </span><br><span class="line">        </span><br><span class="line">        batch = Batch.from_data_list(data_list)</span><br><span class="line">        output = self.layer(batch.x, edge_index=batch.edge_index)</span><br><span class="line"><span class="comment">#         print(&quot;output:&quot;,output.shape)</span></span><br><span class="line">        output = self.dropout(output)</span><br><span class="line">        data_list = [Data(x=x_, edge_index=edge_indexi) <span class="keyword">for</span> x_ , edge_indexi <span class="keyword">in</span> <span class="built_in">zip</span>(torch.split(output,x.shape[<span class="number">1</span>]),edge_index)] </span><br><span class="line">        batch = Batch.from_data_list(data_list)</span><br><span class="line">        output = self.layer2(batch.x,batch.edge_index)</span><br><span class="line">        output = self.dropout(output)</span><br><span class="line">        <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch_geometric.data <span class="keyword">import</span> Data,Batch</span><br><span class="line"><span class="keyword">from</span> torch_geometric.nn <span class="keyword">import</span> GATConv</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">x = torch.randn((<span class="number">8</span>, <span class="number">207</span>, <span class="number">16</span>))</span><br><span class="line">y = torch.rand([<span class="number">8</span>,<span class="number">207</span>,<span class="number">1</span>]).<span class="built_in">float</span>()</span><br><span class="line"></span><br><span class="line">edge_index = torch.randint(high=<span class="number">206</span>, size=(<span class="number">2</span>, <span class="number">1200</span>))</span><br><span class="line"><span class="built_in">print</span>(edge_index.shape)</span><br><span class="line"></span><br><span class="line">edge_index = edge_index.repeat(<span class="number">8</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(edge_index.shape)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">model = Net()</span><br><span class="line">optimizer = torch.optim.Adam(params=model.parameters(),lr=<span class="number">0.01</span>)  <span class="comment"># Only perform weight-decay on first convolution.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">model.train()</span><br><span class="line">s = time.time()</span><br><span class="line"><span class="keyword">for</span> e <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    result = model(x,edge_index)</span><br><span class="line"><span class="comment">#     print(result.shape)</span></span><br><span class="line"><span class="comment">#     print(&quot;output of model&quot;,result.shape)</span></span><br><span class="line"><span class="comment">#     print(y.shape)</span></span><br><span class="line">    result = torch.stack(torch.split(result,x.shape[<span class="number">1</span>]))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;reshape the output:&quot;</span>,result.shape)</span><br><span class="line">    loss = F.mse_loss(result, y)</span><br><span class="line">    loss.backward()</span><br><span class="line">    optimizer.step()</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(loss.item())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;time:&quot;</span>,time.time()-s)</span><br></pre></td></tr></table></figure>
 <pre><code>torch.Size([2, 1200])
 torch.Size([8, 2, 1200])
-torch.Size([8, 207, 1])
-torch.Size([8, 207, 1])
-torch.Size([8, 207, 1])
-0.09769630432128906
+reshape the output: torch.Size([8, 207, 1])
+2.3954498767852783
+reshape the output: torch.Size([8, 207, 1])
+1.1830278635025024
+reshape the output: torch.Size([8, 207, 1])
+0.9167585372924805
+time: 0.05799269676208496
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch_geometric.data <span class="keyword">import</span> Data,Batch</span><br><span class="line"><span class="keyword">from</span> torch_geometric.nn <span class="keyword">import</span> GATConv</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line">x = torch.randn((<span class="number">8</span>, <span class="number">207</span>, <span class="number">16</span>))</span><br><span class="line">y = torch.rand([<span class="number">8</span>,<span class="number">207</span>,<span class="number">1</span>]).<span class="built_in">float</span>()</span><br><span class="line"></span><br><span class="line">edge_index = torch.randint(high=<span class="number">206</span>, size=(<span class="number">2</span>, <span class="number">1200</span>))</span><br><span class="line"><span class="built_in">print</span>(edge_index.shape)</span><br><span class="line"></span><br><span class="line">edge_index = edge_index.repeat(<span class="number">8</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(edge_index.shape)</span><br><span class="line"></span><br><span class="line">data_list = [Data(x=x_, edge_index=edge_indexi) <span class="keyword">for</span> x_ , edge_indexi <span class="keyword">in</span> <span class="built_in">zip</span>(x,edge_index)] </span><br><span class="line">batch = Batch.from_data_list(data_list)</span><br><span class="line">layer = GATConv(in_channels=<span class="number">16</span>, out_channels=<span class="number">2</span>)</span><br><span class="line">result = layer(batch.x, edge_index=batch.edge_index)</span><br><span class="line"><span class="built_in">print</span>(result.shape)</span><br></pre></td></tr></table></figure>
+<pre><code>torch.Size([2, 1200])
+torch.Size([8, 2, 1200])
+torch.Size([1656, 2])
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.rand([<span class="number">2</span>, <span class="number">2</span>, <span class="number">40000</span>])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> x:</span><br><span class="line">    <span class="built_in">print</span>(i.shape)</span><br></pre></td></tr></table></figure>
 <pre><code>torch.Size([2, 40000])
 torch.Size([2, 40000])
-</code></pre><h1 id="批量邻接矩阵转换"><a href="#批量邻接矩阵转换" class="headerlink" title="批量邻接矩阵转换"></a>批量邻接矩阵转换</h1><h2 id="转换完stack"><a href="#转换完stack" class="headerlink" title="转换完stack"></a>转换完stack</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">adj2coo</span>(<span class="params">self,Ab</span>):</span><br><span class="line">        <span class="keyword">import</span> scipy.sparse <span class="keyword">as</span> sp</span><br><span class="line">        <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">        adj = sp.coo_matrix(Ab)  <span class="comment"># 转换成coo_matrix矩阵</span></span><br><span class="line">        edge_attr = adj.data  <span class="comment"># 边权值</span></span><br><span class="line">        indices = np.vstack((adj.row, adj.col))  <span class="comment"># 我们需要的coo形式的edge_index</span></span><br><span class="line">        edge_index = torch.LongTensor(indices)  <span class="comment"># PyG需要的edge_index</span></span><br><span class="line"></span><br><span class="line">        edge_attr = torch.FloatTensor(edge_attr)  <span class="comment"># to float tensor</span></span><br><span class="line">        <span class="built_in">print</span>(edge_index.shape,edge_attr.shape)</span><br><span class="line">        <span class="keyword">return</span> edge_index,edge_attr</span><br></pre></td></tr></table></figure>
+</code></pre><h1 id="批量邻接矩阵转换"><a href="#批量邻接矩阵转换" class="headerlink" title="批量邻接矩阵转换"></a>批量邻接矩阵转换</h1><h2 id="转换实现"><a href="#转换实现" class="headerlink" title="转换实现"></a>转换实现</h2><h3 id="转换完stack"><a href="#转换完stack" class="headerlink" title="转换完stack"></a>转换完stack</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">adj2coo</span>(<span class="params">self,Ab</span>):</span><br><span class="line">        <span class="keyword">import</span> scipy.sparse <span class="keyword">as</span> sp</span><br><span class="line">        <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">        adj = sp.coo_matrix(Ab)  <span class="comment"># 转换成coo_matrix矩阵</span></span><br><span class="line">        edge_attr = adj.data  <span class="comment"># 边权值</span></span><br><span class="line">        indices = np.vstack((adj.row, adj.col))  <span class="comment"># 我们需要的coo形式的edge_index</span></span><br><span class="line">        edge_index = torch.LongTensor(indices)  <span class="comment"># PyG需要的edge_index</span></span><br><span class="line"></span><br><span class="line">        edge_attr = torch.FloatTensor(edge_attr)  <span class="comment"># to float tensor</span></span><br><span class="line">        <span class="built_in">print</span>(edge_index.shape,edge_attr.shape)</span><br><span class="line">        <span class="keyword">return</span> edge_index,edge_attr</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">edg_indexH, edge_attrH = torch.stack([self.adj2coo(i)[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> scoadj], dim=<span class="number">0</span>), torch.stack(</span><br><span class="line">            [self.adj2coo(i)[<span class="number">1</span>] <span class="keyword">for</span> i <span class="keyword">in</span> adj], dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="一次性解决"><a href="#一次性解决" class="headerlink" title="一次性解决"></a>一次性解决</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">adj2edge_index</span>(<span class="params">self,A</span>):</span><br><span class="line">       <span class="keyword">import</span> scipy.sparse <span class="keyword">as</span> sp</span><br><span class="line">       <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">       edg_indexAll = torch.zeros(<span class="number">0</span>,dtype=torch.int64)</span><br><span class="line">       edg_attrAll = torch.zeros(<span class="number">0</span>,dtype=torch.float32)</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> b <span class="keyword">in</span> A:</span><br><span class="line">           adj = sp.coo_matrix(b)  <span class="comment"># 转换成coo_matrix矩阵</span></span><br><span class="line">           edge_attr = adj.data  <span class="comment"># 边权值</span></span><br><span class="line">           indices = np.vstack((adj.row, adj.col))  <span class="comment"># 我们需要的coo形式的edge_index</span></span><br><span class="line">           edge_index = torch.LongTensor(indices)  <span class="comment"># PyG需要的edge_index</span></span><br><span class="line"></span><br><span class="line">           edge_attr = torch.FloatTensor(edge_attr)  <span class="comment"># to float tensor</span></span><br><span class="line">           edg_indexAll = torch.cat((edg_indexAll, edge_index))</span><br><span class="line">           edg_attrAll = torch.cat((edg_attrAll, edge_attr))</span><br><span class="line"></span><br><span class="line">       <span class="comment">#print(&quot;edg&quot;,edg_indexAll.view(A.shape[0],2,-1).shape)</span></span><br><span class="line">       <span class="comment">#print(edg_attrAll.view(A.shape[0],-1).shape)</span></span><br><span class="line">       <span class="keyword">return</span> edg_indexAll.view(A.shape[<span class="number">0</span>],<span class="number">2</span>,-<span class="number">1</span>),edg_attrAll.view(A.shape[<span class="number">0</span>],-<span class="number">1</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="模型中传参"><a href="#模型中传参" class="headerlink" title="模型中传参"></a>模型中传参</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x3 = self.relu(</span><br><span class="line">            torch.stack(</span><br><span class="line">                [self.gc6(graph, edge_index=edge_indexi, edge_attr=edge_attri) <span class="keyword">for</span> graph, edge_indexi, edge_attri <span class="keyword">in</span></span><br><span class="line">                 <span class="built_in">zip</span>(x3_h, edg_indexH, edge_attrH)],</span><br><span class="line">                dim=<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
-<h3 id="在模型中分批传入adj调用adj2coo"><a href="#在模型中分批传入adj调用adj2coo" class="headerlink" title="在模型中分批传入adj调用adj2coo"></a>在模型中分批传入adj调用adj2coo</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x3 = self.relu(</span><br><span class="line">          torch.stack(</span><br><span class="line">              [self.gc6(graph, edge_index=self.adj2coo(Ab)[<span class="number">0</span>],edge_attr =self.adj2coo(Ab)[<span class="number">1</span>]) <span class="keyword">for</span> graph, Ab <span class="keyword">in</span></span><br><span class="line">               <span class="built_in">zip</span>(x3_h, scoadj)],</span><br><span class="line">              dim=<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="一次性解决"><a href="#一次性解决" class="headerlink" title="一次性解决"></a>一次性解决</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">adj2edge_index</span>(<span class="params">self,A</span>):</span><br><span class="line">       <span class="keyword">import</span> scipy.sparse <span class="keyword">as</span> sp</span><br><span class="line">       <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">       edg_indexAll = torch.zeros(<span class="number">0</span>,dtype=torch.int64)</span><br><span class="line">       edg_attrAll = torch.zeros(<span class="number">0</span>,dtype=torch.float32)</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> b <span class="keyword">in</span> A:</span><br><span class="line">           adj = sp.coo_matrix(b)  <span class="comment"># 转换成coo_matrix矩阵</span></span><br><span class="line">           edge_attr = adj.data  <span class="comment"># 边权值</span></span><br><span class="line">           indices = np.vstack((adj.row, adj.col))  <span class="comment"># 我们需要的coo形式的edge_index</span></span><br><span class="line">           edge_index = torch.LongTensor(indices)  <span class="comment"># PyG需要的edge_index</span></span><br><span class="line"></span><br><span class="line">           edge_attr = torch.FloatTensor(edge_attr)  <span class="comment"># to float tensor</span></span><br><span class="line">           edg_indexAll = torch.cat((edg_indexAll, edge_index))</span><br><span class="line">           edg_attrAll = torch.cat((edg_attrAll, edge_attr))</span><br><span class="line"></span><br><span class="line">       <span class="comment">#print(&quot;edg&quot;,edg_indexAll.view(A.shape[0],2,-1).shape)</span></span><br><span class="line">       <span class="comment">#print(edg_attrAll.view(A.shape[0],-1).shape)</span></span><br><span class="line">       <span class="keyword">return</span> edg_indexAll.view(A.shape[<span class="number">0</span>],<span class="number">2</span>,-<span class="number">1</span>),edg_attrAll.view(A.shape[<span class="number">0</span>],-<span class="number">1</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="应用到模型"><a href="#应用到模型" class="headerlink" title="应用到模型"></a>应用到模型</h2><h3 id="模型中传参"><a href="#模型中传参" class="headerlink" title="模型中传参"></a>模型中传参</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x3 = self.relu(</span><br><span class="line">            torch.stack(</span><br><span class="line">                [self.gc6(graph, edge_index=self.adj2coo(edge)[<span class="number">0</span>], edge_attr=self.adj2coo(edge)[<span class="number">1</span>]) <span class="keyword">for</span> graph, edge <span class="keyword">in</span></span><br><span class="line">                 <span class="built_in">zip</span>(x3_h,A)],</span><br><span class="line">                dim=<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="Batch-Data-1"><a href="#Batch-Data-1" class="headerlink" title="Batch+Data"></a>Batch+Data</h3><p><strong>效率更高，如一个epoch前面是280s,后面是90s</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch_geometric.data <span class="keyword">import</span> Data,Batch</span><br><span class="line">data_list = [Data(x = x_,edge_ index=self.adj2coo(edge)[<span class="number">0</span>] ,edge_attr=self.adj2coo(edge)[<span class="number">1</span>]) <span class="keyword">for</span></span><br><span class="line">x_ ,edge <span class="keyword">in</span> <span class="built_in">zip</span>(x, A) ]</span><br><span class="line">batchH = Batch.from_data_list(data_listata_list)</span><br><span class="line">x1_h = self. relu(self. gc1(batchH.x， edge_index=batchH. edge_indexedge_attr=batchH.edge_attr ))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -742,7 +671,7 @@ torch.Size([2, 40000])
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5-to-pyg%E9%9C%80%E8%A6%81%E7%9A%84edge-index%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">邻接矩阵 to pyg需要的edge_index格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#edge-index-to-%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="nav-number">2.</span> <span class="nav-text">edge_index to 邻接矩阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E8%BE%B9%E6%9D%83%E9%87%8D%E7%9A%84GNN"><span class="nav-number">3.</span> <span class="nav-text">构建自定义边权重的GNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%B9%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text">批量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E8%BD%AC%E6%8D%A2"><span class="nav-number">5.</span> <span class="nav-text">批量邻接矩阵转换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E5%AE%8Cstack"><span class="nav-number">5.1.</span> <span class="nav-text">转换完stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%AC%A1%E6%80%A7%E8%A7%A3%E5%86%B3"><span class="nav-number">5.2.</span> <span class="nav-text">一次性解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E4%B8%AD%E4%BC%A0%E5%8F%82"><span class="nav-number">5.3.</span> <span class="nav-text">模型中传参</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E6%A8%A1%E5%9E%8B%E4%B8%AD%E5%88%86%E6%89%B9%E4%BC%A0%E5%85%A5adj%E8%B0%83%E7%94%A8adj2coo"><span class="nav-number">5.3.1.</span> <span class="nav-text">在模型中分批传入adj调用adj2coo</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5-to-pyg%E9%9C%80%E8%A6%81%E7%9A%84edge-index%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">邻接矩阵 to pyg需要的edge_index格式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#scipy"><span class="nav-number">1.1.</span> <span class="nav-text">scipy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#torch"><span class="nav-number">1.2.</span> <span class="nav-text">torch**</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#edge-index-to-%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="nav-number">2.</span> <span class="nav-text">edge_index to 邻接矩阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E8%BE%B9%E6%9D%83%E9%87%8D%E7%9A%84GNN"><span class="nav-number">3.</span> <span class="nav-text">构建自定义边权重的GNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%B9%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text">批量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E7%8B%AC%E4%BC%A0%E5%85%A5%EF%BC%8Cstack%E7%BB%93%E6%9E%9C"><span class="nav-number">4.1.</span> <span class="nav-text">单独传入，stack结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Batch-Data"><span class="nav-number">4.2.</span> <span class="nav-text">Batch+Data</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E8%BD%AC%E6%8D%A2"><span class="nav-number">5.</span> <span class="nav-text">批量邻接矩阵转换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.1.</span> <span class="nav-text">转换实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E5%AE%8Cstack"><span class="nav-number">5.1.1.</span> <span class="nav-text">转换完stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E6%AC%A1%E6%80%A7%E8%A7%A3%E5%86%B3"><span class="nav-number">5.1.2.</span> <span class="nav-text">一次性解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%88%B0%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.2.</span> <span class="nav-text">应用到模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E4%B8%AD%E4%BC%A0%E5%8F%82"><span class="nav-number">5.2.1.</span> <span class="nav-text">模型中传参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Batch-Data-1"><span class="nav-number">5.2.2.</span> <span class="nav-text">Batch+Data</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -820,13 +749,13 @@ torch.Size([2, 40000])
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">26k</span>
+    <span title="Symbols count total">25k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">24 mins.</span>
+    <span title="Reading time total">23 mins.</span>
 </div>
 
         
