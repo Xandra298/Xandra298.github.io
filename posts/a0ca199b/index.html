@@ -21,15 +21,15 @@
     var CONFIG = {"hostname":"xandra298.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="通用实现关键库：Dataset和 DataLoader from torch.utils.data import  Dataset,DataLoader 代码使用数据集：Pytorchlearning&#x2F;pokeman at master · Xandra298&#x2F;Pytorchlearning (github.com) 该数据集目录格式为：  root dir:  dir1(name is the">
+  <meta name="description" content="通用实现关键库：Dataset和 DataLoader from torch.utils.data import  Dataset,DataLoader 代码使用数据集：宝可梦">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【pytorch learning】(一)自定义数据集预处理和加载">
 <meta property="og:url" content="https://xandra298.github.io/posts/a0ca199b/index.html">
 <meta property="og:site_name" content="Tiny Blog">
-<meta property="og:description" content="通用实现关键库：Dataset和 DataLoader from torch.utils.data import  Dataset,DataLoader 代码使用数据集：Pytorchlearning&#x2F;pokeman at master · Xandra298&#x2F;Pytorchlearning (github.com) 该数据集目录格式为：  root dir:  dir1(name is the">
+<meta property="og:description" content="通用实现关键库：Dataset和 DataLoader from torch.utils.data import  Dataset,DataLoader 代码使用数据集：宝可梦">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-24T09:30:38.000Z">
-<meta property="article:modified_time" content="2022-11-24T10:09:21.049Z">
+<meta property="article:modified_time" content="2022-11-24T10:10:50.490Z">
 <meta property="article:author" content="Xandra">
 <meta property="article:tag" content="pytorch">
 <meta name="twitter:card" content="summary">
@@ -234,7 +234,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2022-11-24 17:30:38 / Modified: 18:09:21" itemprop="dateCreated datePublished" datetime="2022-11-24T17:30:38+08:00">2022-11-24</time>
+              <time title="Created: 2022-11-24 17:30:38 / Modified: 18:10:50" itemprop="dateCreated datePublished" datetime="2022-11-24T17:30:38+08:00">2022-11-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,14 +259,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>6.1k</span>
+              <span>6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>6 mins.</span>
+              <span>5 mins.</span>
             </span>
 
         </div>
@@ -280,7 +280,8 @@
       
         <h1 id="通用实现"><a href="#通用实现" class="headerlink" title="通用实现"></a>通用实现</h1><p>关键库：Dataset和 DataLoader</p>
 <p><code>from torch.utils.data import  Dataset,DataLoader</code></p>
-<p>代码使用数据集：<a target="_blank" rel="noopener" href="https://github.com/Xandra298/Pytorchlearning/tree/master/pokeman">Pytorchlearning/pokeman at master · Xandra298/Pytorchlearning (github.com)</a></p>
+<p>代码使用数据集：<a target="_blank" rel="noopener" href="https://github.com/Xandra298/Pytorchlearning/tree/master/pokeman">宝可梦</a></p>
+<span id="more"></span>
 <p>该数据集目录格式为：</p>
 <p> root dir:</p>
 <ul>
