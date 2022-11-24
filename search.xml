@@ -147,7 +147,7 @@ L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</s
 <ul>
 <li><p>失败原因：</p>
 <p>github 21年取消了密码验证</p>
-<p><img src="/posts/83682157/image-20221117162546351.png" alt="image-20221117162546351"></p>
+<p><img src="/posts/83682157/image-20221117162546351.png" alt></p>
 </li>
 <li><p>解决方式</p>
 <p>在_config.yml的deploy中，repo对应的填写为github仓库的ssh地址，可以避免进行密码验证（前提：git配置完成，github上有设置公钥）</p>
