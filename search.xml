@@ -509,9 +509,9 @@ Closeness = \frac{n-1}{该节点到其他节点最短路径之和}</script><p>�
 <p>使用skipgram算法完成嵌入</p>
 <p>window size d是向前向后看多少个节点</p>
 <p>算法：</p>
-<p><img src="/posts/5f3db67/image-20221126154802461.png" alt="image-20221126154802461" style="zoom: 50%;"></p>
+<p><img src="/posts/5f3db67/image-20221126154802461.png" alt style="zoom: 50%;"></p>
 <p>如下图：给定v4节点，算出v2,v3,v5,v6同时出现的概率。然后完成嵌入。</p>
-<p><img src="/posts/5f3db67/image-20221126155109322.png" alt="image-20221126155109322" style="zoom:50%;"></p>
+<p><img src="/posts/5f3db67/image-20221126155109322.png" alt style="zoom:50%;"></p>
 <ul>
 <li><p>embedding效果对比，看参数作用</p>
 <p>DeepWalk是无监督的完成图嵌入，效果判别通过将完成嵌入的图（有label)输入分类器,看分类效果</p>
@@ -535,7 +535,7 @@ Closeness = \frac{n-1}{该节点到其他节点最短路径之和}</script><p>�
 <p>一阶相似性：两个节点相连接，且边的权重很大，那么他们的一阶相似性很高</p>
 <p>二阶相似性： 两个节点的邻居很相似，那么即使这两个节点没有相互连接，他们的二阶相似性也很大</p>
 <p>如图，六节点和七节点一阶相似性高，五节点和六节点的embedding的二阶相似性很高：</p>
-<p><img src="/posts/5f3db67/image-20221126160339470.png" alt="image-20221126160339470" style="zoom: 50%;"></p>
+<p><img src="/posts/5f3db67/image-20221126160339470.png" alt style="zoom: 50%;"></p>
 <ul>
 <li><p>节点的度比较低的话，使用LINE效果不会很好</p>
 </li>
@@ -543,12 +543,12 @@ Closeness = \frac{n-1}{该节点到其他节点最短路径之和}</script><p>�
 </li>
 </ul>
 <p>一阶和二阶embedding训练的loss：</p>
-<p><img src="/posts/5f3db67/image-20221126163731692.png" alt="image-20221126163731692" style="zoom: 50%;"></p>
-<p><img src="/posts/5f3db67/image-20221126163701508.png" alt="image-20221126163701508" style="zoom:50%;"></p>
+<p><img src="/posts/5f3db67/image-20221126163731692.png" alt style="zoom: 50%;"></p>
+<p><img src="/posts/5f3db67/image-20221126163701508.png" alt style="zoom:50%;"></p>
 <p>最后的embedding是一阶和二阶的直接拼接</p>
 <h2 id="Node2Vec"><a href="#Node2Vec" class="headerlink" title="Node2Vec"></a>Node2Vec</h2><p>和DeepWalk相似，不同的是采用了有策略的游走</p>
 <p>游走策略：</p>
-<p><img src="/posts/5f3db67/image-20221126170021320.png" alt="image-20221126170021320" style="zoom:67%;"></p>
+<p><img src="/posts/5f3db67/image-20221126170021320.png" alt style="zoom:67%;"></p>
 <p>DFS，即q值小，探索性强，会捕捉同质性节点，即相邻节点表示类似；BFS，即p值小，保守周围，会捕捉结构性，即某些节点的图上结构类似。</p>
 <h2 id="struct2vec"><a href="#struct2vec" class="headerlink" title="struct2vec"></a>struct2vec</h2><p>之前的方式都是基于近邻，但是有些节点没有近邻也有结构相似性</p>
 <h2 id="SDNE"><a href="#SDNE" class="headerlink" title="SDNE"></a>SDNE</h2><p>structural deep network embedding</p>
