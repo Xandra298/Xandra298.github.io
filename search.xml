@@ -436,9 +436,9 @@ torch.Size([3, 224, 224]) torch.Size([])
       </tags>
   </entry>
   <entry>
-    <title>GNN入门</title>
+    <title>几个基础图神经网络</title>
     <url>/posts/71dd2457/</url>
-    <content><![CDATA[<h1 id="GNN入门"><a href="#GNN入门" class="headerlink" title="GNN入门"></a>GNN入门</h1><span id="more"></span>
+    <content><![CDATA[<h1 id="GCN、GraphSAGE和GAT"><a href="#GCN、GraphSAGE和GAT" class="headerlink" title="GCN、GraphSAGE和GAT"></a>GCN、GraphSAGE和GAT</h1><span id="more"></span>
 <h2 id="GCN"><a href="#GCN" class="headerlink" title="GCN"></a>GCN</h2><ul>
 <li>公式：（I是单位矩阵）</li>
 </ul>
@@ -480,7 +480,7 @@ torch.Size([3, 224, 224]) torch.Size([])
 <li><p>Pooling aggregator</p>
 </li>
 </ul>
-<p><img src="\几个基础GNN\image-20221126212637461.png" alt="image-20221126212637461"></p>
+<p><img src="/posts/71dd2457/image-20221126212637461.png" alt="image-20221126212637461"></p>
 <p><img src="/posts/71dd2457/image-20221126212630219.png" alt="image-20221126212630219"></p>
 <p>不仅可以使用max，使用其他的排列不变性函数都可以，如mean和max效果上是没有差异的。</p>
 <p>通过W可以改变输出的维度。</p>
