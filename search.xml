@@ -126,46 +126,6 @@ L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</s
       </categories>
   </entry>
   <entry>
-    <title>pytorchlearning</title>
-    <url>/posts/643f7c73/</url>
-    <content><![CDATA[<h1 id="pytorch-学习记录"><a href="#pytorch-学习记录" class="headerlink" title="pytorch 学习记录"></a>pytorch 学习记录</h1><span id="more"></span>
-<p>视频学习笔记github存储仓库：（@ljh）</p>
-<p><a href="https://github.com/Xandra298/Pytorchlearning">Xandra298/Pytorchlearning (github.com)</a></p>
-<ul>
-<li><p>torch基础操作</p>
-<p><a href="https://github.com/Xandra298/Pytorchlearning/blob/all/3.pytorch基础操作.ipynb">Pytorchlearning/3.pytorch基础操作.ipynb at all · Xandra298/Pytorchlearning (github.com)</a></p>
-</li>
-<li><p>自定义数据集预处理与加载</p>
-<p><a href="https://xandra298.github.io/posts/a0ca199b/">【pytorch learning】(一)自定义数据集预处理和加载</a></p>
-</li>
-<li><p>完整模型搭建、训练、测试</p>
-<p><a href="https://xandra298.github.io/posts/13fc6476/">【pytorch-learning】(二) 模型搭建-训练-测试 </a></p>
-</li>
-<li><p>可视化</p>
-<p><a href="https://xandra298.github.io/posts/f19419c5/">【pytorch-learning】(三) 可视化 </a></p>
-</li>
-<li><p>【理论】随机梯度下降</p>
-<p>包括损失函数等:  <a href="https://github.com/Xandra298/Pytorchlearning/blob/all/4.随机梯度下降.ipynb">笔记</a></p>
-</li>
-<li><p>过拟合及优化trick</p>
-<p><a href="https://github.com/Xandra298/Pytorchlearning/blob/all/7. 过拟合及优化trick.ipynb">Pytorchlearning/过拟合及优化trick</a></p>
-</li>
-<li><p>卷积神经网络: <a href="https://github.com/Xandra298/Pytorchlearning/blob/all/8.卷积神经网络.ipynb">笔记</a></p>
-</li>
-<li><p>循环神经网络: <a href="https://github.com/Xandra298/Pytorchlearning/blob/all/9.循环神经网络.ipynb">笔记</a></p>
-</li>
-<li><p>自编码器: <a href="https://github.com/Xandra298/Pytorchlearning/blob/master/10.自编码器.ipynb">笔记</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>pytorch</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>zero-shot</title>
     <url>/posts/2ac833a5/</url>
     <content><![CDATA[<blockquote>
@@ -205,89 +165,37 @@ L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</s
 ]]></content>
   </entry>
   <entry>
-    <title>【pytorch learning】(一)自定义数据集预处理和加载</title>
-    <url>/posts/a0ca199b/</url>
-    <content><![CDATA[<h1 id="通用实现"><a href="#通用实现" class="headerlink" title="通用实现"></a>通用实现</h1><p>关键库：Dataset和 DataLoader</p>
-<p><code>from torch.utils.data import  Dataset,DataLoader</code></p>
-<p>代码使用数据集：<a href="https://github.com/Xandra298/Pytorchlearning/tree/master/pokeman">宝可梦</a></p>
-<span id="more"></span>
-<p>该数据集目录格式为：</p>
-<p> root dir:</p>
+    <title>pytorchlearning</title>
+    <url>/posts/643f7c73/</url>
+    <content><![CDATA[<h1 id="pytorch-学习记录"><a href="#pytorch-学习记录" class="headerlink" title="pytorch 学习记录"></a>pytorch 学习记录</h1><span id="more"></span>
+<p>视频学习笔记github存储仓库：（@ljh）</p>
+<p><a href="https://github.com/Xandra298/Pytorchlearning">Xandra298/Pytorchlearning (github.com)</a></p>
 <ul>
-<li>dir1(name is the class)<ul>
-<li>pic1</li>
-<li>pic2</li>
-<li>…</li>
-</ul>
+<li><p>torch基础操作</p>
+<p><a href="https://github.com/Xandra298/Pytorchlearning/blob/all/3.pytorch基础操作.ipynb">Pytorchlearning/3.pytorch基础操作.ipynb at all · Xandra298/Pytorchlearning (github.com)</a></p>
 </li>
-<li>dir2(name is the class)<ul>
-<li>…</li>
-</ul>
+<li><p>自定义数据集预处理与加载</p>
+<p><a href="https://xandra298.github.io/posts/a0ca199b/">【pytorch learning】(一)自定义数据集预处理和加载</a></p>
 </li>
-</ul>
-<h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>继承Dataset类的实现</p>
-<p>需要重载方法：</p>
-<ul>
-<li>__len__:返回数据集长度（数据数量）</li>
-<li>__get_item__：获取数据集的item</li>
-</ul>
-<p>关键思路：具体见代码及代码注释</p>
-<p>自定义方法load_csv:</p>
-<ol>
-<li>遍历目录，将image_path-label存储到csv文件中：</li>
-</ol>
-<ul>
-<li>用<code>glob.glob</code>获取具体路径的数据路径</li>
-<li><code>csv.writer(f)</code>将image_path,label写入csv文件</li>
-</ul>
-<ol>
-<li>读取csv文件，获得image_path-label</li>
-</ol>
-<ul>
-<li>reader = <code>csv.reader(f)</code>，for row in reader:…</li>
-</ul>
-<p>len方法：</p>
-<ul>
-<li>返回数据集长度</li>
-</ul>
-<p>get_item方法：</p>
-<ul>
-<li><p>传入index,从我们全局的列表中获得对应的数据</p>
+<li><p>完整模型搭建、训练、测试</p>
+<p><a href="https://xandra298.github.io/posts/13fc6476/">【pytorch-learning】(二) 模型搭建-训练-测试 </a></p>
 </li>
-<li><p>通过读取csv文件，传入index, 可以获得对应的image_path - label对。</p>
-<p>目标：载入image_path，处理图片，返回符合要求的图片数据和label对</p>
+<li><p>可视化</p>
+<p><a href="https://xandra298.github.io/posts/f19419c5/">【pytorch-learning】(三) 可视化 </a></p>
 </li>
-<li><p>处理从路径上读取的数据，返回指定格式。如使用<code>torchvision.transform</code>，最后处理完的格式是tensor</p>
+<li><p>【理论】随机梯度下降</p>
+<p>包括损失函数等:  <a href="https://github.com/Xandra298/Pytorchlearning/blob/all/4.随机梯度下降.ipynb">笔记</a></p>
 </li>
-<li><p>返回数据和label对</p>
+<li><p>过拟合及优化trick</p>
+<p><a href="https://github.com/Xandra298/Pytorchlearning/blob/all/7. 过拟合及优化trick.ipynb">Pytorchlearning/过拟合及优化trick</a></p>
+</li>
+<li><p>卷积神经网络: <a href="https://github.com/Xandra298/Pytorchlearning/blob/all/8.卷积神经网络.ipynb">笔记</a></p>
+</li>
+<li><p>循环神经网络: <a href="https://github.com/Xandra298/Pytorchlearning/blob/all/9.循环神经网络.ipynb">笔记</a></p>
+</li>
+<li><p>自编码器: <a href="https://github.com/Xandra298/Pytorchlearning/blob/master/10.自编码器.ipynb">笔记</a></p>
 </li>
 </ul>
-<p>关于mode，可以通过判断需要训练集或者测试集这样子，返回切分后的数据集</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> os,glob</span><br><span class="line"><span class="keyword">import</span> random,csv</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset,DataLoader</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Pokemen</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,root,resize,mode</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :param root: root dir of dataset</span></span><br><span class="line"><span class="string">                    root dir:</span></span><br><span class="line"><span class="string">                        - dir1(name is the class)</span></span><br><span class="line"><span class="string">                            - pic1</span></span><br><span class="line"><span class="string">                            - pic2</span></span><br><span class="line"><span class="string">                            - ...</span></span><br><span class="line"><span class="string">                        - dir2(name is the class)</span></span><br><span class="line"><span class="string">                        - ...</span></span><br><span class="line"><span class="string">        :param resize:</span></span><br><span class="line"><span class="string">        :param mode: train\test\val</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="built_in">super</span>(Pokemen, self).__init__()</span><br><span class="line">        self.root = root</span><br><span class="line">        self.resize = resize</span><br><span class="line"></span><br><span class="line">        self.name2label = &#123;&#125;<span class="comment">#  save the dict &#123;name:int&#125; </span></span><br><span class="line">        <span class="comment">#list the dir name under the root dir</span></span><br><span class="line">        <span class="keyword">for</span> name <span class="keyword">in</span> <span class="built_in">sorted</span>(os.listdir(os.path.join(root))): <span class="comment"># sorted to ensure every time to be the same</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(os.path.join(root,name)):</span><br><span class="line">                <span class="comment"># not a dir</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="comment"># get the name:int following the order</span></span><br><span class="line">            self.name2label[name] = <span class="built_in">len</span>(self.name2label.keys())</span><br><span class="line">        <span class="built_in">print</span>(self.name2label)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># read from csv: image_path-label；</span></span><br><span class="line">        <span class="comment"># function load_csv：save the image_path-label to csv and then read from csv</span></span><br><span class="line">        self.images,self.labels = self.load_csv(<span class="string">&quot;image.csv&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#split dataset</span></span><br><span class="line">        <span class="keyword">if</span> mode == <span class="string">&#x27;train&#x27;</span>: <span class="comment">#60%</span></span><br><span class="line">            self.images = self.images[:<span class="built_in">int</span>(<span class="number">0.6</span>*<span class="built_in">len</span>(self.images))]</span><br><span class="line">            self.labels = self.labels[:<span class="built_in">int</span>(<span class="number">0.6</span>*<span class="built_in">len</span>(self.labels))]</span><br><span class="line">        <span class="keyword">elif</span> mode == <span class="string">&#x27;val&#x27;</span>: <span class="comment">#20%</span></span><br><span class="line">            self.images = self.images[<span class="built_in">int</span>(<span class="number">0.6</span> * <span class="built_in">len</span>(self.images)):<span class="built_in">int</span>(<span class="number">0.8</span>*<span class="built_in">len</span>(self.images))]</span><br><span class="line">            self.labels = self.labels[<span class="built_in">int</span>(<span class="number">0.6</span> * <span class="built_in">len</span>(self.labels)):<span class="built_in">int</span>(<span class="number">0.8</span>*<span class="built_in">len</span>(self.labels))]</span><br><span class="line">        <span class="keyword">elif</span> mode == <span class="string">&#x27;test&#x27;</span>:</span><br><span class="line">            self.images = self.images[<span class="built_in">int</span>(<span class="number">0.8</span> * <span class="built_in">len</span>(self.images)):]</span><br><span class="line">            self.labels = self.labels[<span class="built_in">int</span>(<span class="number">0.8</span> * <span class="built_in">len</span>(self.labels)):]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">load_csv</span>(<span class="params">self,filename</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        save image_path-label to csv(if csv exits,just read from it) ，and then read from it</span></span><br><span class="line"><span class="string">        :param filename: filepath of the csv to save and read</span></span><br><span class="line"><span class="string">        :return: images,labels==&gt; images_path,labels</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        savepath = os.path.join(self.root,filename)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(savepath):</span><br><span class="line">            images = []</span><br><span class="line">            <span class="keyword">for</span> name <span class="keyword">in</span> self.name2label.keys():</span><br><span class="line">                <span class="comment">#grop the pic, save to list</span></span><br><span class="line">                images += glob.glob(os.path.join(self.root,name,<span class="string">&#x27;*.png&#x27;</span>))</span><br><span class="line">                images += glob.glob(os.path.join(self.root, name, <span class="string">&#x27;*.jpg&#x27;</span>))</span><br><span class="line">                images += glob.glob(os.path.join(self.root, name, <span class="string">&#x27;*.gif&#x27;</span>))</span><br><span class="line">            <span class="comment">#print(images)</span></span><br><span class="line">            <span class="comment">#&#x27;./pokeman/squirtle\\00000073.png&#x27;</span></span><br><span class="line">            random.shuffle(images) <span class="comment">#shuffle</span></span><br><span class="line">            <span class="comment">#write into csv</span></span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(savepath,mode=<span class="string">&#x27;w&#x27;</span>,newline=<span class="string">&#x27;&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                writer = csv.writer(f)</span><br><span class="line">                <span class="keyword">for</span> img <span class="keyword">in</span> images:</span><br><span class="line">                    name = img.split(os.sep)[-<span class="number">2</span>]</span><br><span class="line">                    label = self.name2label[name]</span><br><span class="line">                    writer.writerow([img,label])</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;written into csv file:&#x27;</span>,savepath)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#read from csv</span></span><br><span class="line">        images,labels = [],[]</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(savepath) <span class="keyword">as</span> f:</span><br><span class="line">            reader = csv.reader(f)</span><br><span class="line">            <span class="keyword">for</span> row <span class="keyword">in</span> reader:</span><br><span class="line">                img,label = row</span><br><span class="line">                label = <span class="built_in">int</span>(label)</span><br><span class="line">                images.append(img)</span><br><span class="line">                labels.append(label)</span><br><span class="line">        <span class="keyword">assert</span>  <span class="built_in">len</span>(images) == <span class="built_in">len</span>(labels)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span>  images,labels</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        :return: len of dataset</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.images)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, item</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :param item: range in [0,len(images)]</span></span><br><span class="line"><span class="string">        :return: self.images,self.labels</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">        img,label = self.images[item],self.labels[item]</span><br><span class="line"></span><br><span class="line">        tf = transforms.Compose(</span><br><span class="line">            [<span class="keyword">lambda</span> x:Image.<span class="built_in">open</span>(x).convert(<span class="string">&#x27;RGB&#x27;</span>), <span class="comment"># open image and convert to RGB</span></span><br><span class="line">             transforms.Resize((<span class="built_in">int</span>(self.resize*<span class="number">1.25</span>),<span class="built_in">int</span>(self.resize*<span class="number">1.25</span>))), <span class="comment"># resize</span></span><br><span class="line">             transforms.RandomRotation(<span class="number">15</span>), <span class="comment"># rotate</span></span><br><span class="line">             transforms.CenterCrop(self.resize), <span class="comment">#center crop</span></span><br><span class="line">             transforms.ToTensor(),</span><br><span class="line">             transforms.Normalize(mean=[<span class="number">0.485</span>,<span class="number">0.456</span>,<span class="number">0.406</span>],std=[<span class="number">0.229</span>,<span class="number">0.224</span>,<span class="number">0.225</span>]),<span class="comment">#values computed from ImageNet，we could use it in other dataset</span></span><br><span class="line"></span><br><span class="line">             ]</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        img = tf(img)</span><br><span class="line">        label = torch.tensor(label)</span><br><span class="line">        <span class="keyword">return</span> img,label</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">denormalize</span>(<span class="params">self,x_hat</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        x_hat = (x - mean)/std</span></span><br><span class="line"><span class="string">        x = x_hat * std + mean</span></span><br><span class="line"><span class="string">        :param x_hat: shape[3,self.resize,self.resize]</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        mean = [<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>]</span><br><span class="line">        std = [<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>]</span><br><span class="line">        mean = torch.tensor(mean).unsqueeze(<span class="number">1</span>).unsqueeze(<span class="number">1</span>)</span><br><span class="line">        std = torch.tensor(std).unsqueeze(<span class="number">1</span>).unsqueeze(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        x = x_hat*std+mean</span><br><span class="line">        <span class="keyword">return</span>  x</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># dataset</span></span><br><span class="line">    db_train = Pokemen(root=<span class="string">&#x27;pokeman&#x27;</span>,resize=<span class="number">224</span>,mode=<span class="string">&#x27;train&#x27;</span>)</span><br><span class="line">    <span class="comment"># dataloader</span></span><br><span class="line">    dl_train = DataLoader(dataset=db_train,batch_size=<span class="number">32</span>,shuffle=<span class="literal">True</span>)</span><br><span class="line">    x,y = <span class="built_in">next</span>(<span class="built_in">iter</span>(dl_train))</span><br><span class="line">    <span class="built_in">print</span>(x.shape,y.shape)</span><br></pre></td></tr></table></figure>
-<pre><code>&#123;&#39;.ipynb_checkpoints&#39;: 0, &#39;bulbasaur&#39;: 1, &#39;charmander&#39;: 2, &#39;mewtwo&#39;: 3, &#39;pikachu&#39;: 4, &#39;squirtle&#39;: 5&#125;
-written into csv file: pokeman\image.csv
-torch.Size([32, 3, 224, 224]) torch.Size([32])
-</code></pre><h2 id="DataLoader"><a href="#DataLoader" class="headerlink" title="DataLoader"></a>DataLoader</h2><p>传入数据集，处理为batch。主要参数：batch_size</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dl_train = DataLoader(dataset=db_train,batch_size=<span class="number">32</span>,shuffle=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-<p>其他常用参数：</p>
-<ul>
-<li>num_workers ( int, optional): how many subprocesses to use for data loading. <code>0</code> means that the data will be loaded in the main process. (default: <code>0</code>)</li>
-<li>drop_last (bool, optional): set to <code>True</code> to drop the last incomplete batch, if the dataset size is not divisible by the batch size. If <code>False</code> and  the size of dataset is not divisible by the batch size, then the last batch will be smaller. (default: <code>False</code>)</li>
-</ul>
-<p>官方文档：<a href="https://pytorch.org/docs/stable/data.html?highlight=dataloader#torch.utils.data.DataLoader">torch.utils.data — PyTorch 1.13 documentation</a></p>
-<p>dl_train返回的参数对应dataset get_item的return 参数</p>
-<ul>
-<li><p><code>x,y = next(iter(dataset))</code></p>
-</li>
-<li><p><code>X,Y = next(iter(dataloader))</code></p>
-</li>
-</ul>
-<p>X.shape == (batchsize,x.shape)</p>
-<p><strong>进行训练时的一般模式：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> idx,(x,label) <span class="keyword">in</span> <span class="built_in">enumerate</span>(dl_train):</span><br><span class="line">	x,label = x.to(device),y.to(device)</span><br><span class="line">	pred = model(x)</span><br><span class="line">	loss = lossFunction(pred,label)</span><br><span class="line">	optimizer.zero_grad()</span><br><span class="line">	loss.backward()</span><br><span class="line">	loss.step()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="特殊便捷方式数据集加载"><a href="#特殊便捷方式数据集加载" class="headerlink" title="特殊便捷方式数据集加载"></a>特殊便捷方式数据集加载</h1><p>使用函数<code>datasets.ImageFolder</code> </p>
-<p>使用场景：适用于将数据集分文件夹存储，文件夹名称为对应的label</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tf  = transforms.Compose([</span><br><span class="line">    transforms.Resize((<span class="number">128</span>,<span class="number">128</span>)),</span><br><span class="line">    transforms.ToTensor()</span><br><span class="line">])</span><br><span class="line"><span class="comment">##适用于将数据集分文件夹存储，文件夹名称为对应的label</span></span><br><span class="line">db = torchvision.datasets.ImageFolder(root=<span class="string">&#x27;./pokeman/&#x27;</span>,transform=tf)</span><br><span class="line">loader = DataLoader(db,batch_size=<span class="number">32</span>,shuffle=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(db.class_to_idx)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>深度学习</category>
@@ -374,6 +282,98 @@ torch.Size([32, 3, 224, 224]) torch.Size([32])
 </ul>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">taskkill /f /t /im &quot;12236&quot;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">成功: 已终止 PID 12236 (属于 PID 7560 子进程)的进程。</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【pytorch learning】(一)自定义数据集预处理和加载</title>
+    <url>/posts/a0ca199b/</url>
+    <content><![CDATA[<h1 id="通用实现"><a href="#通用实现" class="headerlink" title="通用实现"></a>通用实现</h1><p>关键库：Dataset和 DataLoader</p>
+<p><code>from torch.utils.data import  Dataset,DataLoader</code></p>
+<p>代码使用数据集：<a href="https://github.com/Xandra298/Pytorchlearning/tree/master/pokeman">宝可梦</a></p>
+<span id="more"></span>
+<p>该数据集目录格式为：</p>
+<p> root dir:</p>
+<ul>
+<li>dir1(name is the class)<ul>
+<li>pic1</li>
+<li>pic2</li>
+<li>…</li>
+</ul>
+</li>
+<li>dir2(name is the class)<ul>
+<li>…</li>
+</ul>
+</li>
+</ul>
+<h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>继承Dataset类的实现</p>
+<p>需要重载方法：</p>
+<ul>
+<li>__len__:返回数据集长度（数据数量）</li>
+<li>__get_item__：获取数据集的item</li>
+</ul>
+<p>关键思路：具体见代码及代码注释</p>
+<p>自定义方法load_csv:</p>
+<ol>
+<li>遍历目录，将image_path-label存储到csv文件中：</li>
+</ol>
+<ul>
+<li>用<code>glob.glob</code>获取具体路径的数据路径</li>
+<li><code>csv.writer(f)</code>将image_path,label写入csv文件</li>
+</ul>
+<ol>
+<li>读取csv文件，获得image_path-label</li>
+</ol>
+<ul>
+<li>reader = <code>csv.reader(f)</code>，for row in reader:…</li>
+</ul>
+<p>len方法：</p>
+<ul>
+<li>返回数据集长度</li>
+</ul>
+<p>get_item方法：</p>
+<ul>
+<li><p>传入index,从我们全局的列表中获得对应的数据</p>
+</li>
+<li><p>通过读取csv文件，传入index, 可以获得对应的image_path - label对。</p>
+<p>目标：载入image_path，处理图片，返回符合要求的图片数据和label对</p>
+</li>
+<li><p>处理从路径上读取的数据，返回指定格式。如使用<code>torchvision.transform</code>，最后处理完的格式是tensor</p>
+</li>
+<li><p>返回数据和label对</p>
+</li>
+</ul>
+<p>关于mode，可以通过判断需要训练集或者测试集这样子，返回切分后的数据集</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> os,glob</span><br><span class="line"><span class="keyword">import</span> random,csv</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset,DataLoader</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Pokemen</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,root,resize,mode</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :param root: root dir of dataset</span></span><br><span class="line"><span class="string">                    root dir:</span></span><br><span class="line"><span class="string">                        - dir1(name is the class)</span></span><br><span class="line"><span class="string">                            - pic1</span></span><br><span class="line"><span class="string">                            - pic2</span></span><br><span class="line"><span class="string">                            - ...</span></span><br><span class="line"><span class="string">                        - dir2(name is the class)</span></span><br><span class="line"><span class="string">                        - ...</span></span><br><span class="line"><span class="string">        :param resize:</span></span><br><span class="line"><span class="string">        :param mode: train\test\val</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="built_in">super</span>(Pokemen, self).__init__()</span><br><span class="line">        self.root = root</span><br><span class="line">        self.resize = resize</span><br><span class="line"></span><br><span class="line">        self.name2label = &#123;&#125;<span class="comment">#  save the dict &#123;name:int&#125; </span></span><br><span class="line">        <span class="comment">#list the dir name under the root dir</span></span><br><span class="line">        <span class="keyword">for</span> name <span class="keyword">in</span> <span class="built_in">sorted</span>(os.listdir(os.path.join(root))): <span class="comment"># sorted to ensure every time to be the same</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(os.path.join(root,name)):</span><br><span class="line">                <span class="comment"># not a dir</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="comment"># get the name:int following the order</span></span><br><span class="line">            self.name2label[name] = <span class="built_in">len</span>(self.name2label.keys())</span><br><span class="line">        <span class="built_in">print</span>(self.name2label)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># read from csv: image_path-label；</span></span><br><span class="line">        <span class="comment"># function load_csv：save the image_path-label to csv and then read from csv</span></span><br><span class="line">        self.images,self.labels = self.load_csv(<span class="string">&quot;image.csv&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#split dataset</span></span><br><span class="line">        <span class="keyword">if</span> mode == <span class="string">&#x27;train&#x27;</span>: <span class="comment">#60%</span></span><br><span class="line">            self.images = self.images[:<span class="built_in">int</span>(<span class="number">0.6</span>*<span class="built_in">len</span>(self.images))]</span><br><span class="line">            self.labels = self.labels[:<span class="built_in">int</span>(<span class="number">0.6</span>*<span class="built_in">len</span>(self.labels))]</span><br><span class="line">        <span class="keyword">elif</span> mode == <span class="string">&#x27;val&#x27;</span>: <span class="comment">#20%</span></span><br><span class="line">            self.images = self.images[<span class="built_in">int</span>(<span class="number">0.6</span> * <span class="built_in">len</span>(self.images)):<span class="built_in">int</span>(<span class="number">0.8</span>*<span class="built_in">len</span>(self.images))]</span><br><span class="line">            self.labels = self.labels[<span class="built_in">int</span>(<span class="number">0.6</span> * <span class="built_in">len</span>(self.labels)):<span class="built_in">int</span>(<span class="number">0.8</span>*<span class="built_in">len</span>(self.labels))]</span><br><span class="line">        <span class="keyword">elif</span> mode == <span class="string">&#x27;test&#x27;</span>:</span><br><span class="line">            self.images = self.images[<span class="built_in">int</span>(<span class="number">0.8</span> * <span class="built_in">len</span>(self.images)):]</span><br><span class="line">            self.labels = self.labels[<span class="built_in">int</span>(<span class="number">0.8</span> * <span class="built_in">len</span>(self.labels)):]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">load_csv</span>(<span class="params">self,filename</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        save image_path-label to csv(if csv exits,just read from it) ，and then read from it</span></span><br><span class="line"><span class="string">        :param filename: filepath of the csv to save and read</span></span><br><span class="line"><span class="string">        :return: images,labels==&gt; images_path,labels</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        savepath = os.path.join(self.root,filename)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(savepath):</span><br><span class="line">            images = []</span><br><span class="line">            <span class="keyword">for</span> name <span class="keyword">in</span> self.name2label.keys():</span><br><span class="line">                <span class="comment">#grop the pic, save to list</span></span><br><span class="line">                images += glob.glob(os.path.join(self.root,name,<span class="string">&#x27;*.png&#x27;</span>))</span><br><span class="line">                images += glob.glob(os.path.join(self.root, name, <span class="string">&#x27;*.jpg&#x27;</span>))</span><br><span class="line">                images += glob.glob(os.path.join(self.root, name, <span class="string">&#x27;*.gif&#x27;</span>))</span><br><span class="line">            <span class="comment">#print(images)</span></span><br><span class="line">            <span class="comment">#&#x27;./pokeman/squirtle\\00000073.png&#x27;</span></span><br><span class="line">            random.shuffle(images) <span class="comment">#shuffle</span></span><br><span class="line">            <span class="comment">#write into csv</span></span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(savepath,mode=<span class="string">&#x27;w&#x27;</span>,newline=<span class="string">&#x27;&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                writer = csv.writer(f)</span><br><span class="line">                <span class="keyword">for</span> img <span class="keyword">in</span> images:</span><br><span class="line">                    name = img.split(os.sep)[-<span class="number">2</span>]</span><br><span class="line">                    label = self.name2label[name]</span><br><span class="line">                    writer.writerow([img,label])</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;written into csv file:&#x27;</span>,savepath)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#read from csv</span></span><br><span class="line">        images,labels = [],[]</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(savepath) <span class="keyword">as</span> f:</span><br><span class="line">            reader = csv.reader(f)</span><br><span class="line">            <span class="keyword">for</span> row <span class="keyword">in</span> reader:</span><br><span class="line">                img,label = row</span><br><span class="line">                label = <span class="built_in">int</span>(label)</span><br><span class="line">                images.append(img)</span><br><span class="line">                labels.append(label)</span><br><span class="line">        <span class="keyword">assert</span>  <span class="built_in">len</span>(images) == <span class="built_in">len</span>(labels)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span>  images,labels</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        :return: len of dataset</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.images)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, item</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :param item: range in [0,len(images)]</span></span><br><span class="line"><span class="string">        :return: self.images,self.labels</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">        img,label = self.images[item],self.labels[item]</span><br><span class="line"></span><br><span class="line">        tf = transforms.Compose(</span><br><span class="line">            [<span class="keyword">lambda</span> x:Image.<span class="built_in">open</span>(x).convert(<span class="string">&#x27;RGB&#x27;</span>), <span class="comment"># open image and convert to RGB</span></span><br><span class="line">             transforms.Resize((<span class="built_in">int</span>(self.resize*<span class="number">1.25</span>),<span class="built_in">int</span>(self.resize*<span class="number">1.25</span>))), <span class="comment"># resize</span></span><br><span class="line">             transforms.RandomRotation(<span class="number">15</span>), <span class="comment"># rotate</span></span><br><span class="line">             transforms.CenterCrop(self.resize), <span class="comment">#center crop</span></span><br><span class="line">             transforms.ToTensor(),</span><br><span class="line">             transforms.Normalize(mean=[<span class="number">0.485</span>,<span class="number">0.456</span>,<span class="number">0.406</span>],std=[<span class="number">0.229</span>,<span class="number">0.224</span>,<span class="number">0.225</span>]),<span class="comment">#values computed from ImageNet，we could use it in other dataset</span></span><br><span class="line"></span><br><span class="line">             ]</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        img = tf(img)</span><br><span class="line">        label = torch.tensor(label)</span><br><span class="line">        <span class="keyword">return</span> img,label</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">denormalize</span>(<span class="params">self,x_hat</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        x_hat = (x - mean)/std</span></span><br><span class="line"><span class="string">        x = x_hat * std + mean</span></span><br><span class="line"><span class="string">        :param x_hat: shape[3,self.resize,self.resize]</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        mean = [<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>]</span><br><span class="line">        std = [<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>]</span><br><span class="line">        mean = torch.tensor(mean).unsqueeze(<span class="number">1</span>).unsqueeze(<span class="number">1</span>)</span><br><span class="line">        std = torch.tensor(std).unsqueeze(<span class="number">1</span>).unsqueeze(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        x = x_hat*std+mean</span><br><span class="line">        <span class="keyword">return</span>  x</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># dataset</span></span><br><span class="line">    db_train = Pokemen(root=<span class="string">&#x27;pokeman&#x27;</span>,resize=<span class="number">224</span>,mode=<span class="string">&#x27;train&#x27;</span>)</span><br><span class="line">    <span class="comment"># dataloader</span></span><br><span class="line">    dl_train = DataLoader(dataset=db_train,batch_size=<span class="number">32</span>,shuffle=<span class="literal">True</span>)</span><br><span class="line">    x,y = <span class="built_in">next</span>(<span class="built_in">iter</span>(dl_train))</span><br><span class="line">    <span class="built_in">print</span>(x.shape,y.shape)</span><br></pre></td></tr></table></figure>
+<pre><code>&#123;&#39;.ipynb_checkpoints&#39;: 0, &#39;bulbasaur&#39;: 1, &#39;charmander&#39;: 2, &#39;mewtwo&#39;: 3, &#39;pikachu&#39;: 4, &#39;squirtle&#39;: 5&#125;
+written into csv file: pokeman\image.csv
+torch.Size([32, 3, 224, 224]) torch.Size([32])
+</code></pre><h2 id="DataLoader"><a href="#DataLoader" class="headerlink" title="DataLoader"></a>DataLoader</h2><p>传入数据集，处理为batch。主要参数：batch_size</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dl_train = DataLoader(dataset=db_train,batch_size=<span class="number">32</span>,shuffle=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>其他常用参数：</p>
+<ul>
+<li>num_workers ( int, optional): how many subprocesses to use for data loading. <code>0</code> means that the data will be loaded in the main process. (default: <code>0</code>)</li>
+<li>drop_last (bool, optional): set to <code>True</code> to drop the last incomplete batch, if the dataset size is not divisible by the batch size. If <code>False</code> and  the size of dataset is not divisible by the batch size, then the last batch will be smaller. (default: <code>False</code>)</li>
+</ul>
+<p>官方文档：<a href="https://pytorch.org/docs/stable/data.html?highlight=dataloader#torch.utils.data.DataLoader">torch.utils.data — PyTorch 1.13 documentation</a></p>
+<p>dl_train返回的参数对应dataset get_item的return 参数</p>
+<ul>
+<li><p><code>x,y = next(iter(dataset))</code></p>
+</li>
+<li><p><code>X,Y = next(iter(dataloader))</code></p>
+</li>
+</ul>
+<p>X.shape == (batchsize,x.shape)</p>
+<p><strong>进行训练时的一般模式：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> idx,(x,label) <span class="keyword">in</span> <span class="built_in">enumerate</span>(dl_train):</span><br><span class="line">	x,label = x.to(device),y.to(device)</span><br><span class="line">	pred = model(x)</span><br><span class="line">	loss = lossFunction(pred,label)</span><br><span class="line">	optimizer.zero_grad()</span><br><span class="line">	loss.backward()</span><br><span class="line">	loss.step()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="特殊便捷方式数据集加载"><a href="#特殊便捷方式数据集加载" class="headerlink" title="特殊便捷方式数据集加载"></a>特殊便捷方式数据集加载</h1><p>使用函数<code>datasets.ImageFolder</code> </p>
+<p>使用场景：适用于将数据集分文件夹存储，文件夹名称为对应的label</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tf  = transforms.Compose([</span><br><span class="line">    transforms.Resize((<span class="number">128</span>,<span class="number">128</span>)),</span><br><span class="line">    transforms.ToTensor()</span><br><span class="line">])</span><br><span class="line"><span class="comment">##适用于将数据集分文件夹存储，文件夹名称为对应的label</span></span><br><span class="line">db = torchvision.datasets.ImageFolder(root=<span class="string">&#x27;./pokeman/&#x27;</span>,transform=tf)</span><br><span class="line">loader = DataLoader(db,batch_size=<span class="number">32</span>,shuffle=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(db.class_to_idx)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>深度学习</category>
