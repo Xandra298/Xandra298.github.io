@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/firefox-panda-roux.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/firefox-panda-roux.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xandra298.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Zero-shot is the natural best-case scenario for a model as it means we require zero training samples before shifting it to a new domain or task.zero-shot是一个模型的自然最佳情况，因为这意味着我们将其迁移到新的领域或者任务时需要零个训练样本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zero-shot">
+<meta property="og:url" content="https://xandra298.github.io/posts/2ac833a5/index.html">
+<meta property="og:site_name" content="Tiny Blog">
+<meta property="og:description" content="Zero-shot is the natural best-case scenario for a model as it means we require zero training samples before shifting it to a new domain or task.zero-shot是一个模型的自然最佳情况，因为这意味着我们将其迁移到新的领域或者任务时需要零个训练样本">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xandra298.github.io/posts/2ac833a5/image-20230206150750481.png">
+<meta property="og:image" content="https://xandra298.github.io/zero-shot/image-20230206151132885.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/2ac833a5/image-20230206151357836.png">
+<meta property="article:published_time" content="2023-02-06T06:46:23.000Z">
+<meta property="article:modified_time" content="2023-02-06T07:18:48.380Z">
+<meta property="article:author" content="Xandra">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xandra298.github.io/posts/2ac833a5/image-20230206150750481.png">
+
+<link rel="canonical" href="https://xandra298.github.io/posts/2ac833a5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>zero-shot | Tiny Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d53b0bfc3463e2d8df2a44594ea3a8ab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tiny Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>links</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/2ac833a5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/OIP-C.jfif">
+      <meta itemprop="name" content="Xandra">
+      <meta itemprop="description" content="记录，学习，成长。欢迎交流！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tiny Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          zero-shot
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-02-06 14:46:23 / Modified: 15:18:48" itemprop="dateCreated datePublished" datetime="2023-02-06T14:46:23+08:00">2023-02-06</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>Zero-shot is the natural <em>best-case scenario</em> for a model as it means we require <em>zero</em> training samples before shifting it to a new domain or task.<br>zero-shot是一个模型的自然最佳情况，因为这意味着我们将其迁移到新的领域或者任务时需要零个训练样本</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>Sota的CV模型在特定的任务和数据集中表现良好，但是不能很好的泛化，他们无法处理在他们已经训练过的领域之外的新的类别或者图片。收集足够大的标记数据集以使用传统方法对这些专业用例的CV模型进行微调可能非常困难。</p>
+<p>理想情况下，CV模型应该学习图像的内容，而不是过分关注最初训练理解的特定标签。比如，对于狗的图像，模型应该理解“狗在图像中”，当然那，如果它能理解背景中有树木、现在在白天、狗在草地上，那将更加有用。</p>
+<p>分类训练的结果恰恰与该理想情况相反。模型学习将狗的internal representation放到相同的“狗向量空间”，将猫的放到相同的“猫向量空间”。他们关注的点在于图片是否与类匹配的yes or no。</p>
+<p>重新训练分类模型是一种选择，但是需要大量的时间和成本投入：收集一个分类数据集和模型训练过程本身。</p>
+<h2 id="N-shot和Zero-shot"><a href="#N-shot和Zero-shot" class="headerlink" title="N-shot和Zero-shot"></a>N-shot和Zero-shot</h2><h3 id="N-shot-learning"><a href="#N-shot-learning" class="headerlink" title="N-shot learning"></a>N-shot learning</h3><blockquote>
+<p>Here we define <em>N</em> as the number of samples required to train a model to begin making predictions in a new domain or on a new task.</p>
+</blockquote>
+<p>定义N为  为了在新领域或者新任务进行预测 而需要用于训练一个模型的样本数量。</p>
+<p>如今，许多SotA模型都是在ResNet或BERT等用大量数据上进行预训练的。然后针对特定任务和领域对这些预训练模型进行<em>微调</em>。例如，可以使用 <a target="_blank" rel="noopener" href="https://www.pinecone.io/learn/imagenet">ImageNet 对 ResNet</a> 模型进行预训练，然后针对服装分类进行微调。</p>
+<p>像 ResNet 和 BERT 这样的模型被称为<em>“N-shot”</em>learner，因为我们需要<em>许多</em>训练样本才能在最后的微调步骤中达到可接受的性能。</p>
+<p>只有当我们有计算、时间和数据允许我们微调模型时，N-shot learning才有可能。理想情况下，我们希望最大限度地提高模型性能，同时最小化N-shot要求。即提出Zero-shot。</p>
+<h3 id="zero-shot"><a href="#zero-shot" class="headerlink" title="zero-shot"></a>zero-shot</h3><p>zero-shot是一个模型的自然最佳情况，因为这意味着我们将其迁移到新的领域或者任务时需要零个训练样本。</p>
+<h2 id="Zero-shot实现"><a href="#Zero-shot实现" class="headerlink" title="Zero-shot实现"></a>Zero-shot实现</h2><p>OpenAI的CLIP已经证明自己是一个非常灵活的分类模型，通常需要zero的再训练。</p>
+<p><strong>C</strong>ontrastive <strong>L</strong>anguage-I mage <strong>P</strong>retraining （CLIP） 是 OpenAI 于 2021 年发布的一个主要基于transformer的模型 [1]。</p>
+<p>我们在这里使用的 CLIP 版本包括一个用于编码文本嵌入的文本转换器和一个用于编码图像嵌入的视觉转换器 （ViT）。</p>
+<p>两种 CLIP 模型都在预训练期间进行了优化，以对齐向量空间中的相似文本和图像。它通过获取<strong>图像文本对</strong> (image-text pairs )并在向量空间中将其输出向量推近，同时分离非对(non-pairs)的向量来实现这一点。</p>
+<p><img src="/posts/2ac833a5/image-20230206150750481.png" alt></p>
+<p>它与典型的分类模型区别开来有几个原因。首先，OpenAI在一个<strong>由4亿文本图像对组成的庞大</strong>数据集上对其进行了训练，这些数据集是从互联网上抓取的。</p>
+<p>这里有三个主要好处：</p>
+<ol>
+<li>CLIP只需要<strong>图像-文本对</strong>，而不是特定的类标签，这要归功于contrastive而不是classification的训练功能。在当今以社交媒体为中心的世界中，这种类型的数据非常丰富。</li>
+<li>大数据集大小意味着 CLIP 可以对图像中显示的一般文本概念建立深刻的理解。</li>
+<li>文本描述符通常描述图像的各种特征，而不仅仅是一个特征。这意味着可以构建图像（和文本）的更全面的表示。</li>
+</ol>
+<p>CLIP的这些优点是导致其出色的zero-shot性能的主要因素。</p>
+<p>数据对比：</p>
+<p><img src="\zero-shot\image-20230206151132885.png" alt></p>
+<h3 id="zero-shot-classification"><a href="#zero-shot-classification" class="headerlink" title="zero-shot classification"></a>zero-shot classification</h3><p>这些<em>“类”</em>中的每一个都作为向量从文本编码器分别输出为T1,T2和T3。给定一张猫的照片，我们使用 ViT 模型对其进行编码以创建矢量我I1.当我们用余弦相似性计算这些向量的相似性时，我们期望sim（T3，I1）返回最高分。</p>
+<p><img src="/posts/2ac833a5/image-20230206151357836.png" alt></p>
+<h2 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h2><p><a target="_blank" rel="noopener" href="https://www.pinecone.io/learn/zero-shot-image-classification-clip/">Zero-shot Image Classification with OpenAI’s CLIP | Pinecone</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Xandra
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://xandra298.github.io/posts/2ac833a5/" title="zero-shot">https://xandra298.github.io/posts/2ac833a5/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/71dd2457/" rel="prev" title="几个基础图神经网络">
+      <i class="fa fa-chevron-left"></i> 几个基础图神经网络
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzY0Ny8zNDExMA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#N-shot%E5%92%8CZero-shot"><span class="nav-number">2.</span> <span class="nav-text">N-shot和Zero-shot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#N-shot-learning"><span class="nav-number">2.1.</span> <span class="nav-text">N-shot learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zero-shot"><span class="nav-number">2.2.</span> <span class="nav-text">zero-shot</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zero-shot%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">Zero-shot实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zero-shot-classification"><span class="nav-number">3.1.</span> <span class="nav-text">zero-shot classification</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90"><span class="nav-number">4.</span> <span class="nav-text">参考来源</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xandra"
+      src="/uploads/OIP-C.jfif">
+  <p class="site-author-name" itemprop="name">Xandra</p>
+  <div class="site-description" itemprop="description">记录，学习，成长。欢迎交流！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNN/" rel="tag">GNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyG/" rel="tag">PyG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">暴力视频检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">深度视频检测</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+      </div>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="//music.163.com/outchain/player?type=2&id=2001320&auto=1&height=66"></iframe>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=1378191814&auto=0&height=32"></iframe>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xandra</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">65k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">59 mins.</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>

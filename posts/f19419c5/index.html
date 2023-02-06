@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/firefox-panda-roux.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/firefox-panda-roux.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xandra298.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="tensorboard的使用安装1pip install tensorboard">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【pytorch-learning】(三) 可视化">
+<meta property="og:url" content="https://xandra298.github.io/posts/f19419c5/index.html">
+<meta property="og:site_name" content="Tiny Blog">
+<meta property="og:description" content="tensorboard的使用安装1pip install tensorboard">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xandra298.github.io/posts/f19419c5/%E6%A8%A1%E5%9E%8B.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/f19419c5/image-20221124200104212.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/f19419c5/image-20221124201948485.png">
+<meta property="article:published_time" content="2022-11-24T11:42:02.000Z">
+<meta property="article:modified_time" content="2022-11-25T03:01:33.668Z">
+<meta property="article:author" content="Xandra">
+<meta property="article:tag" content="pytorch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xandra298.github.io/posts/f19419c5/%E6%A8%A1%E5%9E%8B.png">
+
+<link rel="canonical" href="https://xandra298.github.io/posts/f19419c5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>【pytorch-learning】(三) 可视化 | Tiny Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d53b0bfc3463e2d8df2a44594ea3a8ab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tiny Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>links</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/f19419c5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/OIP-C.jfif">
+      <meta itemprop="name" content="Xandra">
+      <meta itemprop="description" content="记录，学习，成长。欢迎交流！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tiny Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【pytorch-learning】(三) 可视化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-11-24 19:42:02" itemprop="dateCreated datePublished" datetime="2022-11-24T19:42:02+08:00">2022-11-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-25 11:01:33" itemprop="dateModified" datetime="2022-11-25T11:01:33+08:00">2022-11-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>5.5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="tensorboard的使用"><a href="#tensorboard的使用" class="headerlink" title="tensorboard的使用"></a>tensorboard的使用</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorboard</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="add-scalar"><a href="#add-scalar" class="headerlink" title="add_scalar"></a>add_scalar</h3><h4 id="运行代码"><a href="#运行代码" class="headerlink" title="运行代码"></a><strong>运行代码</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span>  SummaryWriter</span><br><span class="line">writer = SummaryWriter(<span class="string">&quot;logs&quot;</span>)<span class="comment"># 保存log的文件夾</span></span><br><span class="line"><span class="comment">##y=x</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line"></span><br><span class="line">    writer.add_scalar(<span class="string">&quot;y=2x&quot;</span>,<span class="number">2</span>*i,i)</span><br><span class="line"></span><br><span class="line">writer.close()</span><br></pre></td></tr></table></figure>
+<h4 id="命令行运行：打开事件文件"><a href="#命令行运行：打开事件文件" class="headerlink" title="命令行运行：打开事件文件"></a><strong>命令行运行：打开事件文件</strong></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensorboard --logdir=logs --port=6007</span><br></pre></td></tr></table></figure>
+<p>tensorboard参数： —logdir=文件夹名称 —port=端口号 可以不设置端口号就是默认，为了避免冲突可以设置</p>
+<p>由于多次添加，导致log文件中有各种，可能导致tensorboard显示曲线的一些拟合等。</p>
+<p>解决：</p>
+<ul>
+<li>删除logs文件夹下的文件，重新运行程序。</li>
+<li>对应每个任务每次都设立子文件夹。</li>
+</ul>
+<h4 id="浏览器查看"><a href="#浏览器查看" class="headerlink" title="浏览器查看"></a><strong>浏览器查看</strong></h4><p>网址在命令行有显示。前面示例的为 localhost:6007。</p>
+<h3 id="add-image"><a href="#add-image" class="headerlink" title="add_image"></a>add_image</h3><p>图片</p>
+<p>数据类型需要tensor或者numpy array</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span>  SummaryWriter</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">writer = SummaryWriter(<span class="string">&quot;logs&quot;</span>)</span><br><span class="line">img_path = <span class="string">&quot;./hymenoptera_data/hymenoptera_data/train/ants/0013035.jpg&quot;</span></span><br><span class="line">img_PIL = Image.<span class="built_in">open</span>(img_path)</span><br><span class="line">img_array = np.array(img_PIL)</span><br><span class="line"><span class="built_in">print</span>(img_array.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(img_array))</span><br><span class="line">writer.add_image(<span class="string">&quot;test&quot;</span>,img_array,<span class="number">1</span>,dataformats=<span class="string">&quot;HWC&quot;</span>)<span class="comment">##默认是CHW,如果不是需要进行设置</span></span><br><span class="line"></span><br><span class="line">writer.close()</span><br></pre></td></tr></table></figure>
+<h3 id="add-graph"><a href="#add-graph" class="headerlink" title="add_graph"></a>add_graph</h3><p>可视化模型</p>
+<ul>
+<li>代码中使用tensorboard的add_graph将模型加入，注意传参需要传入模型输入。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> Conv2d, MaxPool2d, Linear, Sequential</span><br><span class="line"><span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span> SummaryWriter</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Model</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(Model, self).__init__()</span><br><span class="line">        self.model1 = Sequential(</span><br><span class="line">            Conv2d(<span class="number">3</span>, <span class="number">32</span>, kernel_size=<span class="number">5</span>, padding=<span class="number">2</span>),</span><br><span class="line">            MaxPool2d(<span class="number">2</span>),</span><br><span class="line">            Conv2d(<span class="number">32</span>, <span class="number">32</span>, <span class="number">5</span>, padding=<span class="number">2</span>),</span><br><span class="line">            MaxPool2d(<span class="number">2</span>),</span><br><span class="line">            Conv2d(<span class="number">32</span>, <span class="number">64</span>, <span class="number">5</span>, padding=<span class="number">2</span>),</span><br><span class="line">            MaxPool2d(<span class="number">2</span>),</span><br><span class="line">            nn.Flatten(),</span><br><span class="line">            Linear(<span class="number">1024</span>, <span class="number">64</span>),</span><br><span class="line">            Linear(<span class="number">64</span>, <span class="number">10</span>)</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self,x</span>):</span><br><span class="line">        x = self.model1(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">model = Model()</span><br><span class="line"><span class="built_in">print</span>(model)</span><br><span class="line"></span><br><span class="line"><span class="built_in">input</span> = torch.ones(<span class="number">64</span>,<span class="number">3</span>,<span class="number">32</span>,<span class="number">32</span>)</span><br><span class="line">output = model(<span class="built_in">input</span>)</span><br><span class="line"><span class="built_in">print</span>(output.shape)</span><br><span class="line"></span><br><span class="line">writer = SummaryWriter(<span class="string">&quot;logs_seq&quot;</span>)</span><br><span class="line">writer.add_graph(model,<span class="built_in">input</span>)</span><br><span class="line">writer.close()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>命令行运行命令打开事件文件</p>
+</li>
+<li><p>浏览器查看模型，可以点击放大，看模型具体层</p>
+</li>
+</ul>
+<p><img src="/posts/f19419c5/模型.png" alt="tensorboard查看"></p>
+<h1 id="Visdom可视化"><a href="#Visdom可视化" class="headerlink" title="Visdom可视化"></a>Visdom可视化</h1><p>窗口视图，界面友好</p>
+<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><ul>
+<li>方式一</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install visdom</span><br></pre></td></tr></table></figure>
+<p>命令行运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m visdom.server</span><br></pre></td></tr></table></figure>
+<p>如果报错找不到路径，解决方式：在该目录下自己创建该文件夹</p>
+<ul>
+<li>安装方式2：避免download问题</li>
+</ul>
+<ol>
+<li>pip uninstall visdom</li>
+<li>从github下载visdom文件</li>
+<li>cd 该目录下，pip install -e .</li>
+<li>在项目路径下 python -m visdom.server成功启动</li>
+</ol>
+<h2 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h2><p>visdom的一些具体使用：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41010198/article/details/117853358">https://blog.csdn.net/weixin_41010198/article/details/117853358</a></p>
+<h4 id="一个使用实例"><a href="#一个使用实例" class="headerlink" title="一个使用实例"></a><strong>一个使用实例</strong></h4><ol>
+<li>命令行运行<code>python -m visdom.server</code>成功启动</li>
+<li>运行代码</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> visdom <span class="keyword">import</span> Visdom</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">loss = torch.rand(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">global_step = torch.arange(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">viz = Visdom()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">viz.line([<span class="number">0.</span>],[<span class="number">0.</span>],win=<span class="string">&#x27;train_loss&#x27;</span>,opts = <span class="built_in">dict</span>(title=<span class="string">&#x27;train_loss&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx,lossi <span class="keyword">in</span> <span class="built_in">enumerate</span>(loss):</span><br><span class="line">   </span><br><span class="line">    viz.line([lossi.item()],[idx],win = <span class="string">&#x27;train_loss&#x27;</span>,update=<span class="string">&#x27;append&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>浏览器查看</li>
+</ol>
+<p><img src="/posts/f19419c5/image-20221124200104212.png" alt="浏览器视图" style="zoom:67%;"></p>
+<h4 id="完整模型训练测试过程中使用visdom可视化"><a href="#完整模型训练测试过程中使用visdom可视化" class="headerlink" title="完整模型训练测试过程中使用visdom可视化"></a>完整模型训练测试过程中使用visdom可视化</h4><p><a target="_blank" rel="noopener" href="https://github.com/Xandra298/Pytorchlearning/tree/master/mnist data/MNIST">手写数字识别数据集</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  torch</span><br><span class="line"><span class="keyword">import</span>  torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span>  torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span>  torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="keyword">from</span>    torchvision <span class="keyword">import</span> datasets, transforms</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> visdom <span class="keyword">import</span> Visdom</span><br><span class="line"></span><br><span class="line">batch_size=<span class="number">200</span></span><br><span class="line">learning_rate=<span class="number">0.01</span></span><br><span class="line">epochs=<span class="number">2</span></span><br><span class="line"></span><br><span class="line">train_loader = torch.utils.data.DataLoader(</span><br><span class="line">    datasets.MNIST(<span class="string">&#x27;./mnist data/&#x27;</span>, train=<span class="literal">True</span>, download=<span class="literal">True</span>,</span><br><span class="line">                   transform=transforms.Compose([</span><br><span class="line">                       transforms.ToTensor(),</span><br><span class="line">                       <span class="comment"># transforms.Normalize((0.1307,), (0.3081,))</span></span><br><span class="line">                   ])),</span><br><span class="line">    batch_size=batch_size, shuffle=<span class="literal">True</span>)</span><br><span class="line">test_loader = torch.utils.data.DataLoader(</span><br><span class="line">    datasets.MNIST(<span class="string">&#x27;./mnist data/&#x27;</span>, train=<span class="literal">False</span>, transform=transforms.Compose([</span><br><span class="line">        transforms.ToTensor(),</span><br><span class="line">        <span class="comment"># transforms.Normalize((0.1307,), (0.3081,))</span></span><br><span class="line">    ])),</span><br><span class="line">    batch_size=batch_size, shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MLP</span>(nn.Module):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(MLP, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.model = nn.Sequential(</span><br><span class="line">            nn.Linear(<span class="number">784</span>, <span class="number">200</span>),</span><br><span class="line">            nn.LeakyReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.Linear(<span class="number">200</span>, <span class="number">200</span>),</span><br><span class="line">            nn.LeakyReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">            nn.Linear(<span class="number">200</span>, <span class="number">10</span>),</span><br><span class="line">            nn.LeakyReLU(inplace=<span class="literal">True</span>),</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        x = self.model(x)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">device = torch.device(<span class="string">&#x27;cuda:0&#x27;</span>)</span><br><span class="line">net = MLP().to(device)</span><br><span class="line">optimizer = optim.SGD(net.parameters(), lr=learning_rate)</span><br><span class="line">criteon = nn.CrossEntropyLoss().to(device)</span><br><span class="line"></span><br><span class="line">viz = Visdom()</span><br><span class="line"></span><br><span class="line">viz.line([<span class="number">0.</span>], [<span class="number">0.</span>], win=<span class="string">&#x27;train_loss&#x27;</span>, opts=<span class="built_in">dict</span>(title=<span class="string">&#x27;train loss&#x27;</span>))</span><br><span class="line">viz.line([[<span class="number">0.0</span>, <span class="number">0.0</span>]], [<span class="number">0.</span>], win=<span class="string">&#x27;test&#x27;</span>, opts=<span class="built_in">dict</span>(title=<span class="string">&#x27;test loss&amp;acc.&#x27;</span>,</span><br><span class="line">                                                   legend=[<span class="string">&#x27;loss&#x27;</span>, <span class="string">&#x27;acc.&#x27;</span>]))</span><br><span class="line">global_step = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(epochs):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> batch_idx, (data, target) <span class="keyword">in</span> <span class="built_in">enumerate</span>(train_loader):</span><br><span class="line">        data = data.view(-<span class="number">1</span>, <span class="number">28</span>*<span class="number">28</span>)</span><br><span class="line">        data, target = data.to(device), target.to(device)</span><br><span class="line"></span><br><span class="line">        logits = net(data)</span><br><span class="line">        loss = criteon(logits, target)</span><br><span class="line"></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward()</span><br><span class="line">        <span class="comment"># print(w1.grad.norm(), w2.grad.norm())</span></span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        global_step += <span class="number">1</span></span><br><span class="line">        viz.line([loss.item()], [global_step], win=<span class="string">&#x27;train_loss&#x27;</span>, update=<span class="string">&#x27;append&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> batch_idx % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;Train Epoch: &#123;&#125; [&#123;&#125;/&#123;&#125; (&#123;:.0f&#125;%)]\tLoss: &#123;:.6f&#125;&#x27;</span>.<span class="built_in">format</span>(</span><br><span class="line">                epoch, batch_idx * <span class="built_in">len</span>(data), <span class="built_in">len</span>(train_loader.dataset),</span><br><span class="line">                       <span class="number">100.</span> * batch_idx / <span class="built_in">len</span>(train_loader), loss.item()))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    test_loss = <span class="number">0</span></span><br><span class="line">    correct = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> data, target <span class="keyword">in</span> test_loader:</span><br><span class="line">        data = data.view(-<span class="number">1</span>, <span class="number">28</span> * <span class="number">28</span>)</span><br><span class="line">        data, target = data.to(device), target.cuda()</span><br><span class="line">        logits = net(data)</span><br><span class="line">        test_loss += criteon(logits, target).item()</span><br><span class="line"></span><br><span class="line">        pred = logits.argmax(dim=<span class="number">1</span>)</span><br><span class="line">        correct += pred.eq(target).<span class="built_in">float</span>().<span class="built_in">sum</span>().item()</span><br><span class="line"></span><br><span class="line">    viz.line([[test_loss, correct / <span class="built_in">len</span>(test_loader.dataset)]],</span><br><span class="line">             [global_step], win=<span class="string">&#x27;test&#x27;</span>, update=<span class="string">&#x27;append&#x27;</span>)</span><br><span class="line">    viz.images(data.view(-<span class="number">1</span>, <span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>), win=<span class="string">&#x27;x&#x27;</span>)</span><br><span class="line">    viz.text(<span class="built_in">str</span>(pred.detach().cpu().numpy()), win=<span class="string">&#x27;pred&#x27;</span>,</span><br><span class="line">             opts=<span class="built_in">dict</span>(title=<span class="string">&#x27;pred&#x27;</span>))</span><br><span class="line"></span><br><span class="line">    test_loss /= <span class="built_in">len</span>(test_loader.dataset)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\nTest set: Average loss: &#123;:.4f&#125;, Accuracy: &#123;&#125;/&#123;&#125; (&#123;:.0f&#125;%)\n&#x27;</span>.<span class="built_in">format</span>(</span><br><span class="line">        test_loss, correct, <span class="built_in">len</span>(test_loader.dataset),</span><br><span class="line">        <span class="number">100.</span> * correct / <span class="built_in">len</span>(test_loader.dataset)))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>视图</li>
+</ul>
+<p>​        <img src="/posts/f19419c5/image-20221124201948485.png" alt="image-20221124201948485"></p>
+<h2 id="端口占用处理"><a href="#端口占用处理" class="headerlink" title="端口占用处理"></a>端口占用处理</h2><p>windows上</p>
+<ul>
+<li>查找本端口当前使用情况</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano |findstr &quot;8097&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TCP    0.0.0.0:8097           0.0.0.0:0              LISTENING       12236</span><br><span class="line">  TCP    [::]:8097              [::]:0                 LISTENING       12236</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询当前端口PID的进程，前一步看到为12236</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist | findstr 12236</span><br></pre></td></tr></table></figure>
+<ul>
+<li>终止进程</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">taskkill /f /t /im &quot;12236&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">成功: 已终止 PID 12236 (属于 PID 7560 子进程)的进程。</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Xandra
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://xandra298.github.io/posts/f19419c5/" title="【pytorch-learning】(三) 可视化">https://xandra298.github.io/posts/f19419c5/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/pytorch/" rel="tag"><i class="fa fa-tag"></i> pytorch</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/13fc6476/" rel="prev" title="【pytorch-learning】(二) 模型搭建-训练-测试">
+      <i class="fa fa-chevron-left"></i> 【pytorch-learning】(二) 模型搭建-训练-测试
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/5f3db67/" rel="next" title="图基本知识">
+      图基本知识 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NzY0Ny8zNDExMA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tensorboard%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">tensorboard的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#add-scalar"><span class="nav-number">1.2.1.</span> <span class="nav-text">add_scalar</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">运行代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%90%E8%A1%8C%EF%BC%9A%E6%89%93%E5%BC%80%E4%BA%8B%E4%BB%B6%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">命令行运行：打开事件文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9F%A5%E7%9C%8B"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">浏览器查看</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#add-image"><span class="nav-number">1.2.2.</span> <span class="nav-text">add_image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#add-graph"><span class="nav-number">1.2.3.</span> <span class="nav-text">add_graph</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visdom%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">Visdom可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-1"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-1"><span class="nav-number">2.2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">一个使用实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B%E4%B8%AD%E4%BD%BF%E7%94%A8visdom%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">完整模型训练测试过程中使用visdom可视化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E5%A4%84%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">端口占用处理</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xandra"
+      src="/uploads/OIP-C.jfif">
+  <p class="site-author-name" itemprop="name">Xandra</p>
+  <div class="site-description" itemprop="description">记录，学习，成长。欢迎交流！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNN/" rel="tag">GNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyG/" rel="tag">PyG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">暴力视频检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">深度视频检测</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+      </div>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="//music.163.com/outchain/player?type=2&id=2001320&auto=1&height=66"></iframe>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=1378191814&auto=0&height=32"></iframe>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xandra</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">65k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">59 mins.</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
