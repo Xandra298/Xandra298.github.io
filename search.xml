@@ -109,6 +109,46 @@ L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</s
       </tags>
   </entry>
   <entry>
+    <title>pytorchlearning</title>
+    <url>/posts/643f7c73/</url>
+    <content><![CDATA[<h1 id="pytorch-学习记录"><a href="#pytorch-学习记录" class="headerlink" title="pytorch 学习记录"></a>pytorch 学习记录</h1><span id="more"></span>
+<p>视频学习笔记github存储仓库：（@ljh）</p>
+<p><a href="https://github.com/Xandra298/Pytorchlearning">Xandra298/Pytorchlearning (github.com)</a></p>
+<ul>
+<li><p>torch基础操作</p>
+<p><a href="https://github.com/Xandra298/Pytorchlearning/blob/all/3.pytorch基础操作.ipynb">Pytorchlearning/3.pytorch基础操作.ipynb at all · Xandra298/Pytorchlearning (github.com)</a></p>
+</li>
+<li><p>自定义数据集预处理与加载</p>
+<p><a href="https://xandra298.github.io/posts/a0ca199b/">【pytorch learning】(一)自定义数据集预处理和加载</a></p>
+</li>
+<li><p>完整模型搭建、训练、测试</p>
+<p><a href="https://xandra298.github.io/posts/13fc6476/">【pytorch-learning】(二) 模型搭建-训练-测试 </a></p>
+</li>
+<li><p>可视化</p>
+<p><a href="https://xandra298.github.io/posts/f19419c5/">【pytorch-learning】(三) 可视化 </a></p>
+</li>
+<li><p>【理论】随机梯度下降</p>
+<p>包括损失函数等:  <a href="https://github.com/Xandra298/Pytorchlearning/blob/all/4.随机梯度下降.ipynb">笔记</a></p>
+</li>
+<li><p>过拟合及优化trick</p>
+<p><a href="https://github.com/Xandra298/Pytorchlearning/blob/all/7. 过拟合及优化trick.ipynb">Pytorchlearning/过拟合及优化trick</a></p>
+</li>
+<li><p>卷积神经网络: <a href="https://github.com/Xandra298/Pytorchlearning/blob/all/8.卷积神经网络.ipynb">笔记</a></p>
+</li>
+<li><p>循环神经网络: <a href="https://github.com/Xandra298/Pytorchlearning/blob/all/9.循环神经网络.ipynb">笔记</a></p>
+</li>
+<li><p>自编码器: <a href="https://github.com/Xandra298/Pytorchlearning/blob/master/10.自编码器.ipynb">笔记</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>深度学习</category>
+      </categories>
+      <tags>
+        <tag>pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo Hello World</title>
     <url>/posts/1e44dbaf/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -158,51 +198,11 @@ L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</s
 </ol>
 <p>CLIP的这些优点是导致其出色的zero-shot性能的主要因素。</p>
 <p>数据对比：</p>
-<p><img src="\zero-shot\image-20230206151132885.png" alt></p>
+<p><img src="/posts/2ac833a5/image-20230206151132885.png" alt></p>
 <h3 id="zero-shot-classification"><a href="#zero-shot-classification" class="headerlink" title="zero-shot classification"></a>zero-shot classification</h3><p>这些<em>“类”</em>中的每一个都作为向量从文本编码器分别输出为T1,T2和T3。给定一张猫的照片，我们使用 ViT 模型对其进行编码以创建矢量我I1.当我们用余弦相似性计算这些向量的相似性时，我们期望sim（T3，I1）返回最高分。</p>
 <p><img src="/posts/2ac833a5/image-20230206151357836.png" alt></p>
 <h2 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h2><p><a href="https://www.pinecone.io/learn/zero-shot-image-classification-clip/">Zero-shot Image Classification with OpenAI’s CLIP | Pinecone</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>pytorchlearning</title>
-    <url>/posts/643f7c73/</url>
-    <content><![CDATA[<h1 id="pytorch-学习记录"><a href="#pytorch-学习记录" class="headerlink" title="pytorch 学习记录"></a>pytorch 学习记录</h1><span id="more"></span>
-<p>视频学习笔记github存储仓库：（@ljh）</p>
-<p><a href="https://github.com/Xandra298/Pytorchlearning">Xandra298/Pytorchlearning (github.com)</a></p>
-<ul>
-<li><p>torch基础操作</p>
-<p><a href="https://github.com/Xandra298/Pytorchlearning/blob/all/3.pytorch基础操作.ipynb">Pytorchlearning/3.pytorch基础操作.ipynb at all · Xandra298/Pytorchlearning (github.com)</a></p>
-</li>
-<li><p>自定义数据集预处理与加载</p>
-<p><a href="https://xandra298.github.io/posts/a0ca199b/">【pytorch learning】(一)自定义数据集预处理和加载</a></p>
-</li>
-<li><p>完整模型搭建、训练、测试</p>
-<p><a href="https://xandra298.github.io/posts/13fc6476/">【pytorch-learning】(二) 模型搭建-训练-测试 </a></p>
-</li>
-<li><p>可视化</p>
-<p><a href="https://xandra298.github.io/posts/f19419c5/">【pytorch-learning】(三) 可视化 </a></p>
-</li>
-<li><p>【理论】随机梯度下降</p>
-<p>包括损失函数等:  <a href="https://github.com/Xandra298/Pytorchlearning/blob/all/4.随机梯度下降.ipynb">笔记</a></p>
-</li>
-<li><p>过拟合及优化trick</p>
-<p><a href="https://github.com/Xandra298/Pytorchlearning/blob/all/7. 过拟合及优化trick.ipynb">Pytorchlearning/过拟合及优化trick</a></p>
-</li>
-<li><p>卷积神经网络: <a href="https://github.com/Xandra298/Pytorchlearning/blob/all/8.卷积神经网络.ipynb">笔记</a></p>
-</li>
-<li><p>循环神经网络: <a href="https://github.com/Xandra298/Pytorchlearning/blob/all/9.循环神经网络.ipynb">笔记</a></p>
-</li>
-<li><p>自编码器: <a href="https://github.com/Xandra298/Pytorchlearning/blob/master/10.自编码器.ipynb">笔记</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>深度学习</category>
-      </categories>
-      <tags>
-        <tag>pytorch</tag>
-      </tags>
   </entry>
   <entry>
     <title>【pytorch-learning】(三) 可视化</title>
@@ -383,6 +383,109 @@ torch.Size([32, 3, 224, 224]) torch.Size([32])
       </tags>
   </entry>
   <entry>
+    <title>第一次搭建hexo博客</title>
+    <url>/posts/83682157/</url>
+    <content><![CDATA[<h2 id="hexo-deploy-到github失败"><a href="#hexo-deploy-到github失败" class="headerlink" title="hexo deploy 到github失败"></a>hexo deploy 到github失败</h2><p>使用deploy之后要求输入账户和密码，密码正确但是显示验证失败。</p>
+<span id="more"></span>
+<ul>
+<li><p>失败原因：</p>
+<p>github 21年取消了密码验证</p>
+<p><img src="/posts/83682157/image-20221117162546351.png" alt></p>
+</li>
+</ul>
+<ul>
+<li><p>解决方式</p>
+<p>在_config.yml的deploy中，repo对应的填写为github仓库的ssh地址，可以避免进行密码验证（前提：git配置完成，github上有设置公钥）</p>
+</li>
+</ul>
+<h2 id="完成的配置"><a href="#完成的配置" class="headerlink" title="完成的配置"></a>完成的配置</h2><ul>
+<li><p>使用hexo主题</p>
+<p><a href="https://github.com/probberechts/hexo-theme-cactus">hexo-theme-cactus</a></p>
+<ul>
+<li><a href="https://github.com/theme-next/hexo-theme-next">theme-next/hexo-theme-next: Elegant and powerful theme for Hexo. (github.com)</a></li>
+</ul>
+</li>
+<li><p>主题配置 tags 和 categories</p>
+</li>
+<li><p>配置baidu_analytics</p>
+</li>
+<li><p>comment</p>
+<ul>
+<li>使用utterances设置comment</li>
+<li>来必力</li>
+</ul>
+</li>
+<li><p>不蒜子统计</p>
+</li>
+<li><p>使用主题的search</p>
+<ul>
+<li>不成功-&gt;解决：发现是npm install的时候没有在博客根目录导致的问题</li>
+</ul>
+</li>
+<li><p>解决图片路径问题</p>
+<ul>
+<li><p>sources/images目录下存引图片</p>
+</li>
+<li><p>setup那篇post使用post_asset_folder: true的方式（需要安装hexo插件），将资源放在对应目录下</p>
+<ul>
+<li><p>本地成功但是服务器显示无效，重新安装插件成功：</p>
+<p><code>npm install https://github.com/7ym0n/hexo-asset-image --save</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>hexo new post失败</p>
+<ul>
+<li>使用 hexo new ‘[post]’ “postname”</li>
+</ul>
+</li>
+<li><p>数学公式渲染</p>
+<ul>
+<li><a href="https://blog.csdn.net/qq_38496329/article/details/104065659">https://blog.csdn.net/qq_38496329/article/details/104065659</a></li>
+<li>注意在文章中front 部分设置mathjax: true</li>
+</ul>
+</li>
+</ul>
+<h3 id="音乐"><a href="#音乐" class="headerlink" title="音乐"></a>音乐</h3><ul>
+<li><strong>获取网易云外链的iframe代码</strong></li>
+</ul>
+<p>打开网易云<a href="https://music.163.com/">官网</a>，选择喜欢的歌单或者歌曲，可以自己创建歌单。</p>
+<p>限制：有些歌曲有版权保护，无法生成外链</p>
+<p><img src="\第一次搭建hexo博客\image-20221125133318434.png" alt="image-20221125133318434" style="zoom:50%;"></p>
+<p><img src="\第一次搭建hexo博客\image-20221125133225148.png" alt="image-20221125133225148" style="zoom: 50%;"></p>
+<p>[博客根目录]\themes\next\layout_macro\sidebar.swig，在class为siderbar-inner的div内添加iframe</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% macro render(display_toc) %&#125;</span><br><span class="line">  &lt;div class=&quot;toggle sidebar-toggle&quot;&gt;</span><br><span class="line">    &lt;span class=&quot;toggle-line toggle-line-first&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;toggle-line toggle-line-middle&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;toggle-line toggle-line-last&quot;&gt;&lt;/span&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;aside class=&quot;sidebar&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;sidebar-inner&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h3><p>【next主题下】</p>
+<ul>
+<li>免费图标下载网站：</li>
+</ul>
+<p><a href="https://icons8.com/">https://icons8.com/</a></p>
+<p><a href="https://findicons.com/icon/558960/cursor">Cursor icon PNG, ICO or ICNS | Free vector icons (findicons.com)</a></p>
+<ul>
+<li>站点图标</li>
+</ul>
+<p>next主题默认是黑色的N</p>
+<p>修改： next主题的配置文件中有一项配置 favicon，将配置下的图片目录更改为想换的图片即可</p>
+<ul>
+<li><p>鼠标烟花特效</p>
+<p><a href="https://siriusq.top/Next升级-Mac迁移.html#鼠标点击特效">Next 升级 + Mac 迁移 | Sirius (siriusq.top)</a></p>
+</li>
+</ul>
+<p>​                注意将主题配置文件中将body-end.swig对应的部分移除注释</p>
+<ul>
+<li><p>鼠标样式修改</p>
+<p>hexo\source_data\styles.styl中添加</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 鼠标样式</span><br><span class="line">  * &#123;</span><br><span class="line">      <span class="attribute">cursor</span>: <span class="built_in">url</span>(<span class="string">&quot;image url&quot;</span>),auto<span class="meta">!important</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-pseudo">:active</span> &#123;</span><br><span class="line">      <span class="attribute">cursor</span>: <span class="built_in">url</span>(<span class="string">&quot;image url&quot;</span>),auto<span class="meta">!important</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>注意主题配置文件中custom_file_path: style: source/_data/styles.styl移除注释</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>hexo配置</category>
+      </categories>
+  </entry>
+  <entry>
     <title>【pytorch-learning】(二) 模型搭建-训练-测试</title>
     <url>/posts/13fc6476/</url>
     <content><![CDATA[<h1 id="模型搭建"><a href="#模型搭建" class="headerlink" title="模型搭建"></a>模型搭建</h1><h2 id="自定义模型"><a href="#自定义模型" class="headerlink" title="自定义模型"></a>自定义模型</h2><p>基本骨架为 <code>torch.nn.Module</code></p>
@@ -472,120 +575,6 @@ torch.Size([3, 224, 224]) torch.Size([])
       </categories>
       <tags>
         <tag>pytorch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>几个基础图神经网络</title>
-    <url>/posts/71dd2457/</url>
-    <content><![CDATA[<h1 id="GCN、GraphSAGE和GAT"><a href="#GCN、GraphSAGE和GAT" class="headerlink" title="GCN、GraphSAGE和GAT"></a>GCN、GraphSAGE和GAT</h1><span id="more"></span>
-<h2 id="GCN"><a href="#GCN" class="headerlink" title="GCN"></a>GCN</h2><ul>
-<li>公式：（I是单位矩阵）</li>
-</ul>
-<p><img src="/posts/71dd2457/image-20221126212953575.png" alt="image-20221126212953575"></p>
-<ul>
-<li>聚合过程</li>
-</ul>
-<p>度矩阵的作用主要是归一化。如下图，GCN聚合的过程实际上是将邻居节点信息相加。如节点1和节点2、节点3相连，矩阵相乘的结果是：节点1的特征=节点2+节点3+自己。</p>
-<p><img src="/posts/71dd2457/image-20221126213047435.png" alt="image-20221126213047435"></p>
-<ul>
-<li>GCN操作</li>
-</ul>
-<p>如下图是两层GCN卷积：（N，C）*（C，F） =&gt;（N，F）</p>
-<p>分类：1）最后输出的维度为分类的类数；2）不为分类的类数，只是作为一个特征提取器， 加上全连接层进行分类。</p>
-<p><img src="/posts/71dd2457/image-20221126213249170.png" alt="image-20221126213249170"></p>
-<h2 id="GraphSAGE-SAmple-and-aggreGatE"><a href="#GraphSAGE-SAmple-and-aggreGatE" class="headerlink" title="GraphSAGE(SAmple and aggreGatE)"></a>GraphSAGE(SAmple and aggreGatE)</h2><p>提出归纳式的graph embedding方法，之前的graph embedding方法都是所有节点都在图中，对于没有<br>看到过的节点是不能处理的，这种叫做直推式方法。<br>而GraphSAGE这种归纳式的方法，可 以对于没见过的节点也生成embedding。<br>GraphSAGE不仅限于构建embedding,也通过聚合周围邻居节点的特征。</p>
-<h3 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h3><p><img src="/posts/71dd2457/image-20221126212301603.png" alt="image-20221126212301603"></p>
-<h3 id="邻居采样"><a href="#邻居采样" class="headerlink" title="邻居采样"></a>邻居采样</h3><p>聚合邻居个数采用固定长度k。</p>
-<p>当k&lt;邻居总数时，直接<code>neighbors = np.random.choice(neighbors,self.max_degree,replace=False)</code></p>
-<p>当k&gt;邻居数时，<code>neighbors = np.random.choice(neighbors,self.max_degree,replace=True)</code> (比如当邻居数是2，而要采样3个时，先将2个都放进来，然后再在2个邻居里面随机选一个凑三个)</p>
-<p>作者发现该方法在K=2，即两层时可以达到好的表现。S1*S2&lt;= 500（S1表示第一次采样的邻居数）</p>
-<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><p>aggregator 需要满足的性质：</p>
-<ul>
-<li><p>对称的</p>
-</li>
-<li><p>对于输入排列不变的</p>
-<p>（即改变邻居节点输入的顺序，输出的结果不变）</p>
-</li>
-</ul>
-<p>三种</p>
-<ul>
-<li><p>mean aggregator</p>
-<p><img src="/posts/71dd2457/image-20221126212500331.png" alt="image-20221126212500331"></p>
-</li>
-<li><p>LSTM aggregator</p>
-<p>LSTM本身是有顺序的，但是通过将输入节点随机排列，使得适用于无序集合。</p>
-<p>容量大，表现好。</p>
-</li>
-<li><p>Pooling aggregator</p>
-</li>
-</ul>
-<p><img src="/posts/71dd2457/image-20221126212637461.png" alt="image-20221126212637461"></p>
-<p><img src="/posts/71dd2457/image-20221126212630219.png" alt="image-20221126212630219"></p>
-<p>不仅可以使用max，使用其他的排列不变性函数都可以，如mean和max效果上是没有差异的。</p>
-<p>通过W可以改变输出的维度。</p>
-<h2 id="GraphSAGE-minibatch"><a href="#GraphSAGE-minibatch" class="headerlink" title="GraphSAGE minibatch"></a>GraphSAGE minibatch</h2><p>和GCN使用全图不同的是，GraphSage用采样的方式，在minibatch下，可以不使用全图信息。使得在大规模图上训练变得可行。</p>
-<p>算法如下图所示：</p>
-<p><img src="/posts/71dd2457/image-20221126210734688.png" alt="image-20221126210734688"></p>
-<h3 id="邻居采样：从第K-1层到第0层（从内到外）"><a href="#邻居采样：从第K-1层到第0层（从内到外）" class="headerlink" title="邻居采样：从第K-1层到第0层（从内到外）"></a><strong>邻居采样：从第K-1层到第0层</strong>（从内到外）</h3><p>以节点a为中心进行邻居采样。节点a所在层为第k层，此时k=2。聚合的总结点数为Sall = 1。</p>
-<p>第k-1层，聚合第k层的Sk个邻居节点。此时B1层采样节点a（第2层）的S2个邻居，即三个邻居；采样的总节点数为Sall = Sall*S2 = 3.</p>
-<p>第k-2层，聚合第k-1层的Sk-1个邻居。此时B0层采样B1层的S1个邻居，即B1层的三个节点的对应的两个邻居。总邻居数为Sall = Sall*S1 = 6.</p>
-<p><img src="/posts/71dd2457/image-20221126205428637.png" alt style="zoom:67%;"></p>
-<p>保存所有这些采样的节点作为后续聚合用。可以减少内存，在大图上用。</p>
-<h3 id="节点聚合：从第1层到第K层（从外到内）"><a href="#节点聚合：从第1层到第K层（从外到内）" class="headerlink" title="节点聚合：从第1层到第K层（从外到内）"></a>节点聚合：从第1层到第K层（从外到内）</h3><p><img src="/posts/71dd2457/image-20221126210846442.png" alt="image-20221126210846442"></p>
-<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><p>训练的是GraphSage的权重函数W</p>
-<p>经过GraphSage后，生成的embedding:Zu,求loss</p>
-<p><img src="/posts/71dd2457/image-20221126211203555.png" alt="image-20221126211203555"></p>
-<p>作者提出经过embedding之后，相近的节点应该有相似的表示，反之，区别较大的节点的表示应该很不同。zu为节点u的表示，应该使得相似的节点u和v，他们的表示$z_u^T z_v$乘积比较大，而不相似的乘积比较小=》该式的loss越小越好。</p>
-<h2 id="GAT-Graph-Attention-Networks"><a href="#GAT-Graph-Attention-Networks" class="headerlink" title="GAT(Graph Attention Networks)"></a>GAT(Graph Attention Networks)</h2><ul>
-<li>公式：</li>
-</ul>
-<script type="math/tex; mode=display">
-\alpha _{ij} = \frac{exp(LeakyReLU(\vec a^T[W\vec h_i||W\vec h_j]))}{\sum_{k\in N_i} exp(LeakyReLU(\vec a^T[W\vec h_i||W\vec h_k]))}</script><script type="math/tex; mode=display">
-\vec h'_i = \sigma(\sum \limits_{j \in N_i}a_{ij} W\vec h_j)</script><p>​    N为邻居节点集合，||为concat，W为共享的权值</p>
-<ul>
-<li>具体例子：</li>
-</ul>
-<p><img src="/posts/71dd2457/image-20221126214520133.png" alt="image-20221126214520133"></p>
-<ul>
-<li><p>多头注意力机制</p>
-<p><img src="/posts/71dd2457/image-20221126214858258.png" alt style="zoom:67%;"></p>
-<p><img src="/posts/71dd2457/image-20221126214941394.png" alt style="zoom:67%;"></p>
-</li>
-</ul>
-<p>​    每一个注意力机制都学到节点的特征，然后将这K个拼接到一起作为最后的结果。</p>
-<p>​    如果多头注意力机制在最后一层，用softmax预测，则拼接没必要，直接求平均。如果是接一个全连接层，拼接无所谓。</p>
-<h2 id="网络对比"><a href="#网络对比" class="headerlink" title="网络对比"></a>网络对比</h2><p><img src="/posts/71dd2457/image-20221126215407142.png" alt style="zoom:67%;"></p>
-<p>应用：</p>
-<p>三者都可以用于半监督的任务。但是提出说GCN不能用于推理学习任务（即学习一张图，推荐没见过的另一张图），说是因为GCN的邻接矩阵的定义在两张图里面是不同的。（？？）那GAT就可以是因为是动态的聚合邻居吗，即非需要全图。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="GCN-1"><a href="#GCN-1" class="headerlink" title="GCN"></a>GCN</h2><p><a href="https://github.com/tkipf/pygcn">tkipf/pygcn: Graph Convolutional Networks in PyTorch (github.com)</a></p>
-<p>数据集coras</p>
-<p>pycharm调试</p>
-<p>简单的跑一下默认数值 Test set results: loss= 0.7157 accuracy= 0.8320</p>
-<h2 id="GAT"><a href="#GAT" class="headerlink" title="GAT"></a>GAT</h2><p><a href="https://github.com/Diego999/pyGAT">Diego999/pyGAT: Pytorch implementation of the Graph Attention Network model by Veličković et. al (2017, https://arxiv.org/abs/1710.10903) (github.com)</a></p>
-<p>github上仓库有对GAT代码进行更新，新的代码减少内存的占用：原本a_input是通过将所有节点concat；新的代码是：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span>  <span class="title function_">_prepare_attentional_mechanism_input</span>(<span class="params">self, Wh</span>):</span><br><span class="line">    <span class="comment"># Wh.shape (N, out_feature)</span></span><br><span class="line">    <span class="comment"># self.a.shape (2 * out_feature, 1)</span></span><br><span class="line">    <span class="comment"># Wh1&amp;2.shape (N, 1)</span></span><br><span class="line">    <span class="comment"># e.shape (N, N)</span></span><br><span class="line">    Wh1 = torch.matmul(Wh, self.a[:self.out_features, :])</span><br><span class="line">    Wh2 = torch.matmul(Wh, self.a[self.out_features:, :])</span><br><span class="line">    <span class="comment"># broadcast add</span></span><br><span class="line">    e = Wh1 + Wh2.T</span><br><span class="line">    <span class="keyword">return</span> self.leakyrelu(e)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>batch的实现</li>
-</ul>
-<p>输入：[batch,node,feature]</p>
-<p>adj: [batch,node,node]</p>
-<p>关于GAT batch的实现，该仓库的issue中有讨论，并有提出一些解决方式。</p>
-<p>我自己粗略的实现，在GraphAttentionLayer中修改：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span>, adj</span>):</span><br><span class="line">       h = torch.matmul(<span class="built_in">input</span>, self.W)</span><br><span class="line">       <span class="built_in">print</span>(h.shape)</span><br><span class="line">       <span class="comment">#N = h.size()[0]</span></span><br><span class="line">       N = h.size()[<span class="number">1</span>]</span><br><span class="line">       <span class="built_in">print</span>(N)</span><br><span class="line">       <span class="comment">#a_input = torch.cat([h.repeat(1, N).view(N * N, -1), h.repeat(N, 1)], dim=1).view(N, -1, 2 * self.out_features)</span></span><br><span class="line">       a_input = torch.cat([h.repeat(<span class="number">1</span>,<span class="number">1</span>, N).view(h.shape[<span class="number">0</span>],N * N, -<span class="number">1</span>), h.repeat(<span class="number">1</span>,N, <span class="number">1</span>)], dim=<span class="number">2</span>).view(h.shape[<span class="number">0</span>],N, -<span class="number">1</span>, <span class="number">2</span> * self.out_features)</span><br><span class="line">       <span class="built_in">print</span>(a_input.shape)</span><br><span class="line">       <span class="comment">#e = self.leakyrelu(torch.matmul(a_input, self.a).squeeze(2))</span></span><br><span class="line">       e = self.leakyrelu(torch.matmul(a_input, self.a).squeeze(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-<p>一个博客的实现和我的思路类似：<a href="https://blog.csdn.net/pixian3729/article/details/110261140">GAT（参数中加入batch）_2snoopy的博客-CSDN博客</a></p>
-<p>该方法其实还是挺消耗内存的。</p>
-<p>Diego999减轻内存占用并应用batch的实现：</p>
-<p><a href="https://github.com/Diego999/pyGAT/issues/62">How to implement batch training? · Issue #62 · Diego999/pyGAT (github.com)</a></p>
-<p>实际中确实有减少内存占用，但是GAT本身的特质内存消耗比较大，可以去探索其他改进的GNN。</p>
-<h2 id="GraphSAGE"><a href="#GraphSAGE" class="headerlink" title="GraphSAGE"></a>GraphSAGE</h2><p>tensorflow版本:<a href="https://github.com/williamleif/GraphSAGE">williamleif/GraphSAGE: Representation learning on large graphs using stochastic graph convolutions. (github.com)</a></p>
-<p>pytorch实现（简洁版本）：<a href="https://github.com/williamleif/graphsage-simple">williamleif/graphsage-simple: Simple reference implementation of GraphSAGE. (github.com)</a></p>
-<p><a href="https://blog.csdn.net/qq_35812205/article/details/126681519">【GraphSAGE实践】YelpChi评论图数据集上的反欺诈检测_山顶夕景的博客-CSDN博客_yelpchi数据集</a></p>
-]]></content>
-      <categories>
-        <category>图神经网络</category>
-      </categories>
-      <tags>
-        <tag>GNN</tag>
       </tags>
   </entry>
   <entry>
@@ -713,109 +702,6 @@ Closeness = \frac{n-1}{该节点到其他节点最短路径之和}</script><p>�
       <tags>
         <tag>图</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>第一次搭建hexo博客</title>
-    <url>/posts/83682157/</url>
-    <content><![CDATA[<h2 id="hexo-deploy-到github失败"><a href="#hexo-deploy-到github失败" class="headerlink" title="hexo deploy 到github失败"></a>hexo deploy 到github失败</h2><p>使用deploy之后要求输入账户和密码，密码正确但是显示验证失败。</p>
-<span id="more"></span>
-<ul>
-<li><p>失败原因：</p>
-<p>github 21年取消了密码验证</p>
-<p><img src="/posts/83682157/image-20221117162546351.png" alt></p>
-</li>
-</ul>
-<ul>
-<li><p>解决方式</p>
-<p>在_config.yml的deploy中，repo对应的填写为github仓库的ssh地址，可以避免进行密码验证（前提：git配置完成，github上有设置公钥）</p>
-</li>
-</ul>
-<h2 id="完成的配置"><a href="#完成的配置" class="headerlink" title="完成的配置"></a>完成的配置</h2><ul>
-<li><p>使用hexo主题</p>
-<p><a href="https://github.com/probberechts/hexo-theme-cactus">hexo-theme-cactus</a></p>
-<ul>
-<li><a href="https://github.com/theme-next/hexo-theme-next">theme-next/hexo-theme-next: Elegant and powerful theme for Hexo. (github.com)</a></li>
-</ul>
-</li>
-<li><p>主题配置 tags 和 categories</p>
-</li>
-<li><p>配置baidu_analytics</p>
-</li>
-<li><p>comment</p>
-<ul>
-<li>使用utterances设置comment</li>
-<li>来必力</li>
-</ul>
-</li>
-<li><p>不蒜子统计</p>
-</li>
-<li><p>使用主题的search</p>
-<ul>
-<li>不成功-&gt;解决：发现是npm install的时候没有在博客根目录导致的问题</li>
-</ul>
-</li>
-<li><p>解决图片路径问题</p>
-<ul>
-<li><p>sources/images目录下存引图片</p>
-</li>
-<li><p>setup那篇post使用post_asset_folder: true的方式（需要安装hexo插件），将资源放在对应目录下</p>
-<ul>
-<li><p>本地成功但是服务器显示无效，重新安装插件成功：</p>
-<p><code>npm install https://github.com/7ym0n/hexo-asset-image --save</code></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>hexo new post失败</p>
-<ul>
-<li>使用 hexo new ‘[post]’ “postname”</li>
-</ul>
-</li>
-<li><p>数学公式渲染</p>
-<ul>
-<li><a href="https://blog.csdn.net/qq_38496329/article/details/104065659">https://blog.csdn.net/qq_38496329/article/details/104065659</a></li>
-<li>注意在文章中front 部分设置mathjax: true</li>
-</ul>
-</li>
-</ul>
-<h3 id="音乐"><a href="#音乐" class="headerlink" title="音乐"></a>音乐</h3><ul>
-<li><strong>获取网易云外链的iframe代码</strong></li>
-</ul>
-<p>打开网易云<a href="https://music.163.com/">官网</a>，选择喜欢的歌单或者歌曲，可以自己创建歌单。</p>
-<p>限制：有些歌曲有版权保护，无法生成外链</p>
-<p><img src="\第一次搭建hexo博客\image-20221125133318434.png" alt="image-20221125133318434" style="zoom:50%;"></p>
-<p><img src="\第一次搭建hexo博客\image-20221125133225148.png" alt="image-20221125133225148" style="zoom: 50%;"></p>
-<p>[博客根目录]\themes\next\layout_macro\sidebar.swig，在class为siderbar-inner的div内添加iframe</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% macro render(display_toc) %&#125;</span><br><span class="line">  &lt;div class=&quot;toggle sidebar-toggle&quot;&gt;</span><br><span class="line">    &lt;span class=&quot;toggle-line toggle-line-first&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;toggle-line toggle-line-middle&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;toggle-line toggle-line-last&quot;&gt;&lt;/span&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;aside class=&quot;sidebar&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;sidebar-inner&quot;&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h3><p>【next主题下】</p>
-<ul>
-<li>免费图标下载网站：</li>
-</ul>
-<p><a href="https://icons8.com/">https://icons8.com/</a></p>
-<p><a href="https://findicons.com/icon/558960/cursor">Cursor icon PNG, ICO or ICNS | Free vector icons (findicons.com)</a></p>
-<ul>
-<li>站点图标</li>
-</ul>
-<p>next主题默认是黑色的N</p>
-<p>修改： next主题的配置文件中有一项配置 favicon，将配置下的图片目录更改为想换的图片即可</p>
-<ul>
-<li><p>鼠标烟花特效</p>
-<p><a href="https://siriusq.top/Next升级-Mac迁移.html#鼠标点击特效">Next 升级 + Mac 迁移 | Sirius (siriusq.top)</a></p>
-</li>
-</ul>
-<p>​                注意将主题配置文件中将body-end.swig对应的部分移除注释</p>
-<ul>
-<li><p>鼠标样式修改</p>
-<p>hexo\source_data\styles.styl中添加</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 鼠标样式</span><br><span class="line">  * &#123;</span><br><span class="line">      <span class="attribute">cursor</span>: <span class="built_in">url</span>(<span class="string">&quot;image url&quot;</span>),auto<span class="meta">!important</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-pseudo">:active</span> &#123;</span><br><span class="line">      <span class="attribute">cursor</span>: <span class="built_in">url</span>(<span class="string">&quot;image url&quot;</span>),auto<span class="meta">!important</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>注意主题配置文件中custom_file_path: style: source/_data/styles.styl移除注释</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>hexo配置</category>
-      </categories>
   </entry>
   <entry>
     <title>邻接矩阵表示成PyG需要的edge_index并进行带边权的网络构建</title>
@@ -1104,8 +990,122 @@ torch.Size([2, 40000])
         <category>图神经网络</category>
       </categories>
       <tags>
-        <tag>GNN</tag>
         <tag>PyG</tag>
+        <tag>GNN</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>几个基础图神经网络</title>
+    <url>/posts/71dd2457/</url>
+    <content><![CDATA[<h1 id="GCN、GraphSAGE和GAT"><a href="#GCN、GraphSAGE和GAT" class="headerlink" title="GCN、GraphSAGE和GAT"></a>GCN、GraphSAGE和GAT</h1><span id="more"></span>
+<h2 id="GCN"><a href="#GCN" class="headerlink" title="GCN"></a>GCN</h2><ul>
+<li>公式：（I是单位矩阵）</li>
+</ul>
+<p><img src="/posts/71dd2457/image-20221126212953575.png" alt="image-20221126212953575"></p>
+<ul>
+<li>聚合过程</li>
+</ul>
+<p>度矩阵的作用主要是归一化。如下图，GCN聚合的过程实际上是将邻居节点信息相加。如节点1和节点2、节点3相连，矩阵相乘的结果是：节点1的特征=节点2+节点3+自己。</p>
+<p><img src="/posts/71dd2457/image-20221126213047435.png" alt="image-20221126213047435"></p>
+<ul>
+<li>GCN操作</li>
+</ul>
+<p>如下图是两层GCN卷积：（N，C）*（C，F） =&gt;（N，F）</p>
+<p>分类：1）最后输出的维度为分类的类数；2）不为分类的类数，只是作为一个特征提取器， 加上全连接层进行分类。</p>
+<p><img src="/posts/71dd2457/image-20221126213249170.png" alt="image-20221126213249170"></p>
+<h2 id="GraphSAGE-SAmple-and-aggreGatE"><a href="#GraphSAGE-SAmple-and-aggreGatE" class="headerlink" title="GraphSAGE(SAmple and aggreGatE)"></a>GraphSAGE(SAmple and aggreGatE)</h2><p>提出归纳式的graph embedding方法，之前的graph embedding方法都是所有节点都在图中，对于没有<br>看到过的节点是不能处理的，这种叫做直推式方法。<br>而GraphSAGE这种归纳式的方法，可 以对于没见过的节点也生成embedding。<br>GraphSAGE不仅限于构建embedding,也通过聚合周围邻居节点的特征。</p>
+<h3 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h3><p><img src="/posts/71dd2457/image-20221126212301603.png" alt="image-20221126212301603"></p>
+<h3 id="邻居采样"><a href="#邻居采样" class="headerlink" title="邻居采样"></a>邻居采样</h3><p>聚合邻居个数采用固定长度k。</p>
+<p>当k&lt;邻居总数时，直接<code>neighbors = np.random.choice(neighbors,self.max_degree,replace=False)</code></p>
+<p>当k&gt;邻居数时，<code>neighbors = np.random.choice(neighbors,self.max_degree,replace=True)</code> (比如当邻居数是2，而要采样3个时，先将2个都放进来，然后再在2个邻居里面随机选一个凑三个)</p>
+<p>作者发现该方法在K=2，即两层时可以达到好的表现。S1*S2&lt;= 500（S1表示第一次采样的邻居数）</p>
+<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><p>aggregator 需要满足的性质：</p>
+<ul>
+<li><p>对称的</p>
+</li>
+<li><p>对于输入排列不变的</p>
+<p>（即改变邻居节点输入的顺序，输出的结果不变）</p>
+</li>
+</ul>
+<p>三种</p>
+<ul>
+<li><p>mean aggregator</p>
+<p><img src="/posts/71dd2457/image-20221126212500331.png" alt="image-20221126212500331"></p>
+</li>
+<li><p>LSTM aggregator</p>
+<p>LSTM本身是有顺序的，但是通过将输入节点随机排列，使得适用于无序集合。</p>
+<p>容量大，表现好。</p>
+</li>
+<li><p>Pooling aggregator</p>
+</li>
+</ul>
+<p><img src="/posts/71dd2457/image-20221126212637461.png" alt="image-20221126212637461"></p>
+<p><img src="/posts/71dd2457/image-20221126212630219.png" alt="image-20221126212630219"></p>
+<p>不仅可以使用max，使用其他的排列不变性函数都可以，如mean和max效果上是没有差异的。</p>
+<p>通过W可以改变输出的维度。</p>
+<h2 id="GraphSAGE-minibatch"><a href="#GraphSAGE-minibatch" class="headerlink" title="GraphSAGE minibatch"></a>GraphSAGE minibatch</h2><p>和GCN使用全图不同的是，GraphSage用采样的方式，在minibatch下，可以不使用全图信息。使得在大规模图上训练变得可行。</p>
+<p>算法如下图所示：</p>
+<p><img src="/posts/71dd2457/image-20221126210734688.png" alt="image-20221126210734688"></p>
+<h3 id="邻居采样：从第K-1层到第0层（从内到外）"><a href="#邻居采样：从第K-1层到第0层（从内到外）" class="headerlink" title="邻居采样：从第K-1层到第0层（从内到外）"></a><strong>邻居采样：从第K-1层到第0层</strong>（从内到外）</h3><p>以节点a为中心进行邻居采样。节点a所在层为第k层，此时k=2。聚合的总结点数为Sall = 1。</p>
+<p>第k-1层，聚合第k层的Sk个邻居节点。此时B1层采样节点a（第2层）的S2个邻居，即三个邻居；采样的总节点数为Sall = Sall*S2 = 3.</p>
+<p>第k-2层，聚合第k-1层的Sk-1个邻居。此时B0层采样B1层的S1个邻居，即B1层的三个节点的对应的两个邻居。总邻居数为Sall = Sall*S1 = 6.</p>
+<p><img src="/posts/71dd2457/image-20221126205428637.png" alt style="zoom:67%;"></p>
+<p>保存所有这些采样的节点作为后续聚合用。可以减少内存，在大图上用。</p>
+<h3 id="节点聚合：从第1层到第K层（从外到内）"><a href="#节点聚合：从第1层到第K层（从外到内）" class="headerlink" title="节点聚合：从第1层到第K层（从外到内）"></a>节点聚合：从第1层到第K层（从外到内）</h3><p><img src="/posts/71dd2457/image-20221126210846442.png" alt="image-20221126210846442"></p>
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><p>训练的是GraphSage的权重函数W</p>
+<p>经过GraphSage后，生成的embedding:Zu,求loss</p>
+<p><img src="/posts/71dd2457/image-20221126211203555.png" alt="image-20221126211203555"></p>
+<p>作者提出经过embedding之后，相近的节点应该有相似的表示，反之，区别较大的节点的表示应该很不同。zu为节点u的表示，应该使得相似的节点u和v，他们的表示$z_u^T z_v$乘积比较大，而不相似的乘积比较小=》该式的loss越小越好。</p>
+<h2 id="GAT-Graph-Attention-Networks"><a href="#GAT-Graph-Attention-Networks" class="headerlink" title="GAT(Graph Attention Networks)"></a>GAT(Graph Attention Networks)</h2><ul>
+<li>公式：</li>
+</ul>
+<script type="math/tex; mode=display">
+\alpha _{ij} = \frac{exp(LeakyReLU(\vec a^T[W\vec h_i||W\vec h_j]))}{\sum_{k\in N_i} exp(LeakyReLU(\vec a^T[W\vec h_i||W\vec h_k]))}</script><script type="math/tex; mode=display">
+\vec h'_i = \sigma(\sum \limits_{j \in N_i}a_{ij} W\vec h_j)</script><p>​    N为邻居节点集合，||为concat，W为共享的权值</p>
+<ul>
+<li>具体例子：</li>
+</ul>
+<p><img src="/posts/71dd2457/image-20221126214520133.png" alt="image-20221126214520133"></p>
+<ul>
+<li><p>多头注意力机制</p>
+<p><img src="/posts/71dd2457/image-20221126214858258.png" alt style="zoom:67%;"></p>
+<p><img src="/posts/71dd2457/image-20221126214941394.png" alt style="zoom:67%;"></p>
+</li>
+</ul>
+<p>​    每一个注意力机制都学到节点的特征，然后将这K个拼接到一起作为最后的结果。</p>
+<p>​    如果多头注意力机制在最后一层，用softmax预测，则拼接没必要，直接求平均。如果是接一个全连接层，拼接无所谓。</p>
+<h2 id="网络对比"><a href="#网络对比" class="headerlink" title="网络对比"></a>网络对比</h2><p><img src="/posts/71dd2457/image-20221126215407142.png" alt style="zoom:67%;"></p>
+<p>应用：</p>
+<p>三者都可以用于半监督的任务。但是提出说GCN不能用于推理学习任务（即学习一张图，推荐没见过的另一张图），说是因为GCN的邻接矩阵的定义在两张图里面是不同的。（？？）那GAT就可以是因为是动态的聚合邻居吗，即非需要全图。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="GCN-1"><a href="#GCN-1" class="headerlink" title="GCN"></a>GCN</h2><p><a href="https://github.com/tkipf/pygcn">tkipf/pygcn: Graph Convolutional Networks in PyTorch (github.com)</a></p>
+<p>数据集coras</p>
+<p>pycharm调试</p>
+<p>简单的跑一下默认数值 Test set results: loss= 0.7157 accuracy= 0.8320</p>
+<h2 id="GAT"><a href="#GAT" class="headerlink" title="GAT"></a>GAT</h2><p><a href="https://github.com/Diego999/pyGAT">Diego999/pyGAT: Pytorch implementation of the Graph Attention Network model by Veličković et. al (2017, https://arxiv.org/abs/1710.10903) (github.com)</a></p>
+<p>github上仓库有对GAT代码进行更新，新的代码减少内存的占用：原本a_input是通过将所有节点concat；新的代码是：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span>  <span class="title function_">_prepare_attentional_mechanism_input</span>(<span class="params">self, Wh</span>):</span><br><span class="line">    <span class="comment"># Wh.shape (N, out_feature)</span></span><br><span class="line">    <span class="comment"># self.a.shape (2 * out_feature, 1)</span></span><br><span class="line">    <span class="comment"># Wh1&amp;2.shape (N, 1)</span></span><br><span class="line">    <span class="comment"># e.shape (N, N)</span></span><br><span class="line">    Wh1 = torch.matmul(Wh, self.a[:self.out_features, :])</span><br><span class="line">    Wh2 = torch.matmul(Wh, self.a[self.out_features:, :])</span><br><span class="line">    <span class="comment"># broadcast add</span></span><br><span class="line">    e = Wh1 + Wh2.T</span><br><span class="line">    <span class="keyword">return</span> self.leakyrelu(e)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>batch的实现</li>
+</ul>
+<p>输入：[batch,node,feature]</p>
+<p>adj: [batch,node,node]</p>
+<p>关于GAT batch的实现，该仓库的issue中有讨论，并有提出一些解决方式。</p>
+<p>我自己粗略的实现，在GraphAttentionLayer中修改：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span>, adj</span>):</span><br><span class="line">       h = torch.matmul(<span class="built_in">input</span>, self.W)</span><br><span class="line">       <span class="built_in">print</span>(h.shape)</span><br><span class="line">       <span class="comment">#N = h.size()[0]</span></span><br><span class="line">       N = h.size()[<span class="number">1</span>]</span><br><span class="line">       <span class="built_in">print</span>(N)</span><br><span class="line">       <span class="comment">#a_input = torch.cat([h.repeat(1, N).view(N * N, -1), h.repeat(N, 1)], dim=1).view(N, -1, 2 * self.out_features)</span></span><br><span class="line">       a_input = torch.cat([h.repeat(<span class="number">1</span>,<span class="number">1</span>, N).view(h.shape[<span class="number">0</span>],N * N, -<span class="number">1</span>), h.repeat(<span class="number">1</span>,N, <span class="number">1</span>)], dim=<span class="number">2</span>).view(h.shape[<span class="number">0</span>],N, -<span class="number">1</span>, <span class="number">2</span> * self.out_features)</span><br><span class="line">       <span class="built_in">print</span>(a_input.shape)</span><br><span class="line">       <span class="comment">#e = self.leakyrelu(torch.matmul(a_input, self.a).squeeze(2))</span></span><br><span class="line">       e = self.leakyrelu(torch.matmul(a_input, self.a).squeeze(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<p>一个博客的实现和我的思路类似：<a href="https://blog.csdn.net/pixian3729/article/details/110261140">GAT（参数中加入batch）_2snoopy的博客-CSDN博客</a></p>
+<p>该方法其实还是挺消耗内存的。</p>
+<p>Diego999减轻内存占用并应用batch的实现：</p>
+<p><a href="https://github.com/Diego999/pyGAT/issues/62">How to implement batch training? · Issue #62 · Diego999/pyGAT (github.com)</a></p>
+<p>实际中确实有减少内存占用，但是GAT本身的特质内存消耗比较大，可以去探索其他改进的GNN。</p>
+<h2 id="GraphSAGE"><a href="#GraphSAGE" class="headerlink" title="GraphSAGE"></a>GraphSAGE</h2><p>tensorflow版本:<a href="https://github.com/williamleif/GraphSAGE">williamleif/GraphSAGE: Representation learning on large graphs using stochastic graph convolutions. (github.com)</a></p>
+<p>pytorch实现（简洁版本）：<a href="https://github.com/williamleif/graphsage-simple">williamleif/graphsage-simple: Simple reference implementation of GraphSAGE. (github.com)</a></p>
+<p><a href="https://blog.csdn.net/qq_35812205/article/details/126681519">【GraphSAGE实践】YelpChi评论图数据集上的反欺诈检测_山顶夕景的博客-CSDN博客_yelpchi数据集</a></p>
+]]></content>
+      <categories>
+        <category>图神经网络</category>
+      </categories>
+      <tags>
+        <tag>GNN</tag>
       </tags>
   </entry>
 </search>
