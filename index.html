@@ -211,6 +211,182 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/d2ac8e77/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/OIP-C.jfif">
+      <meta itemprop="name" content="Xandra">
+      <meta itemprop="description" content="记录，学习，成长。欢迎交流！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tiny Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/d2ac8e77/" class="post-title-link" itemprop="url">Exploiting Completeness and Uncertainty of Pseudo Labels</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-02-08 19:43:30 / Modified: 19:48:54" itemprop="dateCreated datePublished" datetime="2023-02-08T19:43:30+08:00">2023-02-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%86%E9%A2%91%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/" itemprop="url" rel="index"><span itemprop="name">视频异常检测</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Exploiting-Completeness-and-Uncertainty-of-Pseudo-Labels"><a href="#Exploiting-Completeness-and-Uncertainty-of-Pseudo-Labels" class="headerlink" title="Exploiting Completeness and Uncertainty of Pseudo Labels"></a>Exploiting Completeness and Uncertainty of Pseudo Labels</h1><p><a href="[[2212.04090\] Exploiting Completeness and Uncertainty of Pseudo Labels for Weakly Supervised Video Anomaly Detection (arxiv.org">page</a>](<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2212.04090))(CVPR">https://arxiv.org/abs/2212.04090))(CVPR</a> 2022.10)</p>
+<aside>
+💡 这篇论文提出了一种利用伪标签的完整性和不确定性的弱监督视频异常检测方法。它由一个完整性增强的伪标签生成器组成，该生成器使用3D CNN提取视频特征，并使用多头分类器训练多样性损失和MIL排序损失来生成初始伪标签，以及一个迭代的不确定性感知伪标签细化策略，该策略使用蒙特卡罗（MC）丢失来测量不确定性，并逐渐细化伪标签以训练所需的分类器。 UCF-Crime，TAD和XD-Violence的实验表明，与几种最先进的方法相比，它的性能良好。
+
+</aside>
+
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><hr>
+<h3 id="现有方法"><a href="#现有方法" class="headerlink" title="现有方法"></a>现有方法</h3><p>paper将现有的弱监督方法分为两种：</p>
+<ul>
+<li>MIL</li>
+<li>two-stage self-training</li>
+</ul>
+<p>基于MIL的方法由于缺少clip-level的标注，得到的异常分数常常是较为不精确的。而two-stage self-training 方法的提出可以缓解该问题。</p>
+<p>two-stage self-training[5,12]</p>
+<ol>
+<li>基于MIL方法为clips生成伪标签(pseudo labels）</li>
+<li>用伪标签去精细化判别表示</li>
+</ol>
+<h3 id="limitations"><a href="#limitations" class="headerlink" title="limitations"></a>limitations</h3><p>针对two-stage self training 的 <strong>Completeness and Uncertainty of Pseudo Labels</strong></p>
+<ul>
+<li><p>用于伪标签生成的ranking loss 忽略异常事件的完整性</p>
+<p>“一个正袋可能包含多个异常事件片段，，但是MIL只会检测到最像的一个。”(really?)</p>
+<p><img src="/posts/d2ac8e77/Untitled.png" alt></p>
+<p>橘色部分代表ground truth, 现有的方法如b所示，关注在最异常的片段。因此，提出使用基于diversity loss的多头分类模块，以生成能够覆盖完整异常事件的伪标签（如c所示）</p>
+</li>
+<li><p>在第二步中  生成伪标签的不确定性 未被考虑</p>
+<p>伪标签通常是有噪声的，直接使用进行最后分类模型的训练可能损害模型性能表现。</p>
+</li>
+</ul>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>分别针对两个limitations</p>
+<ul>
+<li>提出多头模块生成伪标签，引入diversity loss以确保多个分类头生成的伪标签的分布差异→ 确保异常事件的完整性检测 （对应step1)<ul>
+<li>通过这种方式，每一个头倾向于发现不同的异常事件，因此可以让伪标签尽可能覆盖更多的异常事件</li>
+</ul>
+</li>
+<li>设计一个迭代的基于不确定性的训练策略 （对应step2)<ul>
+<li>使用Monte Carlo(MC) Dropout 度量不确定性</li>
+<li>将低不确定性的片段用于最后分类器的训练 (该过程逐渐迭代细化伪标签）<ul>
+<li>第一次迭代  细化 step1生成的伪标签</li>
+<li>剩余的迭代细化分类器每次迭代的输出伪标签</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h2><ul>
+<li>我们设计了一个基于多样性损失的多头分类器方案，使得伪标签覆盖尽可能多的异常片段。</li>
+<li>我们设计了一种迭代的不确定性感知的自我训练策略，以逐步提高伪标签的质量。</li>
+<li>在UCF-Crime、TAD和XD-Violence上进行的实验表明，与几种最先进的方法相比，它具有良好的性能。</li>
+</ul>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><hr>
+<p><img src="/posts/d2ac8e77/Untitled 1.png" alt></p>
+<p>1)  使用预训练的3D CNN模型提取视频特征（paper使用的是I3D）</p>
+<p>2）经过多样性损失和MIL排序损失训练的多头分类器来生成初始的片段伪标签</p>
+<p>3）利用一个迭代的不确定性感知的伪标签细化策略， 逐步提高伪标签的质量，训练最终期望的分类器。</p>
+<blockquote>
+<p>Completeness Enhanced Pseudo Label Generator<br>用预先训练好的3D CNN来提取视频特征。将这些特征输入受多样性损失约束的多头分类器，以检测完整的异常事件。</p>
+</blockquote>
+<p>Iterative Uncertainty Aware Pseudo Label Refinement<br>在第一次迭代中，我们从first stage的多头分类器中获得初始的clip级伪标签，并通过Monte Carlo Dropout计算其不确定性。然后根据不确定性选择可靠的片段来训练一个新的片段分类器。在剩下的迭代中，使用新的片段分类器更新伪标签。</p>
+<blockquote>
+</blockquote>
+<h3 id="Completeness-of-Pseudo-Labels"><a href="#Completeness-of-Pseudo-Labels" class="headerlink" title="Completeness of Pseudo Labels"></a><strong>Completeness of Pseudo Labels</strong></h3><p>伪标签生成器由并行的多头分类器组成。each head由三个全连接层组成</p>
+<p><img src="/posts/d2ac8e77/Untitled 2.png" alt></p>
+<ul>
+<li>diversity loss</li>
+</ul>
+<p>each head输出每个片段的异常分数，并通过softmax生成分数的分布：</p>
+<p><img src="/posts/d2ac8e77/Untitled 3.png" alt></p>
+<p>通过多样性损失（diversity loss) 将属于不同head的分数分布互相区分开来← 通过最小化任意两头之间的余弦相似度</p>
+<p><img src="/posts/d2ac8e77/Untitled 4.png" alt></p>
+<ul>
+<li>regularization term</li>
+</ul>
+<p>片段分数序列的正则化项：平衡多头并避免由于一头占主导地位导致的性能下降</p>
+<p><img src="/posts/d2ac8e77/Untitled 5.png" alt></p>
+<p>在多样性损失和范数正则化的作用下，多头产生的异常得分可以达到最大的区别，并能够检测不同的异常片段。</p>
+<p>sigmoid所有头异常分数的平均得到片段级的标签</p>
+<p><img src="/posts/d2ac8e77/Untitled 6.png" alt></p>
+<ul>
+<li><p>ranking loss</p>
+<p>最大化异常和正常实例的差距</p>
+</li>
+</ul>
+<p><img src="/posts/d2ac8e77/Untitled 7.png" alt></p>
+<h3 id="Uncertainty-of-Pseudo-Labels"><a href="#Uncertainty-of-Pseudo-Labels" class="headerlink" title="Uncertainty of Pseudo Labels"></a><strong>Uncertainty of Pseudo Labels</strong></h3><p>为了训练最终期望的片段分类器fc，而不是直接使用在step1获得的片段级伪标签 提出了一种不确定性感知的自训练策略挖掘具有可靠伪标签的片段。</p>
+<p>具体地说，我们引入了利用Monte Carlo Dropout 的不确定性估计，从而选择具有低不确定性（即可靠的）伪标签的片段进行训练fc。这个过程进行了几次迭代。伪标签最初是在第一阶段获得的，然后进行经由fc更新。</p>
+<p><img src="/posts/d2ac8e77/Untitled 8.png" alt></p>
+<h2 id="Experimental-Results"><a href="#Experimental-Results" class="headerlink" title="Experimental Results"></a>Experimental Results</h2><p><img src="/posts/d2ac8e77/Untitled 9.png" alt></p>
+<p><img src="/posts/d2ac8e77/Untitled 10.png" alt="Untitled"></p>
+<p><img src="/posts/d2ac8e77/Untitled 11.png" alt></p>
+<p>消融实验</p>
+<p><img src="/posts/d2ac8e77/Untitled 12.png" alt></p>
+<p>超参分析</p>
+<p><img src="/posts/d2ac8e77/Untitled 13.png" alt></p>
+<p>最好的结果是双头</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/2ac833a5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1050,101 +1226,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/83682157/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/OIP-C.jfif">
-      <meta itemprop="name" content="Xandra">
-      <meta itemprop="description" content="记录，学习，成长。欢迎交流！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tiny Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/83682157/" class="post-title-link" itemprop="url">第一次搭建hexo博客</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-11-16 20:41:41" itemprop="dateCreated datePublished" datetime="2022-11-16T20:41:41+08:00">2022-11-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-25 13:40:17" itemprop="dateModified" datetime="2022-11-25T13:40:17+08:00">2022-11-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">hexo配置</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.7k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="hexo-deploy-到github失败"><a href="#hexo-deploy-到github失败" class="headerlink" title="hexo deploy 到github失败"></a>hexo deploy 到github失败</h2><p>使用deploy之后要求输入账户和密码，密码正确但是显示验证失败。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/83682157/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1216,20 +1297,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1243,7 +1324,7 @@
     <h3 class="widget-title">标签云</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNN/" rel="tag">GNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyG/" rel="tag">PyG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">暴力视频检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">深度视频检测</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNN/" rel="tag">GNN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyG/" rel="tag">PyG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAD/" rel="tag">VAD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%B1%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">弱监督学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">暴力视频检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">深度视频检测</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -1279,13 +1360,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">65k</span>
+    <span title="Symbols count total">67k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">59 mins.</span>
+    <span title="Reading time total">1:01</span>
 </div>
 
         
