@@ -29,7 +29,7 @@
 <meta property="og:description" content="翻译整理自google-research&#x2F;tuning_playbook 开展一个新项目的指南">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-02-09T10:46:50.000Z">
-<meta property="article:modified_time" content="2023-02-09T13:46:45.753Z">
+<meta property="article:modified_time" content="2023-02-09T13:50:42.491Z">
 <meta property="article:author" content="Xandra">
 <meta property="article:tag" content="Deep Learning Tuning Playbook">
 <meta name="twitter:card" content="summary">
@@ -239,7 +239,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-02-09 18:46:50 / Modified: 21:46:45" itemprop="dateCreated datePublished" datetime="2023-02-09T18:46:50+08:00">2023-02-09</time>
+              <time title="Created: 2023-02-09 18:46:50 / Modified: 21:50:42" itemprop="dateCreated datePublished" datetime="2023-02-09T18:46:50+08:00">2023-02-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,7 +264,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>4.5k</span>
+              <span>4.4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -343,7 +343,7 @@
 </li>
 <li>增加批量大小可以减少、增加或不改变资源消耗。</li>
 <li>批量大小不应该被当作用于验证集性能的可调超参数。<ul>
-<li>只要所有超参数都得到很好的调整（特别是学习率和正则化超参数），并且训练步数足够，使用任何批量大小都应该可以获得相同的最终性能（请参见[Shallue et al. 2018]（ <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1811.03600））。">https://arxiv.org/abs/1811.03600））。</a></li>
+<li>只要所有超参数都得到很好的调整（特别是学习率和正则化超参数），并且训练步数足够，使用任何批量大小都应该可以获得相同的最终性能（请参见 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1811.03600">Shallue et al. 2018</a> ）。</li>
 <li>请参阅为什么不应该将批量大小调整为直接改善验证集性能？<ul>
 <li>改变批量大小<em>而不改变任何其他训练管道的细节</em>通常会影响验证集性能。</li>
 <li>但是，如果为每个批量大小单独优化训练管道，两个批量大小之间的验证集性能差异通常会消失。</li>
@@ -381,12 +381,13 @@
 <ul>
 <li><p>我们通常可以认为每步时间对于所有可行的批量大小来说都是近似恒定的。 当没有并行计算的开销并且所有训练瓶颈都已经诊断和纠正（请参阅上一节以了解如何识别训练瓶颈）时，这是正确的。 实践中，随着批量大小的增加，通常至少有一些开销。</p>
 </li>
-<li><p>随着批量大小的增加，要达到固定性能目标所需的总步数通常会减少（所有相关超参数在更改批量大小时重新调整; </p>
-<p>Shallue et al. 2018</p>
-<p>）。</p>
+<li><p>随着批量大小的增加，要达到固定性能目标所需的总步数通常会减少（所有相关超参数在更改批量大小时重新调整; Shallue et al. 2018）。</p>
 <ul>
 <li>例如。 将批量大小翻倍可能会使所需的总步数减半。 这称为<strong>完美缩放</strong>。</li>
-<li>完美缩放适用于所有批量大小，直到一个临界批量大小，超出该批量大小，收益就会逐渐减少。</li>
+</ul>
+</li>
+<li><p>完美缩放适用于所有批量大小，直到一个临界批量大小，超出该批量大小，收益就会逐渐减少。</p>
+<ul>
 <li>最终，增加批量大小不再减少训练步骤的数量（但永远不会增加）。</li>
 </ul>
 </li>
@@ -394,9 +395,7 @@
 <ul>
 <li><p>此批量大小取决于数据集，模型和优化器，除了为每个新问题找到它的实验之外，如何计算它是一个未解决的问题。 🤖</p>
 </li>
-<li><p>在比较批量大小时，要注意示例预算/</p>
-<p>epoch</p>
-<p>预算（固定训练示例呈现的数量来运行所有实验）和步骤预算（固定训练步骤的数量来运行所有实验）之间的区别。</p>
+<li><p>在比较批量大小时，要注意示例预算/epoch预算（固定训练示例呈现的数量来运行所有实验）和步骤预算（固定训练步骤的数量来运行所有实验）之间的区别。</p>
 <ul>
 <li>使用epoch预算比较批量大小只探测完美缩放模式，即使更大的批量大小仍然可以通过减少所需的训练步骤来提供有意义的加速。</li>
 </ul>
@@ -448,7 +447,7 @@
 </ul>
 </li>
 <li>选择训练步骤数量涉及以下考量：<ul>
-<li>一方面，训练更多步骤可以提高性能，并使超参数调整更容易（请参见[Shallue等人。 2018]（<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1811.03600））。">https://arxiv.org/abs/1811.03600））。</a></li>
+<li>一方面，训练更多步骤可以提高性能，并使超参数调整更容易（请参见<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1811.03600">Shallue et al. 2018</a>）。</li>
 <li>另一方面，训练步骤较少意味着每次训练运行更快，使用的资源更少，通过减少周期之间的时间来提高调整效率，并允许并行运行更多实验。此外，如果最初选择了不必要的大步骤预算，则可能很难在以后更改它，例如一旦为该步数调整了学习率计划。</li>
 </ul>
 </li>
