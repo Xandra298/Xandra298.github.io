@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://xandra298.github.io/posts/82187def/Untitled%201.png">
 <meta property="og:image" content="https://xandra298.github.io/posts/82187def/Untitled%202.png">
 <meta property="og:image" content="https://xandra298.github.io/posts/82187def/Untitled%203.png">
-<meta property="og:image" content="https://xandra298.github.io/posts/82187def/Users/34860/OneDrive/%E6%A1%8C%E9%9D%A2/Export-2d6faf48-cf3b-4459-bddf-dcb2eabbda29/How%20Attentive%20are%20Graph%20Attention%20Networks%20b15ba3e1167d4d0885c6124ef8c8c288/Untitled%204.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/82187def/Untitled%204.png">
 <meta property="og:image" content="https://xandra298.github.io/posts/82187def/Untitled%205.png">
 <meta property="og:image" content="https://xandra298.github.io/posts/82187def/Untitled%206.png">
 <meta property="og:image" content="https://xandra298.github.io/posts/82187def/Untitled%207.png">
@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://xandra298.github.io/posts/82187def/Untitled%2012.png">
 <meta property="og:image" content="https://xandra298.github.io/posts/82187def/Untitled%2013.png">
 <meta property="article:published_time" content="2023-02-22T14:29:41.000Z">
-<meta property="article:modified_time" content="2023-02-22T14:45:26.013Z">
+<meta property="article:modified_time" content="2023-02-22T14:52:45.345Z">
 <meta property="article:author" content="Xandra">
 <meta property="article:tag" content="GAT">
 <meta name="twitter:card" content="summary">
@@ -254,7 +254,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-02-22 22:29:41 / Modified: 22:45:26" itemprop="dateCreated datePublished" datetime="2023-02-22T22:29:41+08:00">2023-02-22</time>
+              <time title="Created: 2023-02-22 22:29:41 / Modified: 22:52:45" itemprop="dateCreated datePublished" datetime="2023-02-22T22:29:41+08:00">2023-02-22</time>
             </span>
 
 		 
@@ -415,7 +415,7 @@ GATv2 (our\ fixed\ version):\quad e (h_i, h_j ) = a^T LeakyReLU( W · [ h_i||h_j
 <li><p>GATv2 easily achieves 100% training and 100% test accuracies for any value of <em>k</em>, and even for <em>k</em>=100 (not shown) and using a <em>single head</em></p>
 </li>
 <li><p>GIN（non-attentive baselines ）的实验</p>
-<p><img src="/posts/82187def/Users\34860\OneDrive\桌面\Export-2d6faf48-cf3b-4459-bddf-dcb2eabbda29\How Attentive are Graph Attention Networks b15ba3e1167d4d0885c6124ef8c8c288\Untitled 4.png" alt="Untitled"></p>
+<p><img src="/posts/82187def/Untitled 4.png" style="zoom:80%;"></p>
 </li>
 </ul>
 <p><strong>Visualization</strong></p>
@@ -479,7 +479,7 @@ GATv2 (our\ fixed\ version):\quad e (h_i, h_j ) = a^T LeakyReLU( W · [ h_i||h_j
 <p><img src="/posts/82187def/Untitled 13.png" style="zoom:67%;"></p>
 <h2 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5. Conclusion"></a>5. Conclusion</h2><p>在本文中，我们发现流行和广泛使用的图注意网络不计算动态注意。相反，在标准定义和实现中的注意机制的结果只是静态的：对于任何查询，它的邻居分数对于每个节点的分数是单调的。因此，GAT甚至不能表达简单的对齐问题。为了解决这个限制，我们引入了一个简单的修复并提出了GATv2：通过修改GAT中的操作顺序，GATv2实现了一个通用的近似注意函数，因此严格比GAT更强大。</p>
 <p>我们在一个需要动态选择节点的综合问题中，展示了GATv2相对于GAT的经验优势，以及来自OGB和其他公共数据集的11个基准测试。我们的实验表明GATv2在所有基准测试中都优于GAT，同时具有相同的参数代价。</p>
-<p>我们鼓励社区在将新的GNN架构与常见的强基线进行比较时，使用GATv2而不是GAT。在复杂的任务和领域中，以及在具有挑战性的数据集中，一个模型使用GAT作为内部组件可以用GATv2替换它，以适应严格上更强大的模型。为此，我们在<a target="_blank" rel="noopener" href="https://github.com/tech-srl/how_attentive_are_gats上公开了我们的代码，并且GATv2可以作为PyTorch">https://github.com/tech-srl/how_attentive_are_gats上公开了我们的代码，并且GATv2可以作为PyTorch</a> Geometric library, the Deep Graph Library, and TensorFlow GNN的一部分使用。在<a target="_blank" rel="noopener" href="https://nn.labml.ai/graphs/gatv2上有一个带注释的实现">https://nn.labml.ai/graphs/gatv2上有一个带注释的实现</a> .</p>
+<p>我们鼓励社区在将新的GNN架构与常见的强基线进行比较时，使用GATv2而不是GAT。在复杂的任务和领域中，以及在具有挑战性的数据集中，一个模型使用GAT作为内部组件可以用GATv2替换它，以适应严格上更强大的模型。为此，我们在<a target="_blank" rel="noopener" href="https://github.com/tech-srl/how_attentive_are_gats">https://github.com/tech-srl/how_attentive_are_gats</a> 上公开了我们的代码，并且GATv2可以作为PyTorch Geometric library, the Deep Graph Library, and TensorFlow GNN的一部分使用。在 <a target="_blank" rel="noopener" href="https://nn.labml.ai/graphs/gatv2">https://nn.labml.ai/graphs/gatv2</a> 上有一个带注释的实现 。</p>
 
     </div>
 
