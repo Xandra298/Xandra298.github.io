@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://xandra298.github.io/posts/82187def/Untitled%2012.png">
 <meta property="og:image" content="https://xandra298.github.io/posts/82187def/Untitled%2013.png">
 <meta property="article:published_time" content="2023-02-22T14:29:41.000Z">
-<meta property="article:modified_time" content="2023-02-25T07:13:05.026Z">
+<meta property="article:modified_time" content="2023-02-25T08:09:28.881Z">
 <meta property="article:author" content="Xandra">
 <meta property="article:tag" content="GAT">
 <meta property="article:tag" content="GNN">
@@ -263,7 +263,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-02-25 15:13:05" itemprop="dateModified" datetime="2023-02-25T15:13:05+08:00">2023-02-25</time>
+                <time title="Modified: 2023-02-25 16:09:28" itemprop="dateModified" datetime="2023-02-25T16:09:28+08:00">2023-02-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -288,7 +288,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>7.5k</span>
+              <span>7.4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -368,14 +368,14 @@ h_i' = σ (\sum _{j∈N_i} α_{ij} · W h_j) \quad\quad (4)</script></li>
 <p>如果attention函数总是将一个key的权重计算的至少与其他任何key一样大，而与query无关，那么我们称他为<strong>static attention</strong>（即不管query是什么，计算的一组key里面，最大的（不小于其他key) 那个是定死的）</p>
 </li>
 <li><p><strong>Definition 3.1</strong> （<strong>static attention</strong>)</p>
-<p>A (possibly infifinite) family of scoring functions <em>F ⊆ (</em>R<em>d ×</em> R<em>d →</em> R) computes <em>static scoring</em> for a given set of key vectors $K={k<em>1, …,k_n} ⊂R^d$ and query vectors $Q ={q_1, …, q_m} ⊂R^d$, if for every $f \in F$ <em>*there exists a “highest scoring” key $j_f$</em>∈<em> [</em>n<em>] such that for every query </em>i∈<em>[</em>m<em>] and key </em>j∈<em> [</em>n*] it holds that $f(q_i,k</em>{j_f})\ge f(q_i,k_j)$. We say that a family of attention functions computes <em>static attention</em> given K and Q , if its scoring function computes static scoring, possibly followed by monotonic normalization such as softmax.</p>
+<p>A (possibly infinite) family of scoring functions <em>F ⊆ (</em>R<em>d ×</em> R<em>d →</em> R) computes <em>static scoring</em> for a given set of key vectors <script type="math/tex">K=\{k_1, ...,k_n\} ⊂R^d</script> and query vectors <script type="math/tex">Q =\{q_1, ..., q_m\} ⊂R^d</script>, if for every <script type="math/tex">f \in F</script> there exists a “highest scoring” key <script type="math/tex">j_f∈ [n]</script> such that for every query i∈[m] and key j∈ [n] it holds that <script type="math/tex">f(q_i,k_{j_f})\ge f(q_i,k_j)</script>. We say that a family of attention functions computes <em>static attention</em> given K and Q , if its scoring function computes static scoring, possibly followed by monotonic normalization such as softmax.</p>
 </li>
 <li><p>静态注意力非常有限</p>
 <p>静态注意非常有限，因为无论查询如何，每个函数$f\in F$都有一个总是选中的key。这些函数不能模拟不同key对不同query有不同关联的情况。</p>
 </li>
 <li><p><strong>Defifinition 3.2</strong> (<strong>Dynamic attention</strong>)</p>
-<p>A (possibly infifinite) family of scoring functions <em>F ⊆ (</em>R<em>d ×</em> R<em>d →</em> R) computes <em>dynamic attention</em> for a given set  of key vectors $K={k<em>1, …,k_n} ⊂R^d$ and $Q ={q_1, …, q_m} ⊂R^d$,  if for any mapping $\phi: [m] → [n]$ , there exists $f \in F$ such that for any query $i\in [m]$ and any key $j </em>{\neq \phi(i)} \in [n]$: $f(q<em>i, k</em>ϕ(i)) &gt; f(q_i, k_j)$. We say that a family of attention functions computes <em>dynamic attention</em> for K and Q, if its scoring function computes dynamic scoring, possibly followed by monotonic normalization such as softmax.</p>
-<p>也就是说，动态注意可以通过查询i选择每个键ϕ(i)，使$f(q<em>i, k</em>ϕ(i))$在${f（q_i，k_j）| j∈[n])}$中最大。请注意，动态注意和静态注意都是排他性的属性，但它们并不是互补的。此外，每个动态注意族对于相同的K和Q都有严格的静态注意族子集。</p>
+<p>A (possibly infifinite) family of scoring functions <em>F ⊆ (</em>R<em>d ×</em> R<em>d →</em> R) computes <em>dynamic attention</em> for a given set  of key vectors <script type="math/tex">K=\{k_1, ...,k_n\} ⊂R^d</script> and <script type="math/tex">Q =\{q_1, ..., q_m\} ⊂R^d</script>,  if for any mapping $\phi: [m] → [n]$ , there exists $f \in F$ such that for any query <script type="math/tex">i\in [m]</script> and any key <script type="math/tex">j _{\neq \phi(i)} \in [n]</script>: <script type="math/tex">f(q_i, k_ϕ(i)) > f(q_i, k_j)</script>. We say that a family of attention functions computes <em>dynamic attention</em> for K and Q, if its scoring function computes dynamic scoring, possibly followed by monotonic normalization such as softmax.</p>
+<p>也就是说，动态注意可以通过查询i选择每个键ϕ(i)，使<script type="math/tex">f(q_i, k_ϕ(i))</script>在<script type="math/tex">\{f（q_i，k_j）| j∈[n])\}</script>中最大。请注意，动态注意和静态注意都是排他性的属性，但它们并不是互补的。此外，每个动态注意族对于相同的K和Q都有严格的静态注意族子集。</p>
 </li>
 <li><p><strong>Attending by decaying</strong></p>
 <p>另一种思考注意力的方式是“focus”于最相关的输入的能力。Focusing只能通过衰减其他输入，即，给出这些输入衰减的输入值的分数低于其他输入值。如果一个键的注意力得分总是比其他键相同或更高（如静态注意），那么任何查询都不能忽略这个键或衰减这个键的score.</p>
