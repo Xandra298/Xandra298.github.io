@@ -21,27 +21,32 @@
     var CONFIG = {"hostname":"xandra298.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Not only look, but also listen: Learning multimodal violence detection under weak supervisionpaper ，code and dataset 暴力视频检测方向论文   💡 We introduce a HL-Net to simultaneously capture long-range relation">
+  <meta name="description" content="paper (Under Submission CVPR)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Learning Multimodal Violence Detection under Weak Supervision">
-<meta property="og:url" content="https://xandra298.github.io/posts/undefined/index.html">
+<meta property="og:title" content="CLIP-TSA:CLIP-Assisted Temporal Self-Attention">
+<meta property="og:url" content="https://xandra298.github.io/posts/d3b330ab/index.html">
 <meta property="og:site_name" content="Tiny Blog  &amp;  小窝">
-<meta property="og:description" content="Not only look, but also listen: Learning multimodal violence detection under weak supervisionpaper ，code and dataset 暴力视频检测方向论文   💡 We introduce a HL-Net to simultaneously capture long-range relation">
+<meta property="og:description" content="paper (Under Submission CVPR)">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://xandra298.github.io/posts/undefined/Untitled.png">
-<meta property="og:image" content="https://xandra298.github.io/posts/undefined/Untitled%201.png">
-<meta property="og:image" content="https://xandra298.github.io/posts/undefined/Untitled%202.png">
-<meta property="og:image" content="https://xandra298.github.io/posts/undefined/Untitled%203.png">
-<meta property="og:image" content="https://xandra298.github.io/posts/undefined/Untitled%204.png">
-<meta property="article:published_time" content="2022-11-19T11:02:42.000Z">
-<meta property="article:modified_time" content="2023-02-25T07:08:48.171Z">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%201.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%202.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%203.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%204.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%205.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%206.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%207.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%208.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%209.png">
+<meta property="article:published_time" content="2023-02-25T07:02:08.000Z">
+<meta property="article:modified_time" content="2023-02-25T07:17:29.042Z">
 <meta property="article:author" content="Xandra">
 <meta property="article:tag" content="弱监督学习">
-<meta property="article:tag" content="暴力视频检测">
+<meta property="article:tag" content="VAD">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://xandra298.github.io/posts/undefined/Untitled.png">
+<meta name="twitter:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled.png">
 
-<link rel="canonical" href="https://xandra298.github.io/posts/undefined/">
+<link rel="canonical" href="https://xandra298.github.io/posts/d3b330ab/">
 
 
 <script id="page-configurations">
@@ -54,7 +59,7 @@
   };
 </script>
 
-  <title>Learning Multimodal Violence Detection under Weak Supervision | Tiny Blog  &  小窝</title>
+  <title>CLIP-TSA:CLIP-Assisted Temporal Self-Attention | Tiny Blog  &  小窝</title>
   
 
 
@@ -222,7 +227,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/undefined/">
+    <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/d3b330ab/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/OIP-C.jfif">
@@ -235,7 +240,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Learning Multimodal Violence Detection under Weak Supervision
+          CLIP-TSA:CLIP-Assisted Temporal Self-Attention
         </h1>
 
         <div class="post-meta">
@@ -244,18 +249,12 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2022-11-19 19:02:42" itemprop="dateCreated datePublished" datetime="2022-11-19T19:02:42+08:00">2022-11-19</time>
+              <time title="Created: 2023-02-25 15:02:08 / Modified: 15:17:29" itemprop="dateCreated datePublished" datetime="2023-02-25T15:02:08+08:00">2023-02-25</time>
             </span>
 
 		 
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-02-25 15:08:48" itemprop="dateModified" datetime="2023-02-25T15:08:48+08:00">2023-02-25</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -279,7 +278,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>4.3k</span>
+              <span>4.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -298,102 +297,136 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Not-only-look-but-also-listen-Learning-multimodal-violence-detection-under-weak-supervision"><a href="#Not-only-look-but-also-listen-Learning-multimodal-violence-detection-under-weak-supervision" class="headerlink" title="Not only look, but also listen: Learning multimodal violence detection under weak supervision"></a>Not only look, but also listen: Learning multimodal violence detection under weak supervision</h1><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2007.04687.pdf">paper</a> ，<a target="_blank" rel="noopener" href="https://roc-ng.github.io/XD-Violence/">code and dataset</a></p>
-<p>暴力视频检测方向论文</p>
-<blockquote>
-<p> 💡 We introduce a HL-Net to simultaneously capture <strong>long-range relations</strong> and<br><strong>local distance relations</strong>, of which these two relations are based on similarity prior and proximity prior, respectively</p>
-<p>三个并行的branch捕捉视频片段和集成的特征之间的不同联系:</p>
-<ul>
-<li>holistic branch captures long-range dependencies using similarity prior,</li>
-<li>localized branch captures local positional relation using proximity prior,</li>
-<li>score branch dynamically captures the closeness of predicted score.</li>
-</ul>
-</blockquote>
+        <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2212.05136.pdf">paper</a> (Under Submission CVPR)</p>
 <span id="more"></span>
-<p>相关工作，其中attention部分可以后面看下；</p>
-<p>一些工作将图神经网络(GCNs)[20,39]在图上建立不同节点之间的关系模型，并学习计算机视觉的强大表示。例如，GCN被用于时间性动作定位[50]、视频分类[37,41]、异常检测[51]。基于骨架的动作识别[33,45]，点云语义分割[21]，图像说明[46]等等。除了GCN，时间关系网络[52]，旨在学习和推理视频帧之间的时间依赖关系，被提出来用于解决视频分类。最近，自我注意网络[40,47,5,18]已被成功应用于视觉问题。注意力操作可以通过聚合一组元素的信息来影响单个元素，其中聚合的权重是自动学习的。</p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="总体框架图"><a href="#总体框架图" class="headerlink" title="总体框架图"></a>总体框架图</h2><p><img src="/posts/undefined/Untitled.png" alt></p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>解决VAD问题：由于劳动密集型性质（帧级别的标注？），通常以弱监督的方式表述为多实例学习问题(MIL）。</p>
 <ul>
-<li><p>特征提取：using the sliding window mechanism 提取 视频特征和声音特征，合并成融合特征（融合部分不予关注。滑动窗口机制待看）</p>
-<blockquote>
-<p>Visual features: utilize two mainstream networks-C3D and I3D networks. we extract fc6 features from C3D that is pretrained on the Sports-1M dataset, and extract global_pool features from I3D pre-trained on Kinetics-200 dataset.</p>
-</blockquote>
+<li>相比该领域传统使用的C3D和I3D模型，我们使用ViT-encoded visual features from CLIP，以使用一种创新的方式来有效地提取判别表示。</li>
+<li>model long- and short-range temporal dependencies， 并使用时间自注意力机制（TSA）来提取重要的片段（snipppets of interest)</li>
+<li>进行了消融实验，实验表明我们提出的CLIP-TSA 在广泛使用的两个benchmark数据集（<strong>UCF-Crmie和ShanghaiTec</strong>)大范围的优于SOTA</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>分别介绍了有监督、无监督和弱监督（基于MIL框架）的VAD方法的优缺点。</p>
+<h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><ol>
+<li><p>弱监督方法的<strong>已有提取视频特征骨架C3D、I3D和2Stream的缺陷（它们是在动作识别任务上预训练的）：</strong></p>
+<p>与动作识别问题不同，VAD依赖于清晰地表示场景中的事件的区别性表征。因此，由于领域的鸿沟（domain gap)，这些骨架并不合适[1])。</p>
+</li>
+<li><p>已有的MIL-based弱监督VAD受限于应对 <strong>异常视频中包含任意数量的异常片段</strong></p>
+</li>
+</ol>
+<h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><ol>
+<li><p>针对性提出解决方案：使用CLIP进行特征提取。</p>
+<p><strong>CLIP的优势</strong>及其为什么能够有效：</p>
+<p>最近（21-23）”vision language”工作的成功证明了通过CLIP（Contrastive Language-Image Pre-traning)框架学习到的特征表示的有效性。</p>
+<p>CLIP由两个网络组成：vision encoder 和 text encoder ， 在互联网公开可用资源收集到的400 million text-image pairs上训练。给定一组words和一张图片，CLIP可以评估他们之间的语义相似性。</p>
+<p>因此，我们使用CLIP作为特征提取器。</p>
+</li>
+<li><p>提出top-k function</p>
+<p>受differentiable top-k operator[2]的启发，提出top-k function, 它定位了视频中感兴趣的κ个片段，并在相似的MIL 设置中采用 differentiable hard attention，以证明其对传统的、流行的设置的有效性和适用性。</p>
+</li>
+<li><p>引入Temporal Self-attention机制（TSA）</p>
+<p>目标是通过衡量片段的异常程度生成重新赋权的注意力特征（reweighted attention feature)</p>
+</li>
+</ol>
+<p>提出的CLIP-TSA采用MIL框架，由三个组件构成：</p>
+<p>（1） 使用CLIP进行的特征编码</p>
+<p>（2）使用TSA机制在时间维度上进行片段一致性建模</p>
+<p>（3） 使用差异最大化训练器定位异常片段</p>
+<p>三个评估数据集：UCF-Crime, ShanghaiTec和XD-Violence</p>
+<h3 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h3><ul>
+<li>提出适用于弱监督VAD问题的Temporal Self-Attention(TSA)机制，并获得了视频片段的异常似然性得分。</li>
+<li>我们运用CLIP，它使用ViT作为视觉特征的主干，引入了1)CLIP特征的新用法，2)分析由异常动作组成的视频中的新型上下文表示</li>
+<li>经验性地验证了我们提出方法的有效性，结果表明：据我们所知，在任何类型的监督设置下，它实现了比目前所有以UCF-Crime和ShanghaiTec数据集为基准的SOTA方法更优的性能。对于XD-violence数据集，他打败了不融合声音特征进行训练的SOTA</li>
+</ul>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
+<li>Unsupervised VAD</li>
+<li>Weakly-supervised VAD</li>
+<li>Vision-Language Pre-trained Models</li>
+<li>Attention Mechanism</li>
+</ul>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>pipeline如下：</p>
+<p><img src="/posts/d3b330ab/Untitled.png" alt></p>
+<p>（1） 使用CLIP进行的特征编码</p>
+<p>（2）使用TSA机制在时间维度上进行片段一致性建模，并下选取关联最多的top-k个</p>
+<p>（3） 使用差异最大化训练器定位异常片段</p>
+<h3 id="feature-embedding"><a href="#feature-embedding" class="headerlink" title="feature embedding"></a>feature embedding</h3><ul>
+<li><p>choose the middle frame $I_i$ that represents each snippet $s_i$</p>
+</li>
+<li><p>encode frame $I_i$ with the pretrained Vision Transformer to extract visual feature $I_i^f$</p>
+</li>
+<li><p>then project feature $I_i^f$ onto the visual projection matrix L, which was pretrained by CLIP to obtain the image embedding $f_i = L*I_i^f$</p>
+</li>
+<li><p>thus got the embedding feature $F_k$  of video X, which consist of  snippets    </p>
+<script type="math/tex; mode=display">X = \{s_i\}|^{T_k}_{i=1}</script></li>
+<li><p>finally apply the video normalization</p>
 </li>
 </ul>
-<h2 id="Holistic-and-Localized-Networks"><a href="#Holistic-and-Localized-Networks" class="headerlink" title="Holistic and Localized Networks"></a>Holistic and Localized Networks</h2><h3 id="Holistic-特征相似性"><a href="#Holistic-特征相似性" class="headerlink" title="Holistic - 特征相似性"></a><strong>Holistic - 特征相似性</strong></h3><hr>
-<p>通用的图卷积表示可以看为：</p>
-<script type="math/tex; mode=display">
-X_l+1 = Update(Aggregate(X_l,W_l^{agg},W_l^{update}))</script><ul>
-<li><strong>GCN范式：</strong><script type="math/tex; mode=display">
-X^H_{l+1} = Dropout(ReLU(A^HX^H_lW^H_l))</script></li>
-</ul>
-<p>注：$X^H_0 = X^S_0 = X^L_0 = X^F$</p>
-<p><strong>特征相似性的邻接矩阵表示:</strong></p>
-<script type="math/tex; mode=display">
-A^H_{ij} = g(f(x_i,x_j))</script><p>$A^H_{ij}$衡量第i个和第j个特征的特征相似性；g是归一化函数，f函数计算一对特征的相似性；附录部分还讨论了一下其他版本的。本文定义如下</p>
+<h3 id="Temporal-Self-Attention-TSA"><a href="#Temporal-Self-Attention-TSA" class="headerlink" title="Temporal Self-Attention (TSA)"></a><strong>Temporal Self-Attention (TSA)</strong></h3><p>目标：model the coherency between snippets of a video and select the top-k most relevant snippets</p>
+<p>组成： (i) temporal scorer network： 获取score向量。将feature变成score向量（$R^{T\times 1}$) ，论文里网络为三层MLP</p>
+<p>(ii) top-<em>κ</em> score nominator：提取K个关联性最大的片段。具体见如下算法二。有借助高斯噪声、基于分数幅度获取top-k个、one-hot编码（Through the soft one-hot encoding mechanism, the higher amount of attention, or weight, is placed near and at the indices of top-<em>κ</em> scores）</p>
+<p>(iii) fusion network： combine information</p>
+<p>输入：前述基于CLIP提取到的特征</p>
+<p>输出：reweighted attention Feature</p>
+<p><img src="/posts/d3b330ab/Untitled 1.png" alt></p>
+<p><img src="/posts/d3b330ab/Untitled 2.png" alt></p>
+<h3 id="Difference-Maximization-Trainer-Learning"><a href="#Difference-Maximization-Trainer-Learning" class="headerlink" title="Difference Maximization Trainer Learning"></a><strong>Difference Maximization Trainer Learning</strong></h3><p>mini batch训练，输入分成2*B（batchsize)，一半从normal bags中加载，一半从abnormal bags中加载。</p>
+<p>在TSA阶段之后，分别得到两部分的reweighted attention feature。</p>
+<p>接着，将feature送入一个卷积网络模块J，J由dilated convolutions和non-local block组成，以此基于重新加权的大小模拟片段之间的长期和短期关系。</p>
+<p>输出的convoluted attention features接着送入一个浅层的MIL-based score classifier，输出的分数决定特征片段的二元异常状态。</p>
 <ul>
-<li>f 定义为：</li>
-</ul>
-<script type="math/tex; mode=display">
-f(x_i,x_j) = \frac{x_i^Tx_j}{||x_i||_{2} \\ . \\ ||x_j||_2}</script><ul>
-<li>thresholding操作（$\tau$是threshod，f将相似性限制在（0,1]之间）：</li>
-</ul>
-<script type="math/tex; mode=display">
-f(x_i,x_j) = \begin{cases} f(x_i,x_j)  & f(x_i,x_j) > \tau \\ 0 & f(x_i,x_j)\leq \tau\end{cases}</script><ul>
-<li><p>使用softmax作为归一化函数g，使得A的每一行的和都为1。</p>
-<script type="math/tex; mode=display">
-A^H_{ij} = \frac{exp(A^H_{ij})}{\sum ^{T'}_{k=1} exp(A^H_{ij})}</script></li>
-</ul>
-<h3 id="localized-branch-proximity-prior-和时间一致性类似）"><a href="#localized-branch-proximity-prior-和时间一致性类似）" class="headerlink" title="localized branch -proximity prior (和时间一致性类似）"></a><strong>localized branch -proximity prior (和时间一致性类似）</strong></h3><hr>
-<script type="math/tex; mode=display">
-A^L_{ij} = exp(\frac{-|i-j|^r}{\sigma })</script><h2 id="Online-detection-amp-score-branch"><a href="#Online-detection-amp-score-branch" class="headerlink" title="Online detection &amp; score branch"></a>Online detection &amp; score branch</h2><p>正如我们提到的，暴力检测系统不仅适用于离线检测（互联网录像机），也适用于在线检测（监控系统）。然而，<strong>上述HL-Net</strong>的在线检测受到了一个主要障碍的阻碍：<strong>HL-Net需要整个视频来获得长距离的依赖关系</strong>。为了跳出这个困境，我们提出了一个HLC近似器，只把以前的视频片段作为输入，在HL-Net的指导下产生精确的预测。两个堆叠的FC层和ReLU以及一个一维因果卷积层构成了HLC近似器。一维因果卷积层的核大小为5，跨度为1，在时间上滑动卷积滤波器。一维因果卷积层也充当分类器，其输出是形状为 T’ 的暴力激活表示为$C^S$。更妙的是，这个操作引入了一个额外的分支，名为<strong>动态得分分支(dynamic score branch)</strong>，以扩展HL-Net，它取决于$C^S$。</p>
-<h3 id="score-branch"><a href="#score-branch" class="headerlink" title="score branch"></a>score branch</h3><p>用于online detection, 解决需要将整个视频作为输入（以获得长距离依赖）的问题。</p>
-<p>该分支的主要作用是将一个位置的响应计算为所有位置特征的加权和，其中权重取决于分数的接近程度。与整体和局部分支的关系矩阵不同，分数分支的关系矩阵在每次迭代中都会更新，并且取决于预测的分数而不是先验。从形式上看，分数分支的关系矩阵设计如下：</p>
-<script type="math/tex; mode=display">
-A^S_{ij} = \rho(1 - |s(C^S_i) - s(C^S_j)|)</script><p>s是 sigmoid, 函数ρ用于加强（和削弱）得分接近度大于（和小于）0.5的配对关系，softmax也用于归一化。</p>
-<script type="math/tex; mode=display">
-\rho (x) = \frac{1}{1+exp(-\frac{x-0.5}{0.1})}</script><h2 id="training-based-on-MIL"><a href="#training-based-on-MIL" class="headerlink" title="training based on MIL"></a>training based on MIL</h2><script type="math/tex; mode=display">
-C^P = (X^H||X^L||X^S)W</script><p>所有输出($C^P 和 C^S$)在时间维度上的K-max取平均作为输出，以得到$y^P$ 和$y^S$。K定义为T‘ 除以q加一后向下取整。</p>
-<p>补充： top-k策略（Weakly-supervised video anomaly detection with robust temporal feature magnitude learning）</p>
-<ul>
-<li>loss结合三个branch</li>
-</ul>
-<blockquote>
-<p>The instances corresponding to the K-max activation in the positive bag is most likely to be true positive instances (violence). The instances corresponding to the K-max activation in the negative bag is hard instances. We expect these two types of instances to be as far as possible.</p>
-</blockquote>
-<p>L_BCE（binary crossentropy) 和L_BCE2分别对应为$y^p 和 y^s$ 与 ground truth y之间的loss。L_DISTILL为知识蒸馏损失。</p>
-<script type="math/tex; mode=display">
-L_{TOTAL}  = L_{BCE} + L_{BCE2} +\lambda L_{DISTILL}</script><script type="math/tex; mode=display">
-L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</script><h2 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h2><p>方法支持线上和离线的检测。sigmoid函数作为$C^P$和$C^S$的激活函数，并最后生成在[0,1]之间的暴力置信得分。注：在线上预测中，只有HLC近似器工作，HL-NET可以移除。</p>
-<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><h2 id="评估标准"><a href="#评估标准" class="headerlink" title="评估标准"></a>评估标准</h2><p>we utilize the frame-level <strong>precision-recall curve</strong> (PRC) and corresponding area under the curve <strong>(average precision, AP)</strong> [30] rather than receiver operating characteristic curve (ROC) and corresponding area under the curve (AUC) [44,43]<br><strong>since AUC usually shows an optimistic result when dealing with class-imbalanced data, and PRC and AP focus on positive samples (violence)</strong></p>
-<ul>
-<li>Precision and Recall (PR曲线)：用于稀有事件检测，如目标检测、信息检索、推荐系统。负样本很多的时候，??? = FP⁄(FP+TN）很小，比较TPR和FPR没有太大意义（ROC）</li>
-</ul>
-<h2 id="性能表现"><a href="#性能表现" class="headerlink" title="性能表现"></a>性能表现</h2><p><img src="/posts/undefined/Untitled 1.png" alt></p>
-<p>优于当前最先进的方法（20年的文章）</p>
-<p>我们观察到，在我们的暴力检测任务中，C3D比I3D差了很大一截。</p>
-<h2 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h2><ul>
-<li>五种模态AP对比</li>
-</ul>
-<p><img src="/posts/undefined/Untitled 2.png" alt="Untitled"></p>
-<p>（该文证明声音和视觉的融合检测效果更好，且视觉模态的作用优于声音）</p>
-<ul>
-<li><p>三个分支的对比（holistic, localized and score branches）</p>
-<ul>
-<li>三个分支单独的情况表现相似</li>
-<li>移除任何一个分支都会使得表现变差</li>
-<li>HL-NET在这三个分支一起作用的时候表现最好，因此证明三个分支都不可替代。</li>
-</ul>
-<p><img src="/posts/undefined/Untitled 3.png" alt></p>
-</li>
-<li><p>online vs offline</p>
-<p><img src="/posts/undefined/Untitled 4.png" alt></p>
+<li><p>每个convoluted attention features执行 Difference Maximization Trainer (DMT)</p>
+<p>基于特征幅度选取top-a个特征，定义loss将异常片段明显区分于正常片段，具体过程与<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2101.10030.pdf">RTFM</a>论文的类似。</p>
 </li>
 </ul>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h3 id="光流"><a href="#光流" class="headerlink" title="光流"></a>光流</h3><blockquote>
-<p>光流（optical flow）是空间运动物体在观察成像平面上的像素运动的瞬时速度。<br>光流法是利用图像序列中像素在时间域上的变化以及相邻帧之间的相关性来找到上一帧跟当前帧之间存在的对应关系，从而计算出相邻帧之间物体的运动信息的一种方法。<br>通常将二维图像平面特定坐标点上的灰度瞬时变化率定义为光流矢量。</p>
-</blockquote>
-<p>作者在《On the Integration of Optical Flow and Action Recognition》这篇文章[1]中深入讨论了光流与行为识别的结合，并通过实验观察到如下结论：<br>（1）光流对于行为识别是有用的，因为它的外观不变性；<br>（2）光流法采用最小化端点误差（EPE，end-point-error）来优化，但是当前EPE方法与动作识别性能没有很好的相关性；<br>（3）对于测试过的光流方法，在边界上和小位移上的精度与动作识别性能最相关；<br>（4）采用最小化分类误差（而非EPE）来训练光流可以提高识别性能；<br>（5）用于行为识别任务的光流不同于传统的光流，特别是在人体内部和身体边界处。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhang_can/article/details/80259946">https://blog.csdn.net/zhang_can/article/details/80259946</a></p>
+<h3 id="Infer"><a href="#Infer" class="headerlink" title="Infer"></a>Infer</h3><p>测试阶段不执行normlization。</p>
+<p>分类器最后得到的一组分数U，每个分数$u_i$表示对应index的异常相似度，值为0-1之间。$u_i$被四舍五入取得二元分数，1代表异常，0代表正常。</p>
+<p>能够进行帧级别的测试：片段的score（对应片段级结果）保留原始顺序，repeat $\delta$次。</p>
+<h2 id="Experimental-Results"><a href="#Experimental-Results" class="headerlink" title="Experimental Results"></a><strong>Experimental Results</strong></h2><p>数据集：<strong>UCF-Crime Dataset、ShanghaiTech Campus Dataset、XD-Violence Dataset</strong></p>
+<p>指标：AUC@ROC（<strong>UCF-Crime、ShanghaiTech）</strong>、AUC@PR（<strong>XD-Violence）</strong></p>
+<h3 id="Performance-Comparison"><a href="#Performance-Comparison" class="headerlink" title="Performance Comparison"></a><strong>Performance Comparison</strong></h3><p><img src="/posts/d3b330ab/Untitled 3.png" style="zoom:80%;"></p>
+<p><img src="/posts/d3b330ab/Untitled 4.png" style="zoom: 80%;"></p>
+<p><img src="/posts/d3b330ab/Untitled 5.png" style="zoom:80%;"></p>
+<h3 id="Ablation-Study"><a href="#Ablation-Study" class="headerlink" title="Ablation Study"></a><strong>Ablation Study</strong></h3><ul>
+<li>TSA机制的有效性：</li>
+</ul>
+<p><img src="/posts/d3b330ab/Untitled 6.png" style="zoom:80%;"></p>
+<ul>
+<li>K的参数选择</li>
+</ul>
+<p>其中，分析的是超参r</p>
+<p><img src="/posts/d3b330ab/Untitled 7.png" alt style="zoom: 80%;"></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>UCF-Crime</th>
+<th>ShanghaiTec</th>
+<th>XD-violence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.7</td>
+<td>[0.3,0.7]</td>
+<td>0.9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>作者通过分析数据分布，来解释最优r值在不同数据集之间不同的原因：</p>
+<p>信息：1）data distribution of UCF-Crime (1,900 videos with 13 types of anomalies), ShanghaiTech Campus (317,398 videos with 130 anomaly events), and XD-Violence (4,754 videos with 6 types of anomalies) datasets</p>
+<p>2）frame-level <strong><em>anomaly-to-all ratio</em></strong> of their test sets, which are 0.1819, 0.4247, and 0.4977,</p>
+<p><img src="/posts/d3b330ab/Untitled 8.png" alt></p>
+<p>基于信息给到的分析：</p>
+<p>ShanghaiTec是一个具有较多异常事件的大尺度数据，因此我们假设该模型具有足够的泛化性，因此，值设为[0.3,0.7]在<strong><em>anomaly-to-all ratio</em></strong>  附近。</p>
+<p>而UCF-Crime和XD-Violence具有不平衡的类分布。此外，做良好判别的决策所依赖的重要特征，不仅限于异常片段，也包括了一些正常片段，特别是作为损失计算的一部分，其中异常top片段和正常片段的幅度都被考虑在内。因此，这两个数据集的最好r不分布在<strong><em>anomaly-to-all ratio</em></strong>附近。</p>
+<p><img src="/posts/d3b330ab/Untitled 9.png" style="zoom:80%;"></p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>本文提出了一种有效的端到端弱监督VAD框架CLIP-TSA。具体地说，我们提出了一种新的TSA机制，它可以在最小限度的情况下最大化对特征子集的注意力关注噪声，并显示了其对弱监督VAD问题的适用性。我们还将TSA应用于clip提取的特征，以证明其对视觉语言特征的有效性，并在弱监督的VAD问题中利用视觉语言特征。通过将我们的数据集与sota进行比较，我们还通过经验验证了我们的模型在VAD的三个流行数据集上的卓越性。</p>
+<p>未来的研究可能着眼于更好的技术，以结合时间和空间信息，并以较少的注释处理不平衡的数据。</p>
+<p>像 Li 等人 (2022)[3]这样的注意力技术 和自监督学习 (Caron 等人, 2021; Chen 等人, 2020a) 也是提高性能的潜在扩展。</p>
+<p>引用：</p>
+<p>[1] Kun Liu and Huadong Ma. Exploring background-bias for anomaly detection in surveillance videos. In <em>Proceedings of the 27th ACM International Conference on Multimedia</em>, pp. 1490–1499, 2019.</p>
+<p>[2] Jean-Baptiste Cordonnier, Aravindh Mahendran, Alexey Dosovitskiy, Dirk Weissenborn, Jakob Uszkoreit, and Thomas Unterthiner. Differentiable patch selection for image recognition. In <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</em>, pp. 2351–2360, June 2021.</p>
+<p>[3] Yehao Li, Ting Yao, Yingwei Pan, and Tao Mei. Contextual transformer networks for visual recognition. <em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em>, 2022.</p>
 
     </div>
 
@@ -409,7 +442,7 @@ L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</s
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://xandra298.github.io/posts/undefined/" title="Learning Multimodal Violence Detection under Weak Supervision">https://xandra298.github.io/posts/undefined/</a>
+    <a href="https://xandra298.github.io/posts/d3b330ab/" title="CLIP-TSA:CLIP-Assisted Temporal Self-Attention">https://xandra298.github.io/posts/d3b330ab/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -422,7 +455,7 @@ L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</s
           
           <div class="post-tags">
               <a href="/tags/%E5%BC%B1%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 弱监督学习</a>
-              <a href="/tags/%E6%9A%B4%E5%8A%9B%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag"><i class="fa fa-tag"></i> 暴力视频检测</a>
+              <a href="/tags/VAD/" rel="tag"><i class="fa fa-tag"></i> VAD</a>
           </div>
 
         
@@ -431,13 +464,10 @@ L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</s
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/83682157/" rel="prev" title="第一次搭建hexo博客">
-      <i class="fa fa-chevron-left"></i> 第一次搭建hexo博客
+    <a href="/posts/82187def/" rel="prev" title="How Attentive are Graph Attention Networks">
+      <i class="fa fa-chevron-left"></i> How Attentive are Graph Attention Networks
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/35a1541/" rel="next" title="邻接矩阵表示成PyG需要的edge_index并进行带边权的网络构建">
-      邻接矩阵表示成PyG需要的edge_index并进行带边权的网络构建 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -501,7 +531,7 @@ L_{DISTILL} = \sum \limits^N_{j=1} (- \sum \limits_i s(C^P_i) log (s(C_i^S)))</s
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Not-only-look-but-also-listen-Learning-multimodal-violence-detection-under-weak-supervision"><span class="nav-number">1.</span> <span class="nav-text">Not only look, but also listen: Learning multimodal violence detection under weak supervision</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E6%A1%86%E6%9E%B6%E5%9B%BE"><span class="nav-number">2.1.</span> <span class="nav-text">总体框架图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Holistic-and-Localized-Networks"><span class="nav-number">2.2.</span> <span class="nav-text">Holistic and Localized Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Holistic-%E7%89%B9%E5%BE%81%E7%9B%B8%E4%BC%BC%E6%80%A7"><span class="nav-number">2.2.1.</span> <span class="nav-text">Holistic - 特征相似性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#localized-branch-proximity-prior-%E5%92%8C%E6%97%B6%E9%97%B4%E4%B8%80%E8%87%B4%E6%80%A7%E7%B1%BB%E4%BC%BC%EF%BC%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">localized branch -proximity prior (和时间一致性类似）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Online-detection-amp-score-branch"><span class="nav-number">2.3.</span> <span class="nav-text">Online detection &amp; score branch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#score-branch"><span class="nav-number">2.3.1.</span> <span class="nav-text">score branch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#training-based-on-MIL"><span class="nav-number">2.4.</span> <span class="nav-text">training based on MIL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inference"><span class="nav-number">2.5.</span> <span class="nav-text">Inference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">3.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E6%A0%87%E5%87%86"><span class="nav-number">3.1.</span> <span class="nav-text">评估标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E8%A1%A8%E7%8E%B0"><span class="nav-number">3.2.</span> <span class="nav-text">性能表现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="nav-number">3.3.</span> <span class="nav-text">消融实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%89%E6%B5%81"><span class="nav-number">4.0.1.</span> <span class="nav-text">光流</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation"><span class="nav-number">2.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%88"><span class="nav-number">2.2.</span> <span class="nav-text">方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Contribution"><span class="nav-number">2.3.</span> <span class="nav-text">Contribution</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">4.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#feature-embedding"><span class="nav-number">4.1.</span> <span class="nav-text">feature embedding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Temporal-Self-Attention-TSA"><span class="nav-number">4.2.</span> <span class="nav-text">Temporal Self-Attention (TSA)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Difference-Maximization-Trainer-Learning"><span class="nav-number">4.3.</span> <span class="nav-text">Difference Maximization Trainer Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Infer"><span class="nav-number">4.4.</span> <span class="nav-text">Infer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experimental-Results"><span class="nav-number">5.</span> <span class="nav-text">Experimental Results</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Performance-Comparison"><span class="nav-number">5.1.</span> <span class="nav-text">Performance Comparison</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ablation-Study"><span class="nav-number">5.2.</span> <span class="nav-text">Ablation Study</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">6.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
