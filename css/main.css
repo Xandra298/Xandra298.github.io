@@ -2979,3 +2979,9 @@ p#div-border-top-purple {
   border-radius: 3px;
   border-top-color: #9954bb;
 }
+.comments {
+  background: rgba(255,255,255,0.95) none repeat scroll !important;
+}
+.post-block {
+  background: rgba(255,255,255,0.95) none repeat scroll !important;
+}
