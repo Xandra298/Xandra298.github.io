@@ -1930,6 +1930,24 @@ pre code {
 .post-block:last-of-type .post-eof {
   display: none;
 }
+.post-copyright ul {
+  list-style: none;
+  overflow: hidden;
+  padding: 0.5em 1em;
+  position: relative;
+  background: var(--card-bg-color);
+  border-left: 3px solid #ff2a2a;
+  margin: 1em 0 0;
+}
+.post-copyright ul::after {
+  content: '\f25e';
+  font-family: 'Font Awesome 6 Brands';
+  font-size: 200px;
+  opacity: 0.1;
+  position: absolute;
+  right: -50px;
+  top: -150px;
+}
 .post-tags {
   margin-top: 40px;
   text-align: center;
@@ -2337,7 +2355,7 @@ mark.search-keyword {
 .main-inner {
   border-radius: 20px 20px 20px 20px;
   box-sizing: border-box;
-  width: calc(100% - 252px);
+  width: calc(100% - 312px);
 }
 @media (max-width: 991px) {
   .main-inner {
@@ -2346,7 +2364,7 @@ mark.search-keyword {
   }
 }
 .footer-inner {
-  padding-right: 252px;
+  padding-right: 312px;
 }
 @media (max-width: 991px) {
   .footer-inner {
@@ -2356,7 +2374,7 @@ mark.search-keyword {
   }
 }
 .column {
-  width: 240px;
+  width: 300px;
 }
 @media (max-width: 991px) {
   .column {
@@ -2524,6 +2542,20 @@ mark.search-keyword {
 }
 .links-of-author-item a:hover {
   background: var(--body-bg-color);
+}
+.links-of-blogroll-item {
+  display: inline-block;
+  max-width: 100%;
+  margin: 5px 0 0;
+}
+.links-of-blogroll-item a {
+  box-sizing: border-box;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .main-inner .sub-menu,
 .main-inner .post-block,
