@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/firefox-panda-roux.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/firefox-panda-roux.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xandra298.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":300},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Exploiting Completeness and Uncertainty of Pseudo Labels[2212.04090] Exploiting Completeness and Uncertainty of Pseudo Labels for Weakly Supervised Video Anomaly Detection (arxiv.org)(CVPR 2022.10)  �">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Exploiting Completeness and Uncertainty of Pseudo Labels">
+<meta property="og:url" content="https://xandra298.github.io/posts/d2ac8e77/index.html">
+<meta property="og:site_name" content="Tiny Blog  &amp;  小窝">
+<meta property="og:description" content="Exploiting Completeness and Uncertainty of Pseudo Labels[2212.04090] Exploiting Completeness and Uncertainty of Pseudo Labels for Weakly Supervised Video Anomaly Detection (arxiv.org)(CVPR 2022.10)  �">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled%201.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled%202.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled%203.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled%204.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled%205.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled%206.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled%207.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled%208.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled%209.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled%2010.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled%2011.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled%2012.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled%2013.png">
+<meta property="article:published_time" content="2023-02-08T11:43:30.000Z">
+<meta property="article:modified_time" content="2023-02-25T07:13:21.018Z">
+<meta property="article:author" content="Xandra">
+<meta property="article:tag" content="VAD">
+<meta property="article:tag" content="弱监督学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xandra298.github.io/posts/d2ac8e77/Untitled.png">
+
+
+<link rel="canonical" href="https://xandra298.github.io/posts/d2ac8e77/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xandra298.github.io/posts/d2ac8e77/","path":"posts/d2ac8e77/","title":"Exploiting Completeness and Uncertainty of Pseudo Labels"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Exploiting Completeness and Uncertainty of Pseudo Labels | Tiny Blog  &  小窝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d53b0bfc3463e2d8df2a44594ea3a8ab"></script>
+
+
+
+
+
+
+<link rel="dns-prefetch" href="wvaline.xandrax.cafe">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tiny Blog  &  小窝</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Exploiting-Completeness-and-Uncertainty-of-Pseudo-Labels"><span class="nav-number">1.</span> <span class="nav-text">Exploiting Completeness and Uncertainty of Pseudo Labels</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">1.1.</span> <span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%B0%E6%9C%89%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">现有方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#limitations"><span class="nav-number">1.1.2.</span> <span class="nav-text">limitations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">1.1.3.</span> <span class="nav-text">解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Contribution"><span class="nav-number">1.2.</span> <span class="nav-text">Contribution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">1.3.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Completeness-of-Pseudo-Labels"><span class="nav-number">1.3.1.</span> <span class="nav-text">Completeness of Pseudo Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Uncertainty-of-Pseudo-Labels"><span class="nav-number">1.3.2.</span> <span class="nav-text">Uncertainty of Pseudo Labels</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experimental-Results"><span class="nav-number">1.4.</span> <span class="nav-text">Experimental Results</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xandra"
+      src="/uploads/OIP-C.jfif">
+  <p class="site-author-name" itemprop="name">Xandra</p>
+  <div class="site-description" itemprop="description">记录，学习，成长。欢迎交流！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning-Tuning-Playbook/" rel="tag">Deep Learning Tuning Playbook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAT/" rel="tag">GAT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNN/" rel="tag">GNN</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyG/" rel="tag">PyG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAD/" rel="tag">VAD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wandb/" rel="tag">wandb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%B1%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">弱监督学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">暴力视频检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E8%AE%BA%E8%AE%A4%E7%9F%A5/" rel="tag">理论认知</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+		      
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://fortunato-all.github.io/" title="https:&#x2F;&#x2F;fortunato-all.github.io&#x2F;" rel="noopener" target="_blank">fortunato</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://cyanm0un.github.io/" title="https:&#x2F;&#x2F;cyanm0un.github.io&#x2F;" rel="noopener" target="_blank">CyanM0un</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=86 src="//music.163.com/outchain/player?type=2&id=2001320&auto=0&height=66"></iframe>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/d2ac8e77/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/OIP-C.jfif">
+      <meta itemprop="name" content="Xandra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tiny Blog  &  小窝">
+      <meta itemprop="description" content="记录，学习，成长。欢迎交流！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Exploiting Completeness and Uncertainty of Pseudo Labels | Tiny Blog  &  小窝">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Exploiting Completeness and Uncertainty of Pseudo Labels
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-02-08 19:43:30" itemprop="dateCreated datePublished" datetime="2023-02-08T19:43:30+08:00">2023-02-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-02-25 15:13:21" itemprop="dateModified" datetime="2023-02-25T15:13:21+08:00">2023-02-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文阅读</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline: </span>
+  
+    <a title="waline" href="/posts/d2ac8e77/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/d2ac8e77/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>2.2k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>2 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Exploiting-Completeness-and-Uncertainty-of-Pseudo-Labels"><a href="#Exploiting-Completeness-and-Uncertainty-of-Pseudo-Labels" class="headerlink" title="Exploiting Completeness and Uncertainty of Pseudo Labels"></a>Exploiting Completeness and Uncertainty of Pseudo Labels</h1><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2212.04090">[2212.04090] Exploiting Completeness and Uncertainty of Pseudo Labels for Weakly Supervised Video Anomaly Detection (arxiv.org)</a>(CVPR 2022.10)</p>
+<aside>
+💡 这篇论文提出了一种利用伪标签的完整性和不确定性的弱监督视频异常检测方法。它由一个完整性增强的伪标签生成器组成，该生成器使用3D CNN提取视频特征，并使用多头分类器训练多样性损失和MIL排序损失来生成初始伪标签，以及一个迭代的不确定性感知伪标签细化策略，该策略使用蒙特卡罗（MC）丢失来测量不确定性，并逐渐细化伪标签以训练所需的分类器。 UCF-Crime，TAD和XD-Violence的实验表明，与几种最先进的方法相比，它的性能良好。
+</aside>
+
+<span id="more"></span>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><hr>
+<h3 id="现有方法"><a href="#现有方法" class="headerlink" title="现有方法"></a>现有方法</h3><p>paper将现有的弱监督方法分为两种：</p>
+<ul>
+<li>MIL</li>
+<li>two-stage self-training</li>
+</ul>
+<p>基于MIL的方法由于缺少clip-level的标注，得到的异常分数常常是较为不精确的。而two-stage self-training 方法的提出可以缓解该问题。</p>
+<p>two-stage self-training[5,12]</p>
+<ol>
+<li>基于MIL方法为clips生成伪标签(pseudo labels）</li>
+<li>用伪标签去精细化判别表示</li>
+</ol>
+<h3 id="limitations"><a href="#limitations" class="headerlink" title="limitations"></a>limitations</h3><p>针对two-stage self training 的 <strong>Completeness and Uncertainty of Pseudo Labels</strong></p>
+<ul>
+<li><p>用于伪标签生成的ranking loss 忽略异常事件的完整性</p>
+<p>“一个正袋可能包含多个异常事件片段，，但是MIL只会检测到最像的一个。”(really?)</p>
+<p><img src="/posts/d2ac8e77/Untitled.png" alt></p>
+<p>橘色部分代表ground truth, 现有的方法如b所示，关注在最异常的片段。因此，提出使用基于diversity loss的多头分类模块，以生成能够覆盖完整异常事件的伪标签（如c所示）</p>
+</li>
+<li><p>在第二步中  生成伪标签的不确定性 未被考虑</p>
+<p>伪标签通常是有噪声的，直接使用进行最后分类模型的训练可能损害模型性能表现。</p>
+</li>
+</ul>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>分别针对两个limitations</p>
+<ul>
+<li>提出多头模块生成伪标签，引入diversity loss以确保多个分类头生成的伪标签的分布差异→ 确保异常事件的完整性检测 （对应step1)<ul>
+<li>通过这种方式，每一个头倾向于发现不同的异常事件，因此可以让伪标签尽可能覆盖更多的异常事件</li>
+</ul>
+</li>
+<li>设计一个迭代的基于不确定性的训练策略 （对应step2)<ul>
+<li>使用Monte Carlo(MC) Dropout 度量不确定性</li>
+<li>将低不确定性的片段用于最后分类器的训练 (该过程逐渐迭代细化伪标签）<ul>
+<li>第一次迭代  细化 step1生成的伪标签</li>
+<li>剩余的迭代细化分类器每次迭代的输出伪标签</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h2><ul>
+<li>我们设计了一个基于多样性损失的多头分类器方案，使得伪标签覆盖尽可能多的异常片段。</li>
+<li>我们设计了一种迭代的不确定性感知的自我训练策略，以逐步提高伪标签的质量。</li>
+<li>在UCF-Crime、TAD和XD-Violence上进行的实验表明，与几种最先进的方法相比，它具有良好的性能。</li>
+</ul>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><hr>
+<p><img src="/posts/d2ac8e77/Untitled 1.png" alt></p>
+<p>1)  使用预训练的3D CNN模型提取视频特征（paper使用的是I3D）</p>
+<p>2）经过多样性损失和MIL排序损失训练的多头分类器来生成初始的片段伪标签</p>
+<p>3）利用一个迭代的不确定性感知的伪标签细化策略， 逐步提高伪标签的质量，训练最终期望的分类器。</p>
+<blockquote>
+<p>Completeness Enhanced Pseudo Label Generator<br>用预先训练好的3D CNN来提取视频特征。将这些特征输入受多样性损失约束的多头分类器，以检测完整的异常事件。</p>
+</blockquote>
+<p>Iterative Uncertainty Aware Pseudo Label Refinement<br>在第一次迭代中，我们从first stage的多头分类器中获得初始的clip级伪标签，并通过Monte Carlo Dropout计算其不确定性。然后根据不确定性选择可靠的片段来训练一个新的片段分类器。在剩下的迭代中，使用新的片段分类器更新伪标签。</p>
+<blockquote>
+</blockquote>
+<h3 id="Completeness-of-Pseudo-Labels"><a href="#Completeness-of-Pseudo-Labels" class="headerlink" title="Completeness of Pseudo Labels"></a><strong>Completeness of Pseudo Labels</strong></h3><p>伪标签生成器由并行的多头分类器组成。each head由三个全连接层组成</p>
+<p><img src="/posts/d2ac8e77/Untitled 2.png" alt></p>
+<ul>
+<li>diversity loss</li>
+</ul>
+<p>each head输出每个片段的异常分数，并通过softmax生成分数的分布：</p>
+<p><img src="/posts/d2ac8e77/Untitled 3.png" alt></p>
+<p>通过多样性损失（diversity loss) 将属于不同head的分数分布互相区分开来← 通过最小化任意两头之间的余弦相似度</p>
+<p><img src="/posts/d2ac8e77/Untitled 4.png" alt></p>
+<ul>
+<li>regularization term</li>
+</ul>
+<p>片段分数序列的正则化项：平衡多头并避免由于一头占主导地位导致的性能下降</p>
+<p><img src="/posts/d2ac8e77/Untitled 5.png" alt></p>
+<p>在多样性损失和范数正则化的作用下，多头产生的异常得分可以达到最大的区别，并能够检测不同的异常片段。</p>
+<p>sigmoid所有头异常分数的平均得到片段级的标签</p>
+<p><img src="/posts/d2ac8e77/Untitled 6.png" alt></p>
+<ul>
+<li><p>ranking loss</p>
+<p>最大化异常和正常实例的差距</p>
+</li>
+</ul>
+<p><img src="/posts/d2ac8e77/Untitled 7.png" alt></p>
+<h3 id="Uncertainty-of-Pseudo-Labels"><a href="#Uncertainty-of-Pseudo-Labels" class="headerlink" title="Uncertainty of Pseudo Labels"></a><strong>Uncertainty of Pseudo Labels</strong></h3><p>为了训练最终期望的片段分类器fc，而不是直接使用在step1获得的片段级伪标签 提出了一种不确定性感知的自训练策略挖掘具有可靠伪标签的片段。</p>
+<p>具体地说，我们引入了利用Monte Carlo Dropout 的不确定性估计，从而选择具有低不确定性（即可靠的）伪标签的片段进行训练fc。这个过程进行了几次迭代。伪标签最初是在第一阶段获得的，然后进行经由fc更新。</p>
+<p><img src="/posts/d2ac8e77/Untitled 8.png" alt></p>
+<h2 id="Experimental-Results"><a href="#Experimental-Results" class="headerlink" title="Experimental Results"></a>Experimental Results</h2><p><img src="/posts/d2ac8e77/Untitled 9.png" alt></p>
+<p><img src="/posts/d2ac8e77/Untitled 10.png" alt="Untitled"></p>
+<p><img src="/posts/d2ac8e77/Untitled 11.png" alt></p>
+<p>消融实验</p>
+<p><img src="/posts/d2ac8e77/Untitled 12.png" alt></p>
+<p>超参分析</p>
+<p><img src="/posts/d2ac8e77/Untitled 13.png" alt></p>
+<p>最好的结果是双头</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Xandra
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://xandra298.github.io/posts/d2ac8e77/" title="Exploiting Completeness and Uncertainty of Pseudo Labels">https://xandra298.github.io/posts/d2ac8e77/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/VAD/" rel="tag"><i class="fa fa-tag"></i> VAD</a>
+              <a href="/tags/%E5%BC%B1%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 弱监督学习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2ac833a5/" rel="prev" title="zero-shot">
+                  <i class="fa fa-chevron-left"></i> zero-shot
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/5e0e6968/" rel="next" title="Guide for starting a new project">
+                  Guide for starting a new project <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xandra</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Word count total: </span>
+    <span title="Word count total">94k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">1:25</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"wvaline.xandrax.cafe","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/d2ac8e77/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
