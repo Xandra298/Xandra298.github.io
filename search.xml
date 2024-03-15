@@ -4,7 +4,7 @@
     <title>音乐播放</title>
     <url>/posts/802d9159/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>
-    <div id="aplayer-CvvyNZvJ" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="8182851368" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div>
+    <div id="aplayer-HqXeyFWY" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="8182851368" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div>
 <p>ヾ(≧▽≦*)o</p>
 <blockquote>
 <p> music  by  @fortunato</p>
@@ -25,7 +25,7 @@
 <p>注意：true之前空格</p>
 </li>
 <li><p>post的markdown中添加
-    <div id="aplayer-PIbJDpMk" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="..." data-server="undefined" data-type="undefined" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div></p>
+    <div id="aplayer-lMWBFaZe" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="..." data-server="undefined" data-type="undefined" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div></p>
 <p>示例：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- Simple example (id, server, type)  --&gt;</span><br><span class="line">&#123;% meting &quot;60198&quot; &quot;netease&quot; &quot;playlist&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&lt;!-- Advanced example --&gt;</span><br><span class="line">&#123;% meting &quot;60198&quot; &quot;netease&quot; &quot;playlist&quot; &quot;autoplay&quot; &quot;mutex:false&quot; &quot;listmaxheight:340px&quot; &quot;preload:none&quot; &quot;theme:#ad7a86&quot;%&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -62,6 +62,109 @@
 </table>
 </div>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Towards Open Vocabulary Learning</title>
+    <url>/posts/ec20f0da/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>paper: <strong><a href="https://ieeexplore.ieee.org/document/10420487">Towards Open Vocabulary Learning: A Survey(TPAMI 2024)</a></strong></p>
+<p>code: <a href="https://github.com/jianzongwu/Awesome-Open-Vocabulary">https://github.com/jianzongwu/Awesome-Open-Vocabulary</a></p>
+<span id="more"></span>
+<h2 id="Concept-of-Open-vocabulary"><a href="#Concept-of-Open-vocabulary" class="headerlink" title="Concept of Open vocabulary"></a>Concept of Open vocabulary</h2><hr>
+<p><img src="/posts/ec20f0da/image-20240315194250086.png" alt="difference"></p>
+<p>样本分为：base class $C_B$ 和 novel class $C_N$(or out-of-distribution examples)</p>
+<p>base class进行training，而novel class没有</p>
+<p>open-set, open world, and OOD tasks  在testing 阶段，模型只需要识别novel 类，并标记为<em>unknown</em>，不需要识别特定的类别。</p>
+<p>zero-shot 进一步的将novel class分类。因此，更具挑战性。</p>
+<p>由于对novel类实际识别性能较低，且image-text pair容易获得，近来工作（21,22）提出open vocabulary，他允许使用有更大的语言词汇（language vocabularies $C_L$）的 额外的低成本训练数据或者预训练视觉语言模型，如clip。</p>
+<p>$C_L$可能包含$C_B$ 和 $C_N$的概念，以在novel类中具有泛化性。并不严格要求包含。他可能有在预定义的novel类之外的词汇，因此进一步扩展泛化性。</p>
+<ul>
+<li>Open-Set / Open World / OOD，这三个任务只需要模型从分类中识别和拒绝未知对象。该模型只需要找到未知的类或实例，而不需要将它们划分到不同的类中。</li>
+<li>zero-shot learning。该模型在训练过程中对CN进行了严格的训练，训练过程中CB类不可用。该模型需要预测新对象的具体类别。</li>
+<li>开放式词汇学习。基于零样本学习设置，可以获得额外的低成本训练源或知识CL，即大规模语言词汇。例如，image caption是最常用的语言数据，可以帮助扩展开放词汇模型的语义空间。人们还可以使用预训练的视觉语言模型，将其用于新颖的类别分类。</li>
+</ul>
+<blockquote>
+<p><strong>Open Vocabulary Learning</strong> Based on the zero-shot learning setting, one can acquire an additional low-cost training source or knowledge CL, large-scale language vocabulary. For example, image captions are the most commonly used language data to help extend the semantic space of an open vocabulary model. One can also use the pre-trained vision language models by adapting them for novel class classification.</p>
+<p>$C_L$ may contain the concepts of both$C_B$ and$C_N$, which enables model to generalize across novel classes. Note that$C_L$  is not strictly required to contain $C_B$ or$C_N$ , as the language vocabulary may not cover all the class names in the vision data. On the contrary, $C_L$may also have words out of the pre-defined novel categories, which can further extend models’ generalizability.</p>
+</blockquote>
+<ul>
+<li><p>close-set</p>
+<p>能识别训练集中存在的预定义类别</p>
+</li>
+<li><p>zero-shot learning</p>
+<p>使其从已注释(已见)的对象类泛化到其他(未见)的类别。</p>
+<p>“Most approaches adopt word embedding projection to constitute the classifier for unseen class classification” (Wu 等, 2023, p. 1) (pdf) 🔤大多数方法采用词嵌入投影来构成分类器，用于未知类别的分类🔤</p>
+<p>“As a result, during inference, the model identifies novel classes solely based on their pre-defined word embeddings [9], [10], [11], thereby limiting exploration of the visual information and relationships of those unseen classes.” (Wu 等, 2023, p. 1) (pdf) 🔤因此，在推理过程中，该模型仅根据预先定义的词嵌入来识别新的类，从而限制了对那些未见的类的视觉信息和关系的探索。🔤 这就是为什么ZSL方法已经被证明在新的类中产生不令人满意的结果。</p>
+</li>
+<li><p>open vocabulary</p>
+<p>“the model trains on base classes and inferences on both base and novel classes” (Wu 等, 2023, p. 1) (pdf) 🔤模型在base类上进行训练，在基类和新类上进行推理🔤</p>
+</li>
+<li><p>zero-shot vs open vocabulary</p>
+<p>零样本学习与开放词汇的关键区别在于可以使用与视觉相关的语言词汇数据，如图像标题作为辅助监督。</p>
+</li>
+<li><p>使用语言数据作为辅助监督的动机是</p>
+<ul>
+<li>语言数据（文本）标注成本更低</li>
+<li>语言数据提供了更广泛的词汇量，因此更具有扩展性和泛化性</li>
+</ul>
+</li>
+<li><p>open vocabulary methods 大多通过利用VLMs（visual language models）学习到的对齐，消除close-set和open-set场景边界。</p>
+</li>
+<li><p>timeline</p>
+<p><img src="/posts/ec20f0da/image-20240315194630309.png" alt="timeline"></p>
+</li>
+</ul>
+<h2 id="Open-Vocabulary-Video-Understanding"><a href="#Open-Vocabulary-Video-Understanding" class="headerlink" title="Open Vocabulary Video Understanding"></a>Open Vocabulary Video Understanding</h2><hr>
+<h3 id="动作识别任务"><a href="#动作识别任务" class="headerlink" title="动作识别任务"></a><strong>动作识别任务</strong></h3><p><img src="/posts/ec20f0da/Untitled 2.png" style="zoom:80%;"></p>
+<p><img src="/posts/ec20f0da/Untitled 3.png" style="zoom:80%;"></p>
+<p>kinetics 400 训练，其他测试</p>
+<p><img src="/posts/ec20f0da/Untitled 4.png" alt></p>
+<ul>
+<li><p><a href="https://arxiv.org/abs/2109.08472">ActionCLIP: A New Paradigm for Video Action Recognition</a> 2021 arxiv</p>
+<p>使用基于图像的视觉-语言预训练的知识。它为视频行为识别中的零样本能力增加了一个时间融合层。</p>
+</li>
+<li><p><a href="https://arxiv.org/abs/2112.04478">Prompting Visual-Language Models for Efficient Video Understanding</a> （ECCV 2022)</p>
+<p>通过在一个冻结的CLIP图像编码器顶部训练transformer层，也可以得到类似的范式，并且具有很强的零样本能力。</p>
+</li>
+<li><p><a href="https://arxiv.org/abs/2208.03550">Frozen CLIP Models are Efficient Video Learners</a> （ECCV2022）</p>
+<p>使用冻结的CLIP进行有效的视频行为识别</p>
+</li>
+<li><p>XCLIP:  <a href="https://arxiv.org/abs/2208.02816">**Expanding Language-Image Pretrained Models for General Video Recognition</a> (ECCV 2022)**</p>
+<p>使用视频编码器，利用编码器中的时间信息进行视频识别。它将来自视频编码器的特征与在基于图像的视觉语言对(例如, CLIP)上预训练的文本编码器进行对齐。</p>
+</li>
+<li><p><a href="https://arxiv.org/abs/2207.01297">Revisiting Classifier: Transferring Vision-Language Models for Video Recognition</a> (AAAI 2023)</p>
+<p>关注于分类器，提出使用CLIP文本编码器作为语义目标进行视频分类。</p>
+</li>
+<li><p><a href="https://arxiv.org/abs/2302.00624">**Open-VCLIP: Transforming CLIP to an Open-vocabulary Video Model via Interpolated Weight Optimization</a> (ICML 2023)**</p>
+<p>Open VCLIP 将CLIP到视频的知识转移建模为一个连续学习问题，并提出插值权重优化来解决该问题。</p>
+</li>
+<li><p><a href="https://arxiv.org/abs/2302.03024">AIM: Adapting Image Models for Efficient Video Action Recognition</a> (ICLR 2023)</p>
+<p>AIM tackles the open vocabulary video classification problem by adding adapt layers on top of the CLIP image encoder.</p>
+</li>
+<li><p>ViFi-CLIP <a href="https://arxiv.org/abs/2212.03640">**Fine-tuned CLIP Models are Efficient Video Learners</a>** (CVPR 2023)</p>
+<p>ViFi-CLIP 揭示了一个简单的微调baseline(基于CLIP视觉编码器和时域池化的图像级特征提取)而不是改进的融合层 可以有很强的性能，并进一步研究了prompt tuning的影响。</p>
+</li>
+</ul>
+<p>最近开放词汇视频分类的进展将注意力转向了VLM建模中的语言部分</p>
+<ul>
+<li><p><a href="https://arxiv.org/abs/2304.02560">VicTR: Video-conditioned Text Representations for Activity Recognition</a> (arxiv 2023)</p>
+<p>VicTR引入了视频条件文本表示来联合优化视觉和文本信息。</p>
+</li>
+<li><p><a href="https://arxiv.org/abs/2303.08914">MAtch, eXpand and Improve: Unsupervised Finetuning for Zero-Shot Action Recognition with Language Knowledge</a> (arxiv 2023) MAXI利用LLMs通过文本扩展为视频构建一个无标注的文本包。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>论文阅读</category>
+      </categories>
+      <tags>
+        <tag>视频理解</tag>
+        <tag>Open vocabulary</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Survey</title>
+    <url>/posts/aaf39eca/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>]]></content>
   </entry>
   <entry>
     <title>latex图表公式汇总</title>
@@ -473,7 +576,7 @@
   <entry>
     <title>CLIP-TSA:CLIP-Assisted Temporal Self-Attention</title>
     <url>/posts/d3b330ab/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><a href="https://arxiv.org/pdf/2212.05136.pdf">paper</a> (Under Submission CVPR)</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><a href="https://arxiv.org/pdf/2212.05136.pdf">paper</a> (ICIP 2023)</p>
 <span id="more"></span>
 <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>解决VAD问题：由于劳动密集型性质（帧级别的标注？），通常以弱监督的方式表述为多实例学习问题(MIL）。</p>
 <ul>
@@ -608,8 +711,8 @@
         <category>论文阅读</category>
       </categories>
       <tags>
-        <tag>VAD</tag>
         <tag>弱监督学习</tag>
+        <tag>VAD</tag>
       </tags>
   </entry>
   <entry>
@@ -1083,8 +1186,8 @@ GATv2 (our\ fixed\ version):\quad e (h_i, h_j ) = a^T LeakyReLU( W · [ h_i||h_j
         <category>论文阅读</category>
       </categories>
       <tags>
-        <tag>VAD</tag>
         <tag>弱监督学习</tag>
+        <tag>VAD</tag>
       </tags>
   </entry>
   <entry>
