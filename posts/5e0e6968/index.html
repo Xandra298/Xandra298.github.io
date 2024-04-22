@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/firefox-panda-roux.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/firefox-panda-roux.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xandra298.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":300},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="翻译整理自google-research&#x2F;tuning_playbook 开展一个新项目的指南">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Guide for starting a new project">
+<meta property="og:url" content="https://xandra298.github.io/posts/5e0e6968/index.html">
+<meta property="og:site_name" content="Tiny Blog  &amp;  小窝">
+<meta property="og:description" content="翻译整理自google-research&#x2F;tuning_playbook 开展一个新项目的指南">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-02-09T10:46:50.000Z">
+<meta property="article:modified_time" content="2023-02-09T13:50:42.491Z">
+<meta property="article:author" content="Xandra">
+<meta property="article:tag" content="Deep Learning Tuning Playbook">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xandra298.github.io/posts/5e0e6968/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xandra298.github.io/posts/5e0e6968/","path":"posts/5e0e6968/","title":"Guide for starting a new project"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Guide for starting a new project | Tiny Blog  &  小窝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d53b0bfc3463e2d8df2a44594ea3a8ab"></script>
+
+
+
+
+
+
+<link rel="dns-prefetch" href="wvaline.xandrax.cafe">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tiny Blog  &  小窝</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%B1%95%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">开展一个新项目的指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">选择模型架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E4%BC%98%E5%8C%96%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">选择优化器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%89%B9%E9%87%8F%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.3.</span> <span class="nav-text">选择批量大小</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E5%8F%AF%E8%A1%8C%E7%9A%84%E6%89%B9%E9%87%8F%E5%A4%A7%E5%B0%8F%E5%92%8C%E4%BC%B0%E8%AE%A1%E8%AE%AD%E7%BB%83%E5%90%9E%E5%90%90%E9%87%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">确定可行的批量大小和估计训练吞吐量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%89%B9%E9%87%8F%E5%A4%A7%E5%B0%8F%E4%BB%A5%E6%9C%80%E5%B0%8F%E5%8C%96%E8%AE%AD%E7%BB%83%E6%97%B6%E9%97%B4"><span class="nav-number">1.3.2.</span> <span class="nav-text">选择批量大小以最小化训练时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%89%B9%E9%87%8F%E5%A4%A7%E5%B0%8F%E4%BB%A5%E6%9C%80%E5%B0%8F%E5%8C%96%E8%B5%84%E6%BA%90%E6%B6%88%E8%80%97"><span class="nav-number">1.3.3.</span> <span class="nav-text">选择批量大小以最小化资源消耗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E6%89%B9%E9%87%8F%E5%A4%A7%E5%B0%8F%E9%9C%80%E8%A6%81%E9%87%8D%E6%96%B0%E8%B0%83%E6%95%B4%E5%A4%A7%E5%A4%9A%E6%95%B0%E8%B6%85%E5%8F%82%E6%95%B0"><span class="nav-number">1.3.4.</span> <span class="nav-text">更改批量大小需要重新调整大多数超参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E5%BD%92%E4%B8%80%E5%8C%96%E5%A6%82%E4%BD%95%E4%B8%8E%E6%89%B9%E9%87%8F%E5%A4%A7%E5%B0%8F%E4%BA%A4%E4%BA%92"><span class="nav-number">1.3.5.</span> <span class="nav-text">批量归一化如何与批量大小交互</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%88%9D%E5%A7%8B%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.</span> <span class="nav-text">选择初始配置</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xandra"
+      src="/uploads/OIP-C.jfif">
+  <p class="site-author-name" itemprop="name">Xandra</p>
+  <div class="site-description" itemprop="description">记录，学习，成长。欢迎交流！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning-Tuning-Playbook/" rel="tag">Deep Learning Tuning Playbook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAT/" rel="tag">GAT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNN/" rel="tag">GNN</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-vocabulary/" rel="tag">Open vocabulary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyG/" rel="tag">PyG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAG/" rel="tag">RAG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAD/" rel="tag">VAD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wandb/" rel="tag">wandb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%B1%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">弱监督学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%A8%A1/" rel="tag">数模</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">暴力视频检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E8%AE%BA%E8%AE%A4%E7%9F%A5/" rel="tag">理论认知</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%90%86%E8%A7%A3/" rel="tag">视频理解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE/" rel="tag">配置</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+		      
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://fortunato-all.github.io/" title="https:&#x2F;&#x2F;fortunato-all.github.io&#x2F;" rel="noopener" target="_blank">fortunato</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://cyanm0un.github.io/" title="https:&#x2F;&#x2F;cyanm0un.github.io&#x2F;" rel="noopener" target="_blank">CyanM0un</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=86 src="//music.163.com/outchain/player?type=2&id=2001320&auto=0&height=66"></iframe>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/5e0e6968/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/OIP-C.jfif">
+      <meta itemprop="name" content="Xandra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tiny Blog  &  小窝">
+      <meta itemprop="description" content="记录，学习，成长。欢迎交流！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Guide for starting a new project | Tiny Blog  &  小窝">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Guide for starting a new project
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-02-09 18:46:50 / Modified: 21:50:42" itemprop="dateCreated datePublished" datetime="2023-02-09T18:46:50+08:00">2023-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline: </span>
+  
+    <a title="waline" href="/posts/5e0e6968/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/5e0e6968/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>4.4k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>4 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>翻译整理自<a target="_blank" rel="noopener" href="https://github.com/google-research/tuning_playbook#choosing-the-batch-size-to-minimize-training-time">google-research/tuning_playbook</a></p>
+<h1 id="开展一个新项目的指南"><a href="#开展一个新项目的指南" class="headerlink" title="开展一个新项目的指南"></a>开展一个新项目的指南</h1><span id="more"></span>
+<p><em>摘要： 我们在调整过程中做出的许多决定可以在项目开始时一次性做出，只有在情况发生变化时才偶尔重新审视。</em></p>
+<p>我们的指导假定以下内容：</p>
+<ul>
+<li>已经完成了问题制定、数据清理等基本工作，花时间调整模型架构和训练配置是有意义的。</li>
+<li>已经设置了一个可以进行训练和评估的流水线，并且可以轻松执行感兴趣的各种模型的训练和预测任务。</li>
+<li>已经选择并实施了适当的指标。这些指标应尽可能反映部署环境中测量的内容。</li>
+</ul>
+<h2 id="选择模型架构"><a href="#选择模型架构" class="headerlink" title="选择模型架构"></a>选择模型架构</h2><p><strong>摘要：</strong> <em>在开始一个新项目时，尝试重用一个已经有效的模型。</em></p>
+<ul>
+<li>首先选择一个成熟、常用的模型架构以获得有效的工作。总是可以稍后构建自定义模型。</li>
+<li>模型架构通常具有各种超参数，用于确定模型的大小和其他细节（例如层数、层宽、激活函数类型）。<ul>
+<li>因此，选择架构实际上意味着选择一个不同模型的家族（每个对应一种模型超参数设置）。</li>
+<li>我们将在<a target="_blank" rel="noopener" href="https://github.com/google-research/tuning_playbook#choosing-the-initial-configuration">Choosing the initial configuration</a> and <a target="_blank" rel="noopener" href="https://github.com/google-research/tuning_playbook#a-scientific-approach-to-improving-model-performance">A scientific approach to improving model performance</a>中考虑选择模型超参数的问题。</li>
+</ul>
+</li>
+<li>如果可能，尝试找到一篇尽可能接近手头问题的论文，并将其作为起点进行复现。</li>
+</ul>
+<h2 id="选择优化器"><a href="#选择优化器" class="headerlink" title="选择优化器"></a>选择优化器</h2><p><strong>摘要：</strong> <em>从手头问题类型的最流行优化器开始。</em></p>
+<ul>
+<li><p>没有优化器是所有机器学习问题和模型架构的“最佳”优化器。即使只是<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1910.05446">比较优化器的性能也是一项艰巨的任务</a>。🤖</p>
+</li>
+<li><p>我们建议坚持使用成熟、流行的优化器，特别是在开始新项目时。</p>
+<ul>
+<li>理想情况下，请选择用于同一类型问题的最流行优化器。</li>
+</ul>
+</li>
+<li><p>准备关注所选优化器的所有超参数。</p>
+<ul>
+<li><p>具有更多超参数的优化器可能需要更多的调整工作才能找到最佳配置。</p>
+</li>
+<li><p>在项目的初始阶段，当我们试图找到其他各种超参数的最佳值时（例如架构超参数），将优化器超参数视为干扰参数 （Nuisance hyperparameters），这是非常重要的。</p>
+<p>（Nuisance hyperparameters是未被特定，但是在理论测试时被考虑到的那些，即它们是需要优化以便比较科学超参数（Scientific hyperparameters) 的不同值的参数。科学超参数是我们试图衡量它们对模型性能造成的影响的参数。</p>
+</li>
+<li><p>在项目的初始阶段，可能更喜欢使用更简单的优化器（例如具有固定动量的SGD或具有固定<em>ϵ</em>、<em>β1</em>和<em>β2</em>的Adam），然后稍后切换到更一般的优化器。</p>
+</li>
+</ul>
+</li>
+<li><p>我们喜欢的成熟优化器（但不限于）包括：</p>
+<ul>
+<li>带有动量的SGD（我们喜欢Nesterov变体）</li>
+<li>Adam和NAdam，它们比带有动量的SGD更一般。请注意，Adam具有4个可调超参数<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1910.05446">它们都很重要</a>！</li>
+<li>请参阅[Adam的超参数如何调整？]<ul>
+<li>根据上面的讨论，关于搜索空间以及应该从搜索空间中采样多少点的一般性陈述是非常困难的。请注意，Adam中的所有超参数并不都同样重要。以下经验法则对应于不同的“预算”，用于研究中的试验次数。 - 如果研究中的试验次数少于10次，只调整（基本）学习率。 - 如果10-25次试验，调整学习率和β1。 - 如果25+次试验，调整学习率，β1和ϵ。 - 如果可以运行的试验次数大大超过25次，还可以调整β2。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="选择批量大小"><a href="#选择批量大小" class="headerlink" title="选择批量大小"></a>选择批量大小</h2><p><strong>摘要：</strong> <em>批量大小控制训练速度，不应该用来直接调整验证集性能。通常，理想的批量大小将是可用硬件支持的最大批量大小。</em></p>
+<ul>
+<li>批量大小是确定<em>训练时间</em>和<em>计算资源消耗</em>的关键因素。</li>
+<li>增加批量大小通常会减少训练时间。这可能是非常有益的，因为它：<ul>
+<li>允许在固定的时间间隔内更彻底地调整超参数，可能导致更好的最终模型。</li>
+<li>减少开发周期的延迟，允许更频繁地测试新想法。</li>
+</ul>
+</li>
+<li>增加批量大小可以减少、增加或不改变资源消耗。</li>
+<li>批量大小不应该被当作用于验证集性能的可调超参数。<ul>
+<li>只要所有超参数都得到很好的调整（特别是学习率和正则化超参数），并且训练步数足够，使用任何批量大小都应该可以获得相同的最终性能（请参见 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1811.03600">Shallue et al. 2018</a> ）。</li>
+<li>请参阅为什么不应该将批量大小调整为直接改善验证集性能？<ul>
+<li>改变批量大小<em>而不改变任何其他训练管道的细节</em>通常会影响验证集性能。</li>
+<li>但是，如果为每个批量大小单独优化训练管道，两个批量大小之间的验证集性能差异通常会消失。</li>
+<li>与批量大小最强烈相互作用的超参数，因此对于每个批量大小最重要的是单独调整优化器超参数（例如学习率，动量）和正则化超参数。<ul>
+<li>较小的批量大小会由于样本方差向训练算法引入更多噪声，并且此噪声可能具有正则化效果。因此，较大的批量大小可能更容易过度拟合，可能需要更强的正则化和/或额外的正则化技术。</li>
+</ul>
+</li>
+<li>此外，改变批量大小时，<a target="_blank" rel="noopener" href="https://github.com/google-research/tuning_playbook#choosing-the-batch-size-to-minimize-training-time">可能需要调整训练步骤的数量</a>。</li>
+<li>一旦考虑到所有这些影响，目前尚无令人信服的证据表明批量大小会影响最大可达到的验证性能（参见<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1811.03600">Shallue et al. 2018</a>）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="确定可行的批量大小和估计训练吞吐量"><a href="#确定可行的批量大小和估计训练吞吐量" class="headerlink" title="确定可行的批量大小和估计训练吞吐量"></a>确定可行的批量大小和估计训练吞吐量</h3><ul>
+<li>对于给定的模型和优化器，可用硬件通常会支持一定范围的批量大小。限制因素通常是加速器内存。</li>
+<li>不幸的是，在不运行或者至少不编译整个训练程序的情况下计算哪些批量大小将适合内存可能很困难。</li>
+<li>最简单的解决方案通常是运行不同批量大小（例如增加2的幂）的训练作业，直到其中一个作业超过可用的内存为止。</li>
+<li>对于每个批量大小，我们应该训练足够长的时间来获得<em>训练吞吐量</em>的可靠估计</li>
+</ul>
+<p>训练吞吐量 =（#每秒处理的实例）</p>
+<p>或者，等效地，<em>每步时间</em>。</p>
+<p>每步时间 =（批量大小）/（训练吞吐量）</p>
+<ul>
+<li>当加速器尚未饱和时，如果批量大小翻倍，训练吞吐量也应该翻倍（或者至少接近翻倍）。等效地，每步时间随着批量大小的增加应该是恒定的（或者至少接近恒定）。</li>
+<li>如果情况不是这样，那么训练管道就具有瓶颈，例如I / O或计算节点之间的同步。在继续之前，这可能值得诊断和纠正。</li>
+<li>如果训练吞吐量仅增加到某个最大批量大小，邤我们应该只考虑到该最大批量大小，即使硬件支持更大的批量大小。<ul>
+<li>使用较大批量大小的所有好处均假定训练吞吐量会增加。  如果不是，修复瓶颈或使用较小的批量大小。</li>
+<li><strong>梯度累积</strong>模拟比硬件支持的更大的批量大小，因此不提供任何吞吐量优势。 在应用工作中通常应避免使用它。</li>
+</ul>
+</li>
+<li>每次更改模型或优化器时（例如，不同的模型架构可能允许更大的批量大小适合内存），可能需要重复这些步骤。</li>
+</ul>
+<h3 id="选择批量大小以最小化训练时间"><a href="#选择批量大小以最小化训练时间" class="headerlink" title="选择批量大小以最小化训练时间"></a>选择批量大小以最小化训练时间</h3><p>训练时间 =（每步时间）x（总步数）</p>
+<ul>
+<li><p>我们通常可以认为每步时间对于所有可行的批量大小来说都是近似恒定的。 当没有并行计算的开销并且所有训练瓶颈都已经诊断和纠正（请参阅上一节以了解如何识别训练瓶颈）时，这是正确的。 实践中，随着批量大小的增加，通常至少有一些开销。</p>
+</li>
+<li><p>随着批量大小的增加，要达到固定性能目标所需的总步数通常会减少（所有相关超参数在更改批量大小时重新调整; Shallue et al. 2018）。</p>
+<ul>
+<li>例如。 将批量大小翻倍可能会使所需的总步数减半。 这称为<strong>完美缩放</strong>。</li>
+</ul>
+</li>
+<li><p>完美缩放适用于所有批量大小，直到一个临界批量大小，超出该批量大小，收益就会逐渐减少。</p>
+<ul>
+<li>最终，增加批量大小不再减少训练步骤的数量（但永远不会增加）。</li>
+</ul>
+</li>
+<li><p>因此，最小化训练时间的批量大小通常是仍然提供减少训练步骤数量的最大批量大小。</p>
+<ul>
+<li><p>此批量大小取决于数据集，模型和优化器，除了为每个新问题找到它的实验之外，如何计算它是一个未解决的问题。 🤖</p>
+</li>
+<li><p>在比较批量大小时，要注意示例预算/epoch预算（固定训练示例呈现的数量来运行所有实验）和步骤预算（固定训练步骤的数量来运行所有实验）之间的区别。</p>
+<ul>
+<li>使用epoch预算比较批量大小只探测完美缩放模式，即使更大的批量大小仍然可以通过减少所需的训练步骤来提供有意义的加速。</li>
+</ul>
+</li>
+<li><p>通常，可用硬件支持的最大批量大小小于关键批量大小。因此，<strong>一个很好的经验法则（无需运行任何实验）是使用尽可能大的批量大小。</strong></p>
+</li>
+<li><p><strong>如果使用更大的批量大小会增加训练时间，那么没有必要使用更大的批量大小。</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="选择批量大小以最小化资源消耗"><a href="#选择批量大小以最小化资源消耗" class="headerlink" title="选择批量大小以最小化资源消耗"></a>选择批量大小以最小化资源消耗</h3><ul>
+<li>增加批量大小与之相关的资源成本有两种类型：<ol>
+<li><em>预付费用</em>，例如购买新硬件或重写训练管道以实现多GPU/多TPU训练。</li>
+<li><em>使用费用</em>，例如对团队资源预算进行计费，云提供商收费，电费/维护费用。</li>
+</ol>
+</li>
+<li>如果增加批量大小会带来显着的前期成本，那么最好推迟增加批量大小，直到项目已成熟，并且更容易评估成本效益权衡。 实施多主机并行训练程序可能会引入错误和微妙的问题，因此可能最好从一个更简单的管道开始。（另一方面，训练时间的大幅加速可能在大量调整实验需要时很有益。）</li>
+<li>我们将总使用成本（可能包括多种不同类型的成本）称为“资源消耗”。 我们可以将资源消耗分解为以下组件：</li>
+</ul>
+<p>资源消耗=（每步资源消耗）x（总步数）</p>
+<ul>
+<li>增加批量大小通常允许我们减少总步数。 资源消耗是增加还是减少将取决于每步消耗如何改变。<ul>
+<li>增加批量大小可能会<em>减少</em>资源消耗。 例如，如果使用较大批量大小的每个步骤都可以在与较小批量大小相同的硬件上运行（仅每步时间稍有增加）</li>
+<li>增加批量大小可能<em>不会改变</em>资源消耗。例如，如果将批量大小翻倍，可以减少所需步骤的一半，并使用两倍的GPU，总消耗（以GPU小时为单位）将不会改变。</li>
+<li>增加批量大小可能会<em>增加</em>资源消耗。例如，如果增加批量大小需要升级硬件，每步的消耗增加可能会超过步骤数量的减少。</li>
+</ul>
+</li>
+</ul>
+<h3 id="更改批量大小需要重新调整大多数超参数"><a href="#更改批量大小需要重新调整大多数超参数" class="headerlink" title="更改批量大小需要重新调整大多数超参数"></a>更改批量大小需要重新调整大多数超参数</h3><ul>
+<li>大多数超参数的最佳值对批量大小敏感。 因此，更改批量大小通常需要重新开始调整过程。</li>
+<li>与批量大小最密切相关的超参数，因此最重要的是为每个批量大小单独调整，是优化器超参数（例如学习率，动量）和正则化超参数。</li>
+<li>在选择项目开始时的批量大小时要牢记这一点。 如果您稍后需要切换到不同的批量大小，则重新调整所有内容以适应新批量大小可能很困难，耗时且昂贵。</li>
+</ul>
+<h3 id="批量归一化如何与批量大小交互"><a href="#批量归一化如何与批量大小交互" class="headerlink" title="批量归一化如何与批量大小交互"></a>批量归一化如何与批量大小交互</h3><p>批量归一化很复杂，一般来说，应该使用不同于梯度计算的批量大小来计算统计信息。 有关详细讨论，请参见<a target="_blank" rel="noopener" href="https://github.com/google-research/tuning_playbook#batch-normalization-implementation-details">批量归一化部分</a></p>
+<h2 id="选择初始配置"><a href="#选择初始配置" class="headerlink" title="选择初始配置"></a>选择初始配置</h2><ul>
+<li>在开始超参数调整之前，我们必须确定起点。 这包括指定（1）模型配置（例如层数），（2）优化器超参数（例如学习率）以及（3）训练步骤数。</li>
+<li>确定此初始配置将需要一些手动配置的训练运行和试错。</li>
+<li>我们的指导原则是找到一个简单，相对快速，相对低资源消耗的配置，可以获得“合理”的结果。<ul>
+<li>“简单”意味着尽可能避免花哨的东西；这些都可以稍后添加。 即使花哨的东西最终证明有帮助，在初始配置中添加它们也会浪费时间来调整无用的功能，或者合并不必要的复杂性。<ul>
+<li>例如，先使用恒定的学习率，然后再添加花哨的衰减计划。</li>
+</ul>
+</li>
+<li>选择快速且资源消耗最小的初始配置将使超参数调整更加高效。<ul>
+<li>例如，从较小的模型开始。</li>
+</ul>
+</li>
+<li>“合理”的性能取决于问题，但至少意味着训练的模型在验证集上的表现要好得多，比随机机会好（尽管它可能足够糟糕，不值得部署）。</li>
+</ul>
+</li>
+<li>选择训练步骤数量涉及以下考量：<ul>
+<li>一方面，训练更多步骤可以提高性能，并使超参数调整更容易（请参见<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1811.03600">Shallue et al. 2018</a>）。</li>
+<li>另一方面，训练步骤较少意味着每次训练运行更快，使用的资源更少，通过减少周期之间的时间来提高调整效率，并允许并行运行更多实验。此外，如果最初选择了不必要的大步骤预算，则可能很难在以后更改它，例如一旦为该步数调整了学习率计划。</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Xandra
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://xandra298.github.io/posts/5e0e6968/" title="Guide for starting a new project">https://xandra298.github.io/posts/5e0e6968/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Deep-Learning-Tuning-Playbook/" rel="tag"><i class="fa fa-tag"></i> Deep Learning Tuning Playbook</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/d2ac8e77/" rel="prev" title="Exploiting Completeness and Uncertainty of Pseudo Labels">
+                  <i class="fa fa-chevron-left"></i> Exploiting Completeness and Uncertainty of Pseudo Labels
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/802d9159/" rel="next" title="音乐播放">
+                  音乐播放 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xandra</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Word count total: </span>
+    <span title="Word count total">115k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">1:44</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"wvaline.xandrax.cafe","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/5e0e6968/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>

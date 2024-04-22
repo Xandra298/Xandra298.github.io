@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/firefox-panda-roux.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/firefox-panda-roux.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xandra298.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":300},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="图基本知识图的表示点和边构成的数据结构 日常生活中无处不在：图像：像素和像素之间的连接构成的图; 网页： 网页之间的跳转;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图基本知识">
+<meta property="og:url" content="https://xandra298.github.io/posts/5f3db67/index.html">
+<meta property="og:site_name" content="Tiny Blog  &amp;  小窝">
+<meta property="og:description" content="图基本知识图的表示点和边构成的数据结构 日常生活中无处不在：图像：像素和像素之间的连接构成的图; 网页： 网页之间的跳转;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xandra298.github.io/posts/5f3db67/image-20221126140426649.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/5f3db67/image-20221126142317310.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/5f3db67/image-20221126142814847.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/5f3db67/image-20221126154802461.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/5f3db67/image-20221126155109322.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/5f3db67/image-20221126160339470.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/5f3db67/image-20221126163731692.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/5f3db67/image-20221126163701508.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/5f3db67/image-20221126170021320.png">
+<meta property="article:published_time" content="2022-11-26T05:37:44.000Z">
+<meta property="article:modified_time" content="2022-11-27T11:27:22.148Z">
+<meta property="article:author" content="Xandra">
+<meta property="article:tag" content="图">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xandra298.github.io/posts/5f3db67/image-20221126140426649.png">
+
+
+<link rel="canonical" href="https://xandra298.github.io/posts/5f3db67/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xandra298.github.io/posts/5f3db67/","path":"posts/5f3db67/","title":"图基本知识"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>图基本知识 | Tiny Blog  &  小窝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d53b0bfc3463e2d8df2a44594ea3a8ab"></script>
+
+
+
+
+
+
+<link rel="dns-prefetch" href="wvaline.xandrax.cafe">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tiny Blog  &  小窝</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">图基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.1.</span> <span class="nav-text">图的表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.1.2.</span> <span class="nav-text">表示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.2.</span> <span class="nav-text">图的性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%A6"><span class="nav-number">1.2.1.</span> <span class="nav-text">度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E5%9B%BE"><span class="nav-number">1.2.2.</span> <span class="nav-text">子图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E9%80%9A%E5%9B%BE%E5%92%8C%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"><span class="nav-number">1.2.3.</span> <span class="nav-text">连通图和连通分量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E5%92%8C%E5%9B%BE%E7%9B%B4%E5%BE%84"><span class="nav-number">1.2.4.</span> <span class="nav-text">最短路径和图直径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%A6%E4%B8%AD%E5%BF%83%E6%80%A7"><span class="nav-number">1.2.5.</span> <span class="nav-text">度中心性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F%E4%B8%AD%E5%BF%83%E6%80%A7Eigenvector-Centrality"><span class="nav-number">1.2.6.</span> <span class="nav-text">特征向量中心性Eigenvector Centrality</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E4%BB%8B%E4%B8%AD%E5%BF%83%E6%80%A7-Betweenness-Centrality"><span class="nav-number">1.2.7.</span> <span class="nav-text">中介中心性 Betweenness Centrality</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E4%B8%AD%E5%BF%83%E6%80%A7-Closeness"><span class="nav-number">1.2.8.</span> <span class="nav-text">连接中心性 Closeness</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.2.9.</span> <span class="nav-text"> </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E9%A1%B5%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.10.</span> <span class="nav-text">网页排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pagerank"><span class="nav-number">1.2.10.1.</span> <span class="nav-text">pagerank</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HITS"><span class="nav-number">1.2.10.2.</span> <span class="nav-text">HITS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Graph-Embedding"><span class="nav-number">2.</span> <span class="nav-text">Graph Embedding</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DeepWalk"><span class="nav-number">2.1.</span> <span class="nav-text">DeepWalk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LINE"><span class="nav-number">2.2.</span> <span class="nav-text">LINE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node2Vec"><span class="nav-number">2.3.</span> <span class="nav-text">Node2Vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#struct2vec"><span class="nav-number">2.4.</span> <span class="nav-text">struct2vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDNE"><span class="nav-number">2.5.</span> <span class="nav-text">SDNE</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xandra"
+      src="/uploads/OIP-C.jfif">
+  <p class="site-author-name" itemprop="name">Xandra</p>
+  <div class="site-description" itemprop="description">记录，学习，成长。欢迎交流！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning-Tuning-Playbook/" rel="tag">Deep Learning Tuning Playbook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAT/" rel="tag">GAT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNN/" rel="tag">GNN</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-vocabulary/" rel="tag">Open vocabulary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyG/" rel="tag">PyG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAG/" rel="tag">RAG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAD/" rel="tag">VAD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wandb/" rel="tag">wandb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%B1%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">弱监督学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%A8%A1/" rel="tag">数模</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">暴力视频检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E8%AE%BA%E8%AE%A4%E7%9F%A5/" rel="tag">理论认知</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%90%86%E8%A7%A3/" rel="tag">视频理解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE/" rel="tag">配置</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+		      
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://fortunato-all.github.io/" title="https:&#x2F;&#x2F;fortunato-all.github.io&#x2F;" rel="noopener" target="_blank">fortunato</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://cyanm0un.github.io/" title="https:&#x2F;&#x2F;cyanm0un.github.io&#x2F;" rel="noopener" target="_blank">CyanM0un</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=86 src="//music.163.com/outchain/player?type=2&id=2001320&auto=0&height=66"></iframe>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/5f3db67/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/OIP-C.jfif">
+      <meta itemprop="name" content="Xandra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tiny Blog  &  小窝">
+      <meta itemprop="description" content="记录，学习，成长。欢迎交流！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="图基本知识 | Tiny Blog  &  小窝">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图基本知识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-11-26 13:37:44" itemprop="dateCreated datePublished" datetime="2022-11-26T13:37:44+08:00">2022-11-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-11-27 19:27:22" itemprop="dateModified" datetime="2022-11-27T19:27:22+08:00">2022-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">图神经网络</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline: </span>
+  
+    <a title="waline" href="/posts/5f3db67/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/5f3db67/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>4.3k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>4 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="图基本知识"><a href="#图基本知识" class="headerlink" title="图基本知识"></a>图基本知识</h1><h2 id="图的表示"><a href="#图的表示" class="headerlink" title="图的表示"></a>图的表示</h2><p>点和边构成的数据结构</p>
+<p>日常生活中无处不在：图像：像素和像素之间的连接构成的图; 网页： 网页之间的跳转;</p>
+<span id="more"></span>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p><strong>无向图和有向图</strong></p>
+<h3 id="表示"><a href="#表示" class="headerlink" title="表示"></a>表示</h3><ul>
+<li>邻接矩阵</li>
+</ul>
+<h2 id="图的性质"><a href="#图的性质" class="headerlink" title="图的性质"></a>图的性质</h2><h3 id="度"><a href="#度" class="headerlink" title="度"></a>度</h3><ul>
+<li>无向图的度==该节点连接的边的数量</li>
+<li>有向图的度<ul>
+<li>出度：从该节点指向的边的数量</li>
+<li>入度：指向该节点的边的数量</li>
+</ul>
+</li>
+</ul>
+<h3 id="子图"><a href="#子图" class="headerlink" title="子图"></a>子图</h3><p>​    子图所有的节点都包含在大图里面；</p>
+<p>​    子图的边都是大图的边的子集；</p>
+<h3 id="连通图和连通分量"><a href="#连通图和连通分量" class="headerlink" title="连通图和连通分量"></a>连通图和连通分量</h3><p>无向图</p>
+<ul>
+<li><p>连通图：</p>
+<p>任意节点i能够通过一些边到达节点j，则称之为连通图；反之非连通图。</p>
+<p>对于一个无向图：没有孤立的节点其实都能连通</p>
+</li>
+<li><p>连通分量：<br>无向图G的一个极大连通子图称为G的一个连通分量（或连通分支）。</p>
+<p>连通图只有一个连通分量：他本身；非连通图有多个连通分量。</p>
+</li>
+</ul>
+<p>有向图的连通性</p>
+<ul>
+<li>强连通图：给定图G的任意两个结点u,v可互相到达。</li>
+<li>弱连通图：至少有一对结点不满足单向连通，但去掉边的方向之后从无向图的观点看是连通图。</li>
+</ul>
+<h3 id="最短路径和图直径"><a href="#最短路径和图直径" class="headerlink" title="最短路径和图直径"></a>最短路径和图直径</h3><p>两结点的最短到达路径就是最短路径</p>
+<p>两两结点的最短路径中的长度最大值是图直径。</p>
+<h3 id="度中心性"><a href="#度中心性" class="headerlink" title="度中心性"></a>度中心性</h3><script type="math/tex; mode=display">
+度中心性 = \frac{N_{degree}}{n-1}</script><p>$N_{degree}$表示该节点的度，n为该节点所在图的节点总数。</p>
+<h3 id="特征向量中心性Eigenvector-Centrality"><a href="#特征向量中心性Eigenvector-Centrality" class="headerlink" title="特征向量中心性Eigenvector Centrality"></a>特征向量中心性Eigenvector Centrality</h3><p>最大特征值对应的特征向量作为特征向量中心性的对比指标。</p>
+<p>A为邻接矩阵；</p>
+<p>如图，最大的特征值是第一个，所以特征向量对应第一列。</p>
+<p>（特征向量中心性将特征向量的负值变成正进行统一对比）</p>
+<p><img src="/posts/5f3db67/image-20221126140426649.png" style="zoom: 67%;"></p>
+<p>特征向量中心性不仅考虑了自己节点的度，还考虑了和他向量节点的度的情况。如v4的值会比v2和v3大是因为它虽然度和v2\v3一样大，但是相连的是v1和v5，比v2/v3向量的节点的度总体要大。</p>
+<p><strong>conclu:特征向量中心性比度中心性可以更好的表示节点在图中所处的位置。</strong></p>
+<h3 id="中介中心性-Betweenness-Centrality"><a href="#中介中心性-Betweenness-Centrality" class="headerlink" title="中介中心性 Betweenness Centrality"></a>中介中心性 Betweenness Centrality</h3><script type="math/tex; mode=display">
+Betweenness  = \frac{经过该节点的最短路径}{其余两两节点的最短路径}</script><h3 id="连接中心性-Closeness"><a href="#连接中心性-Closeness" class="headerlink" title="连接中心性 Closeness"></a>连接中心性 Closeness</h3><script type="math/tex; mode=display">
+Closeness = \frac{n-1}{该节点到其他节点最短路径之和}</script><p>​    n为节点总数；</p>
+<h3 id><a href="#" class="headerlink" title=" "></a> </h3><h3 id="网页排序算法"><a href="#网页排序算法" class="headerlink" title="网页排序算法"></a>网页排序算法</h3><h4 id="pagerank"><a href="#pagerank" class="headerlink" title="pagerank"></a>pagerank</h4><p>边的pagerank值为节点向外指向时平分的结果。如节点2向外指向的边有两条，因此现在那两条边的pagerank值都为pagerank2/2。</p>
+<p>节点的pagerank值即为指向它的边的值的和。</p>
+<p><img src="/posts/5f3db67/image-20221126142317310.png" style="zoom:67%;"></p>
+<p>不断的迭代，最后每个节点的pagerank值达到稳态    。</p>
+<p>阻尼系数：如节点3到节点4的概率有0.15。</p>
+<h4 id="HITS"><a href="#HITS" class="headerlink" title="HITS"></a>HITS</h4><p><img src="/posts/5f3db67/image-20221126142814847.png" style="zoom: 67%;"></p>
+<p>每个节点都有authority值和hub值</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> networkx <span class="keyword">as</span> nx</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">lis =<span class="keyword">lambda</span> x:random.randint(<span class="number">1</span>,<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">edges  = pd.DataFrame()</span><br><span class="line">edges[<span class="string">&#x27;sources&#x27;</span>] = [lis(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">12</span>)]</span><br><span class="line">edges[<span class="string">&#x27;targets&#x27;</span>] = [lis(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">12</span>)]</span><br><span class="line">edges[<span class="string">&#x27;weights&#x27;</span>] = [<span class="number">1</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">12</span>)]</span><br><span class="line"></span><br><span class="line">G = nx.from_pandas_edgelist(edges,source=<span class="string">&#x27;sources&#x27;</span>,target=<span class="string">&#x27;targets&#x27;</span>,edge_attr=<span class="string">&#x27;weights&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;G:&quot;</span>,G)</span><br><span class="line"><span class="built_in">print</span>(nx.__version__)</span><br><span class="line"><span class="built_in">print</span>(nx.adjacency_matrix(G))</span><br><span class="line"><span class="comment">#度</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;degree:&quot;</span>,nx.degree(G))</span><br><span class="line"><span class="comment"># 连通分量</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;connected_components&quot;</span>,<span class="built_in">list</span>(nx.connected_components(G)))</span><br><span class="line"><span class="comment">#图直径</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;diameter:&quot;</span>,nx.diameter(G))</span><br><span class="line"><span class="comment"># 度中心性</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;degree_centrality:&quot;</span>,nx.degree_centrality(G))</span><br><span class="line"><span class="comment">#特征向量中心性</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;eigenvector:&quot;</span>,nx.eigenvector_centrality(G))</span><br><span class="line"><span class="comment"># betweenness 中介中心性</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;betweenness:&quot;</span>,nx.betweenness_centrality(G))</span><br><span class="line"><span class="comment"># closeness 连接中心性</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;closenesss:&quot;</span>,nx.closeness_centrality(G))</span><br><span class="line"><span class="comment">#pagerank</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;pagerank:&quot;</span>,nx.pagerank(G))</span><br><span class="line"><span class="comment">#hits</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hits:&quot;</span>,nx.hits(G))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">FutureWarning: adjacency_matrix will return a scipy.sparse array instead of a matrix in Networkx 3.0.</span><br><span class="line">  print(nx.adjacency_matrix(G))</span><br><span class="line">G: Graph with 6 nodes and 8 edges</span><br><span class="line">2.8.4</span><br><span class="line">  (0, 0)	1</span><br><span class="line">  (0, 2)	1</span><br><span class="line">  (0, 3)	1</span><br><span class="line">  (0, 4)	1</span><br><span class="line">  (1, 1)	1</span><br><span class="line">  (1, 4)	1</span><br><span class="line">  (1, 5)	1</span><br><span class="line">  (2, 0)	1</span><br><span class="line">  (2, 3)	1</span><br><span class="line">  (3, 0)	1</span><br><span class="line">  (3, 2)	1</span><br><span class="line">  (4, 0)	1</span><br><span class="line">  (4, 1)	1</span><br><span class="line">  (5, 1)	1</span><br><span class="line">degree: [(3, 5), (1, 4), (4, 2), (2, 2), (5, 2), (6, 1)]</span><br><span class="line">connected_components [&#123;1, 2, 3, 4, 5, 6&#125;]</span><br><span class="line">diameter: 4</span><br><span class="line">degree_centrality: &#123;3: 1.0, 1: 0.8, 4: 0.4, 2: 0.4, 5: 0.4, 6: 0.2&#125;</span><br><span class="line">eigenvector: &#123;3: 0.6845438993664699, 1: 0.2664667519552274, 4: 0.4038050904760662, 2: 0.4038050904760662, 5: 0.3528502881437044, 6: 0.09886704157967073&#125;</span><br><span class="line">betweenness: &#123;3: 0.6000000000000001, 1: 0.4, 4: 0.0, 2: 0.0, 5: 0.6000000000000001, 6: 0.0&#125;</span><br><span class="line">closenesss: &#123;3: 0.625, 1: 0.5, 4: 0.45454545454545453, 2: 0.45454545454545453, 5: 0.625, 6: 0.35714285714285715&#125;</span><br><span class="line">pagerank: &#123;3: 0.26059842893288254, 1: 0.22624644367910318, 4: 0.1397855189975688, 2: 0.1397855189975688, 5: 0.1444805278346477, 6: 0.08910356155822868&#125;</span><br><span class="line">hits: (&#123;3: 0.3097026575730737, 1: 0.1205522404859372, 4: 0.18269069072963665, 2: 0.18269069072963665, 5: 0.1596357156065535, 6: 0.04472800487516233&#125;, &#123;3: 0.30970265757307375, 1: 0.1205522404859372, 4: 0.1826906907296366, 2: 0.18269069072963656, 5: 0.1596357156065534, 6: 0.04472800487516234&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>视频来源：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1aB4y1Q7RL">https://www.bilibili.com/video/BV1aB4y1Q7RL</a></p>
+<h1 id="Graph-Embedding"><a href="#Graph-Embedding" class="headerlink" title="Graph Embedding"></a>Graph Embedding</h1><p><a target="_blank" rel="noopener" href="https://github.com/shenweichen/GraphEmbedding">代码</a></p>
+<ol>
+<li>DeepWalk :采用随机游走，形成序列，采用skip-gram方 式生成节点embedding。</li>
+<li>node2vec :不同的随机游走策略，形成序列，类似skip-gram方 式生成节点embedding。</li>
+<li>LINE :捕获节点的一-阶和二阶相似度，分别求解，再将一阶二阶拼接在一起， 作为节点的embedding</li>
+<li>struc2vec :对图的结构信息进行捕获，在其结构重要性大于邻居重要性时，有较好的效果。</li>
+<li>SDNE :采用了多个非线性层的方式捕获一阶二阶的相似性。</li>
+</ol>
+<h2 id="DeepWalk"><a href="#DeepWalk" class="headerlink" title="DeepWalk"></a>DeepWalk</h2><ul>
+<li>适用于无向图</li>
+</ul>
+<p>随机游走获得节点序列</p>
+<p>使用skipgram算法完成嵌入</p>
+<p>window size d是向前向后看多少个节点</p>
+<p>算法：</p>
+<p><img src="/posts/5f3db67/image-20221126154802461.png" alt style="zoom: 50%;"></p>
+<p>如下图：给定v4节点，算出v2,v3,v5,v6同时出现的概率。然后完成嵌入。</p>
+<p><img src="/posts/5f3db67/image-20221126155109322.png" alt style="zoom:50%;"></p>
+<ul>
+<li><p>embedding效果对比，看参数作用</p>
+<p>DeepWalk是无监督的完成图嵌入，效果判别通过将完成嵌入的图（有label)输入分类器,看分类效果</p>
+<ul>
+<li><p>embedding size d</p>
+<p>d变大，效果</p>
+<p>一定范围内上升，超过一定值，反而下降</p>
+</li>
+<li><p>迭代次数</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>​                迭代次数增加，效果上升；到达一定值再增加，效果变化有限</p>
+<h2 id="LINE"><a href="#LINE" class="headerlink" title="LINE"></a>LINE</h2><p>large-scale Information Network Embedding</p>
+<p>作者提出LINE用于大规模图上表示节点之间的结构信息表现比较好</p>
+<ul>
+<li><strong>一阶</strong>：局部的结构信息。</li>
+<li><strong>二阶</strong>：节点的邻居。共享邻居的节点可能是相似的。</li>
+</ul>
+<p>一阶相似性：两个节点相连接，且边的权重很大，那么他们的一阶相似性很高</p>
+<p>二阶相似性： 两个节点的邻居很相似，那么即使这两个节点没有相互连接，他们的二阶相似性也很大</p>
+<p>如图，六节点和七节点一阶相似性高，五节点和六节点的embedding的二阶相似性很高：</p>
+<p><img src="/posts/5f3db67/image-20221126160339470.png" alt style="zoom: 50%;"></p>
+<ul>
+<li><p>节点的度比较低的话，使用LINE效果不会很好</p>
+</li>
+<li><p>适用于有向图和无向图</p>
+</li>
+</ul>
+<p>一阶和二阶embedding训练的loss：</p>
+<p><img src="/posts/5f3db67/image-20221126163731692.png" alt style="zoom: 50%;"></p>
+<p><img src="/posts/5f3db67/image-20221126163701508.png" alt style="zoom:50%;"></p>
+<p>最后的embedding是一阶和二阶的直接拼接</p>
+<h2 id="Node2Vec"><a href="#Node2Vec" class="headerlink" title="Node2Vec"></a>Node2Vec</h2><p>和DeepWalk相似，不同的是采用了有策略的游走</p>
+<p>游走策略：</p>
+<p><img src="/posts/5f3db67/image-20221126170021320.png" alt style="zoom:67%;"></p>
+<p>DFS，即q值小，探索性强，会捕捉同质性节点，即相邻节点表示类似；BFS，即p值小，保守周围，会捕捉结构性，即某些节点的图上结构类似。</p>
+<h2 id="struct2vec"><a href="#struct2vec" class="headerlink" title="struct2vec"></a>struct2vec</h2><p>之前的方式都是基于近邻，但是有些节点没有近邻也有结构相似性</p>
+<h2 id="SDNE"><a href="#SDNE" class="headerlink" title="SDNE"></a>SDNE</h2><p>structural deep network embedding</p>
+<p>涉及 autoencoder的思想</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Xandra
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://xandra298.github.io/posts/5f3db67/" title="图基本知识">https://xandra298.github.io/posts/5f3db67/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%9B%BE/" rel="tag"><i class="fa fa-tag"></i> 图</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/f19419c5/" rel="prev" title="【pytorch-learning】(三) 可视化">
+                  <i class="fa fa-chevron-left"></i> 【pytorch-learning】(三) 可视化
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/71dd2457/" rel="next" title="几个基础图神经网络">
+                  几个基础图神经网络 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xandra</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Word count total: </span>
+    <span title="Word count total">115k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">1:44</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"wvaline.xandrax.cafe","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/5f3db67/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>

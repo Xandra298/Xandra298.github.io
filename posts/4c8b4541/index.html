@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/firefox-panda-roux.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/firefox-panda-roux.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xandra298.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":300},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="组件论文标题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="写作模板">
+<meta property="og:url" content="https://xandra298.github.io/posts/4c8b4541/index.html">
+<meta property="og:site_name" content="Tiny Blog  &amp;  小窝">
+<meta property="og:description" content="组件论文标题">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xandra298.github.io/posts/4c8b4541/image-20210904124259870.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/4c8b4541/image-20210904124756585.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/4c8b4541/image-20210904133357130.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/4c8b4541/image-20210904135644870.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/4c8b4541/image-20210904140719365.png">
+<meta property="article:published_time" content="2023-09-21T09:18:04.000Z">
+<meta property="article:modified_time" content="2023-09-21T09:31:10.043Z">
+<meta property="article:author" content="Xandra">
+<meta property="article:tag" content="数模">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xandra298.github.io/posts/4c8b4541/image-20210904124259870.png">
+
+
+<link rel="canonical" href="https://xandra298.github.io/posts/4c8b4541/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xandra298.github.io/posts/4c8b4541/","path":"posts/4c8b4541/","title":"写作模板"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>写作模板 | Tiny Blog  &  小窝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d53b0bfc3463e2d8df2a44594ea3a8ab"></script>
+
+
+
+
+
+
+<link rel="dns-prefetch" href="wvaline.xandrax.cafe">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tiny Blog  &  小窝</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E6%A0%87%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">论文标题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%91%98%E8%A6%81-%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">摘要 ：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="nav-number">1.3.</span> <span class="nav-text">关键词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%97%AE%E9%A2%98%E9%87%8D%E8%BF%B0"><span class="nav-number">1.4.</span> <span class="nav-text">一、问题重述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="nav-number">1.5.</span> <span class="nav-text">二、问题分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%A8%A1%E5%9E%8B%E5%81%87%E8%AE%BE"><span class="nav-number">1.6.</span> <span class="nav-text">三、模型假设</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%AC%A6%E5%8F%B7%E8%AF%B4%E6%98%8E"><span class="nav-number">1.7.</span> <span class="nav-text">四、符号说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%A8%A1%E5%9E%8B%E5%BB%BA%E7%AB%8B%E4%B8%8E%E6%B1%82%E8%A7%A3"><span class="nav-number">1.8.</span> <span class="nav-text">五、模型建立与求解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%86%E6%9E%90%E4%B8%8E%E6%A3%80%E9%AA%8C%EF%BC%88Option"><span class="nav-number">1.9.</span> <span class="nav-text">六、模型的分析与检验（Option)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%84%E4%BB%B7"><span class="nav-number">1.10.</span> <span class="nav-text">七、模型的评价</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">1.11.</span> <span class="nav-text">八、参考文献</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">1.12.</span> <span class="nav-text">附录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E5%A5%BD%E7%9A%84%E8%AE%BA%E6%96%87%E6%A8%A1%E6%9D%BF"><span class="nav-number">2.</span> <span class="nav-text">编辑好的论文模板</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xandra"
+      src="/uploads/OIP-C.jfif">
+  <p class="site-author-name" itemprop="name">Xandra</p>
+  <div class="site-description" itemprop="description">记录，学习，成长。欢迎交流！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning-Tuning-Playbook/" rel="tag">Deep Learning Tuning Playbook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAT/" rel="tag">GAT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNN/" rel="tag">GNN</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-vocabulary/" rel="tag">Open vocabulary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyG/" rel="tag">PyG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAG/" rel="tag">RAG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAD/" rel="tag">VAD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wandb/" rel="tag">wandb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%B1%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">弱监督学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%A8%A1/" rel="tag">数模</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">暴力视频检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E8%AE%BA%E8%AE%A4%E7%9F%A5/" rel="tag">理论认知</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%90%86%E8%A7%A3/" rel="tag">视频理解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE/" rel="tag">配置</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+		      
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://fortunato-all.github.io/" title="https:&#x2F;&#x2F;fortunato-all.github.io&#x2F;" rel="noopener" target="_blank">fortunato</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://cyanm0un.github.io/" title="https:&#x2F;&#x2F;cyanm0un.github.io&#x2F;" rel="noopener" target="_blank">CyanM0un</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=86 src="//music.163.com/outchain/player?type=2&id=2001320&auto=0&height=66"></iframe>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/4c8b4541/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/OIP-C.jfif">
+      <meta itemprop="name" content="Xandra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tiny Blog  &  小窝">
+      <meta itemprop="description" content="记录，学习，成长。欢迎交流！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="写作模板 | Tiny Blog  &  小窝">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          写作模板
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-09-21 17:18:04 / Modified: 17:31:10" itemprop="dateCreated datePublished" datetime="2023-09-21T17:18:04+08:00">2023-09-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline: </span>
+  
+    <a title="waline" href="/posts/4c8b4541/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/4c8b4541/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>706</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><h4 id="论文标题"><a href="#论文标题" class="headerlink" title="论文标题"></a><strong>论文标题</strong></h4><span id="more"></span>
+<ul>
+<li>基于所使用的主要模型或方法作为标题</li>
+</ul>
+<h4 id="摘要-："><a href="#摘要-：" class="headerlink" title="摘要 ："></a><strong>摘要 </strong>：</h4><ul>
+<li>可以最后来写 1000字左右</li>
+<li><strong>格式</strong><ul>
+<li><img src="/posts/4c8b4541/image-20210904124259870.png" alt></li>
+</ul>
+</li>
+<li><strong>开头段（必要）</strong><ul>
+<li>简单交代一下背景实际意义（可选）</li>
+<li>交代一下所做的事情</li>
+</ul>
+</li>
+<li>中间段：分别针对三个问题<ul>
+<li>解决了什么问题 </li>
+<li>应用了什么方法 ：对应这个问题的求解思路，说明应用的模型</li>
+<li>得到了什么结果：必要数值可以呈现</li>
+</ul>
+</li>
+<li>结尾段（可选）<ul>
+<li>总结 对类似问题做适当的推广</li>
+</ul>
+</li>
+<li>废话<ul>
+<li><img src="/posts/4c8b4541/image-20210904124756585.png" alt></li>
+</ul>
+</li>
+</ul>
+<h4 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a><strong>关键词</strong></h4><ul>
+<li>4-6</li>
+<li>主要模型  出现次数多的体现主要内容（1-2个）</li>
+</ul>
+<h4 id="一、问题重述"><a href="#一、问题重述" class="headerlink" title="一、问题重述"></a><strong>一、问题重述</strong></h4><ul>
+<li>格式<ul>
+<li><strong>1.1问题背景</strong></li>
+<li><strong>1.2问题提出</strong></li>
+</ul>
+</li>
+<li>方式：<ul>
+<li>1.在原题上改：这部分不是重点部分，时间来不及可以选这个方法</li>
+<li>丰富一下</li>
+</ul>
+</li>
+</ul>
+<h4 id="二、问题分析"><a href="#二、问题分析" class="headerlink" title="二、问题分析"></a><strong>二、问题分析</strong></h4><ul>
+<li>题目中包含的信息条件，利用信息和条件对题目做整体分析，确定用什么方法建模，每个问题单独放一段，分析过程简明扼要，不需要放结论</li>
+<li>一般不超过一页，问题较多时不超过两页</li>
+<li>图</li>
+<li>格式<ul>
+<li><strong>可选：总的</strong></li>
+<li><strong>2.1对问题一的分析</strong></li>
+<li><strong>2.2对问题二的分析</strong></li>
+<li><strong>2.3对问题三的分析</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="三、模型假设"><a href="#三、模型假设" class="headerlink" title="三、模型假设"></a>三、模型假设</h4><ul>
+<li><strong>1。 2。 3.。。</strong></li>
+<li>题目中明确给出的假设条件</li>
+<li>排除生活中的小概率事件</li>
+<li>仅考虑问题中的核心因素，不考虑次要因素<ul>
+<li>不要过于简化</li>
+</ul>
+</li>
+<li><img src="/posts/4c8b4541/image-20210904133357130.png" alt></li>
+</ul>
+<h4 id="四、符号说明"><a href="#四、符号说明" class="headerlink" title="四、符号说明"></a>四、符号说明</h4><p><strong>三线表</strong></p>
+<ul>
+<li>临时变量可以不放</li>
+<li>下文中首次出现这些变量时也要解释</li>
+<li>可以加一下单位</li>
+</ul>
+<h4 id="五、模型建立与求解"><a href="#五、模型建立与求解" class="headerlink" title="五、模型建立与求解"></a>五、模型建立与求解</h4><ul>
+<li><strong>5.1 问题一模型建立与求解</strong></li>
+<li><strong>5.2问题二模型建立与求解</strong></li>
+<li>…..</li>
+</ul>
+<h4 id="六、模型的分析与检验（Option"><a href="#六、模型的分析与检验（Option" class="headerlink" title="六、模型的分析与检验（Option)"></a>六、模型的分析与检验（Option)</h4><ul>
+<li><p>分析</p>
+<ul>
+<li>常见两种：1.灵敏度分析<ul>
+<li>控制其他参数不变，改变某个重要参数的值，观察模型变化</li>
+<li><img src="/posts/4c8b4541/image-20210904135644870.png" alt></li>
+</ul>
+</li>
+<li>误差分析<ul>
+<li>预测问题或数值计算问题</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>检验</p>
+<ul>
+<li>最常见的是稳定性检验</li>
+<li><img src="/posts/4c8b4541/image-20210904140719365.png" alt></li>
+</ul>
+</li>
+</ul>
+<h4 id="七、模型的评价"><a href="#七、模型的评价" class="headerlink" title="七、模型的评价"></a><strong>七、模型的评价</strong></h4><ul>
+<li><strong>7.1 模型的评价</strong>：<ul>
+<li>优点</li>
+<li>缺点</li>
+</ul>
+</li>
+<li><strong>7.2 模型的改进</strong>：针对模型中的缺点可以改进的地方</li>
+<li><strong>7.3 模型的推广</strong> 可选</li>
+</ul>
+<h4 id="八、参考文献"><a href="#八、参考文献" class="headerlink" title="八、参考文献"></a>八、参考文献</h4><ul>
+<li>不要去引用博客 和 以往的论文</li>
+</ul>
+<h4 id="附录"><a href="#附录" class="headerlink" title="附录"></a><strong>附录</strong></h4><h3 id="编辑好的论文模板"><a href="#编辑好的论文模板" class="headerlink" title="编辑好的论文模板"></a>编辑好的论文模板</h3><p><a target="_blank" rel="noopener" href="https://github.com/Xandra298/For_GMCM">Xandra298/For_GMCM (github.com)</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Xandra
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://xandra298.github.io/posts/4c8b4541/" title="写作模板">https://xandra298.github.io/posts/4c8b4541/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%A8%A1/" rel="tag"><i class="fa fa-tag"></i> 数模</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/75b83972/" rel="prev" title="miketex+vscode">
+                  <i class="fa fa-chevron-left"></i> miketex+vscode
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/b33a9282/" rel="next" title="latex图表公式汇总">
+                  latex图表公式汇总 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xandra</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Word count total: </span>
+    <span title="Word count total">115k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">1:44</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"wvaline.xandrax.cafe","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/4c8b4541/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
