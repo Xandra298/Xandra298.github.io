@@ -19,20 +19,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"xandra298.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":300},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Comment: Project page: https:&#x2F;&#x2F;i2vgen-xl.github.io">
+    <meta name="description" content="视频生成实践依照开源代码部署模型，实现文生视频&#x2F;图生视频。以下仓库为记录存储几种视频生成方法： https:&#x2F;&#x2F;github.com&#x2F;Xandra298&#x2F;VideoGen 其中，I2VGen-XL和text-to-video-synthesis论文大体介绍如下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="I2VGen-XL">
+<meta property="og:title" content="视频生成实践">
 <meta property="og:url" content="https://xandra298.github.io/posts/b63e64f2/index.html">
 <meta property="og:site_name" content="Tiny Blog  &amp;  小窝">
-<meta property="og:description" content="Comment: Project page: https:&#x2F;&#x2F;i2vgen-xl.github.io">
+<meta property="og:description" content="视频生成实践依照开源代码部署模型，实现文生视频&#x2F;图生视频。以下仓库为记录存储几种视频生成方法： https:&#x2F;&#x2F;github.com&#x2F;Xandra298&#x2F;VideoGen 其中，I2VGen-XL和text-to-video-synthesis论文大体介绍如下。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled.png">
 <meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%201.png">
 <meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%202.png">
 <meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%203.png">
 <meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%204.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled-1.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%201-1.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%202-1.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%203.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%204-1.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%205.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%206.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%207.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%208.png">
 <meta property="article:published_time" content="2024-04-24T10:36:27.000Z">
-<meta property="article:modified_time" content="2024-04-24T11:02:50.850Z">
+<meta property="article:modified_time" content="2024-04-24T12:32:38.390Z">
 <meta property="article:author" content="Xandra">
 <meta property="article:tag" content="视频生成">
 <meta property="article:tag" content="Diffusion Model">
@@ -44,10 +53,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xandra298.github.io/posts/b63e64f2/","path":"posts/b63e64f2/","title":"I2VGen-XL"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xandra298.github.io/posts/b63e64f2/","path":"posts/b63e64f2/","title":"视频生成实践"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>I2VGen-XL | Tiny Blog  &  小窝</title>
+<title>视频生成实践 | Tiny Blog  &  小窝</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js"></script>
@@ -148,7 +157,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#I2VGen-XL-High-Quality-Image-to-Video-Synthesis-via-Cascaded-Diffusion-Models"><span class="nav-number">1.</span> <span class="nav-text">I2VGen-XL: High-Quality Image-to-Video Synthesis via Cascaded Diffusion Models</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">1.2.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Preliminary"><span class="nav-number">1.2.1.</span> <span class="nav-text">Preliminary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I2VGen-XL"><span class="nav-number">1.2.2.</span> <span class="nav-text">I2VGen-XL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-base-stage"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">1. base stage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Refinement-stage"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2. Refinement stage</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment"><span class="nav-number">1.3.</span> <span class="nav-text">Experiment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sota%E5%AF%B9%E6%AF%94"><span class="nav-number">1.3.1.</span> <span class="nav-text">sota对比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9Refinement-Model-%E7%9A%84%E5%88%86%E6%9E%90"><span class="nav-number">1.3.2.</span> <span class="nav-text">对Refinement Model 的分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Limitations"><span class="nav-number">1.3.3.</span> <span class="nav-text">Limitations</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90%E5%AE%9E%E8%B7%B5"><span class="nav-number">1.</span> <span class="nav-text">视频生成实践</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I2VGen-XL-High-Quality-Image-to-Video-Synthesis-via-Cascaded-Diffusion-Models"><span class="nav-number">2.</span> <span class="nav-text">I2VGen-XL: High-Quality Image-to-Video Synthesis via Cascaded Diffusion Models</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">2.2.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Preliminary"><span class="nav-number">2.2.1.</span> <span class="nav-text">Preliminary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I2VGen-XL"><span class="nav-number">2.2.2.</span> <span class="nav-text">I2VGen-XL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-base-stage"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">1. base stage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Refinement-stage"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">2. Refinement stage</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment"><span class="nav-number">2.3.</span> <span class="nav-text">Experiment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sota%E5%AF%B9%E6%AF%94"><span class="nav-number">2.3.1.</span> <span class="nav-text">sota对比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9Refinement-Model-%E7%9A%84%E5%88%86%E6%9E%90"><span class="nav-number">2.3.2.</span> <span class="nav-text">对Refinement Model 的分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Limitations"><span class="nav-number">2.3.3.</span> <span class="nav-text">Limitations</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ModelScope-Text-to-Video-Technical-Report"><span class="nav-number">3.</span> <span class="nav-text">ModelScope Text-to-Video Technical Report</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method-1"><span class="nav-number">3.1.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Overview"><span class="nav-number">3.1.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Text-conditioning-mechanism"><span class="nav-number">3.1.2.</span> <span class="nav-text">Text conditioning mechanism</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Denoising-UNet"><span class="nav-number">3.1.3.</span> <span class="nav-text">Denoising UNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spatio-temporal-block"><span class="nav-number">3.1.4.</span> <span class="nav-text">Spatio-temporal block</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-frame-training"><span class="nav-number">3.1.5.</span> <span class="nav-text">Multi-frame training</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment-1"><span class="nav-number">3.2.</span> <span class="nav-text">Experiment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Qualitative-results"><span class="nav-number">3.2.1.</span> <span class="nav-text">Qualitative results</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -214,6 +223,23 @@
       </div>
     </div>
 		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=86 src="//music.163.com/outchain/player?type=2&id=2001320&auto=0&height=66"></iframe>
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    Related Posts
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/posts/d2ac8e77/" rel="bookmark">
+        <time class="popular-posts-time">2023-02-08</time>
+        <br>
+      Exploiting Completeness and Uncertainty of Pseudo Labels
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
   </aside>
 
 
@@ -243,12 +269,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="I2VGen-XL | Tiny Blog  &  小窝">
+      <meta itemprop="name" content="视频生成实践 | Tiny Blog  &  小窝">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          I2VGen-XL
+          视频生成实践
         </h1>
 
         <div class="post-meta-container">
@@ -260,7 +286,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-04-24 18:36:27 / Modified: 19:02:50" itemprop="dateCreated datePublished" datetime="2024-04-24T18:36:27+08:00">2024-04-24</time>
+      <time title="Created: 2024-04-24 18:36:27 / Modified: 20:32:38" itemprop="dateCreated datePublished" datetime="2024-04-24T18:36:27+08:00">2024-04-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -304,14 +330,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>2.7k</span>
+      <span>4.2k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>2 mins.</span>
+      <span>4 mins.</span>
     </span>
 </div>
 
@@ -322,9 +348,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Comment: Project page: <a target="_blank" rel="noopener" href="https://i2vgen-xl.github.io">https://i2vgen-xl.github.io</a></p>
+        <h1 id="视频生成实践"><a href="#视频生成实践" class="headerlink" title="视频生成实践"></a>视频生成实践</h1><p>依照开源代码部署模型，实现文生视频/图生视频。以下仓库为记录存储几种视频生成方法：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Xandra298/VideoGen">https://github.com/Xandra298/VideoGen</a></p>
+<p>其中，<strong><em>I2VGen-XL</em></strong>和<strong><em>text-to-video-synthesis</em></strong>论文大体介绍如下。</p>
 <span id="more"></span>
-<h1 id="I2VGen-XL-High-Quality-Image-to-Video-Synthesis-via-Cascaded-Diffusion-Models"><a href="#I2VGen-XL-High-Quality-Image-to-Video-Synthesis-via-Cascaded-Diffusion-Models" class="headerlink" title="I2VGen-XL: High-Quality Image-to-Video Synthesis via Cascaded Diffusion Models"></a>I2VGen-XL: High-Quality Image-to-Video Synthesis via Cascaded Diffusion Models</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<h1 id="I2VGen-XL-High-Quality-Image-to-Video-Synthesis-via-Cascaded-Diffusion-Models"><a href="#I2VGen-XL-High-Quality-Image-to-Video-Synthesis-via-Cascaded-Diffusion-Models" class="headerlink" title="I2VGen-XL: High-Quality Image-to-Video Synthesis via Cascaded Diffusion Models"></a>I2VGen-XL: High-Quality Image-to-Video Synthesis via Cascaded Diffusion Models</h1><p>Comment: Project page: <a target="_blank" rel="noopener" href="https://i2vgen-xl.github.io">https://i2vgen-xl.github.io</a></p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li><p>challenge</p>
 <ul>
 <li>缺乏对齐良好的文本-视频数据</li>
@@ -353,6 +382,8 @@
 <p>潜在扩散模型（LDM）是一种有效且高效的扩散模型，它从高斯噪声中逐渐恢复目标潜伏，保留视觉流形，并最终从潜伏中重建高保真图像或视频。</p>
 </blockquote>
 <p>在本报告中，除非另有说明，否则我们将使用 3D 架构的 LDM 称为 VLDM。</p>
+<p>该论文使用的VLDM主要是VideoComposer[1]。</p>
+<p>[1] Xiang Wang, Hangjie Yuan, Shiwei Zhang, Dayou Chen, Jiuniu Wang, Yingya Zhang, Yujun Shen, Deli Zhao, and Jingren Zhou. Videocomposer: Compositional video synthesis with motion controllability. NeurIPS, 2023. 2, 3, 4</p>
 <h3 id="I2VGen-XL"><a href="#I2VGen-XL" class="headerlink" title="I2VGen-XL"></a>I2VGen-XL</h3><p><img src="/posts/b63e64f2/Untitled.png" alt="Untitled"></p>
 <p>它需要实现<strong>两个关键目标</strong>：</p>
 <ul>
@@ -400,6 +431,24 @@
 <h3 id="Limitations"><a href="#Limitations" class="headerlink" title="Limitations"></a>Limitations</h3><p>i） 人体运动的生成。如前所述，人体运动的生成在自由度和自然性方面仍然存在重大挑战。这主要是由于与人类相关的运动的复杂性和丰富性，这增加了生成的难度;</p>
 <p>ii） 生成长视频的能力有限。目前的模型主要以单镜头生成几秒钟的短视频为主，还不能生成连续叙事、多场景的长视频;</p>
 <p>iii） 对用户意图的理解有限。目前视频文本配对数据的稀缺性限制了视频合成模型理解用户输入的能力。</p>
+<h1 id="ModelScope-Text-to-Video-Technical-Report"><a href="#ModelScope-Text-to-Video-Technical-Report" class="headerlink" title="ModelScope Text-to-Video Technical Report"></a>ModelScope Text-to-Video Technical Report</h1><p>Project page: <a target="_blank" rel="noopener" href="https://modelscope.cn/models/damo/text-to-video-synthesis/summary">https://modelscope.cn/models/damo/text-to-video-synthesis/summary</a></p>
+<h2 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h2><p>ModelScopeT2V</p>
+<h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p><img src="/posts/b63e64f2/Untitled-1.png" alt="Untitled"></p>
+<p>本文中的潜在空间由VQGAN提出。</p>
+<p>在训练过程中，扩散过程通过添加高斯噪声$[\epsilon_1^{gt},\ldots,\epsilon_T^{gt}]$ 来将 $Z_0^{gt}$ 变成 $Z_T^{gt}$。因此，我们有$[Z_0^{gt},…,Z_T^{gt}]$ 随着扩散过程的进行，它包含的信息越来越少。在推理过程中，UNet 预测每个步骤的附加噪声，因此我们最终从随机噪声 $Z_T^{gt}$生成 $Z_0^{gt} = [Z_1^{pr},…,Z_F^{pr}]$ 。然后我们可以通过 VQGAN 解码器 $D$ 生成一个视频 $v^{pr}$，如下所示：</p>
+<p><img src="/posts/b63e64f2/Untitled 1-1.png" alt="Untitled"></p>
+<h3 id="Text-conditioning-mechanism"><a href="#Text-conditioning-mechanism" class="headerlink" title="Text conditioning mechanism"></a>Text conditioning mechanism</h3><p>受Stable Diffusion 的启发，用交叉注意力机制增强了UNet结构。具体来说，使用<strong>Spatio-temporal block</strong>中prompt p的文本嵌入c作为多头注意力层中的键和值。这使得中间的 UNet 能够无缝聚合文本特征，从而促进语言和视觉嵌入的对齐。为了确保语言和视觉之间的良好一致性，利用预训练的 CLIP ViT-H/14  中的文本编码器将提示 p 转换为文本嵌入 c。</p>
+<h3 id="Denoising-UNet"><a href="#Denoising-UNet" class="headerlink" title="Denoising UNet"></a>Denoising UNet</h3><p><img src="/posts/b63e64f2/Untitled 2-1.png" alt="Untitled"></p>
+<p><img src="/posts/b63e64f2/Untitled 3.png" alt="Untitled"></p>
+<h3 id="Spatio-temporal-block"><a href="#Spatio-temporal-block" class="headerlink" title="Spatio-temporal block"></a>Spatio-temporal block</h3><p><img src="/posts/b63e64f2/Untitled 4-1.png" alt="Untitled"></p>
+<p><img src="/posts/b63e64f2/Untitled 5.png" alt="Untitled"></p>
+<h3 id="Multi-frame-training"><a href="#Multi-frame-training" class="headerlink" title="Multi-frame training"></a>Multi-frame training</h3><p>ModelScopeT2V 旨在在大规模视频-文本配对数据集上进行训练，例如 WebVid，它与视频生成领域一致。尽管如此，与图像-文本配对数据集（如LAION）相比，此类数据集的规模要小几个数量级。尽管使用Stable Diffusion初始化了ModelScopeT2V的空间部分，但仅对视频文本配对数据集进行训练可能会阻碍语义多样性，并导致在训练过程中灾难性地忘记图像域专业知识。为了克服这一局限性并利用两个数据集的优势，我们提出了一种多帧训练方法。具体来说，八分之一的用于训练的 GPU 应用于图像-文本配对数据集，而其余的 GPU 处理视频-文本配对数据集。由于模型结构可以适应任何帧长度，因此对于在图像-文本配对数据集上进行训练的 GPU，可以将一个图像视为帧长度为 1 的视频。</p>
+<h2 id="Experiment-1"><a href="#Experiment-1" class="headerlink" title="Experiment"></a>Experiment</h2><p><img src="/posts/b63e64f2/Untitled 6.png" alt="Untitled"></p>
+<h3 id="Qualitative-results"><a href="#Qualitative-results" class="headerlink" title="Qualitative results"></a>Qualitative results</h3><p>对比： <em>Make-A-Video</em>  和 <em>Imagen Video</em></p>
+<p><em><a target="_blank" rel="noopener" href="https://makeavideo.studio">https://makeavideo.studio</a></em> </p>
+<p><em><a target="_blank" rel="noopener" href="https://imagen.research.google/video">https://imagen.research.google/video</a></em></p>
+<p><img src="/posts/b63e64f2/Untitled 7.png" alt="Untitled"></p>
+<p><img src="/posts/b63e64f2/Untitled 8.png" alt="Untitled"></p>
 
     </div>
 
@@ -417,7 +466,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://xandra298.github.io/posts/b63e64f2/" title="I2VGen-XL">https://xandra298.github.io/posts/b63e64f2/</a>
+      <a href="https://xandra298.github.io/posts/b63e64f2/" title="视频生成实践">https://xandra298.github.io/posts/b63e64f2/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -472,14 +521,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Word count total: </span>
-    <span title="Word count total">129k</span>
+    <span title="Word count total">130k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">1:57</span>
+    <span title="Reading time total">1:58</span>
   </span>
 </div>
 <div class="busuanzi-count">
