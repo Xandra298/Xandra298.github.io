@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/firefox-panda-roux.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/firefox-panda-roux.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xandra298.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":300},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="paper (ICIP 2023)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CLIP-TSA:CLIP-Assisted Temporal Self-Attention">
+<meta property="og:url" content="https://xandra298.github.io/posts/d3b330ab/index.html">
+<meta property="og:site_name" content="Tiny Blog  &amp;  小窝">
+<meta property="og:description" content="paper (ICIP 2023)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%201.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%202.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%203.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%204.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%205.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%206.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%207.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%208.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled%209.png">
+<meta property="article:published_time" content="2023-02-25T07:02:08.000Z">
+<meta property="article:modified_time" content="2024-03-15T11:39:47.332Z">
+<meta property="article:author" content="Xandra">
+<meta property="article:tag" content="VAD">
+<meta property="article:tag" content="弱监督学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xandra298.github.io/posts/d3b330ab/Untitled.png">
+
+
+<link rel="canonical" href="https://xandra298.github.io/posts/d3b330ab/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xandra298.github.io/posts/d3b330ab/","path":"posts/d3b330ab/","title":"CLIP-TSA:CLIP-Assisted Temporal Self-Attention"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CLIP-TSA:CLIP-Assisted Temporal Self-Attention | Tiny Blog  &  小窝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d53b0bfc3463e2d8df2a44594ea3a8ab"></script>
+
+
+
+
+
+
+<link rel="dns-prefetch" href="wvaline.xandrax.cafe">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tiny Blog  &  小窝</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation"><span class="nav-number">2.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%88"><span class="nav-number">2.2.</span> <span class="nav-text">方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Contribution"><span class="nav-number">2.3.</span> <span class="nav-text">Contribution</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">4.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#feature-embedding"><span class="nav-number">4.1.</span> <span class="nav-text">feature embedding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Temporal-Self-Attention-TSA"><span class="nav-number">4.2.</span> <span class="nav-text">Temporal Self-Attention (TSA)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Difference-Maximization-Trainer-Learning"><span class="nav-number">4.3.</span> <span class="nav-text">Difference Maximization Trainer Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Infer"><span class="nav-number">4.4.</span> <span class="nav-text">Infer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experimental-Results"><span class="nav-number">5.</span> <span class="nav-text">Experimental Results</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Performance-Comparison"><span class="nav-number">5.1.</span> <span class="nav-text">Performance Comparison</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ablation-Study"><span class="nav-number">5.2.</span> <span class="nav-text">Ablation Study</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">6.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xandra"
+      src="/uploads/OIP-C.jfif">
+  <p class="site-author-name" itemprop="name">Xandra</p>
+  <div class="site-description" itemprop="description">记录，学习，成长。欢迎交流！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning-Tuning-Playbook/" rel="tag">Deep Learning Tuning Playbook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Diffusion-Model/" rel="tag">Diffusion Model</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAT/" rel="tag">GAT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNN/" rel="tag">GNN</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-vocabulary/" rel="tag">Open vocabulary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyG/" rel="tag">PyG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAG/" rel="tag">RAG</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAD/" rel="tag">VAD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wandb/" rel="tag">wandb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%B1%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">弱监督学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%A8%A1/" rel="tag">数模</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">暴力视频检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E8%AE%BA%E8%AE%A4%E7%9F%A5/" rel="tag">理论认知</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%90%86%E8%A7%A3/" rel="tag">视频理解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" rel="tag">视频生成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE/" rel="tag">配置</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+		      
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://fortunato-all.github.io/" title="https:&#x2F;&#x2F;fortunato-all.github.io&#x2F;" rel="noopener" target="_blank">fortunato</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://cyanm0un.github.io/" title="https:&#x2F;&#x2F;cyanm0un.github.io&#x2F;" rel="noopener" target="_blank">CyanM0un</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=86 src="//music.163.com/outchain/player?type=2&id=2001320&auto=0&height=66"></iframe>
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    Related Posts
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/posts/82187def/" rel="bookmark">
+        <time class="popular-posts-time">2023-02-22</time>
+        <br>
+      How Attentive are Graph Attention Networks
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/d3b330ab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/OIP-C.jfif">
+      <meta itemprop="name" content="Xandra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tiny Blog  &  小窝">
+      <meta itemprop="description" content="记录，学习，成长。欢迎交流！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CLIP-TSA:CLIP-Assisted Temporal Self-Attention | Tiny Blog  &  小窝">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CLIP-TSA:CLIP-Assisted Temporal Self-Attention
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-02-25 15:02:08" itemprop="dateCreated datePublished" datetime="2023-02-25T15:02:08+08:00">2023-02-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-15 19:39:47" itemprop="dateModified" datetime="2024-03-15T19:39:47+08:00">2024-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文阅读</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline: </span>
+  
+    <a title="waline" href="/posts/d3b330ab/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/d3b330ab/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>4.8k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>4 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2212.05136.pdf">paper</a> (ICIP 2023)</p>
+<span id="more"></span>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>解决VAD问题：由于劳动密集型性质（帧级别的标注？），通常以弱监督的方式表述为多实例学习问题(MIL）。</p>
+<ul>
+<li>相比该领域传统使用的C3D和I3D模型，我们使用ViT-encoded visual features from CLIP，以使用一种创新的方式来有效地提取判别表示。</li>
+<li>model long- and short-range temporal dependencies， 并使用时间自注意力机制（TSA）来提取重要的片段（snipppets of interest)</li>
+<li>进行了消融实验，实验表明我们提出的CLIP-TSA 在广泛使用的两个benchmark数据集（<strong>UCF-Crmie和ShanghaiTec</strong>)大范围的优于SOTA</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>分别介绍了有监督、无监督和弱监督（基于MIL框架）的VAD方法的优缺点。</p>
+<h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><ol>
+<li><p>弱监督方法的<strong>已有提取视频特征骨架C3D、I3D和2Stream的缺陷（它们是在动作识别任务上预训练的）：</strong></p>
+<p>与动作识别问题不同，VAD依赖于清晰地表示场景中的事件的区别性表征。因此，由于领域的鸿沟（domain gap)，这些骨架并不合适[1])。</p>
+</li>
+<li><p>已有的MIL-based弱监督VAD受限于应对 <strong>异常视频中包含任意数量的异常片段</strong></p>
+</li>
+</ol>
+<h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><ol>
+<li><p>针对性提出解决方案：使用CLIP进行特征提取。</p>
+<p><strong>CLIP的优势</strong>及其为什么能够有效：</p>
+<p>最近（21-23）”vision language”工作的成功证明了通过CLIP（Contrastive Language-Image Pre-traning)框架学习到的特征表示的有效性。</p>
+<p>CLIP由两个网络组成：vision encoder 和 text encoder ， 在互联网公开可用资源收集到的400 million text-image pairs上训练。给定一组words和一张图片，CLIP可以评估他们之间的语义相似性。</p>
+<p>因此，我们使用CLIP作为特征提取器。</p>
+</li>
+<li><p>提出top-k function</p>
+<p>受differentiable top-k operator[2]的启发，提出top-k function, 它定位了视频中感兴趣的κ个片段，并在相似的MIL 设置中采用 differentiable hard attention，以证明其对传统的、流行的设置的有效性和适用性。</p>
+</li>
+<li><p>引入Temporal Self-attention机制（TSA）</p>
+<p>目标是通过衡量片段的异常程度生成重新赋权的注意力特征（reweighted attention feature)</p>
+</li>
+</ol>
+<p>提出的CLIP-TSA采用MIL框架，由三个组件构成：</p>
+<p>（1） 使用CLIP进行的特征编码</p>
+<p>（2）使用TSA机制在时间维度上进行片段一致性建模</p>
+<p>（3） 使用差异最大化训练器定位异常片段</p>
+<p>三个评估数据集：UCF-Crime, ShanghaiTec和XD-Violence</p>
+<h3 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h3><ul>
+<li>提出适用于弱监督VAD问题的Temporal Self-Attention(TSA)机制，并获得了视频片段的异常似然性得分。</li>
+<li>我们运用CLIP，它使用ViT作为视觉特征的主干，引入了1)CLIP特征的新用法，2)分析由异常动作组成的视频中的新型上下文表示</li>
+<li>经验性地验证了我们提出方法的有效性，结果表明：据我们所知，在任何类型的监督设置下，它实现了比目前所有以UCF-Crime和ShanghaiTec数据集为基准的SOTA方法更优的性能。对于XD-violence数据集，他打败了不融合声音特征进行训练的SOTA</li>
+</ul>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
+<li>Unsupervised VAD</li>
+<li>Weakly-supervised VAD</li>
+<li>Vision-Language Pre-trained Models</li>
+<li>Attention Mechanism</li>
+</ul>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>pipeline如下：</p>
+<p><img src="/posts/d3b330ab/Untitled.png" alt></p>
+<p>（1） 使用CLIP进行的特征编码</p>
+<p>（2）使用TSA机制在时间维度上进行片段一致性建模，并下选取关联最多的top-k个</p>
+<p>（3） 使用差异最大化训练器定位异常片段</p>
+<h3 id="feature-embedding"><a href="#feature-embedding" class="headerlink" title="feature embedding"></a>feature embedding</h3><ul>
+<li><p>choose the middle frame $I_i$ that represents each snippet $s_i$</p>
+</li>
+<li><p>encode frame $I_i$ with the pretrained Vision Transformer to extract visual feature $I_i^f$</p>
+</li>
+<li><p>then project feature $I_i^f$ onto the visual projection matrix L, which was pretrained by CLIP to obtain the image embedding $f_i = L*I_i^f$</p>
+</li>
+<li><p>thus got the embedding feature $F_k$  of video X, which consist of  snippets    </p>
+<script type="math/tex; mode=display">X = \{s_i\}|^{T_k}_{i=1}</script></li>
+<li><p>finally apply the video normalization</p>
+</li>
+</ul>
+<h3 id="Temporal-Self-Attention-TSA"><a href="#Temporal-Self-Attention-TSA" class="headerlink" title="Temporal Self-Attention (TSA)"></a><strong>Temporal Self-Attention (TSA)</strong></h3><p>目标：model the coherency between snippets of a video and select the top-k most relevant snippets</p>
+<p>组成： (i) temporal scorer network： 获取score向量。将feature变成score向量（$R^{T\times 1}$) ，论文里网络为三层MLP</p>
+<p>(ii) top-<em>κ</em> score nominator：提取K个关联性最大的片段。具体见如下算法二。有借助高斯噪声、基于分数幅度获取top-k个、one-hot编码（Through the soft one-hot encoding mechanism, the higher amount of attention, or weight, is placed near and at the indices of top-<em>κ</em> scores）</p>
+<p>(iii) fusion network： combine information</p>
+<p>输入：前述基于CLIP提取到的特征</p>
+<p>输出：reweighted attention Feature</p>
+<p><img src="/posts/d3b330ab/Untitled 1.png" alt></p>
+<p><img src="/posts/d3b330ab/Untitled 2.png" alt></p>
+<h3 id="Difference-Maximization-Trainer-Learning"><a href="#Difference-Maximization-Trainer-Learning" class="headerlink" title="Difference Maximization Trainer Learning"></a><strong>Difference Maximization Trainer Learning</strong></h3><p>mini batch训练，输入分成2*B（batchsize)，一半从normal bags中加载，一半从abnormal bags中加载。</p>
+<p>在TSA阶段之后，分别得到两部分的reweighted attention feature。</p>
+<p>接着，将feature送入一个卷积网络模块J，J由dilated convolutions和non-local block组成，以此基于重新加权的大小模拟片段之间的长期和短期关系。</p>
+<p>输出的convoluted attention features接着送入一个浅层的MIL-based score classifier，输出的分数决定特征片段的二元异常状态。</p>
+<ul>
+<li><p>每个convoluted attention features执行 Difference Maximization Trainer (DMT)</p>
+<p>基于特征幅度选取top-a个特征，定义loss将异常片段明显区分于正常片段，具体过程与<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2101.10030.pdf">RTFM</a>论文的类似。</p>
+</li>
+</ul>
+<h3 id="Infer"><a href="#Infer" class="headerlink" title="Infer"></a>Infer</h3><p>测试阶段不执行normlization。</p>
+<p>分类器最后得到的一组分数U，每个分数$u_i$表示对应index的异常相似度，值为0-1之间。$u_i$被四舍五入取得二元分数，1代表异常，0代表正常。</p>
+<p>能够进行帧级别的测试：片段的score（对应片段级结果）保留原始顺序，repeat $\delta$次。</p>
+<h2 id="Experimental-Results"><a href="#Experimental-Results" class="headerlink" title="Experimental Results"></a><strong>Experimental Results</strong></h2><p>数据集：<strong>UCF-Crime Dataset、ShanghaiTech Campus Dataset、XD-Violence Dataset</strong></p>
+<p>指标：AUC@ROC（<strong>UCF-Crime、ShanghaiTech）</strong>、AUC@PR（<strong>XD-Violence）</strong></p>
+<h3 id="Performance-Comparison"><a href="#Performance-Comparison" class="headerlink" title="Performance Comparison"></a><strong>Performance Comparison</strong></h3><p><img src="/posts/d3b330ab/Untitled 3.png" style="zoom:80%;"></p>
+<p><img src="/posts/d3b330ab/Untitled 4.png" style="zoom: 80%;"></p>
+<p><img src="/posts/d3b330ab/Untitled 5.png" style="zoom:80%;"></p>
+<h3 id="Ablation-Study"><a href="#Ablation-Study" class="headerlink" title="Ablation Study"></a><strong>Ablation Study</strong></h3><ul>
+<li>TSA机制的有效性：</li>
+</ul>
+<p><img src="/posts/d3b330ab/Untitled 6.png" style="zoom:80%;"></p>
+<ul>
+<li>K的参数选择</li>
+</ul>
+<p>其中，分析的是超参r</p>
+<p><img src="/posts/d3b330ab/Untitled 7.png" alt style="zoom: 80%;"></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>UCF-Crime</th>
+<th>ShanghaiTec</th>
+<th>XD-violence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.7</td>
+<td>[0.3,0.7]</td>
+<td>0.9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>作者通过分析数据分布，来解释最优r值在不同数据集之间不同的原因：</p>
+<p>信息：1）data distribution of UCF-Crime (1,900 videos with 13 types of anomalies), ShanghaiTech Campus (317,398 videos with 130 anomaly events), and XD-Violence (4,754 videos with 6 types of anomalies) datasets</p>
+<p>2）frame-level <strong><em>anomaly-to-all ratio</em></strong> of their test sets, which are 0.1819, 0.4247, and 0.4977,</p>
+<p><img src="/posts/d3b330ab/Untitled 8.png" alt></p>
+<p>基于信息给到的分析：</p>
+<p>ShanghaiTec是一个具有较多异常事件的大尺度数据，因此我们假设该模型具有足够的泛化性，因此，值设为[0.3,0.7]在<strong><em>anomaly-to-all ratio</em></strong>  附近。</p>
+<p>而UCF-Crime和XD-Violence具有不平衡的类分布。此外，做良好判别的决策所依赖的重要特征，不仅限于异常片段，也包括了一些正常片段，特别是作为损失计算的一部分，其中异常top片段和正常片段的幅度都被考虑在内。因此，这两个数据集的最好r不分布在<strong><em>anomaly-to-all ratio</em></strong>附近。</p>
+<p><img src="/posts/d3b330ab/Untitled 9.png" style="zoom:80%;"></p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>本文提出了一种有效的端到端弱监督VAD框架CLIP-TSA。具体地说，我们提出了一种新的TSA机制，它可以在最小限度的情况下最大化对特征子集的注意力关注噪声，并显示了其对弱监督VAD问题的适用性。我们还将TSA应用于clip提取的特征，以证明其对视觉语言特征的有效性，并在弱监督的VAD问题中利用视觉语言特征。通过将我们的数据集与sota进行比较，我们还通过经验验证了我们的模型在VAD的三个流行数据集上的卓越性。</p>
+<p>未来的研究可能着眼于更好的技术，以结合时间和空间信息，并以较少的注释处理不平衡的数据。</p>
+<p>像 Li 等人 (2022)[3]这样的注意力技术 和自监督学习 (Caron 等人, 2021; Chen 等人, 2020a) 也是提高性能的潜在扩展。</p>
+<p>引用：</p>
+<p>[1] Kun Liu and Huadong Ma. Exploring background-bias for anomaly detection in surveillance videos. In <em>Proceedings of the 27th ACM International Conference on Multimedia</em>, pp. 1490–1499, 2019.</p>
+<p>[2] Jean-Baptiste Cordonnier, Aravindh Mahendran, Alexey Dosovitskiy, Dirk Weissenborn, Jakob Uszkoreit, and Thomas Unterthiner. Differentiable patch selection for image recognition. In <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</em>, pp. 2351–2360, June 2021.</p>
+<p>[3] Yehao Li, Ting Yao, Yingwei Pan, and Tao Mei. Contextual transformer networks for visual recognition. <em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em>, 2022.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Xandra
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://xandra298.github.io/posts/d3b330ab/" title="CLIP-TSA:CLIP-Assisted Temporal Self-Attention">https://xandra298.github.io/posts/d3b330ab/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/VAD/" rel="tag"><i class="fa fa-tag"></i> VAD</a>
+              <a href="/tags/%E5%BC%B1%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 弱监督学习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/82187def/" rel="prev" title="How Attentive are Graph Attention Networks">
+                  <i class="fa fa-chevron-left"></i> How Attentive are Graph Attention Networks
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/aa8baae/" rel="next" title="使用wandb可视化">
+                  使用wandb可视化 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xandra</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Word count total: </span>
+    <span title="Word count total">129k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">1:57</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"wvaline.xandrax.cafe","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/d3b330ab/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>

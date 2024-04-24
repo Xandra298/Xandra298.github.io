@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/firefox-panda-roux.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/firefox-panda-roux.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xandra298.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":300},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Comment: Project page: https:&#x2F;&#x2F;i2vgen-xl.github.io">
+<meta property="og:type" content="article">
+<meta property="og:title" content="I2VGen-XL">
+<meta property="og:url" content="https://xandra298.github.io/posts/b63e64f2/index.html">
+<meta property="og:site_name" content="Tiny Blog  &amp;  小窝">
+<meta property="og:description" content="Comment: Project page: https:&#x2F;&#x2F;i2vgen-xl.github.io">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%201.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%202.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%203.png">
+<meta property="og:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled%204.png">
+<meta property="article:published_time" content="2024-04-24T10:36:27.000Z">
+<meta property="article:modified_time" content="2024-04-24T11:02:50.850Z">
+<meta property="article:author" content="Xandra">
+<meta property="article:tag" content="视频生成">
+<meta property="article:tag" content="Diffusion Model">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xandra298.github.io/posts/b63e64f2/Untitled.png">
+
+
+<link rel="canonical" href="https://xandra298.github.io/posts/b63e64f2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xandra298.github.io/posts/b63e64f2/","path":"posts/b63e64f2/","title":"I2VGen-XL"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>I2VGen-XL | Tiny Blog  &  小窝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d53b0bfc3463e2d8df2a44594ea3a8ab"></script>
+
+
+
+
+
+
+<link rel="dns-prefetch" href="wvaline.xandrax.cafe">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tiny Blog  &  小窝</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#I2VGen-XL-High-Quality-Image-to-Video-Synthesis-via-Cascaded-Diffusion-Models"><span class="nav-number">1.</span> <span class="nav-text">I2VGen-XL: High-Quality Image-to-Video Synthesis via Cascaded Diffusion Models</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">1.2.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Preliminary"><span class="nav-number">1.2.1.</span> <span class="nav-text">Preliminary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I2VGen-XL"><span class="nav-number">1.2.2.</span> <span class="nav-text">I2VGen-XL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-base-stage"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">1. base stage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Refinement-stage"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2. Refinement stage</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment"><span class="nav-number">1.3.</span> <span class="nav-text">Experiment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sota%E5%AF%B9%E6%AF%94"><span class="nav-number">1.3.1.</span> <span class="nav-text">sota对比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9Refinement-Model-%E7%9A%84%E5%88%86%E6%9E%90"><span class="nav-number">1.3.2.</span> <span class="nav-text">对Refinement Model 的分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Limitations"><span class="nav-number">1.3.3.</span> <span class="nav-text">Limitations</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xandra"
+      src="/uploads/OIP-C.jfif">
+  <p class="site-author-name" itemprop="name">Xandra</p>
+  <div class="site-description" itemprop="description">记录，学习，成长。欢迎交流！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning-Tuning-Playbook/" rel="tag">Deep Learning Tuning Playbook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Diffusion-Model/" rel="tag">Diffusion Model</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAT/" rel="tag">GAT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNN/" rel="tag">GNN</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-vocabulary/" rel="tag">Open vocabulary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyG/" rel="tag">PyG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAG/" rel="tag">RAG</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAD/" rel="tag">VAD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wandb/" rel="tag">wandb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%B1%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">弱监督学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%A8%A1/" rel="tag">数模</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">暴力视频检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E8%AE%BA%E8%AE%A4%E7%9F%A5/" rel="tag">理论认知</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%90%86%E8%A7%A3/" rel="tag">视频理解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" rel="tag">视频生成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE/" rel="tag">配置</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+		      
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://fortunato-all.github.io/" title="https:&#x2F;&#x2F;fortunato-all.github.io&#x2F;" rel="noopener" target="_blank">fortunato</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://cyanm0un.github.io/" title="https:&#x2F;&#x2F;cyanm0un.github.io&#x2F;" rel="noopener" target="_blank">CyanM0un</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=86 src="//music.163.com/outchain/player?type=2&id=2001320&auto=0&height=66"></iframe>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/b63e64f2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/OIP-C.jfif">
+      <meta itemprop="name" content="Xandra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tiny Blog  &  小窝">
+      <meta itemprop="description" content="记录，学习，成长。欢迎交流！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="I2VGen-XL | Tiny Blog  &  小窝">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          I2VGen-XL
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-04-24 18:36:27 / Modified: 19:02:50" itemprop="dateCreated datePublished" datetime="2024-04-24T18:36:27+08:00">2024-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文阅读</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/AIGC/" itemprop="url" rel="index"><span itemprop="name">AIGC</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline: </span>
+  
+    <a title="waline" href="/posts/b63e64f2/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/b63e64f2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>2.7k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>2 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Comment: Project page: <a target="_blank" rel="noopener" href="https://i2vgen-xl.github.io">https://i2vgen-xl.github.io</a></p>
+<span id="more"></span>
+<h1 id="I2VGen-XL-High-Quality-Image-to-Video-Synthesis-via-Cascaded-Diffusion-Models"><a href="#I2VGen-XL-High-Quality-Image-to-Video-Synthesis-via-Cascaded-Diffusion-Models" class="headerlink" title="I2VGen-XL: High-Quality Image-to-Video Synthesis via Cascaded Diffusion Models"></a>I2VGen-XL: High-Quality Image-to-Video Synthesis via Cascaded Diffusion Models</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li><p>challenge</p>
+<ul>
+<li>缺乏对齐良好的文本-视频数据</li>
+<li>视频复杂的固有结构，使得模型难以同时确保语义和定性的卓越性。</li>
+</ul>
+</li>
+<li><p>解决方案</p>
+<p>在本报告中，我们提出了一种级联 I2VGen-XL 方法，该方法通过解耦这两个因素来增强模型性能，并通过利用静态图像作为关键指导形式来确保输入数据的对齐。</p>
+<p>两个步骤：</p>
+<ol>
+<li>base stage: 通过使用两个分层编码器来保证连贯的语义并保留输入图像中的内容</li>
+<li>refinement stage: 通过加入额外的简短文本来增强视频的细节，并将分辨率提高到 1280×720。</li>
+</ol>
+</li>
+<li><p>效果：通过这种方式，I2VGen-XL可以同时提高语义的准确性、细节的连续性和生成视频的清晰度。贡献：</p>
+<ul>
+<li>收集约3500万个单镜头文本视频对和60亿个文本-图像对来优化模型。</li>
+<li>通过大量的实验，我们研究了I2VGenXL的基本原理，并将其与当前的顶级方法进行了比较，这可以证明其在各种数据上的有效性</li>
+</ul>
+</li>
+</ul>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Preliminary"><a href="#Preliminary" class="headerlink" title="Preliminary"></a>Preliminary</h3><ul>
+<li><strong>LDM</strong></li>
+</ul>
+<blockquote>
+<p>潜在扩散模型（LDM）是一种有效且高效的扩散模型，它从高斯噪声中逐渐恢复目标潜伏，保留视觉流形，并最终从潜伏中重建高保真图像或视频。</p>
+</blockquote>
+<p>在本报告中，除非另有说明，否则我们将使用 3D 架构的 LDM 称为 VLDM。</p>
+<h3 id="I2VGen-XL"><a href="#I2VGen-XL" class="headerlink" title="I2VGen-XL"></a>I2VGen-XL</h3><p><img src="/posts/b63e64f2/Untitled.png" alt="Untitled"></p>
+<p>它需要实现<strong>两个关键目标</strong>：</p>
+<ul>
+<li>语义一致性，包括准确预测图像的意图，然后在保持输入图像的内容和结构的同时生成精确的动作;</li>
+<li>高度的时空连贯性和清晰度，这是视频的基本属性，对于确保视频创作应用程序的潜力至关重要。</li>
+</ul>
+<h4 id="1-base-stage"><a href="#1-base-stage" class="headerlink" title="1. base stage"></a><strong>1. base stage</strong></h4><p>在低分辨率： 448*256</p>
+<p>主要侧重于基于输入图像整合多级特征提取，包括高级语义和低级细节学习， 确保意图理解并有效保存内容。</p>
+<p><strong>High-level semantics learning</strong></p>
+<ol>
+<li>仅使用visual encoder of CLIP导致生成的视频中输入图像的内容和结构保存不佳：主要原因是因为CLIP的训练目标是进行视觉文本特征的对齐以学习高阶语义，但是会忽略对图像中精细细节的感知。</li>
+<li>论文合并一个额外的可训练全局编码器（即 G.Enc.），学习具有相同形状的互补特征，来缓解上述问题。</li>
+<li>然后，通过加法运算将两个一维特征集成在一起，并使用交叉注意力嵌入到3D UNet的每个空间层中。</li>
+</ol>
+<p>尽管做出了这些努力，但将输入图像压缩为低维向量仍然会导致信息丢失。</p>
+<p><strong>Low-level details</strong></p>
+<p>为了减少细节的损失，我们采用了从VQGAN编码器（即D.Enc.）中提取的特征，并将它们直接添加到第一帧的输入噪声中。（这种选择是基于编码器完全重建原始图像的能力而做出的，确保保留其所有细节。）</p>
+<p>我们的实验表明，使用本地编码器而不是更复杂的语义编码器可以使视频更好地保留图像内容。</p>
+<p>然而，随着视频的播放，出现了明显的失真，表明语义的清晰度正在下降。这突出了两个分层编码器的互补性，表明它们的集成是有利的。</p>
+<h4 id="2-Refinement-stage"><a href="#2-Refinement-stage" class="headerlink" title="2. Refinement stage"></a><strong>2. Refinement stage</strong></h4><p>通过<strong>1.</strong>，我们可以获得具有多种多样且语义准确的动作的低分辨率视频。</p>
+<p>但是，这些视频可能会受到各种问题的影响，例如噪声、时间和空间抖动以及变形。</p>
+<p><strong>Refinement stage的目标：</strong></p>
+<ul>
+<li>提高视频分辨率，将其从 448 × 256 提高到 1280 × 720 或更高;</li>
+<li>提高视频的时空连续性和清晰度，解决时间和空间上的伪影。</li>
+</ul>
+<p>为了提高视频质量，我们训练了一个单独的VLDM，专门处理高质量、高分辨率的数据，并在第一阶段生成的视频上采用SDEdit 执行noising-denoising process。</p>
+<p>与基本模型不同，细化模型使用用户提供的简单文本（例如几个单词）作为条件，而不是原始输入图像。（原因是我们发现，当两个阶段的输入条件相同时，视频校正的有效性会显著降低。这可能是由于引入了具有相同条件的类似映射导致缺失模型中的恢复能力。另一方面，引入不同的条件会带来有效的补偿。）</p>
+<p>具体来说，我们使用 CLIP 对文本进行编码，并通过交叉注意力将其嵌入到 3D UNet 中。然后，基于基础阶段的预训练模型，我们使用精心挑选的高质量视频训练高分辨率模型，所有这些视频的分辨率都大于 1280 × 720。</p>
+<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p><strong>Datasets.</strong> WebVid10M and LAION-400M, as well as private datasets consisting of video-text pairs and image-text pairs of the same type. 3500万个单镜头文本视频对和60亿个文本-图像对</p>
+<h3 id="sota对比"><a href="#sota对比" class="headerlink" title="sota对比"></a>sota对比</h3><p><strong>sota方法</strong>：<strong>Gen2 and Pika</strong></p>
+<p>Gen2: <em>Patrick Esser, Johnathan Chiu, Parmida Atighehchian, Jonathan Granskog, and Anastasis Germanidis. Structure and content-guided video synthesis with diffusion models. arXiv preprint arXiv:2302.03011, 2023</em></p>
+<p>Pika: <em>Pika Lab discord server. <a target="_blank" rel="noopener" href="https://www.pika">https://www.pika</a>. art. 2023</em></p>
+<p><strong>对比类型：<em>pseudo-factual, real, and abstract paintings</em></strong></p>
+<p><img src="/posts/b63e64f2/Untitled 1.png" alt="Untitled"></p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a><strong>结论</strong></h4><p>i） 运动的丰富性：我们的结果表现出更逼真和多样化的运动，例如飞狗的例子。相比之下，Gen-2 和 Pika 生成的视频似乎更接近静态状态，表明 I2VGen-XL 实现了更好的运动丰富度;</p>
+<p>ii） ID保留程度：从这三个样本中可以看出，Gen-2和Pika成功地保留了物体的身份，而我们的方法丢失了输入图像的一些细节。在我们的实验中，我们还发现ID的保留程度和运动的强度表现出一定的权衡关系。我们在这两个因素之间取得平衡。</p>
+<h3 id="对Refinement-Model-的分析"><a href="#对Refinement-Model-的分析" class="headerlink" title="对Refinement Model 的分析"></a><strong>对Refinement Model 的分析</strong></h3><p><img src="/posts/b63e64f2/Untitled 2.png" alt="Untitled"></p>
+<p>这些结果揭示了空间细节的显著增强，包括精致的面部和身体特征和局部细节中的噪点明显降低。</p>
+<p><img src="/posts/b63e64f2/Untitled 3.png" alt="Untitled"></p>
+<p>Fig. 7b: 细化模型有效地保留了低频数据，同时在高频数据中表现出更平滑的变化</p>
+<p>Fig. 7d 表明高清视频的连续性有了明显的改善。</p>
+<p>人类移动效果：</p>
+<p><img src="/posts/b63e64f2/Untitled 4.png" alt="Untitled"></p>
+<h3 id="Limitations"><a href="#Limitations" class="headerlink" title="Limitations"></a>Limitations</h3><p>i） 人体运动的生成。如前所述，人体运动的生成在自由度和自然性方面仍然存在重大挑战。这主要是由于与人类相关的运动的复杂性和丰富性，这增加了生成的难度;</p>
+<p>ii） 生成长视频的能力有限。目前的模型主要以单镜头生成几秒钟的短视频为主，还不能生成连续叙事、多场景的长视频;</p>
+<p>iii） 对用户意图的理解有限。目前视频文本配对数据的稀缺性限制了视频合成模型理解用户输入的能力。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Xandra
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://xandra298.github.io/posts/b63e64f2/" title="I2VGen-XL">https://xandra298.github.io/posts/b63e64f2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" rel="tag"><i class="fa fa-tag"></i> 视频生成</a>
+              <a href="/tags/Diffusion-Model/" rel="tag"><i class="fa fa-tag"></i> Diffusion Model</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/653ef131/" rel="prev" title="RAG with Gemma using wikipedia api">
+                  <i class="fa fa-chevron-left"></i> RAG with Gemma using wikipedia api
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xandra</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Word count total: </span>
+    <span title="Word count total">129k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">1:57</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"wvaline.xandrax.cafe","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/b63e64f2/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
