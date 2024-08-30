@@ -4,7 +4,7 @@
     <title>音乐播放</title>
     <url>/posts/802d9159/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>
-    <div id="aplayer-PrmHPUrh" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="8182851368" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div>
+    <div id="aplayer-EsNzxDwS" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="8182851368" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div>
 <p>ヾ(≧▽≦*)o</p>
 <blockquote>
 <p> music  by  @fortunato</p>
@@ -25,7 +25,7 @@
 <p>注意：true之前空格</p>
 </li>
 <li><p>post的markdown中添加
-    <div id="aplayer-FfJzOHTj" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="..." data-server="undefined" data-type="undefined" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div></p>
+    <div id="aplayer-vKZYFDdW" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="..." data-server="undefined" data-type="undefined" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div></p>
 <p>示例：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- Simple example (id, server, type)  --&gt;</span><br><span class="line">&#123;% meting &quot;60198&quot; &quot;netease&quot; &quot;playlist&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&lt;!-- Advanced example --&gt;</span><br><span class="line">&#123;% meting &quot;60198&quot; &quot;netease&quot; &quot;playlist&quot; &quot;autoplay&quot; &quot;mutex:false&quot; &quot;listmaxheight:340px&quot; &quot;preload:none&quot; &quot;theme:#ad7a86&quot;%&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -1043,8 +1043,8 @@
         <category>论文阅读</category>
       </categories>
       <tags>
-        <tag>VAD</tag>
         <tag>弱监督学习</tag>
+        <tag>VAD</tag>
       </tags>
   </entry>
   <entry>
@@ -1518,8 +1518,8 @@ GATv2 (our\ fixed\ version):\quad e (h_i, h_j ) = a^T LeakyReLU( W · [ h_i||h_j
         <category>论文阅读</category>
       </categories>
       <tags>
-        <tag>VAD</tag>
         <tag>弱监督学习</tag>
+        <tag>VAD</tag>
       </tags>
   </entry>
   <entry>
