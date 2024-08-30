@@ -4,7 +4,7 @@
     <title>音乐播放</title>
     <url>/posts/802d9159/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>
-    <div id="aplayer-aQBEwIRO" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="8182851368" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div>
+    <div id="aplayer-PrmHPUrh" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="8182851368" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div>
 <p>ヾ(≧▽≦*)o</p>
 <blockquote>
 <p> music  by  @fortunato</p>
@@ -25,7 +25,7 @@
 <p>注意：true之前空格</p>
 </li>
 <li><p>post的markdown中添加
-    <div id="aplayer-pcQRiQqv" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="..." data-server="undefined" data-type="undefined" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div></p>
+    <div id="aplayer-FfJzOHTj" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="..." data-server="undefined" data-type="undefined" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div></p>
 <p>示例：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- Simple example (id, server, type)  --&gt;</span><br><span class="line">&#123;% meting &quot;60198&quot; &quot;netease&quot; &quot;playlist&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&lt;!-- Advanced example --&gt;</span><br><span class="line">&#123;% meting &quot;60198&quot; &quot;netease&quot; &quot;playlist&quot; &quot;autoplay&quot; &quot;mutex:false&quot; &quot;listmaxheight:340px&quot; &quot;preload:none&quot; &quot;theme:#ad7a86&quot;%&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -914,7 +914,7 @@
 <ul>
 <li>相比该领域传统使用的C3D和I3D模型，我们使用ViT-encoded visual features from CLIP，以使用一种创新的方式来有效地提取判别表示。</li>
 <li>model long- and short-range temporal dependencies， 并使用时间自注意力机制（TSA）来提取重要的片段（snipppets of interest)</li>
-<li>进行了消融实验，实验表明我们提出的CLIP-TSA 在广泛使用的两个benchmark数据集（<strong>UCF-Crmie和ShanghaiTec</strong>)大范围的优于SOTA</li>
+<li>进行了消融实验，实验表明我们提出的CLIP-TSA 在广泛使用的两个benchmark数据集（<strong>UCF-Crime和ShanghaiTech</strong>)大范围的优于SOTA</li>
 </ul>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>分别介绍了有监督、无监督和弱监督（基于MIL框架）的VAD方法的优缺点。</p>
 <h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><ol>
@@ -942,11 +942,11 @@
 <p>（1） 使用CLIP进行的特征编码</p>
 <p>（2）使用TSA机制在时间维度上进行片段一致性建模</p>
 <p>（3） 使用差异最大化训练器定位异常片段</p>
-<p>三个评估数据集：UCF-Crime, ShanghaiTec和XD-Violence</p>
+<p>三个评估数据集：UCF-Crime, ShanghaiTech和XD-Violence</p>
 <h3 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h3><ul>
 <li>提出适用于弱监督VAD问题的Temporal Self-Attention(TSA)机制，并获得了视频片段的异常似然性得分。</li>
 <li>我们运用CLIP，它使用ViT作为视觉特征的主干，引入了1)CLIP特征的新用法，2)分析由异常动作组成的视频中的新型上下文表示</li>
-<li>经验性地验证了我们提出方法的有效性，结果表明：据我们所知，在任何类型的监督设置下，它实现了比目前所有以UCF-Crime和ShanghaiTec数据集为基准的SOTA方法更优的性能。对于XD-violence数据集，他打败了不融合声音特征进行训练的SOTA</li>
+<li>经验性地验证了我们提出方法的有效性，结果表明：据我们所知，在任何类型的监督设置下，它实现了比目前所有以UCF-Crime和ShanghaiTech数据集为基准的SOTA方法更优的性能。对于XD-violence数据集，他打败了不融合声音特征进行训练的SOTA</li>
 </ul>
 <h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
 <li>Unsupervised VAD</li>
@@ -1043,8 +1043,8 @@
         <category>论文阅读</category>
       </categories>
       <tags>
-        <tag>弱监督学习</tag>
         <tag>VAD</tag>
+        <tag>弱监督学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1518,8 +1518,8 @@ GATv2 (our\ fixed\ version):\quad e (h_i, h_j ) = a^T LeakyReLU( W · [ h_i||h_j
         <category>论文阅读</category>
       </categories>
       <tags>
-        <tag>弱监督学习</tag>
         <tag>VAD</tag>
+        <tag>弱监督学习</tag>
       </tags>
   </entry>
   <entry>
