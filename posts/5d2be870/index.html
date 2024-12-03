@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/firefox-panda-roux.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/firefox-panda-roux.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xandra298.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"width":300},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="应用场景说明以Vchart为例，开发一个开源仓库问答机器人。 背景">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开源仓库问答机器人——基于LLM+Langchain+streamlit开发">
+<meta property="og:url" content="https://xandra298.github.io/posts/5d2be870/index.html">
+<meta property="og:site_name" content="Tiny Blog  &amp;  小窝">
+<meta property="og:description" content="应用场景说明以Vchart为例，开发一个开源仓库问答机器人。 背景">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xandra298.github.io/posts/5d2be870/image.png">
+<meta property="article:published_time" content="2024-12-03T08:42:50.000Z">
+<meta property="article:modified_time" content="2024-12-03T09:52:31.211Z">
+<meta property="article:author" content="Xandra">
+<meta property="article:tag" content="langchain">
+<meta property="article:tag" content="RAG">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xandra298.github.io/posts/5d2be870/image.png">
+
+
+<link rel="canonical" href="https://xandra298.github.io/posts/5d2be870/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://xandra298.github.io/posts/5d2be870/","path":"posts/5d2be870/","title":"开源仓库问答机器人——基于LLM+Langchain+streamlit开发"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>开源仓库问答机器人——基于LLM+Langchain+streamlit开发 | Tiny Blog  &  小窝</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d53b0bfc3463e2d8df2a44594ea3a8ab"></script>
+
+
+
+
+
+
+<link rel="dns-prefetch" href="wvaline.xandrax.cafe">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Tiny Blog  &  小窝</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">应用场景说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E8%AF%B4%E6%98%8E"><span class="nav-number">1.2.</span> <span class="nav-text">需求说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%9B%AE%E6%A0%87"><span class="nav-number">1.3.</span> <span class="nav-text">功能目标</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E5%89%8D%E5%AE%9E%E7%8E%B0%E7%9A%84%E6%95%88%E6%9E%9C"><span class="nav-number">2.</span> <span class="nav-text">目前实现的效果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95"><span class="nav-number">3.1.</span> <span class="nav-text">项目目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LLM%E8%B0%83%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">LLM调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#debug-and-trace"><span class="nav-number">3.3.</span> <span class="nav-text">debug and trace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E7%95%8C%E9%9D%A2%E4%B8%8E%E4%BA%A4%E4%BA%92"><span class="nav-number">3.4.</span> <span class="nav-text">可视化界面与交互</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%84%E4%B8%AA%E7%BB%84%E4%BB%B6"><span class="nav-number">3.4.1.</span> <span class="nav-text">各个组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%93%E5%AF%BC%E5%85%A5"><span class="nav-number">3.4.1.1.</span> <span class="nav-text">库导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA"><span class="nav-number">3.4.1.2.</span> <span class="nav-text">配置日志输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E5%AF%B9%E8%AF%9D%E5%8E%86%E5%8F%B2%E4%BF%9D%E5%AD%98%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="nav-number">3.4.1.3.</span> <span class="nav-text">将对话历史保存到本地</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E9%80%92%E6%9E%84%E5%BB%BA%E6%9C%AC%E5%9C%B0%E7%9F%A5%E8%AF%86%E5%BA%93%E7%9A%84%E6%96%87%E4%BB%B6%E5%B9%B6%E6%9E%84%E9%80%A0RAG%E9%93%BE"><span class="nav-number">3.4.1.4.</span> <span class="nav-text">传递构建本地知识库的文件并构造RAG链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%95%8C%E9%9D%A2%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.4.1.5.</span> <span class="nav-text">界面设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96LLM"><span class="nav-number">3.4.1.6.</span> <span class="nav-text">初始化LLM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%B9%E6%A0%8F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%90%84%E9%A1%B9%E6%93%8D%E4%BD%9C%E6%8C%89%E9%92%AE"><span class="nav-number">3.4.1.7.</span> <span class="nav-text">边栏设计与各项操作按钮</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E5%AF%B9%E8%AF%9D%E4%BF%A1%E6%81%AF"><span class="nav-number">3.4.1.8.</span> <span class="nav-text">显示对话信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E5%AF%B9%E8%AF%9D%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA"><span class="nav-number">3.4.1.9.</span> <span class="nav-text">用户对话输入与输出</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E7%9F%A5%E8%AF%86%E5%BA%93%E6%9E%84%E5%BB%BA"><span class="nav-number">3.5.</span> <span class="nav-text">本地知识库构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">3.5.1.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E6%96%87%E6%A1%A3"><span class="nav-number">3.5.1.1.</span> <span class="nav-text">加载文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%88%86%E5%89%B2"><span class="nav-number">3.5.1.2.</span> <span class="nav-text">文本分割</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%B5%8C%E5%85%A5"><span class="nav-number">3.5.1.3.</span> <span class="nav-text">文本嵌入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%AD%98%E5%82%A8"><span class="nav-number">3.5.1.4.</span> <span class="nav-text">向量存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#retriever"><span class="nav-number">3.5.1.5.</span> <span class="nav-text">retriever</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">3.6.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">3.7.</span> <span class="nav-text">完整代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#app-py"><span class="nav-number">3.7.1.</span> <span class="nav-text">app.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#retrieve-py"><span class="nav-number">3.7.2.</span> <span class="nav-text">retrieve.py</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%85%E4%BC%98%E5%8C%96%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">待优化的问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xandra"
+      src="/uploads/OIP-C.jfif">
+  <p class="site-author-name" itemprop="name">Xandra</p>
+  <div class="site-description" itemprop="description">记录，学习，成长。欢迎交流！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning-Tuning-Playbook/" rel="tag">Deep Learning Tuning Playbook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Diffusion-Model/" rel="tag">Diffusion Model</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAT/" rel="tag">GAT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNN/" rel="tag">GNN</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-vocabulary/" rel="tag">Open vocabulary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyG/" rel="tag">PyG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAG/" rel="tag">RAG</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAD/" rel="tag">VAD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/langchain/" rel="tag">langchain</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pytorch/" rel="tag">pytorch</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wandb/" rel="tag">wandb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%B1%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" rel="tag">弱监督学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%A8%A1/" rel="tag">数模</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E8%A7%86%E9%A2%91%E6%A3%80%E6%B5%8B/" rel="tag">暴力视频检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E8%AE%BA%E8%AE%A4%E7%9F%A5/" rel="tag">理论认知</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%90%86%E8%A7%A3/" rel="tag">视频理解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" rel="tag">视频生成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE/" rel="tag">配置</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+		      
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://fortunato-all.github.io/" title="https:&#x2F;&#x2F;fortunato-all.github.io&#x2F;" rel="noopener" target="_blank">fortunato</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://cyanm0un.github.io/" title="https:&#x2F;&#x2F;cyanm0un.github.io&#x2F;" rel="noopener" target="_blank">CyanM0un</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=86 src="//music.163.com/outchain/player?type=2&id=2001320&auto=0&height=66"></iframe>
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    Related Posts
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/posts/91a389bb/" rel="bookmark">
+        <time class="popular-posts-time">2024-04-22</time>
+        <br>
+      Retrieval Augmented Generation (RAG)
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xandra298.github.io/posts/5d2be870/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/OIP-C.jfif">
+      <meta itemprop="name" content="Xandra">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tiny Blog  &  小窝">
+      <meta itemprop="description" content="记录，学习，成长。欢迎交流！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="开源仓库问答机器人——基于LLM+Langchain+streamlit开发 | Tiny Blog  &  小窝">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          开源仓库问答机器人——基于LLM+Langchain+streamlit开发
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-12-03 16:42:50 / Modified: 17:52:31" itemprop="dateCreated datePublished" datetime="2024-12-03T16:42:50+08:00">2024-12-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LLM/" itemprop="url" rel="index"><span itemprop="name">LLM</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline: </span>
+  
+    <a title="waline" href="/posts/5d2be870/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/5d2be870/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>28k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>25 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="应用场景说明"><a href="#应用场景说明" class="headerlink" title="应用场景说明"></a>应用场景说明</h1><p>以Vchart为例，开发一个开源仓库问答机器人。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
+<p>VisActor是一个数据可视化渲染引擎，在开源社区中赢得了许多前端开发者的喜爱。你是VisActor项目中VChart框架的开发贡献者，每天会有很多用户向你提问关于仓库使用的问题。为了减轻运营开源项目的负担、同时更好的服务用户，你希望借助 LLM + Langchain 开发出一个智能问答机器人，机器人能够基于开源项目的用户文档来回答用户的常见问题。</p>
+<h2 id="需求说明"><a href="#需求说明" class="headerlink" title="需求说明"></a>需求说明</h2><p>VChart智能问答机器人需提供可视化交互界面供开发者遇到问题时使用，用户典型问题如下:</p>
+<p>1.框架介绍类: 介绍一下VChart的图表，它都由哪些部分组成。<br>2.功能使用类: VChart怎么下载?如何使用VChart配置出相关性散点图?<br>3.场景咨询类: 我发现如果数字的小数点位数较长时很不美观，有没有办法控制标签显示的小数位数的长度?</p>
+<p>系统需要参考用户文档中的内容，定位到最关联的信息并通过大模型生成相应的回答，必要时可以输出代码/图片等多模态数据以更好的回答用户问题。</p>
+<h2 id="功能目标"><a href="#功能目标" class="headerlink" title="功能目标"></a>功能目标</h2><ul>
+<li>[ ] <del>能基于框架的使用文档回答用户提问，提供完整、符合逻辑的回答</del></li>
+<li>[ ] <del>具备简答的可视化交互界面</del></li>
+<li>[ ] 具有多模态回复能力</li>
+</ul>
+<h1 id="目前实现的效果"><a href="#目前实现的效果" class="headerlink" title="目前实现的效果"></a>目前实现的效果</h1><p><img src="/posts/5d2be870/image.png" alt></p>
+<h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><h2 id="项目目录"><a href="#项目目录" class="headerlink" title="项目目录"></a>项目目录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">OpenSourceChatbot</span><br><span class="line">|__chroma_db</span><br><span class="line">|__VChart(知识库文件)</span><br><span class="line">|__upload(用户上传的文件)</span><br><span class="line">|__output(存储历史对话)</span><br><span class="line">|__app.py</span><br><span class="line">|__retrieval.py</span><br></pre></td></tr></table></figure>
+<h2 id="LLM调用"><a href="#LLM调用" class="headerlink" title="LLM调用"></a>LLM调用</h2><p>通过API调用平台的大模型，实现在本地cpu环境即可运行。</p>
+<p>langchain封装了很多大模型的调用。</p>
+<p>以下以使用豆包大模型为例。</p>
+<ul>
+<li>豆包大模型配置了和openai一样的接口，因此可以直接使用langchain的openai接口。</li>
+<li>注册火山引擎的账号，选择特定的模型，获取模型各项配置：apikey, baseurl, model_id。</li>
+<li>使用langchain调用llm。<h2 id="debug-and-trace"><a href="#debug-and-trace" class="headerlink" title="debug and trace"></a>debug and trace</h2>使用langchainSmith<h2 id="可视化界面与交互"><a href="#可视化界面与交互" class="headerlink" title="可视化界面与交互"></a>可视化界面与交互</h2>使用Streamlit实现网页可视化，使用langchain调用LLM。</li>
+</ul>
+<p>文件命名为<code>app.py</code>。</p>
+<h3 id="各个组件"><a href="#各个组件" class="headerlink" title="各个组件"></a>各个组件</h3><h4 id="库导入"><a href="#库导入" class="headerlink" title="库导入"></a>库导入</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import streamlit as st</span><br><span class="line">from langchain_openai import ChatOpenAI  # ChatOpenAI模型</span><br><span class="line">import os,datetime,json</span><br><span class="line">from retrieval_parallel import ChatbotWithRetrieval</span><br><span class="line">from langchain import hub</span><br><span class="line">from langchain_core.output_parsers import StrOutputParser</span><br><span class="line">from langchain_core.runnables import (</span><br><span class="line">    RunnableParallel,</span><br><span class="line">    RunnablePassthrough,</span><br><span class="line">)</span><br><span class="line">import os</span><br><span class="line">from loguru import logger</span><br><span class="line">import sys</span><br></pre></td></tr></table></figure>
+<h4 id="配置日志输出"><a href="#配置日志输出" class="headerlink" title="配置日志输出"></a>配置日志输出</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logger.add(&quot;app.log&quot;, rotation=&quot;1 week&quot;, compression=&quot;zip&quot;)  # 自动按周滚动并压缩旧日志</span><br><span class="line">logger.add(sys.stdout, level=&quot;ERROR&quot;)  # 输出到控制台</span><br></pre></td></tr></table></figure>
+<h4 id="将对话历史保存到本地"><a href="#将对话历史保存到本地" class="headerlink" title="将对话历史保存到本地"></a>将对话历史保存到本地</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def _history_to_disk():</span><br><span class="line">    &quot;&quot;&quot;Save the history to disk.&quot;&quot;&quot;</span><br><span class="line">    if &#x27;messages&#x27; in st.session_state:</span><br><span class="line">        now = datetime.datetime.now().strftime(&quot;%Y%m%dT%H%M%S&quot;)</span><br><span class="line">        if not os.path.isdir(&quot;../outputs/logs&quot;):</span><br><span class="line">            os.makedirs(&quot;../outputs/logs&quot;)</span><br><span class="line">        with open(f&quot;./outputs/logs/history_&#123;now&#125;.json&quot;, &quot;w&quot;, encoding=&#x27;utf-8&#x27;) as f:</span><br><span class="line">            mess = [</span><br><span class="line">                &#123;&quot;role&quot;: m[&quot;role&quot;], &quot;content&quot;: m[&quot;content&quot;]&#125;</span><br><span class="line">                for m in st.session_state.messages</span><br><span class="line">            ],</span><br><span class="line">            json.dump(mess, f, ensure_ascii=False, indent=4)</span><br><span class="line">            logger.info(&quot;save history to disk&quot;)</span><br></pre></td></tr></table></figure>
+<h4 id="传递构建本地知识库的文件并构造RAG链"><a href="#传递构建本地知识库的文件并构造RAG链" class="headerlink" title="传递构建本地知识库的文件并构造RAG链"></a>传递构建本地知识库的文件并构造RAG链</h4><p><code>streamlit</code>的<code>session_state</code>可以存储会话状态。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def updatefiles(newdir):</span><br><span class="line">    st.session_state.basedir = newdir</span><br><span class="line">    msg = st.toast(&#x27;building vectorstore...&#x27;)</span><br><span class="line">    st.session_state.chatbot = ChatbotWithRetrieval(st.session_state.basedir)</span><br><span class="line">    msg.toast(&#x27;done!&#x27;, icon=&#x27;🎉&#x27;)</span><br><span class="line">    # 初始化RAG Chain</span><br><span class="line">    rag_prompt = hub.pull(&quot;rlm/rag-prompt&quot;)</span><br><span class="line">    # logger.info(rag_prompt)</span><br><span class="line">    st.session_state.rag_chain = (</span><br><span class="line">            &#123;&quot;context&quot;: st.session_state.chatbot.multiQueryRetriver |  st.session_state.chatbot.format_docs, &quot;question&quot;: RunnablePassthrough()&#125;</span><br><span class="line">            #&#123;&quot;context&quot;: st.session_state.chatbot.retriever|st.session_state.chatbot.format_docs, &quot;question&quot;: RunnablePassthrough()&#125;</span><br><span class="line">            | rag_prompt</span><br><span class="line">            | st.session_state[&quot;llm&quot;]</span><br><span class="line">            | StrOutputParser()</span><br><span class="line">    )</span><br></pre></td></tr></table></figure></p>
+<h4 id="界面设置"><a href="#界面设置" class="headerlink" title="界面设置"></a>界面设置</h4><ul>
+<li>标题<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">st.title(&quot;:sunglasses:本地知识库问答机器人&quot;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="初始化LLM"><a href="#初始化LLM" class="headerlink" title="初始化LLM"></a>初始化LLM</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if &quot;llm&quot; not in st.session_state:</span><br><span class="line">    st.session_state[&quot;llm&quot;] = ChatOpenAI(</span><br><span class="line">        api_key=st.secrets[&quot;OPENAI_API_KEY&quot;],</span><br><span class="line">        base_url=st.secrets[&quot;OPENAI_BASE_URL&quot;],</span><br><span class="line">        model=st.secrets[&quot;LLM_MODELEND&quot;],</span><br><span class="line">        max_tokens=st.secrets[&quot;MAX_TOKENS&quot;],</span><br><span class="line">        temperature=0,</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<h4 id="边栏设计与各项操作按钮"><a href="#边栏设计与各项操作按钮" class="headerlink" title="边栏设计与各项操作按钮"></a>边栏设计与各项操作按钮</h4><ul>
+<li>选择加载默认的知识库</li>
+<li>支持自定义上传文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">with st.sidebar:</span><br><span class="line">    st.subheader(&quot;_Streamlit_ is :blue[cool] :sunglasses:&quot;,divider=True)</span><br><span class="line">    st.write(&quot;这是一个使用 Streamlit 构建的简单聊天应用程序。&quot;)</span><br><span class="line">    st.write(&quot;你可以提问并得到智能客服的回复。&quot;)</span><br><span class="line">    if st.button(&quot;加载默认知识库文件&quot;, icon=&quot;😃&quot;, use_container_width=True, type=&quot;primary&quot;):</span><br><span class="line">        with st.status(&quot;preparing&quot;):</span><br><span class="line">            st.session_state.basedir = &quot;./VChart/docs/assets/&quot;</span><br><span class="line">            # st.session_state.basedir = &quot;./API/&quot; #测试</span><br><span class="line">            updatefiles(st.session_state.basedir)</span><br><span class="line">    wn = st.session_state.basedir if &quot;basedir&quot; in st.session_state else &#x27;None&#x27;</span><br><span class="line">    line = st.write(f&quot;现在加载的知识库文件路径为：&#123;wn&#125;&quot;)</span><br><span class="line">    st.subheader(&quot;自定义文件&quot;, divider=True)</span><br><span class="line">    st.markdown(&quot;你可以在侧边栏中上传新的文件。**上传完毕点击x再开始问答。**&quot;)</span><br><span class="line">    # 文件上传</span><br><span class="line">    uploaded_file = st.file_uploader(&quot;请选择文件进行上传&quot;, type=None)</span><br><span class="line">    # 检查是否有文件上传</span><br><span class="line">    if uploaded_file is not None:</span><br><span class="line">        now = datetime.datetime.now().strftime(&quot;%Y%m%dT%H%M%S&quot;)</span><br><span class="line">        newdir = f&quot;./upload/&#123;now&#125;/&quot;</span><br><span class="line">        if not os.path.isdir(newdir):</span><br><span class="line">            os.makedirs(newdir)</span><br><span class="line"></span><br><span class="line">        # 获取文件字节内容</span><br><span class="line">        file_bytes = uploaded_file.read()</span><br><span class="line">        # 将文件保存到本地</span><br><span class="line">        save_path = f&quot;&#123;newdir&#125;/&#123;uploaded_file.name&#125;&quot;</span><br><span class="line">        with open(save_path, &quot;wb&quot;) as f:</span><br><span class="line">            f.write(file_bytes)</span><br><span class="line">        # 显示文件信息</span><br><span class="line">        with st.expander(&quot;文件信息&quot;,expanded=True):</span><br><span class="line">            st.success(f&quot;文件已保存到: &#123;save_path&#125;&quot;)</span><br><span class="line">            st.write(f&quot;文件名: &#123;uploaded_file.name&#125;&quot;)</span><br><span class="line">            st.write(f&quot;文件大小: &#123;uploaded_file.size&#125; 字节&quot;)</span><br><span class="line">        with st.status(&quot;preparing vectorstore...&quot;):</span><br><span class="line">                updatefiles(newdir)</span><br><span class="line"></span><br><span class="line">        line = st.empty()</span><br><span class="line">        line.write(f&quot;现在加载的知识库文件路径为：&#123;st.session_state.basedir&#125;&quot;)</span><br><span class="line"></span><br><span class="line">    ### Memory clear</span><br><span class="line">    col1, col2 = st.columns([1, 1])</span><br><span class="line">    col1.button(&quot;Clear history&quot;, on_click=lambda: st.session_state.messages.clear(),</span><br><span class="line">                use_container_width=True,</span><br><span class="line">                help=&quot;Clear the conversation history for agent.&quot;,type=&quot;secondary&quot;)</span><br><span class="line">    ### Memory save</span><br><span class="line">    col3, col4 = st.columns([1, 1])</span><br><span class="line">    col3.button(&quot;Save history&quot;, on_click=_history_to_disk, type=&quot;secondary&quot;, use_container_width=True)</span><br></pre></td></tr></table></figure>
+<h4 id="显示对话信息"><a href="#显示对话信息" class="headerlink" title="显示对话信息"></a>显示对话信息</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if &quot;messages&quot; not in st.session_state:</span><br><span class="line">    st.session_state.messages = []</span><br><span class="line"></span><br><span class="line">for message in st.session_state.messages:</span><br><span class="line">    with st.chat_message(message[&quot;role&quot;]):</span><br><span class="line">        st.markdown(message[&quot;content&quot;])</span><br></pre></td></tr></table></figure>
+<h4 id="用户对话输入与输出"><a href="#用户对话输入与输出" class="headerlink" title="用户对话输入与输出"></a>用户对话输入与输出</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">if prompt := st.chat_input(&quot;What is up?&quot;):</span><br><span class="line">    st.session_state.messages.append(&#123;&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: prompt&#125;)</span><br><span class="line">    with st.chat_message(&quot;user&quot;):</span><br><span class="line">        st.markdown(prompt)</span><br><span class="line"></span><br><span class="line">    with st.chat_message(&quot;assistant&quot;):</span><br><span class="line">        # stream = client.chat.completions.create(</span><br><span class="line">        #     model=st.session_state[&quot;llm&quot;],</span><br><span class="line">        #     messages=[</span><br><span class="line">        #         &#123;&quot;role&quot;: m[&quot;role&quot;], &quot;content&quot;: m[&quot;content&quot;]&#125;</span><br><span class="line">        #         for m in st.session_state.messages</span><br><span class="line">        #     ],</span><br><span class="line">        #     stream=True,</span><br><span class="line">        # ) ##历史所有message都提交了，费token</span><br><span class="line">        logger.info(st.session_state.basedir)</span><br><span class="line">        if &quot;basedir&quot; in st.session_state:</span><br><span class="line">            logger.info(&quot;RAG问答&quot;)</span><br><span class="line">            stream = st.session_state.rag_chain.stream(prompt)</span><br><span class="line">        else:</span><br><span class="line">            logger.info(&quot;llm问答&quot;)</span><br><span class="line">            stream = st.session_state.llm.stream(prompt)</span><br><span class="line">        response = st.write_stream(stream)</span><br><span class="line">    st.session_state.messages.append(&#123;&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: response&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="本地知识库构建"><a href="#本地知识库构建" class="headerlink" title="本地知识库构建"></a>本地知识库构建</h2><ul>
+<li>优化1：前端选择加载本地知识库时，如果已经构建过了则从本地向量存储数据库检索，否则重新构建。由于项目文件比较多，重新构建一次费时，可以预先持久化存储。</li>
+<li>优化2：通过批量操作加快嵌入和存储速率</li>
+</ul>
+<h3 id="具体实现-1"><a href="#具体实现-1" class="headerlink" title="具体实现"></a>具体实现</h3><h4 id="加载文档"><a href="#加载文档" class="headerlink" title="加载文档"></a>加载文档</h4><p>开源仓库markdown文件居多，使用<code>UnstructuredMarkdownLoader</code>加载<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">def load_documents(self, base_dir):</span><br><span class="line">    &quot;&quot;&quot;加载文档的函数，包括 pdf, txt, md, csv 等格式&quot;&quot;&quot;</span><br><span class="line">    documents = []</span><br><span class="line">    paths = os.walk(base_dir)</span><br><span class="line">    cnt_md, cnt_pdf, cnt_txt, cnt_csv = 0, 0, 0, 0</span><br><span class="line">    for path, dir_lst, file_lst in tqdm(paths):</span><br><span class="line">        for file_name in file_lst:</span><br><span class="line">            file_path = os.path.join(path, file_name)</span><br><span class="line">            if file_name.endswith(&quot;.pdf&quot;):</span><br><span class="line">                loader = PyPDFLoader(file_path)</span><br><span class="line">                documents.extend(loader.load())</span><br><span class="line">                cnt_pdf += 1</span><br><span class="line">            elif file_name.endswith(&quot;.docx&quot;) or file_name.endswith(&quot;.doc&quot;):</span><br><span class="line">                loader = Docx2txtLoader(file_path)</span><br><span class="line">                documents.extend(loader.load())</span><br><span class="line">                cnt_txt += 1</span><br><span class="line">            elif file_name.endswith(&quot;.txt&quot;):</span><br><span class="line">                loader = TextLoader(file_path)</span><br><span class="line">                documents.extend(loader.load())</span><br><span class="line">            elif file_name.endswith(&quot;.csv&quot;):</span><br><span class="line">                loader = CSVLoader(file_path, encoding=&#x27;utf-8&#x27;)</span><br><span class="line">                documents.extend(loader.load())</span><br><span class="line">                cnt_csv += 1</span><br><span class="line">            elif file_name.endswith(&quot;.md&quot;):</span><br><span class="line">                # logger.info(&quot;processing markdown data...&quot;)</span><br><span class="line">                cnt_md += 1</span><br><span class="line">                loader = UnstructuredMarkdownLoader(file_path)</span><br><span class="line">                documents.extend(loader.load())</span><br><span class="line">            # elif file_name.endswith(&quot;.json&quot;):</span><br><span class="line">            #     loader = JSONLoader(file_path,jq_schema=&quot;.messages[].content&quot;,text_content=False)</span><br><span class="line">            #     documents.extend(loader.load())</span><br><span class="line"></span><br><span class="line">    logger.info(f&quot;Finished loading documents from &#123;base_dir&#125;. Total &#123;len(documents)&#125; documents.\n&quot;</span><br><span class="line">          f&quot;total &#123;cnt_md&#125; md files, total &#123;cnt_pdf&#125; pdf files, total &#123;cnt_txt&#125; txt files, total &#123;cnt_csv&#125; csv files&quot;)</span><br><span class="line">    return documents</span><br></pre></td></tr></table></figure></p>
+<h4 id="文本分割"><a href="#文本分割" class="headerlink" title="文本分割"></a>文本分割</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">logger.info(&quot;vectorstore does not exist, building from documents&quot;)</span><br><span class="line"># 本地加载Documents</span><br><span class="line">documents = self.load_documents(self.base_dir)</span><br><span class="line">###total 1807 md files, total 0 pdf files, total 0 txt files, total 0 csv files</span><br><span class="line">## 文本的分割</span><br><span class="line">logger.info(&quot;start text split...&quot;)</span><br><span class="line">text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)</span><br><span class="line">all_splits = text_splitter.split_documents(documents)</span><br><span class="line">logger.info(&quot;finish text split&quot;)</span><br></pre></td></tr></table></figure>
+<h4 id="文本嵌入"><a href="#文本嵌入" class="headerlink" title="文本嵌入"></a>文本嵌入</h4><ul>
+<li>使用huggingface开源嵌入模型，预先将模型下载到本地<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">logger.info(&quot;start loading embedding model&quot;)</span><br><span class="line">model_name = r&quot;F:/pycharm_project/pythonProject/LANGCHAIN/chatbot/hub/BAAI/bge-small-zh-v1.5&quot;</span><br><span class="line">model_kwargs = &#123;&quot;device&quot;: &quot;cpu&quot;&#125;</span><br><span class="line">encode_kwargs = &#123;&quot;normalize_embeddings&quot;: True&#125;</span><br><span class="line">bge_embeddings = HuggingFaceBgeEmbeddings(</span><br><span class="line">            model_name=model_name,</span><br><span class="line">            model_kwargs=model_kwargs,</span><br><span class="line">            encode_kwargs=encode_kwargs,</span><br><span class="line">            query_instruction=&quot;为这个句子生成表示以用于检索相关文章：&quot;</span><br><span class="line">        )</span><br><span class="line">logger.info(&quot;finish loading embedding model&quot;)</span><br></pre></td></tr></table></figure>
+<h4 id="向量存储"><a href="#向量存储" class="headerlink" title="向量存储"></a>向量存储</h4>使用chroma数据库。</li>
+<li>原本只需要一步：<br>不传入persist_directory默认加载存储到内存中<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">self.vectorstore = Chroma.from_documents(</span><br><span class="line">                documents=all_splits,  # 以分块的文档</span><br><span class="line">                embedding=bge_embeddings,  # 嵌入模型</span><br><span class="line">                persist_directory=persist_directory, ##保存到本地磁盘</span><br><span class="line">                collection_name=default_collection,</span><br><span class="line">            )  # 指定collection_name</span><br></pre></td></tr></table></figure></li>
+<li><p>现为了优化存储速率分开处理<br>选择持久化存储</p>
+<ul>
+<li><p>直接加载之前存储好的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if os.path.exists(self.persist_directory) and self.base_dir == default_directory:</span><br><span class="line">          logger.info(&quot;loading vectorstore from persist directory&quot;)</span><br><span class="line">          # 从磁盘中加载数据</span><br><span class="line">self.vectorstore = Chroma(persist_directory=self.persist_directory, embedding_function=bge_embeddings,collection_name=self.collection_name)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重新构建：向量化并存储</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"># 使用并行处理批量向量化</span><br><span class="line">embeddings = self.batch_vectorize(all_splits, bge_embeddings,batch_size=self.batchsz)</span><br><span class="line"># 将嵌入存储到 Chroma</span><br><span class="line">logger.info(&quot;start building Chroma vectorstore&quot;)</span><br><span class="line">self.vectorstore = self.store_embeddings_in_batches(all_splits, embeddings, self.persist_directory, bge_embeddings,self.collection_name,batch_size=self.batchsz)</span><br><span class="line">logger.info(&quot;finish building vectorstore&quot;)</span><br><span class="line"></span><br><span class="line">def batch_vectorize(self, all_splits, bge_embeddings, batch_size=64):</span><br><span class="line">        &quot;&quot;&quot;批量向量化&quot;&quot;&quot;</span><br><span class="line">        save_path = f&quot;./tmp_save/embeddings/&#123;os.path.basename(os.path.dirname(self.base_dir))&#125;.npy&quot;</span><br><span class="line">        if os.path.exists(save_path):</span><br><span class="line">            logger.info(&quot;loading embeddings from disk...&quot;)</span><br><span class="line">            embeddings = np.load(save_path)</span><br><span class="line">            return embeddings</span><br><span class="line">        else:</span><br><span class="line">            logger.info(&quot;embedding documents...&quot;)</span><br><span class="line">            embeddings = []</span><br><span class="line">            for i in tqdm(range(0, len(all_splits), batch_size)):</span><br><span class="line">                # 计算当前批次的结束位置，防止超出范围</span><br><span class="line">                end_idx = min(i + batch_size, len(all_splits))</span><br><span class="line">                batch_docs = all_splits[i:end_idx]</span><br><span class="line">                try:</span><br><span class="line">                    batch_embeddings = bge_embeddings.embed_documents([doc.page_content for doc in batch_docs if doc.page_content])</span><br><span class="line">                    embeddings.extend(batch_embeddings)</span><br><span class="line">                except Exception as e:</span><br><span class="line">                    logger.info(f&quot;Error processing batch &#123;i&#125;: &#123;e&#125;&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            os.makedirs(os.path.dirname(save_path), exist_ok=True)</span><br><span class="line">            np.save(save_path, embeddings)</span><br><span class="line">            logger.info(&quot;saved embeddings to disk&quot;)</span><br><span class="line">            return embeddings</span><br><span class="line">def store_embeddings_in_batches(self, all_splits, embeddings, persist_directory, bge_embeddings, default_collection,</span><br><span class="line">                                    batch_size=64):</span><br><span class="line">        &quot;&quot;&quot;批量存储向量到 Chroma&quot;&quot;&quot;</span><br><span class="line">        # 初始化 Chroma 向量数据库</span><br><span class="line">        vectorstore = Chroma(embedding_function=bge_embeddings, persist_directory=persist_directory,</span><br><span class="line">                            collection_name=default_collection)</span><br><span class="line">        logger.info(f&quot;Starting to store embeddings into collection: &#123;default_collection&#125;&quot;)</span><br><span class="line">        # 批量存储向量</span><br><span class="line">        total_docs = len(all_splits)</span><br><span class="line">        batch_ids = []  # 只在初始化时定义一次</span><br><span class="line">        for i in tqdm(range(0, total_docs, batch_size)):</span><br><span class="line">            # 计算当前批次的结束位置，防止超出范围</span><br><span class="line">            end_idx = min(i + batch_size, len(all_splits))</span><br><span class="line">            batch_docs = all_splits[i:end_idx]</span><br><span class="line">            batch_embeddings = embeddings[i:end_idx]</span><br><span class="line"></span><br><span class="line">            # 构建批次的文档 ID，确保全局唯一</span><br><span class="line">            batch_ids = [f&quot;doc_&#123;i + j&#125;&quot; for j in range(len(batch_docs))]  # 给每个文档一个唯一的 ID</span><br><span class="line">            # 提取每个 Document 对象的 page_content，确保传递纯文本</span><br><span class="line">            batch_texts = [doc.page_content for doc in batch_docs]</span><br><span class="line">            try:</span><br><span class="line">                # 将该批次存储到 Chroma</span><br><span class="line">                logger.info(f&quot;Processing batch &#123;i // batch_size + 1&#125;/&#123;(total_docs // batch_size) + 1&#125; &quot;</span><br><span class="line">                            f&quot;with &#123;len(batch_docs)&#125; documents (ID range: &#123;batch_ids[0]&#125; to &#123;batch_ids[-1]&#125;)&quot;)</span><br><span class="line"></span><br><span class="line">                # 向 Chroma 添加文本和嵌入</span><br><span class="line">                vectorstore.add_texts(batch_texts, embeddings=batch_embeddings, ids=batch_ids,collection_name=default_collection)</span><br><span class="line">                ###可能有加入限制 一到64+x就退出了</span><br><span class="line">            except Exception as e:</span><br><span class="line">                logger.error(f&quot;Error processing batch &#123;i&#125;: &#123;e&#125;&quot;)</span><br><span class="line">                continue  # 继续处理下一个批次</span><br><span class="line"></span><br><span class="line">        # 持久化数据到磁盘</span><br><span class="line">        try:</span><br><span class="line">                vectorstore.persist()</span><br><span class="line">                logger.info(f&quot;Persisted embeddings to &#123;persist_directory&#125;&quot;)</span><br><span class="line">        except Exception as e:</span><br><span class="line">                logger.error(f&quot;Error during persistence: &#123;e&#125;&quot;)</span><br><span class="line">        # 返回存储后的 vectorstore 实例</span><br><span class="line">        return vectorstore</span><br></pre></td></tr></table></figure>
+<h4 id="retriever"><a href="#retriever" class="headerlink" title="retriever"></a>retriever</h4></li>
+<li>普通retriever</li>
+<li>multiQueryRetriever<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 设置Retrieval Chain</span><br><span class="line">self.retriever = self.vectorstore.as_retriever(search_kwargs=&#123;&quot;k&quot;: 2&#125;)</span><br><span class="line"># 实例化一个MultiQueryRetriever</span><br><span class="line">## llm</span><br><span class="line">self.llm = ChatOpenAI(</span><br><span class="line">            model=os.environ[&quot;LLM_MODELEND&quot;],</span><br><span class="line">            temperature=0.5,</span><br><span class="line">        )</span><br><span class="line">self.multiQueryRetriever = MultiQueryRetriever.from_llm(retriever=self.vectorstore.as_retriever(search_kwargs=&#123;&quot;k&quot;: 2&#125;), llm=self.llm)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>命令行运行<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">streamlit run app.py</span><br></pre></td></tr></table></figure></p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><h3 id="app-py"><a href="#app-py" class="headerlink" title="app.py"></a>app.py</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">@File: app.py</span><br><span class="line">@IDE: PyCharm </span><br><span class="line">@Author: Xandra</span><br><span class="line">@Time: 2024/11/26 14:55</span><br><span class="line">@Desc:</span><br><span class="line"> </span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">import streamlit as st</span><br><span class="line">from langchain_openai import ChatOpenAI  # ChatOpenAI模型</span><br><span class="line">import os,datetime,json</span><br><span class="line">from retrieval_parallel import ChatbotWithRetrieval</span><br><span class="line">from langchain import hub</span><br><span class="line">from langchain_core.output_parsers import StrOutputParser</span><br><span class="line">from langchain_core.runnables import (</span><br><span class="line">    RunnableParallel,</span><br><span class="line">    RunnablePassthrough,</span><br><span class="line">)</span><br><span class="line">import os</span><br><span class="line">from loguru import logger</span><br><span class="line">import sys</span><br><span class="line">import time</span><br><span class="line"># 配置日志输出</span><br><span class="line">logger.add(&quot;app.log&quot;, rotation=&quot;1 week&quot;, compression=&quot;zip&quot;)  # 自动按周滚动并压缩旧日志</span><br><span class="line">logger.add(sys.stdout, level=&quot;ERROR&quot;)  # 输出到控制台</span><br><span class="line">def _history_to_disk():</span><br><span class="line">    &quot;&quot;&quot;Save the history to disk.&quot;&quot;&quot;</span><br><span class="line">    if &#x27;messages&#x27; in st.session_state:</span><br><span class="line">        now = datetime.datetime.now().strftime(&quot;%Y%m%dT%H%M%S&quot;)</span><br><span class="line">        if not os.path.isdir(&quot;../outputs/logs&quot;):</span><br><span class="line">            os.makedirs(&quot;../outputs/logs&quot;)</span><br><span class="line">        with open(f&quot;./outputs/logs/history_&#123;now&#125;.json&quot;, &quot;w&quot;, encoding=&#x27;utf-8&#x27;) as f:</span><br><span class="line">            mess = [</span><br><span class="line">                &#123;&quot;role&quot;: m[&quot;role&quot;], &quot;content&quot;: m[&quot;content&quot;]&#125;</span><br><span class="line">                for m in st.session_state.messages</span><br><span class="line">            ],</span><br><span class="line">            json.dump(mess, f, ensure_ascii=False, indent=4)</span><br><span class="line">            logger.info(&quot;save history to disk&quot;)</span><br><span class="line">def updatefiles(newdir):</span><br><span class="line">    st.session_state.basedir = newdir</span><br><span class="line">    msg = st.toast(&#x27;building vectorstore...&#x27;)</span><br><span class="line">    st.session_state.chatbot = ChatbotWithRetrieval(st.session_state.basedir)</span><br><span class="line">    msg.toast(&#x27;done!&#x27;, icon=&#x27;🎉&#x27;)</span><br><span class="line">    # 初始化RAG Chain</span><br><span class="line">    rag_prompt = hub.pull(&quot;rlm/rag-prompt&quot;)</span><br><span class="line">    # logger.info(rag_prompt)</span><br><span class="line">    st.session_state.rag_chain = (</span><br><span class="line">            &#123;&quot;context&quot;: st.session_state.chatbot.multiQueryRetriver |  st.session_state.chatbot.format_docs, &quot;question&quot;: RunnablePassthrough()&#125;</span><br><span class="line">            #&#123;&quot;context&quot;: st.session_state.chatbot.retriever|st.session_state.chatbot.format_docs, &quot;question&quot;: RunnablePassthrough()&#125;</span><br><span class="line">            | rag_prompt</span><br><span class="line">            | st.session_state[&quot;llm&quot;]</span><br><span class="line">            | StrOutputParser()</span><br><span class="line">    )</span><br><span class="line">st.title(&quot;:sunglasses:本地知识库问答机器人&quot;)</span><br><span class="line"></span><br><span class="line">if &quot;llm&quot; not in st.session_state:</span><br><span class="line">    st.session_state[&quot;llm&quot;] = ChatOpenAI(</span><br><span class="line">        api_key=st.secrets[&quot;OPENAI_API_KEY&quot;],</span><br><span class="line">        base_url=st.secrets[&quot;OPENAI_BASE_URL&quot;],</span><br><span class="line">        model=st.secrets[&quot;LLM_MODELEND&quot;],</span><br><span class="line">        max_tokens=st.secrets[&quot;MAX_TOKENS&quot;],</span><br><span class="line">        temperature=0,</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">with st.sidebar:</span><br><span class="line">    st.subheader(&quot;_Streamlit_ is :blue[cool] :sunglasses:&quot;,divider=True)</span><br><span class="line">    st.write(&quot;这是一个使用 Streamlit 构建的简单聊天应用程序。&quot;)</span><br><span class="line">    st.write(&quot;你可以提问并得到智能客服的回复。&quot;)</span><br><span class="line">    if st.button(&quot;加载默认知识库文件&quot;, icon=&quot;😃&quot;, use_container_width=True, type=&quot;primary&quot;):</span><br><span class="line">        with st.status(&quot;preparing&quot;):</span><br><span class="line">            st.session_state.basedir = &quot;./VChart/docs/assets/&quot;</span><br><span class="line">            # st.session_state.basedir = &quot;./API/&quot; #测试</span><br><span class="line">            updatefiles(st.session_state.basedir)</span><br><span class="line">    wn = st.session_state.basedir if &quot;basedir&quot; in st.session_state else &#x27;None&#x27;</span><br><span class="line">    line = st.write(f&quot;现在加载的知识库文件路径为：&#123;wn&#125;&quot;)</span><br><span class="line">    st.subheader(&quot;自定义文件&quot;, divider=True)</span><br><span class="line">    st.markdown(&quot;你可以在侧边栏中上传新的文件。**上传完毕点击x再开始问答。**&quot;)</span><br><span class="line">    # 文件上传</span><br><span class="line">    uploaded_file = st.file_uploader(&quot;请选择文件进行上传&quot;, type=None)</span><br><span class="line">    # 检查是否有文件上传</span><br><span class="line">    if uploaded_file is not None:</span><br><span class="line">        now = datetime.datetime.now().strftime(&quot;%Y%m%dT%H%M%S&quot;)</span><br><span class="line">        newdir = f&quot;./upload/&#123;now&#125;/&quot;</span><br><span class="line">        if not os.path.isdir(newdir):</span><br><span class="line">            os.makedirs(newdir)</span><br><span class="line"></span><br><span class="line">        # 获取文件字节内容</span><br><span class="line">        file_bytes = uploaded_file.read()</span><br><span class="line">        # 将文件保存到本地</span><br><span class="line">        save_path = f&quot;&#123;newdir&#125;/&#123;uploaded_file.name&#125;&quot;</span><br><span class="line">        with open(save_path, &quot;wb&quot;) as f:</span><br><span class="line">            f.write(file_bytes)</span><br><span class="line">        # 显示文件信息</span><br><span class="line">        with st.expander(&quot;文件信息&quot;,expanded=True):</span><br><span class="line">            st.success(f&quot;文件已保存到: &#123;save_path&#125;&quot;)</span><br><span class="line">            st.write(f&quot;文件名: &#123;uploaded_file.name&#125;&quot;)</span><br><span class="line">            st.write(f&quot;文件大小: &#123;uploaded_file.size&#125; 字节&quot;)</span><br><span class="line">        with st.status(&quot;preparing vectorstore...&quot;):</span><br><span class="line">                updatefiles(newdir)</span><br><span class="line"></span><br><span class="line">        line = st.empty()</span><br><span class="line">        line.write(f&quot;现在加载的知识库文件路径为：&#123;st.session_state.basedir&#125;&quot;)</span><br><span class="line">    ### Memory clear</span><br><span class="line">    col1, col2 = st.columns([1, 1])</span><br><span class="line">    col1.button(&quot;Clear history&quot;, on_click=lambda: st.session_state.messages.clear(),</span><br><span class="line">                use_container_width=True,</span><br><span class="line">                help=&quot;Clear the conversation history for agent.&quot;,type=&quot;secondary&quot;)</span><br><span class="line">    ### Memory save</span><br><span class="line">    col3, col4 = st.columns([1, 1])</span><br><span class="line">    col3.button(&quot;Save history&quot;, on_click=_history_to_disk, type=&quot;secondary&quot;, use_container_width=True)</span><br><span class="line"></span><br><span class="line">if &quot;messages&quot; not in st.session_state:</span><br><span class="line">    st.session_state.messages = []</span><br><span class="line"></span><br><span class="line">for message in st.session_state.messages:</span><br><span class="line">    with st.chat_message(message[&quot;role&quot;]):</span><br><span class="line">        st.markdown(message[&quot;content&quot;])</span><br><span class="line"></span><br><span class="line">if prompt := st.chat_input(&quot;What is up?&quot;):</span><br><span class="line">    st.session_state.messages.append(&#123;&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: prompt&#125;)</span><br><span class="line">    with st.chat_message(&quot;user&quot;):</span><br><span class="line">        st.markdown(prompt)</span><br><span class="line"></span><br><span class="line">    with st.chat_message(&quot;assistant&quot;):</span><br><span class="line">        # stream = client.chat.completions.create(</span><br><span class="line">        #     model=st.session_state[&quot;llm&quot;],</span><br><span class="line">        #     messages=[</span><br><span class="line">        #         &#123;&quot;role&quot;: m[&quot;role&quot;], &quot;content&quot;: m[&quot;content&quot;]&#125;</span><br><span class="line">        #         for m in st.session_state.messages</span><br><span class="line">        #     ],</span><br><span class="line">        #     stream=True,</span><br><span class="line">        # ) ##历史所有message都提交了，费token</span><br><span class="line">        logger.info(st.session_state.basedir)</span><br><span class="line">        if &quot;basedir&quot; in st.session_state:</span><br><span class="line">            logger.info(&quot;RAG问答&quot;)</span><br><span class="line">            stream = st.session_state.rag_chain.stream(prompt)</span><br><span class="line">        else:</span><br><span class="line">            logger.info(&quot;llm问答&quot;)</span><br><span class="line">            stream = st.session_state.llm.stream(prompt)</span><br><span class="line">        response = st.write_stream(stream)</span><br><span class="line">    st.session_state.messages.append(&#123;&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: response&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="retrieve-py"><a href="#retrieve-py" class="headerlink" title="retrieve.py"></a>retrieve.py</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">@File: retrieval.py</span><br><span class="line">@IDE: PyCharm </span><br><span class="line">@Author: Xandra</span><br><span class="line">@Time: 2024/11/23 14:55</span><br><span class="line">@Desc:</span><br><span class="line"> </span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">import os</span><br><span class="line">from langchain.retrievers import MultiQueryRetriever</span><br><span class="line">import numpy as np</span><br><span class="line">os.environ[&#x27;LANGCHAIN_TRACING_V2&#x27;] = &#x27;true&#x27;</span><br><span class="line">os.environ[&#x27;LANGCHAIN_ENDPOINT&#x27;] = &#x27;https://api.smith.langchain.com&#x27;</span><br><span class="line">os.environ[&#x27;LANGCHAIN_API_KEY&#x27;] = &#x27;&#x27;</span><br><span class="line">os.environ[&#x27;LANGCHAIN_PROJECT&#x27;] = &#x27;OS_chatbot&#x27;</span><br><span class="line">#</span><br><span class="line">os.environ[&quot;OPENAI_BASE_URL&quot;] = &quot;&quot;</span><br><span class="line">os.environ[&quot;OPENAI_API_KEY&quot;] = &quot;&quot;</span><br><span class="line">os.environ[&quot;LLM_MODELEND&quot;] = &quot;&quot;</span><br><span class="line"># 导入所需的库</span><br><span class="line">from langchain.text_splitter import RecursiveCharacterTextSplitter</span><br><span class="line">from langchain_community.vectorstores import Qdrant,Chroma</span><br><span class="line">from langchain_community.document_loaders import PyPDFLoader, Docx2txtLoader, TextLoader, CSVLoader, WebBaseLoader, \</span><br><span class="line">    JSONLoader</span><br><span class="line">from langchain_openai import ChatOpenAI  # ChatOpenAI模型</span><br><span class="line">from langchain_community.embeddings import HuggingFaceBgeEmbeddings</span><br><span class="line">from langchain import hub</span><br><span class="line">from langchain_core.output_parsers import StrOutputParser</span><br><span class="line">from langchain_core.runnables import (</span><br><span class="line">    RunnablePassthrough,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">from langchain_community.document_loaders import UnstructuredMarkdownLoader</span><br><span class="line">from tqdm import *</span><br><span class="line">from loguru import logger</span><br><span class="line">import sys</span><br><span class="line">import time</span><br><span class="line"># 配置日志输出</span><br><span class="line">logger.add(&quot;retrieve.log&quot;, rotation=&quot;1 week&quot;, compression=&quot;zip&quot;)  # 自动按周滚动并压缩旧日志</span><br><span class="line">logger.add(sys.stdout, level=&quot;ERROR&quot;)  # 输出到控制台</span><br><span class="line"># ## 自定义时间戳格式</span><br><span class="line"># logger.add(sys.stdout, level=&quot;INFO&quot;, format=&quot;&#123;time:YYYY-MM-DD HH:mm:ss&#125; | &#123;level&#125; | &#123;message&#125;&quot;)</span><br><span class="line"></span><br><span class="line">class ChatbotWithRetrieval:</span><br><span class="line"></span><br><span class="line">    def __init__(self, dir):</span><br><span class="line">        self.base_dir = dir  # 文档的存放目录</span><br><span class="line">        self.persist_directory = &quot;./chroma_db&quot;</span><br><span class="line">        default_directory = &quot;./VChart/docs/assets/&quot;</span><br><span class="line">        self.default_collection = &quot;VChart&quot;</span><br><span class="line">        self.batchsz = 32</span><br><span class="line">        ##测试</span><br><span class="line">        # default_directory = &quot;./API/&quot;</span><br><span class="line">        # self.default_collection = &quot;Test&quot;</span><br><span class="line">        self.collection_name = self.default_collection if self.base_dir == default_directory else f&quot;user_&#123;os.path.basename(os.path.dirname(self.base_dir))&#125;&quot;</span><br><span class="line">        self.persist_directory = &quot;./chroma_db/&quot; + self.collection_name</span><br><span class="line">        logger.info(&quot;start loading embedding model&quot;)</span><br><span class="line">        model_name = r&quot;F:/pycharm_project/pythonProject/LANGCHAIN/chatbot/hub/BAAI/bge-small-zh-v1.5&quot;</span><br><span class="line">        model_kwargs = &#123;&quot;device&quot;: &quot;cpu&quot;&#125;</span><br><span class="line">        encode_kwargs = &#123;&quot;normalize_embeddings&quot;: True&#125;</span><br><span class="line">        bge_embeddings = HuggingFaceBgeEmbeddings(</span><br><span class="line">            model_name=model_name,</span><br><span class="line">            model_kwargs=model_kwargs,</span><br><span class="line">            encode_kwargs=encode_kwargs,</span><br><span class="line">            query_instruction=&quot;为这个句子生成表示以用于检索相关文章：&quot;</span><br><span class="line">        )</span><br><span class="line">        logger.info(&quot;finish loading embedding model&quot;)</span><br><span class="line">        ##直接从磁盘加载数据</span><br><span class="line">        if os.path.exists(self.persist_directory) and self.base_dir == default_directory:</span><br><span class="line">            logger.info(&quot;loading vectorstore from persist directory&quot;)</span><br><span class="line">            # 从磁盘中加载数据</span><br><span class="line">            self.vectorstore = Chroma(persist_directory=self.persist_directory, embedding_function=bge_embeddings,collection_name=self.collection_name)</span><br><span class="line">        else:</span><br><span class="line">            logger.info(&quot;vectorstore does not exist, building from documents&quot;)</span><br><span class="line">            # 本地加载Documents</span><br><span class="line">            documents = self.load_documents(self.base_dir)</span><br><span class="line">            ###total 1807 md files, total 0 pdf files, total 0 txt files, total 0 csv files</span><br><span class="line">            ## 文本的分割</span><br><span class="line">            logger.info(&quot;start text split...&quot;)</span><br><span class="line">            text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)</span><br><span class="line">            all_splits = text_splitter.split_documents(documents)</span><br><span class="line">            logger.info(&quot;finish text split&quot;)</span><br><span class="line">            logger.info(&quot;strart batch embedding...&quot;)</span><br><span class="line">            # 使用并行处理批量向量化</span><br><span class="line">            embeddings = self.batch_vectorize(all_splits, bge_embeddings,batch_size=self.batchsz)</span><br><span class="line">            # 将嵌入存储到 Chroma</span><br><span class="line">            logger.info(&quot;start building Chroma vectorstore&quot;)</span><br><span class="line">            self.vectorstore = self.store_embeddings_in_batches(all_splits, embeddings, self.persist_directory, bge_embeddings,</span><br><span class="line">                                             self.collection_name,batch_size=self.batchsz)</span><br><span class="line">            logger.info(&quot;finish building vectorstore&quot;)</span><br><span class="line"></span><br><span class="line">        # Persist data ##LangChainDeprecationWarning: Since Chroma 0.4.x the manual persistence method is no longer supported as docs are automatically persisted.</span><br><span class="line">        self.vectorstore.persist()</span><br><span class="line">        logger.info(&quot;vectorstore loaded or created successfully.&quot;)</span><br><span class="line">        ## llm</span><br><span class="line">        self.llm = ChatOpenAI(</span><br><span class="line">            model=os.environ[&quot;LLM_MODELEND&quot;],</span><br><span class="line">            temperature=0.5,</span><br><span class="line">        )</span><br><span class="line">        # 设置Retrieval Chain</span><br><span class="line">        self.retriever = self.vectorstore.as_retriever(search_kwargs=&#123;&quot;k&quot;: 2&#125;)</span><br><span class="line">        # 实例化一个MultiQueryRetriever</span><br><span class="line">        self.multiQueryRetriver = MultiQueryRetriever.from_llm(retriever=self.vectorstore.as_retriever(search_kwargs=&#123;&quot;k&quot;: 2&#125;), llm=self.llm)</span><br><span class="line"></span><br><span class="line">    def batch_vectorize(self, all_splits, bge_embeddings, batch_size=64):</span><br><span class="line">        &quot;&quot;&quot;批量向量化&quot;&quot;&quot;</span><br><span class="line">        save_path = f&quot;./tmp_save/embeddings/&#123;os.path.basename(os.path.dirname(self.base_dir))&#125;.npy&quot;</span><br><span class="line">        if os.path.exists(save_path):</span><br><span class="line">            logger.info(&quot;loading embeddings from disk...&quot;)</span><br><span class="line">            embeddings = np.load(save_path)</span><br><span class="line">            return embeddings</span><br><span class="line">        else:</span><br><span class="line">            logger.info(&quot;embedding documents...&quot;)</span><br><span class="line">            embeddings = []</span><br><span class="line">            for i in tqdm(range(0, len(all_splits), batch_size)):</span><br><span class="line">                # 计算当前批次的结束位置，防止超出范围</span><br><span class="line">                end_idx = min(i + batch_size, len(all_splits))</span><br><span class="line">                batch_docs = all_splits[i:end_idx]</span><br><span class="line">                try:</span><br><span class="line">                    batch_embeddings = bge_embeddings.embed_documents([doc.page_content for doc in batch_docs if doc.page_content])</span><br><span class="line">                    embeddings.extend(batch_embeddings)</span><br><span class="line">                except Exception as e:</span><br><span class="line">                    logger.info(f&quot;Error processing batch &#123;i&#125;: &#123;e&#125;&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            os.makedirs(os.path.dirname(save_path), exist_ok=True)</span><br><span class="line">            np.save(save_path, embeddings)</span><br><span class="line">            logger.info(&quot;saved embeddings to disk&quot;)</span><br><span class="line">            return embeddings</span><br><span class="line">    def format_docs(self,docs):</span><br><span class="line">        return &quot;\n\n&quot;.join(doc.page_content for doc in docs)</span><br><span class="line"></span><br><span class="line">    def load_documents(self, base_dir):</span><br><span class="line">        &quot;&quot;&quot;加载文档的函数，包括 pdf, txt, md, csv 等格式&quot;&quot;&quot;</span><br><span class="line">        documents = []</span><br><span class="line">        paths = os.walk(base_dir)</span><br><span class="line">        cnt_md, cnt_pdf, cnt_txt, cnt_csv = 0, 0, 0, 0</span><br><span class="line">        for path, dir_lst, file_lst in tqdm(paths):</span><br><span class="line">            for file_name in file_lst:</span><br><span class="line">                file_path = os.path.join(path, file_name)</span><br><span class="line">                if file_name.endswith(&quot;.pdf&quot;):</span><br><span class="line">                    loader = PyPDFLoader(file_path)</span><br><span class="line">                    documents.extend(loader.load())</span><br><span class="line">                    cnt_pdf += 1</span><br><span class="line">                elif file_name.endswith(&quot;.docx&quot;) or file_name.endswith(&quot;.doc&quot;):</span><br><span class="line">                    loader = Docx2txtLoader(file_path)</span><br><span class="line">                    documents.extend(loader.load())</span><br><span class="line">                    cnt_txt += 1</span><br><span class="line">                elif file_name.endswith(&quot;.txt&quot;):</span><br><span class="line">                    loader = TextLoader(file_path)</span><br><span class="line">                    documents.extend(loader.load())</span><br><span class="line">                elif file_name.endswith(&quot;.csv&quot;):</span><br><span class="line">                    loader = CSVLoader(file_path, encoding=&#x27;utf-8&#x27;)</span><br><span class="line">                    documents.extend(loader.load())</span><br><span class="line">                    cnt_csv += 1</span><br><span class="line">                elif file_name.endswith(&quot;.md&quot;):</span><br><span class="line">                    # logger.info(&quot;processing markdown data...&quot;)</span><br><span class="line">                    cnt_md += 1</span><br><span class="line">                    loader = UnstructuredMarkdownLoader(file_path)</span><br><span class="line">                    documents.extend(loader.load())</span><br><span class="line">                # elif file_name.endswith(&quot;.json&quot;):</span><br><span class="line">                #     loader = JSONLoader(file_path,jq_schema=&quot;.messages[].content&quot;,text_content=False)</span><br><span class="line">                #     documents.extend(loader.load())</span><br><span class="line"></span><br><span class="line">        logger.info(f&quot;Finished loading documents from &#123;base_dir&#125;. Total &#123;len(documents)&#125; documents.\n&quot;</span><br><span class="line">              f&quot;total &#123;cnt_md&#125; md files, total &#123;cnt_pdf&#125; pdf files, total &#123;cnt_txt&#125; txt files, total &#123;cnt_csv&#125; csv files&quot;)</span><br><span class="line">        return documents</span><br><span class="line"></span><br><span class="line">    def store_embeddings_in_batches(self, all_splits, embeddings, persist_directory, bge_embeddings, default_collection,</span><br><span class="line">                                    batch_size=64):</span><br><span class="line">        &quot;&quot;&quot;批量存储向量到 Chroma&quot;&quot;&quot;</span><br><span class="line">        # 初始化 Chroma 向量数据库</span><br><span class="line">        vectorstore = Chroma(embedding_function=bge_embeddings, persist_directory=persist_directory,</span><br><span class="line">                             collection_name=default_collection)</span><br><span class="line">        logger.info(f&quot;Starting to store embeddings into collection: &#123;default_collection&#125;&quot;)</span><br><span class="line">        # 批量存储向量</span><br><span class="line">        total_docs = len(all_splits)</span><br><span class="line">        batch_ids = []  # 只在初始化时定义一次</span><br><span class="line">        for i in tqdm(range(0, total_docs, batch_size)):</span><br><span class="line">            # 计算当前批次的结束位置，防止超出范围</span><br><span class="line">            end_idx = min(i + batch_size, len(all_splits))</span><br><span class="line">            batch_docs = all_splits[i:end_idx]</span><br><span class="line">            batch_embeddings = embeddings[i:end_idx]</span><br><span class="line"></span><br><span class="line">            # 构建批次的文档 ID，确保全局唯一</span><br><span class="line">            batch_ids = [f&quot;doc_&#123;i + j&#125;&quot; for j in range(len(batch_docs))]  # 给每个文档一个唯一的 ID</span><br><span class="line">            # 提取每个 Document 对象的 page_content，确保传递纯文本</span><br><span class="line">            batch_texts = [doc.page_content for doc in batch_docs]</span><br><span class="line">            try:</span><br><span class="line">                # 将该批次存储到 Chroma</span><br><span class="line">                logger.info(f&quot;Processing batch &#123;i // batch_size + 1&#125;/&#123;(total_docs // batch_size) + 1&#125; &quot;</span><br><span class="line">                            f&quot;with &#123;len(batch_docs)&#125; documents (ID range: &#123;batch_ids[0]&#125; to &#123;batch_ids[-1]&#125;)&quot;)</span><br><span class="line"></span><br><span class="line">                # 向 Chroma 添加文本和嵌入</span><br><span class="line">                vectorstore.add_texts(batch_texts, embeddings=batch_embeddings, ids=batch_ids,collection_name=default_collection)</span><br><span class="line">                ###可能有加入限制 一到64+x就退出了</span><br><span class="line">            except Exception as e:</span><br><span class="line">                logger.error(f&quot;Error processing batch &#123;i&#125;: &#123;e&#125;&quot;)</span><br><span class="line">                continue  # 继续处理下一个批次</span><br><span class="line"></span><br><span class="line">        # 持久化数据到磁盘</span><br><span class="line">        try:</span><br><span class="line">                vectorstore.persist()</span><br><span class="line">                logger.info(f&quot;Persisted embeddings to &#123;persist_directory&#125;&quot;)</span><br><span class="line">        except Exception as e:</span><br><span class="line">                logger.error(f&quot;Error during persistence: &#123;e&#125;&quot;)</span><br><span class="line">        # 返回存储后的 vectorstore 实例</span><br><span class="line">        return vectorstore</span><br><span class="line">    def chat_loop(self):</span><br><span class="line">        logger.info(&quot;Chatbot 已启动! 输入&#x27;exit&#x27;来退出程序。&quot;)</span><br><span class="line">        while True:</span><br><span class="line">            user_input = input(&quot;你: &quot;)</span><br><span class="line">            if user_input.lower() == &quot;exit&quot;:</span><br><span class="line">                logger.info(&quot;再见!&quot;)</span><br><span class="line">                break</span><br><span class="line"></span><br><span class="line">            # 初始化RAG Chain</span><br><span class="line">            rag_prompt = hub.pull(&quot;rlm/rag-prompt&quot;)</span><br><span class="line">            # logger.info(rag_prompt)</span><br><span class="line">            self.rag_chain = (</span><br><span class="line">                    &#123;&quot;context&quot;: self.retriever, &quot;question&quot;: RunnablePassthrough()&#125;</span><br><span class="line">                    | rag_prompt</span><br><span class="line">                    | self.llm</span><br><span class="line">                    | StrOutputParser()</span><br><span class="line">            )</span><br><span class="line">            print(self.rag_chain.invoke(user_input))</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    dir = &quot;./VChart/docs/assets/&quot;  ##测试使用</span><br><span class="line">    chatbot = ChatbotWithRetrieval(dir)</span><br><span class="line">    ##qa chain</span><br><span class="line">    chatbot.chat_loop()</span><br><span class="line">    ##rag</span><br><span class="line">    # logger.info(chatbot.rag_chain.invoke(&quot;玫瑰的花语&quot;))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="待优化的问题"><a href="#待优化的问题" class="headerlink" title="待优化的问题"></a>待优化的问题</h1><ul>
+<li>chroma数据库持久化存储过程中一到第96左右就卡住</li>
+<li>多模态索引与输出<ul>
+<li>openclip embedding</li>
+<li>glm-4v</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>Xandra
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://xandra298.github.io/posts/5d2be870/" title="开源仓库问答机器人——基于LLM+Langchain+streamlit开发">https://xandra298.github.io/posts/5d2be870/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/langchain/" rel="tag"><i class="fa fa-tag"></i> langchain</a>
+              <a href="/tags/RAG/" rel="tag"><i class="fa fa-tag"></i> RAG</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/b63e64f2/" rel="prev" title="视频生成实践">
+                  <i class="fa fa-chevron-left"></i> 视频生成实践
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xandra</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Word count total: </span>
+    <span title="Word count total">158k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">2:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"wvaline.xandrax.cafe","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":[],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/5d2be870/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
